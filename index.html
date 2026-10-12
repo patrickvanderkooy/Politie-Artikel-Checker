@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Politie Toetsmatrijs PSI Integrale Assistent</title>
-    <!-- PWA / App Manifest instellingen voor startscherm & icoon -->
+    <title>Politie Toetsmatrijs PSI Examen Trainer</title>
+    <!-- PWA / App Manifest instellingen -->
     <meta name="theme-color" content="#1a365d">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Politie Toetsmatrijs">
+    <meta name="apple-mobile-web-app-title" content="Politie Toets">
     <link rel="manifest" href="data:application/manifest+json;charset=utf-8,{
       %22name%22: %22Politie Toetsmatrijs PSI Assistent%22,
       %22short_name%22: %22Politie Toets%22,
@@ -37,6 +37,30 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+        }
+
+        /* Installatie banner stijl */
+        .install-banner {
+            background: #2b6cb0;
+            color: white;
+            padding: 0.8rem 1rem;
+            text-align: center;
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .install-banner button {
+            background: white;
+            color: #2b6cb0;
+            border: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 0.85rem;
         }
 
         header {
@@ -249,7 +273,7 @@
             color: #7b341e;
         }
 
-        /* Quiz specifieke styling */
+        /* Quiz styling */
         .quiz-container {
             background: white;
             padding: 1.5rem;
@@ -378,14 +402,20 @@
 </head>
 <body>
 
+    <!-- Direct zichtbare installatie-banner bovenaan -->
+    <div class="install-banner" id="installBanner">
+        <span>📲 Wil je deze app als icoontje op je startscherm?</span>
+        <button onclick="showInstallHelp()">Installeer App</button>
+    </div>
+
     <header>
-        <h1>Politie Toetsmatrijs PSI Integrale Assistent</h1>
-        <p>Wetboeken, Integrale Toelichtingen, Wetsketens, Oefentest & Termijnen</p>
+        <h1>Politie Toetsmatrijs PSI Examen Trainer</h1>
+        <p>Wetboeken, Integrale Toelichtingen, Wetsketens, Adaptieve Quiz & Termijnen</p>
     </header>
 
     <nav>
         <button class="nav-btn active" onclick="switchTab('articles-tab', this)">Alle Artikelen</button>
-        <button class="nav-btn" onclick="switchTab('quiz-tab', this)">Oefentest (Quiz)</button>
+        <button class="nav-btn" onclick="switchTab('quiz-tab', this)">Echte Toets Quiz</button>
         <button class="nav-btn" onclick="switchTab('schema-tab', this)">Termijnschema</button>
     </nav>
 
@@ -416,13 +446,13 @@
         <div id="quiz-tab" class="tab-content">
             <div class="quiz-container">
                 <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; color: #718096; font-size: 0.9rem;">
-                    <span id="quiz-counter">Oefenvraag generator</span>
+                    <span id="quiz-counter">Examen Vraag #1</span>
                     <span id="quiz-score">Score: 0 goed</span>
                 </div>
                 <div class="quiz-question" id="quiz-question">Vraag laden...</div>
                 <div class="quiz-options" id="quiz-options"></div>
                 <div class="quiz-feedback" id="quiz-feedback"></div>
-                <button class="quiz-btn" id="quiz-next-btn" onclick="nextQuestion()" style="display: none;">Volgende Vraag →</button>
+                <button class="quiz-btn" id="quiz-next-btn" onclick="generateQuestion()" style="display: none;">Volgende Examenvraag →</button>
             </div>
         </div>
 
@@ -477,8 +507,11 @@
     </footer>
 
     <script>
+        function showInstallHelp() {
+            alert("Om deze app direct op je beginscherm te plaatsen:\n\n- Android (Chrome): Tik rechtsboven op de 3 puntjes (⋮) en kies 'Toevoegen aan startscherm' of 'App installeren'.\n- iPhone (Safari): Tik onderaan op het deel-icoontje (vierkantje met pijl) en kies 'Zet op beginscherm'.");
+        }
+
         const database = [
-            // GRONDWET
             {
                 id: "gw1", law: "Grondwet", article: "Artikel 1", title: "Gelijkheid", inMatrix: true, vh: false, exam: false, tax: "T",
                 eis: "De student kan in een praktijksituatie herkennen wanneer sprake is van discriminatie en kan aangeven hoe daar volgens de wet mee omgegaan moet worden.",
@@ -507,8 +540,6 @@
                 explanation: "Vrijheidsontneming mag uitsluitend als dit wettelijk bepaald is. Uitgangspunt: wanneer het kan, wordt een verdachte gemotiveerd in vrijheid gesteld.",
                 connection: "Vrijheidsontnemingsketen uit WvSv: Ophouden voor onderzoek (art. 56a), IVS (art. 57/58), IBS (art. 63/64), Gevangenhouding (art. 65/66)."
             },
-
-            // POLITIEWET 2012
             {
                 id: "pw2_3", law: "Politiewet 2012", article: "Artikel 2 & 3", title: "Ambtenaren van politie & Taak van de politie", inMatrix: true, vh: false, exam: false, tax: "K",
                 eis: "De student kan beschrijven wie volgens de wet als ambtenaren van politie worden beschouwd en wat de taak van de politie is.",
@@ -552,21 +583,12 @@
                 connection: "Politiewet art. 7 lid 1 t/m 4."
             },
             {
-                id: "pw7_7", law: "Politiewet 2012", article: "Artikel 7 lid 7", title: "Proportionaliteit en subsidiariteit bevoegdheden", inMatrix: true, vh: false, exam: false, tax: "K",
-                eis: "De student kan beschrijven dat de uitoefening van bepaalde bevoegdheden redelijk en gematigd moet zijn in verhouding tot het beoogde doel.",
-                text: "De uitoefening van de bevoegdheden, bedoeld in het eerste tot en met zesde lid, dient in verhouding tot het beoogde doel redelijk en gematigd te zijn.",
-                explanation: "Proportionaliteit en subsidiariteit gelden voor alle geweld- en fouilleringshandelingen.",
-                connection: "Algemene rechtsbeginselen van behoorlijk bestuur."
-            },
-            {
                 id: "pw8", law: "Politiewet 2012", article: "Artikel 8", title: "Vorderen inzage identiteitsbewijs", inMatrix: true, vh: false, exam: false, tax: "T",
                 eis: "De student kan in een praktijksituatie bepalen of hij inzage van een identiteitsbewijs mag vorderen van personen tijdens de uitvoering van de politietaak.",
                 text: "Bevoegd tot het vorderen van inzage van een identiteitsbewijs voor zover dat redelijkerwijs noodzakelijk is voor de uitvoering van de politietaak (art. 3 Politiewet).",
                 explanation: "Geen willekeurige controlebevoegdheid. Geldt voor niet-aangehouden personen tijdens opsporing, ordehandhaving of hulpverlening. Iedereen vanaf 14 jaar is verplicht te tonen. Niet voldoen = strafbaar art. 447e Sr.",
                 connection: "Wet op de identificatieplicht art. 2 & Sr art. 447e."
             },
-
-            // AMBTSINSTRUCTIE & GEMEENTEWET & WPG
             {
                 id: "ai2", law: "Ambtsinstructie", article: "Artikel 2", title: "Legitimatieplicht ambtenaar", inMatrix: true, vh: false, exam: false, tax: "K",
                 eis: "De student kan benoemen in welke situaties hij zich moet legitimeren met zijn politie-legitimatiebewijs.",
@@ -582,21 +604,12 @@
                 connection: "Sr art. 184 & Gemeentewet art. 176."
             },
             {
-                id: "wpg1", law: "Wet politiegegevens", article: "Artikel 1", title: "Definitie politiegegevens", inMatrix: true, vh: false, exam: false, tax: "K",
-                eis: "De student kan beschrijven wat wordt verstaan onder politiegegevens en welke soorten gegevens hieronder vallen.",
-                text: "Politiegegeven: elk persoonsgegeven dat wordt verwerkt in het kader van de uitvoering van de politietaak (art. 3 & 4 Politiewet).",
-                explanation: "Alle persoonsgegevens verwerkt voor de politietaak (identificatie, biometrie, uiterlijk, strafrechtelijk). Identiek aan AVG definitie persoonsgegeven.",
-                connection: "AVG art. 4 onder 1 & Politiewet art. 3/4."
-            },
-            {
                 id: "wpg8", law: "Wet politiegegevens", article: "Artikel 8 lid 1 & 6", title: "Uitvoering dagelijkse politietaak & Bewaartermijn", inMatrix: true, vh: false, exam: false, tax: "K",
                 eis: "De student kan beschrijven onder welke voorwaarden politiegegevens kunnen worden verwerkt.",
                 text: "Lid 1: Verwerken ter uitvoering dagelijkse politietaak gedurende 1 jaar na eerste verwerking.\nLid 6: Vernietigen zodra niet meer noodzakelijk, uiterlijk 5 jaar na eerste verwerking.",
                 explanation: "Verwerken voor dagelijkse politietaak (1 jaar). Gegevens moeten vernietigd worden zodra niet meer nodig en uiterlijk binnen 5 jaar.",
                 connection: "Wpg verwerkingsdoelen."
             },
-
-            // STRAFRECHT (Sr)
             {
                 id: "sr1", law: "Wetboek van Strafrecht", article: "Artikel 1", title: "Legaliteitsbeginsel & Territorialiteit", inMatrix: true, vh: false, exam: false, tax: "K",
                 eis: "De student kan beschrijven wanneer een gepleegd feit strafbaar is (legaliteitsbeginsel).",
@@ -633,17 +646,10 @@
                 connection: "Politiewet 2012 art. 7 lid 1 & Ambtsinstructie."
             },
             {
-                id: "sr43", law: "Wetboek van Strafrecht", article: "Artikel 43", title: "Ambtelijk bevel", inMatrix: true, vh: false, exam: false, tax: "T",
-                eis: "De student kan in een praktijksituatie bepalen dat iemand niet strafbaar is omdat hij handelde op grond van een ambtelijk bevel.",
-                text: "Niet strafbaar is hij die een feit begaat ter uitvoering van een ambtelijk bevel, gegeven door het daartoe bevoegde gezag.",
-                explanation: "Bevoegd ambtelijk bevel = rechtvaardigingsgrond. Onbevoegd ambtelijk bevel = schulduitsluitingsgrond mits te goeder trouw als bevoegd beschouwd.",
-                connection: "Ambtelijk bevel van openbaar gezag."
-            },
-            {
                 id: "sr45_46", law: "Wetboek van Strafrecht", article: "Artikel 45, 46 & 46b", title: "Poging, Voorbereiding & Vrijwillige terugtred", inMatrix: true, vh: false, exam: false, tax: "T",
                 eis: "De student kan in een praktijksituatie bepalen wanneer er sprake is van een strafbare poging of voorbereiding.",
                 text: "Art. 45: Poging tot misdrijf is strafbaar als het voornemen van de dader zich door een begin van uitvoering heeft geopenbaard (-1/3 straf).\nArt. 46: Voorbereiding misdrijf (8+ jaar strafmaat) is strafbaar bij bestemde voorwerpen.\nArt. 46b: Vrijwillige terugtred heft strafbaarheid poging/voorbereiding op.",
-                explanation: "Poging tot overtredingen, vernieling (350), eenvoudige mishandeling (300) en belediging (266) is NOT strafbaar! Absoluut ondeugdelijke poging is niet strafbaar, relatief ondeugdelijke poging wel.",
+                explanation: "Poging tot overtredingen, vernieling (350), eenvoudige mishandeling (300) en belediging (266) is NIET strafbaar! Absoluut ondeugdelijke poging is niet strafbaar, relatief ondeugdelijke poging wel.",
                 connection: "Sr art. 300, 350, 266."
             },
             {
@@ -661,25 +667,11 @@
                 connection: "Sr art. 370 (ambtelijke huisvredebreuk) & art. 139 (lokaalvredebreuk)."
             },
             {
-                id: "sr139", law: "Wetboek van Strafrecht", article: "Artikel 139", title: "Lokaalvredebreuk", inMatrix: true, vh: false, exam: false, tax: "T",
-                eis: "De student kan in een praktijksituatie bepalen of er sprake is van het onbevoegd binnendringen van een niet-openbaar gebouw.",
-                text: "Wederrechtelijk binnendringen in een voor de openbare dienst bestemd lokaal, of zich op vordering van bevoegde ambtenaar niet verwijderen.",
-                explanation: "Betreft openbare overheidsgebouwen (gemeentehuis, politiebureau, bibliotheek). Vordering door bevoegde ambtenaar.",
-                connection: "Verschil met art. 138 Sr."
-            },
-            {
                 id: "sr141", law: "Wetboek van Strafrecht", article: "Artikel 141", title: "Openlijke geweldpleging", inMatrix: true, vh: true, exam: false, tax: "T",
                 eis: "De student kan in een praktijksituatie bepalen of er sprake is van openlijke geweldpleging.",
                 text: "Zij die openlijk in vereniging geweld plegen tegen personen of goederen.",
                 explanation: "Aangewezen VH-feit. Groepsaansprakelijkheid: je hoeft zelf niet fysiek te slaan, bewuste bijdrage/aanmoediging in vereniging is voldoende. Ontbreekt 'openlijk'? Dan art. 306 Sr (deelneming aan vechtpartij).",
                 connection: "Sr art. 350 (vernieling door 1 persoon) & art. 306 Sr."
-            },
-            {
-                id: "sr177", law: "Wetboek van Strafrecht", article: "Artikel 177", title: "Ambtelijke omkoping (Actief)", inMatrix: true, vh: false, exam: false, tax: "T",
-                eis: "De student kan in een praktijksituatie bepalen of er sprake is van ambtelijke omkoping.",
-                text: "Hij die een ambtenaar een gift of belofte doet dan wel een dienst verleent of aanbiedt met het oogmerk om hem te bewegen in zijn bediening iets te doen of na te laten.",
-                explanation: "Actieve omkoping. Passieve omkoping (ambtenaar die steekpenningen aanneemt) is art. 363 Sr.",
-                connection: "Sr art. 363 (Passieve omkoping)."
             },
             {
                 id: "sr180", law: "Wetboek van Strafrecht", article: "Artikel 180", title: "Wederspannigheid (Verzet)", inMatrix: true, vh: false, exam: false, tax: "T",
@@ -696,13 +688,6 @@
                 connection: "Vordering stopteken, vordering overbrengen voertuig (art. 96b Sv)."
             },
             {
-                id: "sr207", law: "Wetboek van Strafrecht", article: "Artikel 207", title: "Meineed", inMatrix: true, vh: false, exam: false, tax: "T",
-                eis: "De student kan in een praktijksituatie bepalen of er sprake is van meineed.",
-                text: "Opzettelijk een valse verklaring onder ede (of belofte) afleggen in gevallen waarin de wet dit vordert.",
-                explanation: "Geldt in de rechtbank onder ede. Agent die liegt in proces-verbaal pleegt géén meineed maar valsheid in geschrifte (art. 225 Sr).",
-                connection: "Sr art. 225 (valsheid in geschrifte)."
-            },
-            {
                 id: "sr225", law: "Wetboek van Strafrecht", article: "Artikel 225", title: "Valsheid in geschrifte", inMatrix: true, vh: false, exam: false, tax: "T",
                 eis: "De student kan in een praktijksituatie beoordelen wanneer sprake is van valsheid in geschrifte.",
                 text: "Een authentieke akte of geschrift valselijk opmaken of vervalsen met het oogmerk het als echt en onvervalst te gebruiken, of opzettelijk gebruik maken van een vals geschrift.",
@@ -715,13 +700,6 @@
                 text: "Degene die een kind beneden de leeftijd van 16 jaar (of persoon die zich zo voordoet) een ontmoeting voorstelt voor seksuele doeleinden en enige handeling onderneemt tot verwezenlijking.",
                 explanation: "Aangewezen VH-feit (groene tekst toetsmatrijs). Zowel het voornemen als het zetten van concrete stappen (chatten, afspreken) is strafbaar.",
                 connection: "Opium/Seksuele misdrijven wetgeving."
-            },
-            {
-                id: "sr261", law: "Wetboek van Strafrecht", article: "Artikel 261", title: "Smaad & Smaadschrift", inMatrix: true, vh: false, exam: false, tax: "T",
-                eis: "De student kan in een praktijksituatie bepalen of er sprake is van smaad of smaadschrift.",
-                text: "Opzettelijk iemands eer of goede naam aanranden door tenlastelegging van een bepaald feit met het doel daaraan ruchtbaarheid te geven.",
-                explanation: "Smaad = mondeling. Smaadschrift = schriftelijk/afbeelding. Klachtdelict (tenzij tegen ambtenaar in functie). Noodzakelijke verdediging = niet strafbaar.",
-                connection: "Absolute klachtdelicten."
             },
             {
                 id: "sr285", law: "Wetboek van Strafrecht", article: "Artikel 285", title: "Bedreiging", inMatrix: true, vh: true, exam: true, tax: "T",
@@ -766,13 +744,6 @@
                 connection: "Sr art. 317 (afpersing: slachtoffer geeft zelf af onder dwang)."
             },
             {
-                id: "sr317", law: "Wetboek van Strafrecht", article: "Artikel 317", title: "Afpersing", inMatrix: true, vh: true, exam: false, tax: "T",
-                eis: "De student kan in een praktijksituatie bepalen of er sprake is van afpersing.",
-                text: "Met het oogmerk om zich of ander wederrechtelijk te bevoordelen door geweld of bedreiging iemand dwingen tot afgifte van een goed.",
-                explanation: "Verschil met diefstal met geweld (312): bij afpersing wordt het goed door het slachtoffer AFGEGEVEN onder dwang.",
-                connection: "Sr art. 312."
-            },
-            {
                 id: "sr321_326", law: "Wetboek van Strafrecht", article: "Artikel 321 & 326", title: "Verduistering & Oplichting", inMatrix: true, vh: true, exam: false, tax: "T",
                 eis: "De student kan in een praktijksituatie bepalen wanneer er sprake is van verduistering en oplichting.",
                 text: "Art. 321: Opzettelijk enig goed dat aan ander toebehoort en dat hij anders dan door misdrijf onder zich heeft wederrechtelijk zich toe-eigenen.\nArt. 326: Bewegen tot afgifte goed door valse naam/hoedanigheid, listige kunstgrepen of samenweefsel van verdichtsels.",
@@ -787,32 +758,11 @@
                 connection: "Sr art. 424 (baldadigheid)."
             },
             {
-                id: "sr370", law: "Wetboek van Strafrecht", article: "Artikel 370", title: "Ambtelijke huisvredebreuk", inMatrix: true, vh: false, exam: false, tax: "K",
-                eis: "De student kan beschrijven wanneer een ambtenaar strafbaar is bij onrechtmatig binnentreden of doorzoeken.",
-                text: "De ambtenaar die met overschrijding van zijn bevoegdheid of zonder inachtneming van wettelijke vormen in een woning/lokaal/erf binnentreedt.",
-                explanation: "Maakt niet uit of de ambtenaar WIST dat hij fout zat: vanuit de functie dient hij de wettelijke regels en Awbi te kennen.",
-                connection: "Awbi & Grondwet art. 12."
-            },
-            {
                 id: "sr416_417", law: "Wetboek van Strafrecht", article: "Artikel 416 & 417bis", title: "Opzetheling & Schuldheling", inMatrix: true, vh: true, exam: false, tax: "K",
                 eis: "De student kan beschrijven wanneer er sprake is van opzetheling en schuldheling.",
                 text: "Art. 416: Weten dat een goed uit misdrijf verkregen is en het verwerven/voorhanden hebben.\nArt. 417bis: Redelijkerwijs hadden moeten vermoeden dat het uit misdrijf afkomstig is (schuldheling).",
                 explanation: "Schuldheling (417bis) is een aangewezen VH-feit. Heler-steler regel: de dief zelf kan niet de heler van zijn eigen gestolen goed zijn. Heling is een voortdurend delict.",
                 connection: "Heterdaadsituatie blijft duren zolang goed voorhanden is."
-            },
-            {
-                id: "sr424", law: "Wetboek van Strafrecht", article: "Artikel 424", title: "Baldadigheid (Straatschenderij)", inMatrix: true, vh: false, exam: false, tax: "K",
-                eis: "De student kan beschrijven wat onder baldadigheid wordt verstaan.",
-                text: "Op of aan de openbare weg enige baldadigheid plegen tegen personen of goederen waardoor gevaar of nadeel kan worden teweeggebracht.",
-                explanation: "Overtreding. Dader gaat het om het plezier van de daad. Geen opzet op de beschadiging zelf (anders art. 350 Sr vernieling).",
-                connection: "Verschil met Sr art. 350."
-            },
-            {
-                id: "sr435", law: "Wetboek van Strafrecht", article: "Artikel 435 onder 4", title: "Opgeven valse identiteitsgegevens", inMatrix: true, vh: false, exam: false, tax: "T",
-                eis: "De student kan in een praktijksituatie bepalen of er sprake is van het opgeven van valse identiteitsgegevens.",
-                text: "Hij die, door het bevoegd gezag naar zijn identificerende persoonsgegevens gevraagd, een valse naam, geboortedatum, adres opgeeft.",
-                explanation: "Overtreding. Moet gevraagd zijn door bevoegd gezag in rechtmatige functie. Ongevraagd valse naam roepen valt hier niet onder.",
-                connection: "Wet op de identificatieplicht & Politiewet art. 8."
             },
             {
                 id: "sr447e", law: "Wetboek van Strafrecht", article: "Artikel 447e", title: "Niet voldoen aan identificatieplicht", inMatrix: true, vh: false, exam: true, tax: "T",
@@ -821,8 +771,6 @@
                 explanation: "Overtreding (groene tekst). Iedereen vanaf 14 jaar verplicht op eerste vordering van opsporingsambtenaar in het kader van de politietaak.",
                 connection: "Politiewet art. 8 & Wet op de identificatieplicht art. 2."
             },
-
-            // STRAFVORDERING (Sv)
             {
                 id: "sv1", law: "Wetboek van Strafvordering", article: "Artikel 1", title: "Legaliteitsbeginsel strafvordering", inMatrix: true, vh: false, exam: false, tax: "K",
                 eis: "De student kan beschrijven dat strafvordering alleen mag plaatsvinden op de wijze zoals bij wet is geregeld.",
@@ -838,9 +786,9 @@
                 connection: "Basisvoorwaarde voor alle dwangmiddelen uit WvSv."
             },
             {
-                id: "sv27c_29", law: "Wetboek van Strafvordering", article: "Artikel 27c, 28, 28a, 28b, 29", title: "Rechten van de verdachte (Cautie & Rechtsbijstand)", inMatrix: true, vh: false, exam: false, tax: "K",
+                id: "sv27c_29", law: "Wetboek van Strafvordering", article: "Artikel 27c, 28, 29", title: "Rechten van de verdachte (Cautie & Rechtsbijstand)", inMatrix: true, vh: false, exam: false, tax: "K",
                 eis: "De student kan beschrijven welke rechten een verdachte heeft.",
-                text: "Art. 27c: Recht op informatie over verdenking.\nArt. 28: Recht op raadsman & tolk.\nArt. 28a: Afstand rechtsbijstand (niet bij kwetsbaren/A-feiten 12+jr).\nArt. 29: Zwijgrecht (cautie verplicht voor elk verhoor) & Pressieverbod.",
+                text: "Art. 27c: Recht op informatie.\nArt. 28: Recht op raadsman.\nArt. 29: Zwijgrecht (cautie verplicht voor elk verhoor) & Pressieverbod.",
                 explanation: "Cautie én mededeling recht op rechtsbijstand moeten VOORAFGAAND aan het verhoor worden gegeven. Verhoor = alle vragen over betrokkenheid bij strafbaar feit.",
                 connection: "Salduz-arrest & EVRM art. 6."
             },
@@ -848,121 +796,70 @@
                 id: "sv52", law: "Wetboek van Strafvordering", article: "Artikel 52", title: "Staande houden", inMatrix: true, vh: false, exam: false, tax: "K",
                 eis: "De student kan benoemen onder welke voorwaarden iemand mag worden staande gehouden.",
                 text: "Iedere opsporingsambtenaar is bevoegd de identiteit van de verdachte vast te stellen en hem daartoe staande te houden.",
-                explanation: "Alleen op een VERDACHTE toegepast. Kort ophouden om identiteitsgegevens te vragen (naam, adres BRP, etc. ex art. 27a Sv). Niet meewerken/weglopen bij staandehouding op zichzelf is niet strafbaar, maar weigeren ID te tonen = art. 447e Sr.",
+                explanation: "Alleen op een VERDACHTE toegepast. Kort ophouden om identiteitsgegevens te vragen (naam, adres BRP, etc. ex art. 27a Sv).",
                 connection: "Sv art. 27a, 55b (identiteitsfouillering) & Sr art. 447e."
             },
             {
                 id: "sv53_54", law: "Wetboek van Strafvordering", article: "Artikel 53 & 54", title: "Aanhouding (Heterdaad & Buiten heterdaad)", inMatrix: true, vh: false, exam: false, tax: "K",
                 eis: "De student kan benoemen wanneer een verdachte mag worden aangehouden.",
-                text: "Art. 53 (Heterdaad): EENIEDER bevoegd bij ontdekking op heterdaad.\nArt. 54 (Buiten heterdaad): Opsporingsambtenaar op bevel OvJ (of getrapt HOvJ/opsporingsambtenaar) bij misdrijf waarvoor VOORLOPIGE HECHTENIS is toegelaten.",
-                explanation: "Aanhouden = vrijheidsberoving ter voorgeleiding (H)OvJ. Burger bij heterdaad moet verdachte onverwijld overdragen. Buiten heterdaad uitsluitend bij VH-feiten (art. 67 Sv).",
-                connection: "Sv art. 67 (VH-feiten) & art. 128 (heterdaad)."
+                text: "Art. 53 (Heterdaad): EENIEDER bevoegd bij ontdekking op heterdaad.\nArt. 54 (Buiten heterdaad): Opsporingsambtenaar op bevel OvJ bij misdrijf waarvoor voorlopige hechtenis is toegelaten.",
+                explanation: "Aanhouden = vrijheidsberoving ter voorgeleiding (H)OvJ. Buiten heterdaad uitsluitend bij VH-feiten (art. 67 Sv).",
+                connection: "Sv art. 67 (VH-feiten)."
             },
             {
                 id: "sv55b_56", law: "Wetboek van Strafvordering", article: "Artikel 55b & 56", title: "Fouilleringen (Identiteit & Opsporingsfouillering)", inMatrix: true, vh: true, exam: true, tax: "T",
                 eis: "De student kan in een praktijksituatie bepalen of en hoe onderzoek aan lichaam en kleding mag worden gedaan.",
-                text: "Art. 55b: Identiteitsfouillering bij staande/aangehouden verdachte.\nArt. 56 lid 1: Onderzoek aan kleding/lichaam bij ERNSTIGE BEZWAREN op bevel (H)OvJ.\nArt. 56 lid 2: Onderzoek IN het lichaam uitsluitend op bevel OvJ door een arts.",
-                explanation: "Aangewezen onderwerpen (groene tekst). Ernstige bezwaren = meer dan redelijk vermoeden. Fouillering aan kleding mag grondig. In het lichaam uitsluitend door een arts op besloten plaats.",
-                connection: "Politiewet art. 7 lid 3/4 (veiligheids/vervoersfouillering)."
+                text: "Art. 55b: Identiteitsfouillering bij staande/aangehouden verdachte.\nArt. 56: Onderzoek kleding/lichaam bij ERNSTIGE BEZWAREN op bevel (H)OvJ.",
+                explanation: "Aangewezen onderwerpen (groene tekst). Ernstige bezwaren = meer dan redelijk vermoeden.",
+                connection: "Politiewet art. 7 lid 3/4."
             },
             {
                 id: "sv56a_61a", law: "Wetboek van Strafvordering", article: "Artikel 56a, 56b & 61a", title: "Ophouden voor onderzoek & Maatregelen", inMatrix: true, vh: true, exam: true, tax: "T",
                 eis: "De student kan in een praktijksituatie bepalen hoe lang een aangehouden verdachte mag worden opgehouden voor onderzoek.",
-                text: "Art. 56a: Na voorgeleiding max 9 UUR ophouden (VH-feit) of max 6 UUR (geen VH-feit). Nachturen (00:00 - 09:00) tellen NIET mee.\nArt. 56b: Verlenging identificatie met max 6 uur bij geen-VH feit.\nArt. 61a: Onderzoeksmaatregelen (foto's, vingerafdrukken, confrontatie).",
-                explanation: "Groene tekst toetsmatrijs. Tijd tussen 00:00 en 09:00 uur wordt niet meegerekend voor de termijn. Na ophouden volgt invrijheidstelling of inverzekeringstelling.",
-                connection: "Sv art. 57/58 (Inverzekeringstelling)."
-            },
-            {
-                id: "sv57_58", law: "Wetboek van Strafvordering", article: "Artikel 57 & 58", title: "Inverzekeringstelling (IVS)", inMatrix: true, vh: false, exam: false, tax: "K",
-                eis: "De student kan beschrijven wanneer en hoe lang een verdachte in verzekering kan worden gesteld.",
-                text: "Bevoegdheid (H)OvJ na verhoor in het belang van het onderzoek. Duur: max 3 DAGEN. Verlenging door OvJ eenmaal met max 3 DAGEN bij dringende noodzakelijkheid.",
-                explanation: "Alleen toegelaten bij VH-feiten (art. 67 Sv). Verdachte wordt ingesloten in een cel op het politiebureau. Voorgeleiding RC uiterlijk binnen 3 dagen en 18 uur.",
-                connection: "Sv art. 67 & art. 59a."
+                text: "Art. 56a: Na voorgeleiding max 9 UUR ophouden (VH-feit) of max 6 UUR (geen VH-feit). Nachturen (00:00 - 09:00) tellen NIET mee.",
+                explanation: "Groene tekst toetsmatrijs. Tijd tussen 00:00 en 09:00 uur wordt niet meegerekend voor de termijn.",
+                connection: "Sv art. 57/58."
             },
             {
                 id: "sv67", law: "Wetboek van Strafvordering", article: "Artikel 67", title: "Voorlopige hechtenis (VH-feiten)", inMatrix: true, vh: true, exam: true, tax: "K",
                 eis: "De student kan beschrijven voor welke strafbare feiten uit deze toetsmatrijs voorlopige hechtenis is toegestaan.",
-                text: "Toegelaten bij misdrijven met wettelijke gevangenisstraf van 4 jaar of meer, PLUS specifiek aangewezen feiten (zoals mishandeling 300, bedreiging 285, belaging 285b, doxing 285d, grooming 251, vernieling 350, verduistering 321, oplichting 326, schuldheling 417bis).",
-                explanation: "Alle paarsgekleurde delicten in de studiehandleiding zijn VH-feiten! Ook voor verdachten zonder vaste woon/verblijfplaats in NL.",
-                connection: "Voorwaarde voor aanhouding buiten heterdaad, IVS, IBS en Gevangenhouding."
+                text: "Toegelaten bij misdrijven met wettelijke gevangenisstraf van 4 jaar of meer, PLUS specifiek aangewezen feiten.",
+                explanation: "Alle paarsgekleurde delicten in de studiehandleiding zijn VH-feiten!",
+                connection: "Voorwaarde voor aanhouding buiten heterdaad, IVS, IBS."
             },
             {
-                id: "sv94_96b", law: "Wetboek van Strafvordering", article: "Artikel 94, 95, 96, 96a & 96b", title: "Inbeslagneming & Doorzoeken vervoersmiddel", inMatrix: true, vh: false, exam: false, tax: "T",
+                id: "sv94_96b", law: "Wetboek van Strafvordering", article: "Artikel 94 & 96", title: "Inbeslagneming & Doorzoeken vervoersmiddel", inMatrix: true, vh: false, exam: false, tax: "T",
                 eis: "De student kan in een praktijksituatie bepalen of een voorwerp vatbaar is voor inbeslagneming en wanneer hij bevoegd is.",
-                text: "Art. 94: Vatbaar voor inbeslagname (waarheidsvinding, verbeurdverklaring, voordeel).\nArt. 95: Ibn bij staandehouding/aanhouding (wat direct zichtbaar/meegevoerd wordt).\nArt. 96: Ibn bij heterdaad of VH-feit (elke plaats betreden).\nArt. 96a: Bevel uitlevering (NIET aan verdachte!).\nArt. 96b: Doorzoeken vervoermiddel ter ibn.",
-                explanation: "Bevel uitlevering (96a) mag NOOIT aan de verdachte gegeven worden (nemo tenetur). Doorzoeken vervoersmiddel (96b) mag door opsporingsambtenaar (behalve woongedeelte).",
-                connection: "Sv art. 134 (definitie inbeslagneming)."
-            },
-            {
-                id: "sv96c_97", law: "Wetboek van Strafvordering", article: "Artikel 96c & 97", title: "Doorzoeken plaatsen en woningen ter inbeslagneming", inMatrix: true, vh: false, exam: false, tax: "K",
-                eis: "De student kan beschrijven onder welke voorwaarden een plaats of woning mag worden doorzocht ter inbeslagneming.",
-                text: "Art. 96c: Doorzoeken plaatsen ter ibn door OvJ (HOvJ bij spoed met machtiging OvJ).\nArt. 97: Doorzoeken woning ter ibn door OvJ bij spoed met machtiging RC (HOvJ bij uiterste spoed).",
-                explanation: "Doorzoeken woning ter ibn vereist machtiging van de Rechter-Commissaris!",
-                connection: "Sv art. 110 (Doorzoeking door RC)."
-            },
-            {
-                id: "sv124", law: "Wetboek van Strafvordering", article: "Artikel 124", title: "Ordehandhaving tijdens ambtsverrichtingen", inMatrix: true, vh: false, exam: false, tax: "K",
-                eis: "De student kan beschrijven wie verantwoordelijk is voor de orde tijdens ambtsverrichtingen.",
-                text: "Voorzitter/rechter/ambtenaar belast met de leiding draagt zorg voor de orde. Kan waarschuwen, bevelen te vertrekken en bij weigering doen verwijderen.",
-                explanation: "Ordehandhaving bij zittingen/onderzoeken. Let op: het spannen van politielint is GEEN bevel ex art. 184 Sr.",
-                connection: "Sr art. 180/184."
+                text: "Art. 94: Vatbaar voor inbeslagname (waarheidsvinding, verbeurdverklaring, voordeel).\nArt. 96: Ibn bij heterdaad of VH-feit.",
+                explanation: "Bevel uitlevering (96a) mag NOOIT aan de verdachte gegeven worden (nemo tenetur).",
+                connection: "Sv art. 134."
             },
             {
                 id: "sv126nda", law: "Wetboek van Strafvordering", article: "Artikel 126nd & 126nda", title: "Vorderen gegevens & Camerabeelden", inMatrix: true, vh: true, exam: false, tax: "K",
                 eis: "De student kan benoemen welke voorwaarden gelden bij het vorderen van camerabeelden of andere gegevens.",
-                text: "Art. 126nd: OvJ kan opgeslagen gegevens vorderen bij VH-feit.\nArt. 126nda: Opsporingsambtenaar kan beveiligingscamerabeelden vorderen bij VH-feit.",
-                explanation: "Vordering mag NOOIT aan verdachte worden gericht! Mag bij 126nda mondeling of schriftelijk gedaan worden.",
+                text: "Art. 126nda: Opsporingsambtenaar kan beveiligingscamerabeelden vorderen bij VH-feit.",
+                explanation: "Vordering mag NOOIT aan verdachte worden gericht! Mag mondeling of schriftelijk.",
                 connection: "Opsporingsdwangmiddelen bij VH-feiten."
-            },
-            {
-                id: "sv127_142", law: "Wetboek van Strafvordering", article: "Artikel 127, 141 & 142", title: "Opsporingsambtenaren (Algemeen & BOA)", inMatrix: true, vh: false, exam: false, tax: "K",
-                eis: "De student kan beschrijven wie zijn belast met de opsporing van strafbare feiten.",
-                text: "Art. 141: Algemene opsporingsambtenaren (OvJ, politieambtenaren A, C, D voor politietaak, KMar, BOD's).\nArt. 142: Buitengewoon opsporingsambtenaren (BOA's met akte voor specifiek domein).",
-                explanation: "Politieambtenaren aangesteld voor de politietaak zijn algemeen opsporingsambtenaar. BOA's hebben beperkte opsporingsbevoegdheid voor hun werkdomein.",
-                connection: "Politiewet 2012 art. 2."
-            },
-            {
-                id: "sv128", law: "Wetboek van Strafvordering", article: "Artikel 128", title: "Ontdekking op heterdaad", inMatrix: true, vh: false, exam: false, tax: "B",
-                eis: "De student kan uitleggen wanneer er sprake is van heterdaad.",
-                text: "Ontdekking op heterdaad heeft plaats wanneer het strafbare feit ontdekt wordt terwijl het begaan wordt of terstond nadat het begaan is.",
-                explanation: "Kort na het feit. Heterdaad kan worden opgerekt bij voortdurende achtervolging/opsporing of bij voortdurende delicten (zoals heling).",
-                connection: "Sv art. 53 (Aanhouding op heterdaad)."
-            },
-            {
-                id: "sv161", law: "Wetboek van Strafvordering", article: "Artikel 161", title: "Aangifte en Klacht", inMatrix: true, vh: false, exam: false, tax: "K",
-                eis: "De student kan benoemen wie bevoegd is om aangifte te doen.",
-                text: "Ieder die kennis draagt van een begaan strafbaar feit is bevoegd daarvan aangifte te doen. Klachtdelicten vereisen uitdrukkelijk verzoek tot vervolging door slachtoffer.",
-                explanation: "Aangifte kan niet worden ingetrokken. Politie is verplicht aangifte op te nemen. Klacht (bij klachtdelicten) moet binnen 3 maanden ingediend worden en kan binnen 8 dagen worden ingetrokken.",
-                connection: "Absolute en Relatieve klachtdelicten."
-            },
-            {
-                id: "sv167", law: "Wetboek van Strafvordering", article: "Artikel 167", title: "Opportuniteitsbeginsel", inMatrix: true, vh: false, exam: false, tax: "K",
-                eis: "De student kan beschrijven welke factoren een OvJ in overweging neemt bij vervolging.",
-                text: "Het Openbaar Ministerie beslist of vervolging plaatsvindt. Van vervolging kan worden afgezien op gronden aan het algemeen belang ontleend (seponeren).",
-                explanation: "Technisch sepot (te weinig bewijs/niet strafbaar) vs Beleidssepot (algemeen belang). Strafbeschikking mogelijk bij feiten tot max 6 jaar cel.",
-                connection: "Vervolgingsbeslissing OM."
             },
             {
                 id: "sv338_344", law: "Wetboek van Strafvordering", article: "Artikel 338, 339, 341, 342, 344", title: "Bewijsrecht & Wettige bewijsmiddelen", inMatrix: true, vh: false, exam: false, tax: "K / T",
                 eis: "De student kan in een praktijksituatie bepalen wat wettige bewijsmiddelen zijn en de regels toepassen.",
-                text: "Wettige bewijsmiddelen (339): 1. Eigen waarneming rechter; 2. Verklaring verdachte (341); 3. Verklaring getuige (342); 4. Verklaring deskundige; 5. Schriftelijke bescheiden (344 - ambtelijk PV).",
-                explanation: "Bewijsminimum: 1 getuige is géén getuige (342 lid 2). Een bekentenis van verdachte alleen is niet genoeg (341 lid 4). EEN op ambtseed opgemaakt PV van een opsporingsambtenaar kan wél alleen voldoende bewijs opleveren (344 lid 2)!",
-                connection: "Strafvorderlijke bewijsregels ter terechtzitting."
+                text: "Wettige bewijsmiddelen (339): Eigen waarneming, verklaring verdachte/getuige, schriftelijke bescheiden (ambtelijk PV).",
+                explanation: "Bewijsminimum: 1 getuige is géén getuige (342 lid 2). EEN op ambtseed opgemaakt PV van een opsporingsambtenaar is wél voldoende bewijs (344 lid 2)!",
+                connection: "Strafvorderlijke bewijsregels."
             },
-
-            // WET OP DE IDENTIFICATIEPLICHT & AWBI
             {
                 id: "wid1_2", law: "Wet op de identificatieplicht", article: "Artikel 1 & 2", title: "Aanwijzing documenten & Toonplicht", inMatrix: true, vh: false, exam: true, tax: "K",
                 eis: "De student kan beschrijven welke documenten zijn aangewezen en vanaf welke leeftijd de toonplicht geldt.",
-                text: "Art. 1: Paspoort, ID-kaart, rijbewijs, vreemdelingendocument.\nArt. 2: Eenieder van 14 JAAR of ouder is verplicht op eerste vordering van een opsporingsambtenaar een ID-bewijs ter inzage aan te bieden.",
+                text: "Art. 2: Eenieder van 14 JAAR of ouder is verplicht op eerste vordering van een opsporingsambtenaar een ID-bewijs ter inzage aan te bieden.",
                 explanation: "Groene tekst. Toonplicht geldt vanaf 14 jaar op eerste vordering in het kader van de politietaak (art. 8 Politiewet).",
                 connection: "Politiewet art. 8 & Sr art. 447e."
             },
             {
                 id: "awbi1_9", law: "Awbi", article: "Artikel 1, 2, 3, 7, 9", title: "Algemene wet op het binnentreden", inMatrix: true, vh: false, exam: true, tax: "K / T",
                 eis: "De student kan de voorwaarden, uitzonderingen en nachtregels voor het binnentreden van een woning benoemen.",
-                text: "Art. 1: Legitimatie- en doelmededeling vooraf.\nArt. 2: Schriftelijke machtiging vereist (behalve bij direct gevaar/hulp).\nArt. 3: Machtiging gegeven door OvJ of HOvJ.\nArt. 7: 's Nachts (24:00 - 06:00) alleen bij DRINGENDE NOODZAKELIJKHEID en uitdrukkelijke machtiging.\nArt. 9: Toegang/doorgang verschaffen (forceren).",
-                explanation: "Groene tekst. 's Nachts binnentreden mag uitsluitend als dit dringend noodzakelijk is en op de machtiging staat vermeld. Fysieke barrières openbreken mag ex art. 9.",
+                text: "Art. 1: Legitimatie/doel.\nArt. 7: 's Nachts (24:00 - 06:00) alleen bij DRINGENDE NOODZAKELIJKHEID en uitdrukkelijke machtiging.\nArt. 9: Toegang verschaffen (forceren).",
+                explanation: "Groene tekst. 's Nachts binnentreden mag uitsluitend als dit dringend noodzakelijk is en op de machtiging staat vermeld.",
                 connection: "Grondwet art. 12 & Politiewet art. 7 lid 2."
             }
         ];
@@ -976,7 +873,7 @@
             document.getElementById(tabId).classList.add('active');
             btn.classList.add('active');
 
-            if (tabId === 'quiz-tab' && currentQuizQuestion === null) {
+            if (tabId === 'quiz-tab') {
                 generateQuestion();
             }
         }
@@ -1079,69 +976,66 @@
         let currentQuizQuestion = null;
         let score = 0;
         let questionCount = 0;
-
-        function getRandomItem(arr) {
-            return arr[Math.floor(Math.random() * arr.length)];
-        }
+        let askedQuestionIds = [];
 
         function generateQuestion() {
             document.getElementById('quiz-feedback').style.display = 'none';
             document.getElementById('quiz-next-btn').style.display = 'none';
 
-            const item = getRandomItem(database);
+            let availableItems = database.filter(d => !askedQuestionIds.includes(d.id));
+            if (availableItems.length === 0) {
+                askedQuestionIds = [];
+                availableItems = database;
+            }
+
+            const item = availableItems[Math.floor(Math.random() * availableItems.length)];
+            askedQuestionIds.push(item.id);
+
             const questionType = Math.floor(Math.random() * 4); 
 
             let questionText = "";
             let correctAnswer = "";
-            let wrongAnswers = [];
+            let wrongPool = [];
 
             if (questionType === 0) {
-                questionText = `Is het delict <strong>${item.article} (${item.title})</strong> uit de toetsmatrijs aangemerkt als een <strong>VH-feit (paars gemarkeerd)</strong>?`;
+                questionText = `<strong>Examenstoets Vraag (VH-Feit):</strong> Is het delict <strong>${item.article} (${item.title})</strong> volgens de officiële toetsmatrijs aangemerkt als een <strong>Voorlopige Hechtenis feit (Paars)</strong>?`;
                 correctAnswer = item.vh ? "Ja, dit is een VH-feit" : "Nee, dit is GEEN VH-feit";
-                wrongAnswers = [
+                wrongPool = [
                     item.vh ? "Nee, dit is GEEN VH-feit" : "Ja, dit is een VH-feit",
-                    "Alleen als het 's nachts plaatsvindt",
-                    "Alleen bij recidive binnen 1 jaar"
+                    "Alleen indien er sprake is van heterdaad",
+                    "Alleen indien de verdachte niet meewerkt aan identificatie"
                 ];
             } else if (questionType === 1) {
-                questionText = `Welk wetsartikel en wetboek hoort bij de volgende wettekst/omschrijving?<br><em>"${item.text}"</em>`;
-                correctAnswer = `${item.law} - ${item.article}`;
+                questionText = `<strong>Wettekst Herkenning:</strong> Welk wetsartikel uit de toetsmatrijs hoort exact bij deze bepaling of omschrijving?<br><em>"${item.text}"</em>`;
+                correctAnswer = `${item.law} - ${item.article}: ${item.title}`;
                 
-                const otherItems = database.filter(d => d.id !== item.id);
-                wrongAnswers = [
-                    `${getRandomItem(otherItems).law} - ${getRandomItem(otherItems).article}`,
-                    `${getRandomItem(otherItems).law} - ${getRandomItem(otherItems).article}`,
-                    `${getRandomItem(otherItems).law} - ${getRandomItem(otherItems).article}`
-                ];
+                const otherItems = database.filter(d => d.id !== item.id).sort(() => 0.5 - Math.random());
+                wrongPool = otherItems.slice(0, 3).map(o => `${o.law} - ${o.article}: ${o.title}`);
             } else if (questionType === 2) {
                 let taxName = item.tax.includes('K') ? "Kennis (K)" : (item.tax.includes('B') ? "Begrip (B)" : "Toepassing (T)");
-                questionText = `Op welk niveau volgens de toetsmatrijs wordt <strong>${item.article} (${item.title})</strong> getoetst?`;
+                questionText = `<strong>Toetsmatrijs Taxonomie:</strong> Op welk niveau wordt het onderwerp <strong>${item.article} (${item.title})</strong> getoetst in de examentoets?`;
                 correctAnswer = taxName;
-                wrongAnswers = ["Kennis (K)", "Begrip (B)", "Toepassing (T)"].filter(a => a !== taxName);
-                wrongAnswers.push("Analyse (A)");
+                wrongPool = ["Kennis (K)", "Begrip (B)", "Toepassing (T)"].filter(a => a !== taxName);
+                wrongPool.push("Analyse (A) & Synthese");
             } else {
-                questionText = `<strong>Praktijkniveau (${item.tax}):</strong> ${item.eis || 'Welk artikel is van toepassing bij de uitoefening van deze bevoegdheid?'}`;
+                questionText = `<strong>Praktijkcasus (Toetsing):</strong> ${item.eis || `Welke juridische grondslag is hier van toepassing op ${item.title}?`}`;
                 correctAnswer = `${item.law} - ${item.article}`;
                 
-                const otherItems = database.filter(d => d.id !== item.id);
-                wrongAnswers = [
-                    `${getRandomItem(otherItems).law} - ${getRandomItem(otherItems).article}`,
-                    `${getRandomItem(otherItems).law} - ${getRandomItem(otherItems).article}`,
-                    `${getRandomItem(otherItems).law} - ${getRandomItem(otherItems).article}`
-                ];
+                const otherItems = database.filter(d => d.id !== item.id).sort(() => 0.5 - Math.random());
+                wrongPool = otherItems.slice(0, 3).map(o => `${o.law} - ${o.article}`);
             }
 
-            const allOptions = [correctAnswer, ...wrongAnswers.slice(0, 3)].sort(() => Math.random() - 0.5);
+            const allOptions = [correctAnswer, ...wrongPool.slice(0, 3)].sort(() => Math.random() - 0.5);
 
             currentQuizQuestion = {
                 question: questionText,
                 correct: correctAnswer,
                 options: allOptions,
-                explanation: item.explanation + (item.connection ? `<br><br><strong>Wetsketen:</strong> ${item.connection}` : '')
+                explanation: (item.eis ? `<strong>Toetsmatrijs Eis:</strong> ${item.eis}<br><br>` : '') + item.explanation + (item.connection ? `<br><br><strong>Wetsketen / Praktijkkoppeling:</strong> ${item.connection}` : '')
             };
 
             questionCount++;
-            document.getElementById('quiz-counter').innerHTML = `Vraag #${questionCount}`;
+            document.getElementById('quiz-counter').innerHTML = `Examen Vraag #${questionCount}`;
             document.getElementById('quiz-question').innerHTML = currentQuizQuestion.question;
 
             const optionsContainer = document.getElementById('quiz-options');
@@ -1167,13 +1061,13 @@
                 btnElement.classList.add('correct');
                 feedback.style.background = '#c6f6d5';
                 feedback.style.color = '#22543d';
-                feedback.innerHTML = `<strong>Correct! 🎉</strong><br>${currentQuizQuestion.explanation}`;
+                feedback.innerHTML = `<strong>Juist! 🎉 Goed geoefend voor de toets.</strong><br><br>${currentQuizQuestion.explanation}`;
                 score++;
             } else {
                 btnElement.classList.add('wrong');
                 feedback.style.background = '#fed7d7';
                 feedback.style.color = '#742a2a';
-                feedback.innerHTML = `<strong>Helaas, niet juist.</strong> Het juiste antwoord was: <strong>${currentQuizQuestion.correct}</strong>.<br><br>${currentQuizQuestion.explanation}`;
+                feedback.innerHTML = `<strong>Onjuist.</strong> Het juiste examen-antwoord is: <strong>${currentQuizQuestion.correct}</strong>.<br><br>${currentQuizQuestion.explanation}`;
                 
                 allBtns.forEach(b => {
                     if (b.innerHTML === currentQuizQuestion.correct) {
@@ -1184,10 +1078,6 @@
 
             document.getElementById('quiz-score').textContent = `Score: ${score} van de ${questionCount}`;
             document.getElementById('quiz-next-btn').style.display = 'inline-block';
-        }
-
-        function nextQuestion() {
-            generateQuestion();
         }
 
         renderArticles(database);
