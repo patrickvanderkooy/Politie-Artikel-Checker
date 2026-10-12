@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Politie Toetsmatrijs & Wetsverbanden Assistent</title>
+    <title>Politie Toetsmatrijs Pro & Quiz Assistent</title>
     <style>
         :root {
             --primary: #1a365d;
@@ -29,79 +29,104 @@
         header {
             background-color: var(--primary);
             color: white;
-            padding: 1.5rem 1rem;
+            padding: 1.2rem 1rem;
             text-align: center;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
         header h1 {
             margin: 0;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
         }
 
         header p {
-            margin: 0.5rem 0 0 0;
-            font-size: 0.9rem;
+            margin: 0.4rem 0 0 0;
+            font-size: 0.85rem;
             opacity: 0.8;
         }
 
+        nav {
+            display: flex;
+            background: #2c5282;
+            justify-content: center;
+        }
+
+        nav button {
+            background: none;
+            border: none;
+            color: white;
+            padding: 0.8rem 1.2rem;
+            font-size: 0.95rem;
+            font-weight: bold;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+        }
+
+        nav button.active {
+            border-bottom: 3px solid #63b3ed;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
         .container {
-            max-width: 800px;
-            margin: 2rem auto;
+            max-width: 850px;
+            margin: 1.5rem auto;
             padding: 0 1rem;
             width: 100%;
             box-sizing: border-box;
             flex: 1;
         }
 
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
         .search-box {
             position: relative;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
         }
 
         .search-box input {
             width: 100%;
-            padding: 1rem 1rem 1rem 3rem;
+            padding: 0.9rem 1rem 0.9rem 2.8rem;
             font-size: 1rem;
             border: 2px solid var(--border);
             border-radius: 8px;
             outline: none;
             box-sizing: border-box;
-            transition: border-color 0.2s;
             background: white;
-        }
-
-        .search-box input:focus {
-            border-color: var(--secondary);
         }
 
         .search-box svg {
             position: absolute;
-            left: 1rem;
+            left: 0.9rem;
             top: 50%;
             transform: translateY(-50%);
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             fill: #a0aec0;
         }
 
         .filters {
             display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
+            gap: 0.4rem;
+            margin-bottom: 1.2rem;
             flex-wrap: wrap;
         }
 
         .filter-btn {
             background: white;
             border: 1px solid var(--border);
-            padding: 0.5rem 1rem;
+            padding: 0.4rem 0.8rem;
             border-radius: 20px;
             cursor: pointer;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 500;
             color: var(--text);
-            transition: all 0.2s;
         }
 
         .filter-btn.active {
@@ -110,19 +135,14 @@
             border-color: var(--secondary);
         }
 
-        .results-info {
-            font-size: 0.85rem;
-            color: #718096;
-            margin-bottom: 1rem;
-        }
-
         .card {
             background: var(--card-bg);
             border-radius: 8px;
-            padding: 1.25rem;
+            padding: 1.2rem;
             margin-bottom: 1rem;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             border: 1px solid var(--border);
+            position: relative;
         }
 
         .card-header {
@@ -130,11 +150,11 @@
             justify-content: space-between;
             align-items: flex-start;
             margin-bottom: 0.75rem;
-            gap: 1rem;
+            gap: 0.8rem;
         }
 
         .article-title {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-weight: bold;
             color: var(--primary);
             margin: 0;
@@ -142,14 +162,13 @@
 
         .badges {
             display: flex;
-            gap: 0.4rem;
-            flex-shrink: 0;
+            gap: 0.3rem;
             flex-wrap: wrap;
         }
 
         .badge {
-            font-size: 0.75rem;
-            padding: 0.25rem 0.6rem;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
             border-radius: 4px;
             font-weight: bold;
             text-transform: uppercase;
@@ -162,19 +181,33 @@
         .badge-begrip { background-color: #feebc8; color: #744210; }
         .badge-toepassing { background-color: #fed7d7; color: #9b2c2c; }
 
+        .fav-btn {
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            cursor: pointer;
+            color: #cbd5e0;
+            padding: 0;
+            margin-left: 0.5rem;
+        }
+
+        .fav-btn.active {
+            color: #ecc94b;
+        }
+
         .article-text {
             font-family: monospace;
             background: #f8fafc;
             padding: 0.75rem;
             border-radius: 4px;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             white-space: pre-wrap;
             margin-bottom: 0.75rem;
             border-left: 3px solid var(--secondary);
         }
 
         .explanation {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             line-height: 1.5;
             color: #4a5568;
             margin-bottom: 0.75rem;
@@ -186,17 +219,130 @@
             border-left: 3px solid #dd6b20;
             padding: 0.75rem;
             border-radius: 4px;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             color: #7b341e;
         }
 
-        .connection-box strong {
-            color: #c05621;
+        /* Quiz specifieke styling */
+        .quiz-container {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .quiz-question {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .quiz-option {
+            background: #f7fafc;
+            border: 2px solid var(--border);
+            padding: 0.8rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            text-align: left;
+            transition: all 0.2s;
+        }
+
+        .quiz-option:hover {
+            border-color: var(--secondary);
+            background: #ebf8ff;
+        }
+
+        .quiz-option.correct {
+            background: #c6f6d5 !important;
+            border-color: #38a169 !important;
+            color: #22543d;
+            font-weight: bold;
+        }
+
+        .quiz-option.wrong {
+            background: #fed7d7 !important;
+            border-color: #e53e3e !important;
+            color: #742a2a;
+        }
+
+        .quiz-feedback {
+            padding: 1rem;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            display: none;
+            line-height: 1.5;
+        }
+
+        .quiz-btn {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Schema styling */
+        .timeline-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 18px;
+            top: 35px;
+            bottom: -20px;
+            width: 3px;
+            background: #cbd5e0;
+        }
+
+        .timeline-item:last-child::before {
+            display: none;
+        }
+
+        .timeline-badge {
+            width: 38px;
+            height: 38px;
+            background: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+            z-index: 1;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 1rem;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            flex: 1;
         }
 
         footer {
             text-align: center;
-            padding: 1.5rem;
+            padding: 1.2rem;
             font-size: 0.8rem;
             color: #a0aec0;
             border-top: 1px solid var(--border);
@@ -207,218 +353,223 @@
 <body>
 
     <header>
-        <h1>Politie Toetsmatrijs & Wetsverbanden</h1>
-        <p>Inclusief wetsketens, taxonomie (K/B/T) & complete wetboeken</p>
+        <h1>Politie Toetsmatrijs Pro</h1>
+        <p>Wetboeken, Wetsketens, Toets-Quiz & Termijnen</p>
     </header>
 
+    <nav>
+        <button class="nav-btn active" onclick="switchTab('articles-tab', this)">Wetboeken</button>
+        <button class="nav-btn" onclick="switchTab('quiz-tab', this)">Oefentest (Quiz)</button>
+        <button class="nav-btn" onclick="switchTab('schema-tab', this)">Termijnschema</button>
+    </nav>
+
     <div class="container">
-        <div class="search-box">
-            <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
-            <input type="text" id="searchInput" placeholder="Zoek op artikel (bijv. '7 Politiewet', '12 Grondwet', '56 Sv') of trefwoord..." onkeyup="filterArticles()">
+        <!-- TAB 1: ARTIKELEN EN ZOEKEN -->
+        <div id="articles-tab" class="tab-content active">
+            <div class="search-box">
+                <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                <input type="text" id="searchInput" placeholder="Zoek op artikel (bijv. '310 Sr', '53 Sv', '7 Politiewet') of trefwoord..." onkeyup="filterArticles()">
+            </div>
+
+            <div class="filters">
+                <button class="filter-btn active" onclick="setFilter('all', this)">Alles</button>
+                <button class="filter-btn" onclick="setFilter('matrix', this)">Toetsmatrijs</button>
+                <button class="filter-btn" onclick="setFilter('vh', this)">VH-feiten</button>
+                <button class="filter-btn" onclick="setFilter('favs', this)">⭐ Favorieten</button>
+                <button class="filter-btn" onclick="setFilter('kennis', this)">Kennis (K)</button>
+                <button class="filter-btn" onclick="setFilter('begrip', this)">Begrip (B)</button>
+                <button class="filter-btn" onclick="setFilter('toepassing', this)">Toepassing (T)</button>
+            </div>
+
+            <div class="results-info" id="resultsInfo">Laden...</div>
+            <div id="articlesContainer"></div>
         </div>
 
-        <div class="filters">
-            <button class="filter-btn active" onclick="setFilter('all', this)">Alles</button>
-            <button class="filter-btn" onclick="setFilter('matrix', this)">In Toetsmatrijs</button>
-            <button class="filter-btn" onclick="setFilter('vh', this)">VH-feiten</button>
-            <button class="filter-btn" onclick="setFilter('kennis', this)">Kennis (K)</button>
-            <button class="filter-btn" onclick="setFilter('begrip', this)">Begrip (B)</button>
-            <button class="filter-btn" onclick="setFilter('toepassing', this)">Toepassing (T)</button>
+        <!-- TAB 2: QUIZ / OEFENTEST -->
+        <div id="quiz-tab" class="tab-content">
+            <div class="quiz-container">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; color: #718096; font-size: 0.9rem;">
+                    <span id="quiz-counter">Oefenvraag generator</span>
+                    <span id="quiz-score">Score: 0 goed</span>
+                </div>
+                <div class="quiz-question" id="quiz-question">Vraag laden...</div>
+                <div class="quiz-options" id="quiz-options"></div>
+                <div class="quiz-feedback" id="quiz-feedback"></div>
+                <button class="quiz-btn" id="quiz-next-btn" onclick="nextQuestion()" style="display: none;">Volgende Vraag →</button>
+            </div>
         </div>
 
-        <div class="results-info" id="resultsInfo">Alle artikelen worden weergegeven</div>
+        <!-- TAB 3: VISUEEL TERMIJNSCHEMA -->
+        <div id="schema-tab" class="tab-content">
+            <h2 style="color: var(--primary); font-size: 1.2rem; margin-bottom: 1rem;">Opeenvolging Vrijheidsbeneming & Dwangmiddelen</h2>
+            
+            <div class="timeline-item">
+                <div class="timeline-badge">1</div>
+                <div class="timeline-content">
+                    <h4 style="margin:0 0 0.4rem 0; color:var(--primary);">Staandehouding / Aanhouding</h4>
+                    <p style="margin:0; font-size:0.9rem; color:#4a5568;"><strong>Art. 52 Sv (Staandehouding):</strong> Alleen ter vaststelling identiteit.<br><strong>Art. 53/54 Sv (Aanhouding):</strong> Terstond overbrengen naar plaats van verhoor ter voorgeleiding.</p>
+                </div>
+            </div>
 
-        <div id="articlesContainer"></div>
+            <div class="timeline-item">
+                <div class="timeline-badge">2</div>
+                <div class="timeline-content">
+                    <h4 style="margin:0 0 0.4rem 0; color:var(--primary);">Ophouden voor onderzoek (Art. 56a Sv)</h4>
+                    <p style="margin:0; font-size:0.9rem; color:#4a5568;"><strong>Geen VH-feit:</strong> Maximaal 6 uur.<br><strong>Wel VH-feit:</strong> Maximaal 9 uur.<br><em>Let op: Tijd tussen 00:00 en 09:00 uur telt niet mee voor de termijnberekening!</em></p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-badge">3</div>
+                <div class="timeline-content">
+                    <h4 style="margin:0 0 0.4rem 0; color:var(--primary);">Inverzekeringstelling - IVS (Art. 57/58 Sv)</h4>
+                    <p style="margin:0; font-size:0.9rem; color:#4a5568;"><strong>Bevoegdheid:</strong> (H)OvJ.<br><strong>Duur:</strong> Maximaal 3 dagen (72 uur).<br><strong>Verlenging:</strong> Eenmaal met max 3 dagen door OvJ bij dringende noodzakelijkheid.<br><strong>Voorwaarde:</strong> Alleen bij VH-feiten (art. 67 Sv).</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-badge">4</div>
+                <div class="timeline-content">
+                    <h4 style="margin:0 0 0.4rem 0; color:var(--primary);">Inbewaringstelling - IBS (Art. 63 Sv)</h4>
+                    <p style="margin:0; font-size:0.9rem; color:#4a5568;"><strong>Bevoegdheid:</strong> Rechter-Commissaris (RC).<br><strong>Duur:</strong> Maximaal 14 dagen.<br><strong>Termijn voorgeleiding RC:</strong> Uiterlijk binnen 3 dagen en 18 uur na aanhouding!</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-badge">5</div>
+                <div class="timeline-content">
+                    <h4 style="margin:0 0 0.4rem 0; color:var(--primary);">Gevangenhouding (Art. 65 Sv)</h4>
+                    <p style="margin:0; font-size:0.9rem; color:#4a5568;"><strong>Bevoegdheid:</strong> Raadkamer Rechtbank op vordering OvJ.<br><strong>Duur:</strong> Maximaal 90 dagen.</p>
+                </div>
+            </div>
+        </div>
     </div>
 
     <footer>
-        Politie Studie Assistent &bull; Werkt direct op Android, iOS en PC
+        Politie Studie Assistent Pro &bull; Werkt offline op Android, iOS en PC
     </footer>
 
     <script>
         const database = [
             // GRONDWET
-            {
-                law: "Grondwet", article: "Artikel 12", title: "Huisrecht (Binnentreden woning)", inMatrix: true, vh: false, tax: "B",
-                text: "Het binnentreden in woning zonder toestemming van de bewoner is alleen geoorloofd in de gevallen bij of krachtens de wet bepaald.",
-                explanation: "Uitleg: Regelt het huisrecht. Zonder toestemming binnentreden kan enkel bij hulpverlening of wettelijke bevoegdheid[span_3](start_span)[span_3](end_span).",
-                connection: "<strong>Wetsverband / Keten:</strong> Hangt direct samen met <strong>Politiewet art. 7 lid 2</strong> (binnentreden ter hulpverlening) en de vormvoorschriften uit de <strong>Awbi (Algemene wet op het binnentreden)</strong>[span_4](start_span)[span_4](end_span)."
-            },
-            {
-                law: "Grondwet", article: "Artikel 15", title: "Persoonlijke vrijheid", inMatrix: true, vh: false, tax: "B",
-                text: "Buiten de gevallen bij of krachtens de wet bepaald mag niemand zijn vrijheid worden ontnomen.",
-                explanation: "Uitleg: Vrijheidsbeneming kan uitsluitend op wettelijke basis[span_5](start_span)[span_5](end_span).",
-                connection: "<strong>Wetsverband / Keten:</strong> Vertaalt zich naar de dwangmiddelenketen in het Wetboek van Strafvordering: <em>ophouden voor onderzoek (art. 56a Sv) -> inverzekeringstelling (art. 57 Sv) -> inbewaringstelling (art. 63 Sv) -> gevangenhouding (art. 65 Sv)</em>[span_6](start_span)[span_6](end_span)."
-            },
+            { id: "gw1", law: "Grondwet", article: "Artikel 1", title: "Gelijkheidsbeginsel & Verbod op discriminatie", inMatrix: true, vh: false, tax: "T", text: "Allen die zich in Nederland bevinden, worden in gelijke gevallen gelijk behandeld. Discriminatie is niet toegestaan.", explanation: "Gelijkheidsbeginsel. Willekeur en onrechtvaardig onderscheid zijn verboden.", connection: "Gekoppeld aan artikel 3 Politiewet (neutraal optreden)." },
+            { id: "gw10", law: "Grondwet", article: "Artikel 10 & 11", title: "Persoonlijke levenssfeer & Onaantastbaarheid lichaam", inMatrix: true, vh: false, tax: "T", text: "Eerbiediging persoonlijke levenssfeer en onaantastbaarheid van het lichaam.", explanation: "Overheid mag hier alleen inbreuk op maken als dit expliciet in de wet geregeld is.", connection: "Verbonden met wetgeving rond privacy (Wpg) en fouilleringen (art. 56 Sv & art. 7 Politiewet)." },
+            { id: "gw12", law: "Grondwet", article: "Artikel 12", title: "Huisrecht (Binnentreden woning)", inMatrix: true, vh: false, tax: "B", text: "Het binnentreden in woning zonder toestemming is alleen geoorloofd in de gevallen bij de wet bepaald.", explanation: "Zonder toestemming binnentreden kan enkel bij hulpverlening of wettelijke bevoegdheid.", connection: "Politiewet art. 7 lid 2 (hulpverlening) en vormvoorschriften Awbi." },
+            { id: "gw15", law: "Grondwet", article: "Artikel 15", title: "Persoonlijke vrijheid", inMatrix: true, vh: false, tax: "B", text: "Buiten de gevallen bij wet bepaald mag niemand zijn vrijheid worden ontnomen.", explanation: "Vrijheidsbeneming kan uitsluitend op wettelijke basis.", connection: "Keten van dwangmiddelen: art. 56a, 57, 63, 65 Sv." },
 
             // POLITIEWET 2012
-            {
-                law: "Politiewet 2012", article: "Artikel 3", title: "Taak van de politie", inMatrix: true, vh: false, tax: "K",
-                text: "De politie heeft tot taak in ondergeschiktheid aan het bevoegd gezag en in overeenstemming met de geldende rechtsregels te zorgen voor handhaving van de rechtsorde en hulpverlening.", explanation: "Uitleg: Bevoegd gezag is burgemeester (openbare orde) of OvJ (strafrecht)[span_7](start_span)[span_7](end_span).",
-                connection: "<strong>Wetsverband / Keten:</strong> Gekoppeld aan <strong>art. 141 en 132a WvSv</strong> bij het uitvoeren van bijvoorbeeld een buurtonderzoek onder leiding van het bevoegd gezag[span_8](start_span)[span_8](end_span)."
-            },
-            {
-                law: "Politiewet 2012", article: "Artikel 7 lid 1", title: "Geweldsaanwending", inMatrix: true, vh: false, tax: "T",
-                text: "Bevoegd tot geweld of vrijheidsbeperkende middelen bij rechtmatige uitoefening bediening (subsidiariteit & proportionaliteit).", explanation: "Uitleg: Mildste middel kiezen en in verhouding tot het doel[span_9](start_span)[span_9](end_span).",
-                connection: "<strong>Wetsverband / Keten:</strong> Vormt samen met <strong>Sr artikel 42</strong> (wettelijk voorschrift / ambtelijk geweld) de rechtvaardigingsgrond dat een agent die geweld gebruikt niet strafbaar is, mits conform de Ambtsinstructie[span_10](start_span)[span_10](end_span)."
-            },
-            {
-                law: "Politiewet 2012", article: "Artikel 7 lid 2", title: "Toegang plaatsen hulpverlening", inMatrix: true, vh: false, tax: "T",
-                text: "Toegang tot elke plaats voor zover dat voor het verlenen van hulp redelijkerwijs nodig is.", explanation: "Uitleg: Juridische basis om bij acute noodsituaties een woning binnen te gaan[span_11](start_span)[span_11](end_span).",
-                connection: "<strong>Wetsverband / Keten:</strong> Vormt een uitzondering op de vormvereisten van de <strong>Awbi</strong> (zoals de plicht tot legitimatie/machtiging bij direct gevaar)[span_12](start_span)[span_12](end_span)."
-            },
-            {
-                law: "Politiewet 2012", article: "Artikel 8", title: "Vorderen inzage identiteitsbewijs", inMatrix: true, vh: false, tax: "T",
-                text: "Bevoegd tot vorderen inzage ID-bewijs voor zover redelijkerwijs noodzakelijk voor de politietaak.", explanation: "Uitleg: Moet gekoppeld zijn aan de politietaak[span_13](start_span)[span_13](end_span).",
-                connection: "<strong>Wetsverband / Keten:</strong> Gekoppeld aan de <strong>Wet op de identificatieplicht (art. 1 & 2)</strong>. Wie weigert, maakt zich strafbaar volgens <strong>art. 447e Sr</strong>[span_14](start_span)[span_14](end_span)."
-            },
+            { id: "pw2", law: "Politiewet 2012", article: "Artikel 2 & 3", title: "Ambtenaren van politie & Taak van de politie", inMatrix: true, vh: false, tax: "K", text: "Taak: daadwerkelijke handhaving rechtsorde en hulpverlening onder gezag.", explanation: "Bevoegd gezag is burgemeester (openbare orde) of OvJ (strafrecht).", connection: "Art. 141 en 132a WvSv bij uitvoeren opsporingstaken." },
+            { id: "pw6", law: "Politiewet 2012", article: "Artikel 6", title: "Territoriale bevoegdheid", inMatrix: true, vh: false, tax: "K", text: "Bevoegd zijn taak uit te oefenen in het gehele land.", explanation: "Landelijk bevoegd, lokaal gestationeerd.", connection: "Uitzonderingen bij dringende noodzaak of toestemming bevoegd gezag." },
+            { id: "pw7_1", law: "Politiewet 2012", article: "Artikel 7 lid 1", title: "Geweldsaanwending", inMatrix: true, vh: false, tax: "T", text: "Bevoegd tot geweld of vrijheidsbeperkende middelen bij rechtmatige uitoefening bediening.", explanation: "Subsidiariteit en proportionaliteit. Waarschuwing vooraf verplicht indien mogelijk.", connection: "Sr art. 42 (wettelijk voorschrift / ambtelijk geweld)." },
+            { id: "pw7_2", law: "Politiewet 2012", article: "Artikel 7 lid 2", title: "Toegang plaatsen hulpverlening", inMatrix: true, vh: false, tax: "T", text: "Toegang tot elke plaats voor zover dat voor het verlenen van hulp redelijkerwijs nodig is.", explanation: "Juridische basis om bij acute nood een woning binnen te gaan.", connection: "Uitzondering op machtigingsvereiste Awbi bij direct gevaar." },
+            { id: "pw7_3", law: "Politiewet 2012", article: "Artikel 7 lid 3 & 4", title: "Veiligheids- & Vervoersfouillering", inMatrix: true, vh: false, tax: "K", text: "Onderzoek kleding bij gevaar (lid 3) of bij vervoer/insluiting (lid 4).", explanation: "Veiligheidsfouillering vereist gevaar; vervoersfouillering mag altijd bij transport.", connection: "Niet verwarren met strafvorderlijke fouillering ex art. 56 Sv." },
+            { id: "pw8", law: "Politiewet 2012", article: "Artikel 8", title: "Vorderen inzage identiteitsbewijs", inMatrix: true, vh: false, tax: "T", text: "Bevoegd tot vorderen inzage ID-bewijs voor uitvoering politietaak.", explanation: "Moet gekoppeld zijn aan de politietaak (art. 3 PW).", connection: "Wet op de identificatieplicht & strafbaarstelling art. 447e Sr." },
 
-            // GEMEENTEWET
-            {
-                law: "Gemeentewet", article: "Artikel 172 lid 3", title: "Lichte bevelsbevoegdheid burgemeester", inMatrix: true, vh: false, tax: "K",
-                text: "Bevoegd bij acute verstoring van de openbare orde of vrees daartoe noodzakelijke bevelen te geven.", explanation: "Uitleg: Autonome bevoegdheid burgemeester (bijv. gebiedsverbod)[span_15](start_span)[span_15](end_span).",
-                connection: "<strong>Wetsverband / Keten:</strong> Als een burger niet luistert naar dit bevel van de burgemeester, pleegt hij een strafbaar feit ex <strong>artikel 184 Sr</strong> (niet voldoen aan ambtelijk bevel)[span_16](start_span)[span_16](end_span)."
-            },
-
-            // WETBOEK VAN STRAFRECHT (Sr)
-            {
-                law: "Wetboek van Strafrecht", article: "Artikel 41", title: "Noodweer & Noodweerexces", inMatrix: true, vh: false, tax: "T",
-                text: "Niet strafbaar is noodzakelijke verdediging tegen ogenblikkelijke, wederrechtelijke aanranding.", explanation: "Uitleg: Rechtvaardigingsgrond (noodweer) of schulduitsluitingsgrond bij hevige gemoedsbeweging (exces)[span_17](start_span)[span_17](end_span).",
-                connection: "<strong>Wetsverband / Keten:</strong> Vaak gekoppeld in scenario's aan geweldshandelingen van verdachten of agenten, waarbij getoetst wordt op proportionaliteit en subsidiariteit[span_18](start_span)[span_18](end_span)."
-            },
-            {
-                law: "Wetboek van Strafrecht", article: "Artikel 138", title: "Huisvredebreuk", inMatrix: true, vh: true, tax: "T",
-                text: "Wederrechtelijk binnendringen in woning, besloten lokaal of erf.", explanation: "Uitleg: Beschermt het huisrecht[span_19](start_span)[span_19](end_span).",
-                connection: "<strong>Wetsverband / Keten:</strong> Ligt in het verl Gedeelte van ambtelijke huisvredebreuk door een agent (<strong>art. 370 Sr</strong>) wanneer deze ten onrechte zonder bevoegdheid binnentreedt[span_20](start_span)[span_20](end_span)."
-            },
-            {
-                law: "Wetboek van Strafrecht", article: "Artikel 180 & 184", title: "Wederspannigheid & Niet voldoen aan bevel", inMatrix: true, vh: false, tax: "T",
-                text: "Art. 180: Verzet met geweld tegen ambtenaar.\nArt. 184: Niet voldoen aan bevel/vordering.", explanation: "Uitleg: Bescherming van de ambtenaar in uitoefening van zijn bediening[span_21](start_span)[span_21](end_span).",
-                connection: "<strong>Wetsverband / Keten:</strong> Direct gekoppeld aan de uitoefening van bevoegdheden uit de <strong>Politiewet</strong> (zoals aanhouding of staandehouding)[span_22](start_span)[span_22](end_span)."
-            },
-            {
-                law: "Wetboek van Strafrecht", article: "Artikel 310 & 312", title: "Diefstal & Diefstal met geweld", inMatrix: true, vh: true, tax: "T",
-                text: "Wegnemen goed met toe-eigeningsecho, eventueel voorafgegaan/gevolgd door geweld (art. 312).", explanation: "Uitleg: Kernvermogensdelicten[span_23](start_span)[span_23](end_span).",
-                connection: "<strong>Wetsverband / Keten:</strong> Artikel 312 is een aangewezen <em>VH-feit</em>, wat betekent dat direct dwangmiddelen als voorlopige hechtenis (<strong>art. 67 Sv</strong>) en aanhouding buiten heterdaad (<strong>art. 54 Sv</strong>) mogelijk zijn[span_24](start_span)[span_24](end_span)."
-            },
+            // GEMEENTEWET & STRAFRECHT (Sr)
+            { id: "gw172", law: "Gemeentewet", article: "Artikel 172 lid 3", title: "Lichte bevelsbevoegdheid burgemeester", inMatrix: true, vh: false, tax: "K", text: "Bevoegd bij acute verstoring openbare orde noodzakelijke bevelen te geven.", explanation: "Autonome bevoegdheid burgemeester bij acute dreiging.", connection: "Weigeren te voldoen is strafbaar ex art. 184 Sr." },
+            { id: "sr1", law: "Wetboek van Strafrecht", article: "Artikel 1", title: "Legaliteitsbeginsel", inMatrix: true, vh: false, tax: "K", text: "Geen feit is strafbaar dan uit kracht van een daaraan voorafgegane wettelijke strafbepaling.", explanation: "Geen straf zonder wet. Gunstigste wet achteraf geldt.", connection: "Ook vastgelegd in Art. 16 Grondwet." },
+            { id: "sr39", law: "Wetboek van Strafrecht", article: "Artikel 39", title: "Ontoerekenbaarheid", inMatrix: true, vh: false, tax: "T", text: "Niet strafbaar wegens psychische stoornis of verstandelijke handicap.", explanation: "Schulduitsluitingsgrond. Geen straf zonder schuld.", connection: "Kan leiden tot TBS-maatregel." },
+            { id: "sr40", law: "Wetboek van Strafrecht", article: "Artikel 40", title: "Overmacht", inMatrix: true, vh: false, tax: "T", text: "Niet strafbaar is hij die een feit begaat waartoe hij door overmacht is gedrongen.", explanation: "Psychische overmacht (schulduitsluiting) vs Noodtoestand (rechtvaardiging).", connection: "Toets op subsidiariteit en proportionaliteit." },
+            { id: "sr41", law: "Wetboek van Strafrecht", article: "Artikel 41", title: "Noodweer & Noodweerexces", inMatrix: true, vh: false, tax: "T", text: "Noodzakelijke verdediging tegen ogenblikkelijke, wederrechtelijke aanranding.", explanation: "Noodweer = rechtvaardiging. Noodweerexces = schulduitsluiting door hevige emotie.", connection: "Vereist ogenblikkelijke aanranding van eigen of andermans lijf, eerbaarheid of goed." },
+            { id: "sr138", law: "Wetboek van Strafrecht", article: "Artikel 138", title: "Huisvredebreuk", inMatrix: true, vh: true, tax: "T", text: "Wederrechtelijk binnendringen of niet verwijderen uit woning/besloten erf.", explanation: "Aangewezen VH-feit. Actief binnendringen of passief weigeren te vertrekken.", connection: "Vergelijk met ambtelijke huisvredebreuk ex art. 370 Sr." },
+            { id: "sr141", law: "Wetboek van Strafrecht", article: "Artikel 141", title: "Openlijke geweldpleging", inMatrix: true, vh: true, tax: "T", text: "Openlijk in vereniging geweld plegen tegen personen of goederen.", explanation: "Groepsaansprakelijkheid. Voldoende is bewuste bijdrage aan het geweld.", connection: "Aangewezen VH-feit." },
+            { id: "sr180", law: "Wetboek van Strafrecht", article: "Artikel 180", title: "Wederspannigheid", inMatrix: true, vh: false, tax: "T", text: "Zich met geweld of bedreiging met geweld verzetten tegen ambtenaar.", explanation: "Actief verzet vereist. Passief verzet is niet strafbaar ex art. 180 Sr.", connection: "Tijdens rechtmatige uitoefening van bediening." },
+            { id: "sr184", law: "Wetboek van Strafrecht", article: "Artikel 184", title: "Niet voldoen aan ambtelijk bevel", inMatrix: true, vh: false, tax: "T", text: "Opzettelijk niet voldoen aan bevel/vordering krachtens wettelijk voorschrift.", explanation: "Richt zich tegen het negeren van de bevoegdheid/bevel van de ambtenaar.", connection: "Bijvoorbeeld negeren stopteken of vordering inzage ID." },
+            { id: "sr251", law: "Wetboek van Strafrecht", article: "Artikel 251 lid 1 sub c", title: "Grooming", inMatrix: true, vh: true, tax: "T", text: "Benaderen kind (<16) voor seksuele doeleinden en stappen ondernemen.", explanation: "Aangewezen VH-feit.", connection: "Dwangmiddelen voorarrest direct toepasbaar." },
+            { id: "sr285", law: "Wetboek van Strafrecht", article: "Artikel 285", title: "Bedreiging", inMatrix: true, vh: true, tax: "T", text: "Bedreiging met zware mishandeling, misdrijf tegen het leven, brandstichting.", explanation: "Aangewezen VH-feit. Slachtoffer moet zich in redelijkheid bedreigd voelen.", connection: "Strafverzwaring bij bedreiging van politiemensen/ambtenaren (+1/3)." },
+            { id: "sr285b", law: "Wetboek van Strafrecht", article: "Artikel 285b", title: "Belaging (Stalking)", inMatrix: true, vh: true, tax: "T", text: "Wederrechtelijk stelselmatig inbreuk maken op eens anders levenssfeer.", explanation: "Aangewezen VH-feit. Klachtdelict.", connection: "Vereist stelselmatigheid." },
+            { id: "sr285d", law: "Wetboek van Strafrecht", article: "Artikel 285d", title: "Doxing", inMatrix: true, vh: true, tax: "T", text: "Zich persoonsgegevens verschaffen of verspreiden om vrees aan te jagen.", explanation: "Aangewezen VH-feit.", connection: "Ook eenmalig delen van privégegevens voor intimidatie is strafbaar." },
+            { id: "sr287_289", law: "Wetboek van Strafrecht", article: "Artikel 287 & 289", title: "Doodslag & Moord", inMatrix: true, vh: true, tax: "K", text: "Opzettelijk een ander van het leven beroven (moord = met voorbedachten rade).", explanation: "Voorbedachte rade vereist een moment van kalm overleg en rustig nadenken.", connection: "Maximale tijdelijke celstraf 30 jaar (moord) of levenslang." },
+            { id: "sr300_302", law: "Wetboek van Strafrecht", article: "Artikel 300 & 302", title: "Mishandeling & Zware mishandeling", inMatrix: true, vh: true, tax: "T", text: "Art. 300: Lichaamspijn/letsel (VH-feit). Art. 302: Opzettelijk zwaar letsel.", explanation: "Poging tot eenvoudige mishandeling is NIET strafbaar.", connection: "Eenvoudige mishandeling is specifiek aangewezen VH-feit." },
+            { id: "sr310_312", law: "Wetboek van Strafrecht", article: "Artikel 310, 311 & 312", title: "Diefstal & Diefstal met geweld", inMatrix: true, vh: true, tax: "T", text: "Wegnemen enig goed met oogmerk van wederrechtelijke toe-eigening.", explanation: "Gekwalificeerde diefstal (art. 311) en geweld/bedreiging (art. 312).", connection: "Alle drie geven bevoegdheden tot arrestatie en doorzoeking." },
+            { id: "sr321_326", law: "Wetboek van Strafrecht", article: "Artikel 321 & 326", title: "Verduistering & Oplichting", inMatrix: true, vh: true, tax: "T", text: "Verduistering (al rechtmatig onder zich). Oplichting (bewegen door misleiding).", explanation: "Beide aangewezen VH-feiten.", connection: "Kernverschil zit in de wijze van het in bezit krijgen van het goed." },
+            { id: "sr350", law: "Wetboek van Strafrecht", article: "Artikel 350", title: "Vernieling", inMatrix: true, vh: true, tax: "T", text: "Opzettelijk en wederrechtelijk een goed dat aan een ander toebehoort vernielen.", explanation: "Aangewezen VH-feit. Niet te verwarren met baldadigheid (art. 424 Sr).", connection: "Vereist opzet op handeling én beschadiging." },
+            { id: "sr416_417", law: "Wetboek van Strafrecht", article: "Artikel 416 & 417bis", title: "Opzetheling & Schuldheling", inMatrix: true, vh: true, tax: "K", text: "Verwerven/voorhanden hebben van goed afkomstig uit misdrijf.", explanation: "Schuldheling (redelijkerwijs moeten vermoeden) is een VH-feit.", connection: "Voortdurend delict (altijd ontdekking op heterdaad)." },
+            { id: "sr447e", law: "Wetboek van Strafrecht", article: "Artikel 447e", title: "Niet voldoen aan identificatieplicht", inMatrix: true, vh: false, tax: "T", text: "Niet voldoen aan verplichting ID-bewijs te tonen.", explanation: "Overtreding voor iedereen vanaf 14 jaar.", connection: "Gekoppeld aan vordering ex art. 8 Politiewet." },
 
             // WETBOEK VAN STRAFVORDERING (Sv)
-            {
-                law: "Wetboek van Strafvordering", article: "Artikel 27", title: "Definitie verdachte", inMatrix: true, vh: false, tax: "T",
-                text: "Redelijk vermoeden van schuld aan een strafbaar feit uit feiten of omstandigheden.", explanation: "Uitleg: Ondergrens voor elk dwangmiddel[span_25](start_span)[span_25](end_span).",
-                connection: "<strong>Wetsverband / Keten:</strong> Zonder een 'redelijk vermoeden' ex art. 27 Sv zijn alle volgende strafvorderlijke stappen (zoals staandehouding <strong>art. 52 Sv</strong>, aanhouding <strong>art. 53/54 Sv</strong> en fouillering) onrechtmatig[span_26](start_span)[span_26](end_span)."
-            },
-            {
-                law: "Wetboek van Strafvordering", article: "Artikel 56", title: "Opsporingsfouillering", inMatrix: true, vh: true, tax: "T",
-                text: "Onderzoek aan kleding of lichaam bij ernstige bezwaren op bevel van (H)OvJ.", explanation: "Uitleg: Dwangmiddel in het belang van het onderzoek[span_27](start_span)[span_27](end_span).",
-                connection: "<strong>Wetsverband / Keten:</strong> Niet te verwarren met de <em>veiligheidsfouillering</em> (<strong>Politiewet art. 7 lid 3</strong>) of <em>identiteitsfouillering</em> (<strong>Sv art. 55b</strong>)[span_28](start_span)[span_28](end_span)."
-            },
-            {
-                law: "Wetboek van Strafvordering", article: "Artikel 67", title: "Voorlopige hechtenis (VH-feiten)", inMatrix: true, vh: true, tax: "K",
-                text: "Toegelaten bij misdrijven met 4+ jaar straf of specifiek aangewezen misdrijven.", explanation: "Uitleg: Bepaalt de grens voor zwaardere dwangmiddelen[span_29](start_span)[span_29](end_span).",
-                connection: "<strong>Wetsverband / Keten:</strong> Bepaalt of iemand in verzekering gesteld kan worden (<strong>art. 58 Sv</strong>), doorzocht mag worden ter aanhouding (<strong>art. 55a Sv</strong>) en of er camerabeelden gevorderd mogen worden (<strong>art. 126nda Sv</strong>)[span_30](start_span)[span_30](end_span)."
-            }
+            { id: "sv27", law: "Wetboek van Strafvordering", article: "Artikel 27", title: "Definitie verdachte", inMatrix: true, vh: false, tax: "T", text: "Redelijk vermoeden van schuld aan een strafbaar feit uit feiten of omstandigheden.", explanation: "Noodzakelijke ondergrens voor opsporingsdwangmiddelen.", connection: "Mag niet berusten op enkel onderbuikgevoel." },
+            { id: "sv27c", law: "Wetboek van Strafvordering", article: "Artikel 27c, 28, 29", title: "Rechten verdachte & Cautie", inMatrix: true, vh: false, tax: "K", text: "Recht op informatie, zwijgrecht (cautie) en rechtsbijstand.", explanation: "Cautie verplicht voorafgaand aan elk verhoor.", connection: "Salduz-arrest waarborgt verhoorbijstand advocaat." },
+            { id: "sv52_54", law: "Wetboek van Strafvordering", article: "Artikel 52, 53 & 54", title: "Staandehouding & Aanhouding", inMatrix: true, vh: false, tax: "K", text: "Staandehouding (ID), Aanhouding heterdaad (ieder) / buiten heterdaad (OvJ/HOvJ).", explanation: "Buiten heterdaad alleen bij VH-feiten toegelaten.", connection: "Verdachte moet aanhouding dulden; verzet met geweld = art. 180 Sr." },
+            { id: "sv56", law: "Wetboek van Strafvordering", article: "Artikel 56", title: "Opsporingsfouillering", inMatrix: true, vh: true, tax: "T", text: "Onderzoek kleding/lichaam bij ernstige bezwaren op bevel (H)OvJ.", explanation: "Onderzoek IN het lichaam uitsluitend door arts op bevel OvJ.", connection: "Verschilt van veiligheidsfouillering art. 7 lid 3 Politiewet." },
+            { id: "sv56a", law: "Wetboek van Strafvordering", article: "Artikel 56a - 61a", title: "Ophouden voor onderzoek", inMatrix: true, vh: true, tax: "T", text: "Max 9 uur (VH) of 6 uur (geen VH). Nachturen (00:00-09:00) tellen niet mee.", explanation: "Tijd gaat in vanaf bevel (H)OvJ.", connection: "Kan verlengd worden ter identificatie ex art. 56b Sv met max 6 uur." },
+            { id: "sv67", law: "Wetboek van Strafvordering", article: "Artikel 67", title: "Voorlopige hechtenis (VH-feiten)", inMatrix: true, vh: true, tax: "K", text: "Misdrijven met 4+ jaar gevangenisstraf of specifiek aangewezen feiten.", explanation: "Basis voor IVS, Bewaring en Gevangenhouding.", connection: "Bepaalt de bevoegdheden bij aanhouding buiten heterdaad." },
+            { id: "sv94", law: "Wetboek van Strafvordering", article: "Artikel 94 & 96", title: "Inbeslagneming & Betreden", inMatrix: true, vh: false, tax: "T", text: "Vatbaar voor inbeslagneming: waarheidsvinding, verbeurdverklaring, voordeel.", explanation: "Opsporingsambtenaar bevoegd elke plaats te betreden bij heterdaad/VH-feit.", connection: "Doorzoeken vereist hogere bevoegdheid (H)OvJ of RC." },
+            { id: "sv126nda", law: "Wetboek van Strafvordering", article: "Artikel 126nda", title: "Vorderen camerabeelden", inMatrix: true, vh: true, tax: "T", text: "Opsporingsambtenaar kan bij VH-feit beveiligingsbeelden vorderen.", explanation: "Mag mondeling en schriftelijk worden gedaan (niet aan verdachte).", connection: "Weigeren te voldoen is strafbaar ex art. 180/184 Sr." },
+            { id: "wid", law: "Wet op de identificatieplicht", article: "Artikel 1 & 2", title: "Toonplicht ID-bewijs", inMatrix: true, vh: false, tax: "K", text: "Iedereen vanaf 14 jaar verplicht op eerste vordering ID te tonen.", explanation: "Geldig: paspoort, ID-kaart, rijbewijs, vreemdelingendocument.", connection: "Vordering moet noodzakelijk zijn voor politietaak." },
+            { id: "awbi", law: "Awbi", article: "Artikel 1, 2, 7 & 9", title: "Binnentreden woning", inMatrix: true, vh: false, tax: "T", text: "Legitimatie en doel vooraf. Machtiging vereist (behalve bij nood/hulp).", explanation: "'s Nachts (24:00 - 06:00 uur) alleen bij dringende noodzaak + uitdrukkelijke machtiging.", connection: "Mag zo nodig de sterke arm inschakelen (art. 9)." }
         ];
 
+        let favorites = JSON.parse(localStorage.getItem('pol_favs') || '[]');
         let currentFilter = 'all';
+
+        // --- TAB NAVIGATION ---
+        function switchTab(tabId, btn) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            btn.classList.add('active');
+
+            if (tabId === 'quiz-tab' && currentQuizQuestion === null) {
+                generateQuestion();
+            }
+        }
+
+        // --- ARTIKELEN RENDEREN ---
+        function toggleFav(id, btn) {
+            if (favorites.includes(id)) {
+                favorites = favorites.filter(f => f !== id);
+                btn.classList.remove('active');
+            } else {
+                favorites.push(id);
+                btn.classList.add('active');
+            }
+            localStorage.setItem('pol_favs', JSON.stringify(favorites));
+            if (currentFilter === 'favs') filterArticles();
+        }
 
         function renderArticles(items, searchTerm = '') {
             const container = document.getElementById('articlesContainer');
             const resultsInfo = document.getElementById('resultsInfo');
             
             container.innerHTML = '';
-            resultsInfo.textContent = `${items.length} artikel(en) gevonden`;
-
-            if (items.length === 0 && searchTerm.length > 0) {
-                const dynamicItem = generateDynamicArticle(searchTerm);
-                if (dynamicItem) {
-                    items = [dynamicItem];
-                    resultsInfo.textContent = `1 algemeen wetboek artikel gevonden`;
-                }
-            }
+            resultsInfo.textContent = `${items.length} artikel(en) weergegeven`;
 
             if (items.length === 0) {
-                container.innerHTML = `
-                    <div class="card" style="text-align: center; padding: 2rem;">
-                        <h3>Geen artikel gevonden</h3>
-                        <p>Probeer te zoeken op een ander artikelnummer (bijv. "310 Sr", "53 Sv") of trefwoord.</p>
-                    </div>
-                `;
+                container.innerHTML = `<div class="card" style="text-align:center; padding:2rem;">Geen resultaten gevonden.</div>`;
                 return;
             }
 
             items.forEach(item => {
+                const isFav = favorites.includes(item.id);
                 const card = document.createElement('div');
                 card.className = 'card';
 
-                let badgesHtml = '';
-                if (item.inMatrix) {
-                    badgesHtml += `<span class="badge badge-matrix">Toetsmatrijs</span>`;
-                } else {
-                    badgesHtml += `<span class="badge badge-general">Algemeen wetboek</span>`;
-                }
-
-                if (item.vh) {
-                    badgesHtml += `<span class="badge badge-vh">VH-feit</span>`;
-                }
-
+                let badgesHtml = item.inMatrix ? `<span class="badge badge-matrix">Toetsmatrijs</span>` : `<span class="badge badge-general">Wetboek</span>`;
+                if (item.vh) badgesHtml += ` <span class="badge badge-vh">VH-feit</span>`;
                 if (item.tax) {
-                    if (item.tax === 'K') badgesHtml += `<span class="badge badge-kennis">Kennis (K)</span>`;
-                    else if (item.tax === 'B') badgesHtml += `<span class="badge badge-begrip">Begrip (B)</span>`;
-                    else if (item.tax === 'T') badgesHtml += `<span class="badge badge-toepassing">Toepassing (T)</span>`;
-                    else badgesHtml += `<span class="badge badge-kennis">${item.tax}</span>`;
-                }
-
-                let connectionHtml = '';
-                if (item.connection) {
-                    connectionHtml = `<div class="connection-box">${item.connection}</div>`;
+                    if (item.tax === 'K') badgesHtml += ` <span class="badge badge-kennis">Kennis (K)</span>`;
+                    else if (item.tax === 'B') badgesHtml += ` <span class="badge badge-begrip">Begrip (B)</span>`;
+                    else if (item.tax === 'T') badgesHtml += ` <span class="badge badge-toepassing">Toepassing (T)</span>`;
                 }
 
                 card.innerHTML = `
                     <div class="card-header">
                         <div>
-                            <span style="font-size: 0.8rem; font-weight: bold; color: var(--secondary); text-transform: uppercase;">${item.law}</span>
+                            <span style="font-size:0.75rem; font-weight:bold; color:var(--secondary); text-transform:uppercase;">${item.law}</span>
                             <h3 class="article-title">${item.article}: ${item.title}</h3>
                         </div>
-                        <div class="badges">
-                            ${badgesHtml}
+                        <div style="display:flex; align-items:center;">
+                            <div class="badges">${badgesHtml}</div>
+                            <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFav('${item.id}', this)">★</button>
                         </div>
                     </div>
                     <div class="article-text">${item.text}</div>
-                    <div class="explanation">${item.explanation}</div>
-                    ${connectionHtml}
+                    <div class="explanation"><strong>Toelichting:</strong> ${item.explanation}</div>
+                    ${item.connection ? `<div class="connection-box"><strong>Wetsverband / Keten:</strong> ${item.connection}</div>` : ''}
                 `;
                 container.appendChild(card);
             });
-        }
-
-        function generateDynamicArticle(query) {
-            const lowerQ = query.toLowerCase();
-            let lawName = "Wetboek van Strafrecht of Strafvordering";
-            let shortLaw = "Sr/Sv";
-
-            if (lowerQ.includes('sv') || lowerQ.includes('strafvordering')) {
-                lawName = "Wetboek van Strafvordering (Sv)";
-                shortLaw = "Wetboek van Strafvordering";
-            } else if (lowerQ.includes('sr') || lowerQ.includes('strafrecht')) {
-                lawName = "Wetboek van Strafrecht (Sr)";
-                shortLaw = "Wetboek van Strafrecht";
-            }
-
-            const matches = query.match(/\d+/);
-            const artNum = matches ? matches[0] : "ingevoerd";
-
-            return {
-                law: shortLaw,
-                article: `Artikel ${artNum}`,
-                title: `Artikel uit het ${lawName}`,
-                inMatrix: false,
-                vh: false,
-                tax: "Algemeen",
-                text: `[Tekst van ${lawName} Artikel ${artNum}]`,
-                explanation: `<strong>Algemeen wetboek artikel:</strong> Dit artikel staat niet in de verkorte toetsmatrijs, maar hoort wel bij het ${lawName}.`,
-                connection: `<strong>Wetsverband / Keten:</strong> Controleer in je wetbundel hoe dit artikel zich verhoudt tot de opsporingsbevoegdheden.`
-            };
         }
 
         function filterArticles() {
@@ -437,6 +588,7 @@
 
                 if (currentFilter === 'matrix') return item.inMatrix;
                 if (currentFilter === 'vh') return item.vh;
+                if (currentFilter === 'favs') return favorites.includes(item.id);
                 if (currentFilter === 'kennis') return item.tax && item.tax.includes('K');
                 if (currentFilter === 'begrip') return item.tax && item.tax.includes('B');
                 if (currentFilter === 'toepassing') return item.tax && item.tax.includes('T');
@@ -454,6 +606,128 @@
             filterArticles();
         }
 
+        // --- DYNAMISCHE OEFENBANK / QUIZ GENERATOR ---
+        let currentQuizQuestion = null;
+        let score = 0;
+        let questionCount = 0;
+
+        function getRandomItem(arr) {
+            return arr[Math.floor(Math.random() * arr.length)];
+        }
+
+        function generateQuestion() {
+            document.getElementById('quiz-feedback').style.display = 'none';
+            document.getElementById('quiz-next-btn').style.display = 'none';
+
+            const item = getRandomItem(database);
+            const questionType = Math.floor(Math.random() * 4); 
+
+            let questionText = "";
+            let correctAnswer = "";
+            let wrongAnswers = [];
+
+            if (questionType === 0) {
+                // Type 1: VH-Feit vraag
+                questionText = `Is het delict <strong>${item.article} (${item.title})</strong> uit de toetsmatrijs aangemerkt als een <strong>VH-feit (Voorlopige Hechtenis toegelaten)</strong>?`;
+                correctAnswer = item.vh ? "Ja, dit is een VH-feit" : "Nee, dit is GEEN VH-feit";
+                wrongAnswers = [
+                    item.vh ? "Nee, dit is GEEN VH-feit" : "Ja, dit is een VH-feit",
+                    "Alleen als het 's nachts plaatsvindt",
+                    "Alleen bij recidive binnen 1 jaar"
+                ];
+            } else if (questionType === 1) {
+                // Type 2: Wetsartikel herkenning
+                questionText = `Welk artikel hoort bij de volgende omschrijving/bevoegdheid?<br><em>"${item.text}"</em>`;
+                correctAnswer = `${item.law} - ${item.article}`;
+                
+                const otherItems = database.filter(d => d.id !== item.id);
+                wrongAnswers = [
+                    `${getRandomItem(otherItems).law} - ${getRandomItem(otherItems).article}`,
+                    `${getRandomItem(otherItems).law} - ${getRandomItem(otherItems).article}`,
+                    `${getRandomItem(otherItems).law} - ${getRandomItem(otherItems).article}`
+                ];
+            } else if (questionType === 2) {
+                // Type 3: Taxonomie vraag (K/B/T)
+                let taxName = item.tax === 'K' ? "Kennis (K)" : (item.tax === 'B' ? "Begrip (B)" : "Toepassing (T)");
+                questionText = `Op welk niveau wordt <strong>${item.article} (${item.title})</strong> in de politietoetsmatrijs getoetst?`;
+                correctAnswer = taxName;
+                wrongAnswers = ["Kennis (K)", "Begrip (B)", "Toepassing (T)"].filter(a => a !== taxName);
+                wrongAnswers.push("Analyse (A)");
+            } else {
+                // Type 4: Praktijkcasus
+                questionText = `<strong>Praktijkcasus:</strong> Een agent wil <em>"${item.title.toLowerCase()}"</em> uitvoeren of beoordelen in een situatie. Op welke wettelijke basis rust dit hoofdzakelijk?`;
+                correctAnswer = `${item.law} - ${item.article}`;
+                
+                const otherItems = database.filter(d => d.id !== item.id);
+                wrongAnswers = [
+                    `${getRandomItem(otherItems).law} - ${getRandomItem(otherItems).article}`,
+                    `${getRandomItem(otherItems).law} - ${getRandomItem(otherItems).article}`,
+                    `${getRandomItem(otherItems).law} - ${getRandomItem(otherItems).article}`
+                ];
+            }
+
+            // Opties schudden
+            const allOptions = [correctAnswer, ...wrongAnswers.slice(0, 3)].sort(() => Math.random() - 0.5);
+
+            currentQuizQuestion = {
+                question: questionText,
+                correct: correctAnswer,
+                options: allOptions,
+                explanation: item.explanation + (item.connection ? `<br><br><strong>Wetsketen:</strong> ${item.connection}` : '')
+            };
+
+            questionCount++;
+            document.getElementById('quiz-counter').innerHTML = `Vraag #${questionCount}`;
+            document.getElementById('quiz-question').innerHTML = currentQuizQuestion.question;
+
+            const optionsContainer = document.getElementById('quiz-options');
+            optionsContainer.innerHTML = '';
+
+            currentQuizQuestion.options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-option';
+                btn.innerHTML = opt;
+                btn.onclick = () => checkAnswer(opt, btn);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(selectedOpt, btnElement) {
+            const allBtns = document.querySelectorAll('.quiz-option');
+            allBtns.forEach(b => b.onclick = null); // Deactiveer overige opties
+
+            const feedback = document.getElementById('quiz-feedback');
+            feedback.style.display = 'block';
+
+            if (selectedOpt === currentQuizQuestion.correct) {
+                btnElement.classList.add('correct');
+                feedback.style.background = '#c6f6d5';
+                feedback.style.color = '#22543d';
+                feedback.innerHTML = `<strong>Correct! 🎉</strong><br>${currentQuizQuestion.explanation}`;
+                score++;
+            } else {
+                btnElement.classList.add('wrong');
+                feedback.style.background = '#fed7d7';
+                feedback.style.color = '#742a2a';
+                feedback.innerHTML = `<strong>Helaas, niet juist.</strong> Het juiste antwoord was: <strong>${currentQuizQuestion.correct}</strong>.<br><br>${currentQuizQuestion.explanation}`;
+                
+                // Markeer het juiste antwoord
+                allBtns.forEach(b => {
+                    if (b.innerHTML === currentQuizQuestion.correct) {
+                        b.classList.add('correct');
+                    }
+                });
+            }
+
+            document.getElementById('quiz-score').textContent = `Score: ${score} van de ${questionCount}`;
+            document.getElementById('quiz-next-btn').style.display = 'inline-block';
+        }
+
+        function nextQuestion() {
+            generateQuestion();
+        }
+
+        // Initieel laden
         renderArticles(database);
     </script>
 </body>
