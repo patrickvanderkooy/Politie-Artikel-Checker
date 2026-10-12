@@ -1,10 +1,22 @@
-
 <!DOCTYPE html>
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Politie Toetsmatrijs PSI - Integrale Assistent</title>
+    <title>Politie Toetsmatrijs PSI Integrale Assistent</title>
+    <!-- PWA / App Manifest instellingen voor startscherm & icoon -->
+    <meta name="theme-color" content="#1a365d">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Politie Toetsmatrijs">
+    <link rel="manifest" href="data:application/manifest+json;charset=utf-8,{
+      %22name%22: %22Politie Toetsmatrijs PSI Assistent%22,
+      %22short_name%22: %22Politie Toets%22,
+      %22start_url%22: %22.%22,
+      %22display%22: %22standalone%22,
+      %22background_color%22: %22#f7fafc%22,
+      %22theme_color%22: %22#1a365d%22
+    }">
     <style>
         :root {
             --primary: #1a365d;
@@ -465,7 +477,6 @@
     </footer>
 
     <script>
-        // Integrale database gebaseerd op de documentatie "Toetsmatrijs PSI + toelichtingen.docx"
         const database = [
             // GRONDWET
             {
@@ -483,14 +494,14 @@
                 connection: "WPG (Wet politiegegevens) en WvSv fouilleringsartikelen (art. 55b, 56 Sv) en Politiewet art. 7 lid 3/4."
             },
             {
-                id: "gw12", law: "Grondwet", article: "Artikel 12", title: "Huisrecht", inMatrix: true, vh: false, tax: "B",
+                id: "gw12", law: "Grondwet", article: "Artikel 12", title: "Huisrecht", inMatrix: true, vh: false, exam: false, tax: "B",
                 eis: "De student kan uitleggen onder welke voorwaarden binnentreden in een woning zonder toestemming van de bewoner is toegestaan.",
                 text: "Het binnentreden in een woning zonder toestemming van de bewoner is alleen geoorloofd in de gevallen bij of krachtens de wet bepaald, door hen die daartoe bij of krachtens de wet zijn aangewezen. Voorafgaande legitimatie en mededeling van het doel zijn vereist. Schriftelijk verslag wordt verstrekt.",
                 explanation: "Zonder toestemming van de bewoner mag je slechts een woning betreden in het geval van hulpverlening (Politiewet art. 7 lid 2) en op basis van een wettelijke bevoegdheid i.c.m. de Awbi. Bewoner = feitelijke gebruiker (kan ook kraker of huurder zijn). Toestemming van één bewoner is voldoende.",
                 connection: "Direct verbonden met Politiewet 2012 art. 7 lid 2 en de Algemene wet op het binnentreden (Awbi art. 1, 2, 7, 9)."
             },
             {
-                id: "gw15", law: "Grondwet", article: "Artikel 15", title: "Persoonlijke vrijheid", inMatrix: true, vh: false, tax: "B",
+                id: "gw15", law: "Grondwet", article: "Artikel 15", title: "Persoonlijke vrijheid", inMatrix: true, vh: false, exam: false, tax: "B",
                 eis: "De student kan uitleggen wat wordt bedoeld met het recht op vrijheid en onder welke voorwaarden iemand zijn vrijheid mag worden ontnomen.",
                 text: "Buiten de gevallen bij of krachtens de wet bepaald mag niemand zijn vrijheid worden ontnomen. Hij aan wie anders dan op rechterlijk bevel zijn vrijheid is ontnomen, kan aan de rechter zijn invrijheidstelling verzoeken.",
                 explanation: "Vrijheidsontneming mag uitsluitend als dit wettelijk bepaald is. Uitgangspunt: wanneer het kan, wordt een verdachte gemotiveerd in vrijheid gesteld.",
@@ -897,7 +908,7 @@
                 connection: "Sr art. 180/184."
             },
             {
-                id: "sv126nda", law: "Wetboek van Strafvordering", article: "Artikel 126nd & 126nda", title: "Vorderen gegevens & Camerabeelden", inMatrix: true, vh: false, exam: false, tax: "K",
+                id: "sv126nda", law: "Wetboek van Strafvordering", article: "Artikel 126nd & 126nda", title: "Vorderen gegevens & Camerabeelden", inMatrix: true, vh: true, exam: false, tax: "K",
                 eis: "De student kan benoemen welke voorwaarden gelden bij het vorderen van camerabeelden of andere gegevens.",
                 text: "Art. 126nd: OvJ kan opgeslagen gegevens vorderen bij VH-feit.\nArt. 126nda: Opsporingsambtenaar kan beveiligingscamerabeelden vorderen bij VH-feit.",
                 explanation: "Vordering mag NOOIT aan verdachte worden gericht! Mag bij 126nda mondeling of schriftelijk gedaan worden.",
@@ -959,7 +970,6 @@
         let favorites = JSON.parse(localStorage.getItem('pol_favs') || '[]');
         let currentFilter = 'all';
 
-        // --- TAB NAVIGATION ---
         function switchTab(tabId, btn) {
             document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
@@ -971,7 +981,6 @@
             }
         }
 
-        // --- ARTIKELEN RENDEREN ---
         function toggleFav(id, btn) {
             if (favorites.includes(id)) {
                 favorites = favorites.filter(f => f !== id);
@@ -1067,7 +1076,6 @@
             filterArticles();
         }
 
-        // --- DYNAMISCHE OEFENBANK / QUIZ GENERATOR ---
         let currentQuizQuestion = null;
         let score = 0;
         let questionCount = 0;
@@ -1182,9 +1190,7 @@
             generateQuestion();
         }
 
-        // Initieel laden
         renderArticles(database);
     </script>
 </body>
 </html>
-
