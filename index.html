@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Politie Toetsmatrijs PSI Examen Trainer & Artikelenbank</title>
+    <title>Politie PSI Examen Assistent & Artikelenbank</title>
     <!-- PWA / App Manifest instellingen -->
     <meta name="theme-color" content="#1a365d">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -924,7 +924,7 @@
                     ${item.eis ? `<div class="eis-box"><strong>Eis Toetsmatrijs:</strong> ${item.eis}</div>` : ''}
                     <div class="article-text">${item.text}</div>
                     <div class="explanation"><strong>Toelichting:</strong> ${item.explanation}</div>
-                    ${item.connection ? `<div class="connection-box"><strong>Wetsverband / Lesstof:</strong> ${item.connection}</div>` : ''}
+                    ${item.connection ? `<div class="connection-box"><strong>Wetsverband:</strong> ${item.connection}</div>` : ''}
                 `;
                 container.appendChild(card);
             });
