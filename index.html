@@ -1457,18 +1457,17 @@
             });
         }
 
+        // Verbeterde zoekfunctie die punten en spaties negeert voor flexibel zoeken
         function filterArticles() {
-            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            const rawQuery = document.getElementById('searchInput').value.toLowerCase().trim();
+            const query = rawQuery.replace(/[\s\.]+/g, '');
             
             let filtered = database.filter(item => {
-                const matchesQuery = 
-                    item.article.toLowerCase().includes(query) ||
-                    item.title.toLowerCase().includes(query) ||
-                    item.text.toLowerCase().includes(query) ||
-                    item.explanation.toLowerCase().includes(query) ||
-                    item.law.toLowerCase().includes(query) ||
-                    (item.eis && item.eis.toLowerCase().includes(query)) ||
-                    (item.connection && item.connection.toLowerCase().includes(query));
+                const searchableText = (
+                    item.article + item.title + item.text + item.explanation + item.law + (item.eis || '') + (item.connection || '')
+                ).toLowerCase().replace(/[\s\.]+/g, '');
+
+                const matchesQuery = searchableText.includes(query);
 
                 if (!matchesQuery) return false;
 
@@ -1480,11 +1479,10 @@
                 return true;
             });
 
-            // Slim sorteren: exacte artikel-overeenkomsten komen bovenaan
             if (query) {
                 filtered.sort((a, b) => {
-                    const aMatch = a.article.toLowerCase().includes(query) ? 1 : 0;
-                    const bMatch = b.article.toLowerCase().includes(query) ? 1 : 0;
+                    const aMatch = a.article.toLowerCase().replace(/[\s\.]+/g, '').includes(query) ? 1 : 0;
+                    const bMatch = b.article.toLowerCase().replace(/[\s\.]+/g, '').includes(query) ? 1 : 0;
                     return bMatch - aMatch;
                 });
             }
@@ -1518,7 +1516,7 @@
             const item = availableItems[Math.floor(Math.random() * availableItems.length)];
             askedQuestionIds.push(item.id);
 
-            const questionType = Math.floor(Math.random() * 3); 
+            const questionType = Math.floor(Math.random() * 4); // Uitgebreid met casustype
 
             let questionText = "";
             let correctAnswer = "";
@@ -1538,12 +1536,20 @@
                 
                 const otherItems = matrixItems.filter(d => d.id !== item.id).sort(() => 0.5 - Math.random());
                 wrongPool = otherItems.slice(0, 3).map(o => `${o.law} - ${o.article}: ${o.title}`);
-            } else {
+            } else if (questionType === 2) {
                 questionText = `<strong>Praktijkcasus (Toetsing):</strong> ${item.eis || `Welke juridische grondslag is hier van toepassing op ${item.title}?`}`;
                 correctAnswer = `${item.law} - ${item.article}`;
                 
                 const otherItems = matrixItems.filter(d => d.id !== item.id).sort(() => 0.5 - Math.random());
                 wrongPool = otherItems.slice(0, 3).map(o => `${o.law} - ${o.article}`);
+            } else {
+                questionText = `<strong>Praktijkcasus Geweldsaanwending (Politiewet art. 7):</strong> Je wilt als politieambtenaar optreden in een heterdaadsituatie. Aan welke twee kerncriteria moet geweldsaanwending altijd voldoen?`;
+                correctAnswer = `Subsidiariteit (mildste middel) en proportionaliteit (redelijkheid in verhouding tot het doel).`;
+                wrongPool = [
+                    `Uitsluitend schriftelijke toestemming van de Officier van Justitie vooraf.`,
+                    `Het gebruik van vuurwapens is altijd verplicht bij aanhouding van verdachten.`,
+                    `Er mag direct ongeoorloofd geweld worden gebruikt zolang de verdachte weigert te praten.`
+                ];
             }
 
             const allOptions = [correctAnswer, ...wrongPool.slice(0, 3)].sort(() => Math.random() - 0.5);
