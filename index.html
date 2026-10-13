@@ -345,48 +345,53 @@
             cursor: pointer;
         }
 
-        /* Schema styling */
-        .timeline-item {
-            display: flex;
-            gap: 1rem;
+        /* Schema / Stroomdiagram styling */
+        .flow-step {
+            background: white;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            padding: 1.2rem;
             margin-bottom: 1.2rem;
             position: relative;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
         }
 
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: 18px;
-            top: 35px;
-            bottom: -20px;
-            width: 3px;
-            background: #cbd5e0;
-        }
-
-        .timeline-item:last-child::before {
-            display: none;
-        }
-
-        .timeline-badge {
-            width: 38px;
-            height: 38px;
-            background: var(--secondary);
+        .flow-step-number {
+            display: inline-block;
+            background: var(--primary);
             color: white;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            text-align: center;
+            line-height: 28px;
             font-weight: bold;
-            flex-shrink: 0;
-            z-index: 1;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
         }
 
-        .timeline-content {
-            background: white;
-            padding: 1rem;
+        .flow-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 0 0 0.5rem 0;
+        }
+
+        .flow-laws {
+            background: #f0f4f8;
+            padding: 0.6rem 0.8rem;
             border-radius: 6px;
-            border: 1px solid var(--border);
-            flex: 1;
+            font-size: 0.88rem;
+            font-weight: bold;
+            color: var(--secondary);
+            margin-bottom: 0.6rem;
+            border-left: 3px solid var(--secondary);
+        }
+
+        .flow-desc {
+            font-size: 0.92rem;
+            line-height: 1.5;
+            color: #4a5568;
         }
 
         footer {
@@ -408,12 +413,13 @@
 
     <header>
         <h1>Politie Toetsmatrijs PSI Examen Trainer</h1>
-        <p>Wetboeken, Integrale Toelichtingen, Wetsketens, Adaptieve Quiz & Termijnen</p>
+        <p>Wetboeken, Integrale Toelichtingen, Wetsketens, Adaptieve Quiz & Stroomdiagrammen</p>
     </header>
 
     <nav>
         <button class="nav-btn active" onclick="switchTab('articles-tab', this)">Alle Artikelen</button>
         <button class="nav-btn" onclick="switchTab('quiz-tab', this)">Echte Toets Quiz</button>
+        <button class="nav-btn" onclick="switchTab('flow-tab', this)">Stroomdiagrammen</button>
         <button class="nav-btn" onclick="switchTab('schema-tab', this)">Termijnschema</button>
     </nav>
 
@@ -454,7 +460,78 @@
             </div>
         </div>
 
-        <!-- TAB 3: VISUEEL TERMIJNSCHEMA -->
+        <!-- TAB 3: STROOMDIAGRAMMEN (VAN BEGIN TOT EIND) -->
+        <div id="flow-tab" class="tab-content">
+            <h2 style="color: var(--primary); font-size: 1.25rem; margin-bottom: 0.5rem;">Chronologisch Stroomdiagram: Van Straat tot Insluiting</h2>
+            <p style="color: #64748b; font-size: 0.92rem; margin-bottom: 1.5rem;">Stap-voor-stap doorloping van een aanhoudings- en vrijheidsbenemingssituatie inclusief alle wettelijke grondslagen en koppelingen.</p>
+
+            <div class="flow-step">
+                <div class="flow-step-number">1</div>
+                <h3 class="flow-title">Optreden & Staandehouding op straat</h3>
+                <div class="flow-laws">Wetsartikelen: Art. 3 & 8 Politiewet 2012 | Art. 52 Sv | Art. 2 Wid</div>
+                <div class="flow-desc">
+                    • <strong>Taakstelling (Art. 3 Pw):</strong> Handhaving rechtsorde en hulpverlening.<br>
+                    • <strong>Identificatie (Art. 8 Pw & Art. 2 Wid):</strong> Vordering van een ID-bewijs is toegestaan vanaf 14 jaar indien redelijkerwijs noodzakelijk voor de politietaak.<br>
+                    • <strong>Staandehouding (Art. 52 Sv):</strong> Is er sprake van een <em>verdachte</em> (art. 27 Sv)? Dan mag je hem staande houden om zijn identiteit vast te stellen. Niet voldoen = strafbaar ex art. 447e Sr.
+                </div>
+            </div>
+
+            <div class="flow-step">
+                <div class="flow-step-number">2</div>
+                <h3 class="flow-title">Aanhouding (Heterdaad vs. Buiten Heterdaad)</h3>
+                <div class="flow-laws">Wetsartikelen: Art. 53 Sv (Heterdaad) & Art. 54 Sv (Buiten heterdaad)</div>
+                <div class="flow-desc">
+                    • <strong>Heterdaad (Art. 53 Sv):</strong> Ontdekking op het hete feit. <em>Iedereen</em> (dus ook een burger) is bevoegd aan te houden, maar moet de verdachte terstond overdragen aan een opsporingsambtenaar.<br>
+                    • <strong>Buiten heterdaad (Art. 54 Sv):</strong> Uitsluitend door opsporingsambtenaren op schriftelijk of mondeling bevel van de (H)OvJ, en enkel bij strafbare feiten waarvoor <em>voorlopige hechtenis</em> is toegelaten (VH-feiten, art. 67 Sv).
+                </div>
+            </div>
+
+            <div class="flow-step">
+                <div class="flow-step-number">3</div>
+                <h3 class="flow-title">Noodzaak tot Binnentreden Woning (Indien verdachte vlucht)</h3>
+                <div class="flow-laws">Wetsartikelen: Art. 7 lid 2 Politiewet | Art. 12 Grondwet | Awbi Art. 1, 2, 7 & 9</div>
+                <div class="flow-desc">
+                    • Vlucht de verdachte een woning in? Toegang kan gebaseerd zijn op strafvorderlijke opsporing of hulpverlening (Politiewet art. 7 lid 2).<br>
+                    • <strong>Awbi-voorschriften:</strong> Vooraf legitimeren en het doel mededelen (art. 1 Awbi). Indien nodig geweld gebruiken om toegang te verschaffen (art. 9 Awbi).<br>
+                    • <em>Let op 's nachts:</em> Tussen 24:00 en 06:00 uur binnentreden mag uitsluitend bij dringende noodzakelijkheid en indien dit expliciet op de machtiging vermeld staat (art. 7 Awbi).
+                </div>
+            </div>
+
+            <div class="flow-step">
+                <div class="flow-step-number">4</div>
+                <h3 class="flow-title">Fouillering & Veiligheid</h3>
+                <div class="flow-laws">Wetsartikelen: Art. 7 lid 3/4 Politiewet | Art. 55b & 56 Sv</div>
+                <div class="flow-desc">
+                    • <strong>Veiligheidsfouillering (Art. 7 lid 3 Pw):</strong> Bij onmiddellijk gevaar voor leven/veiligheid (geen verdachte vereist!).<br>
+                    • <strong>Identiteitsfouillering (Art. 55b Sv):</strong> Bij een aangehouden verdachte ter inbeslagname van een ID-bewijs.<br>
+                    • <strong>Opsporingsfouillering (Art. 56 Sv):</strong> Onderzoek aan kleding/lichaam bij *ernstige bezwaren* op bevel van de (H)OvJ.
+                </div>
+            </div>
+
+            <div class="flow-step">
+                <div class="flow-step-number">5</div>
+                <h3 class="flow-title">Overbrenging & Ophouden voor Onderzoek</h3>
+                <div class="flow-laws">Wetsartikelen: Art. 56a & 56b Sv</div>
+                <div class="flow-desc">
+                    • Na aanhouding wordt de verdachte overgebracht naar het bureau en voorgeleid aan de (H)OvJ.<br>
+                    • <strong>Ophouden voor onderzoek (Art. 56a Sv):</strong> Maximaal 6 uur (geen VH-feit) of maximaal 9 uur (wel VH-feit). <em>Belangrijk:</em> De nachturen tussen 00:00 en 09:00 uur tellen NIET mee voor deze termijn!<br>
+                    • <strong>Verlenging ID (Art. 56b Sv):</strong> Kan bij een niet-VH feit door de (H)OvJ eenmaal met max 6 uur worden verlengd als de identificatie nog niet rond is.
+                </div>
+            </div>
+
+            <div class="flow-step">
+                <div class="flow-step-number">6</div>
+                <h3 class="flow-title">Inverzekeringstelling & Vastzetten op het Bureau</h3>
+                <div class="flow-laws">Wetsartikelen: Art. 57 & 58 Sv | Art. 67 Sv</div>
+                <div class="flow-desc">
+                    • <strong>Inverzekeringstelling (IVS):</strong> Bevoegdheid van de (H)OvJ na verhoor in het belang van het onderzoek.<br>
+                    • <strong>Voorwaarde:</strong> Uitsluitend toegestaan bij VH-feiten (misdrijven met 4+ jaar cel of specifiek aangewezen misdrijven ex art. 67 Sv).<br>
+                    • <strong>Duur:</strong> Maximaal 3 dagen (72 uur), eenmaal te verlengen met 3 dagen door de OvJ bij dringende noodzakelijkheid. Hierna volgt eventueel voorgeleiding aan de Rechter-Commissaris voor inbewaringstelling (IBS, art. 63 Sv).
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: VISUEEL TERMIJNSCHEMA -->
         <div id="schema-tab" class="tab-content">
             <h2 style="color: var(--primary); font-size: 1.2rem; margin-bottom: 1rem;">Opeenvolging Vrijheidsbeneming & Dwangmiddelen</h2>
             
