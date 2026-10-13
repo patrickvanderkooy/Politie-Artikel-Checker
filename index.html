@@ -391,6 +391,34 @@
             color: #4a5568;
         }
 
+        /* Video Opdracht styling */
+        .video-box {
+            background: white;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            padding: 1.2rem;
+            margin-bottom: 1.2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+        }
+
+        .video-box h3 {
+            margin-top: 0;
+            color: var(--primary);
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            margin-bottom: 0.6rem;
+            font-size: 0.92rem;
+            line-height: 1.4;
+        }
+
+        .checklist-item input[type="checkbox"] {
+            margin-top: 0.2rem;
+        }
+
         footer {
             text-align: center;
             padding: 1.2rem;
@@ -410,13 +438,14 @@
 
     <header>
         <h1>Politie Toetsmatrijs PSI Examen Trainer</h1>
-        <p>Wetboeken, Toetsmatrijs, Stroomdiagrammen & Volledige Artikelenbank</p>
+        <p>Wetboeken, Toetsmatrijs, Stroomdiagrammen & Video-opdracht Trainer</p>
     </header>
 
     <nav>
         <button class="nav-btn active" onclick="switchTab('articles-tab', this)">Alle Artikelen</button>
         <button class="nav-btn" onclick="switchTab('quiz-tab', this)">Echte Toets Quiz</button>
         <button class="nav-btn" onclick="switchTab('flow-tab', this)">Stroomdiagrammen</button>
+        <button class="nav-btn" onclick="switchTab('video-tab', this)">Video-opdracht 2</button>
         <button class="nav-btn" onclick="switchTab('schema-tab', this)">Termijnschema</button>
     </nav>
 
@@ -522,7 +551,79 @@
             </div>
         </div>
 
-        <!-- TAB 4: TERMIJNSCHEMA -->
+        <!-- TAB 4: VIDEO-OPDRACHT 2 VERSIER/REFLECTIEVERSIAG -->
+        <div id="video-tab" class="tab-content">
+            <h2 style="color: var(--primary); font-size: 1.25rem; margin-bottom: 0.5rem;">Handleiding Video-opdracht 2 (Videoverslag & Reflectie)</h2>
+            <p style="color: #64748b; font-size: 0.92rem; margin-bottom: 1.5rem;">Richtlijnen, verplichte onderdelen en juridische onderbouwing voor het uitwerken van Opdracht 2.</p>
+
+            <div class="video-box">
+                <h3>1. Opbouw & Structuur van het Videoverslag</h3>
+                <p style="font-size:0.92rem; color:#4a5568; line-height:1.5;">
+                    Het videoverslag van Opdracht 2 dient een duidelijke, chronologische en juridisch correcte toelichting te bevatten op het door jou uitgevoerde politieoptreden.
+                </p>
+                <div class="checklist-item">
+                    <input type="checkbox" id="v1">
+                    <label for="v1"><strong>Inleiding:</strong> Situatieschets, melding, locatie en eerste waarnemingen ter plaatse.</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="v2">
+                    <label for="v2"><strong>Wettelijke Grondslag:</strong> Welke artikelen lagen aan de basis van het optreden (bijv. Art. 3 Pw, Art. 8 Pw, Art. 52/53 Sv)?</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="v3">
+                    <label for="v3"><strong>Verloop van de handelingen:</strong> Van aanspreken/staandehouden tot eventuele aanhouding, fouillering en overbrenging.</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="v4">
+                    <label for="v4"><strong>Geweld- en Dwangmiddelen (indien van toepassing):</strong> Toepassing van Art. 7 lid 1 Pw, proportionaliteit & subsidiariteit.</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="v5">
+                    <label for="v5"><strong>Afhandeling & Borging:</strong> Rechten van de verdachte (cautie art. 29 Sv), verslaglegging in PV en overdracht aan (H)OvJ.</label>
+                </div>
+            </div>
+
+            <div class="video-box">
+                <h3>2. Essentiële Juridische Toetspunten (Checklist)</h3>
+                <p style="font-size:0.92rem; color:#4a5568; line-height:1.5;">
+                    Zorg dat je in het mondelinge of schriftelijke videoverslag expliciet stilstaat bij onderstaande juridische vereisten:
+                </p>
+
+                <div style="background:#f8fafc; padding:0.8rem; border-radius:6px; margin-bottom:0.8rem; font-size:0.9rem;">
+                    <strong>A. Redelijk Vermoeden van Schuld (Art. 27 Sv)</strong><br>
+                    Onderbouw concreet welke feiten en omstandigheden aanleiding gaven om betrokkene als <em>verdachte</em> aan te merken.
+                </div>
+
+                <div style="background:#f8fafc; padding:0.8rem; border-radius:6px; margin-bottom:0.8rem; font-size:0.9rem;">
+                    <strong>B. Rechten van de Verdachte & Cautie (Art. 29 Sv)</strong><br>
+                    Is de cautie tijdig medegedeeld vóór aanvang van het verhoor/vragenvuur? Geef aan op welk moment dit precies gebeurde.
+                </div>
+
+                <div style="background:#f8fafc; padding:0.8rem; border-radius:6px; margin-bottom:0.8rem; font-size:0.9rem;">
+                    <strong>C. Veiligheid & Fouillering (Art. 7 lid 3 Pw / Art. 55b Sv)</strong><br>
+                    Licht het onderscheid toe tussen een veiligheidsfouillering (afwending gevaar) en een identiteitsfouillering bij aanhouding.
+                </div>
+
+                <div style="background:#f8fafc; padding:0.8rem; border-radius:6px; font-size:0.9rem;">
+                    <strong>D. Proportionaliteit & Subsidiariteit</strong><br>
+                    Motiveer waarom het gekozen dwangmiddel noodzakelijk was en waarom een lichter middel niet volstond.
+                </div>
+            </div>
+
+            <div class="video-box">
+                <h3>3. Zelfreflectie & Professionele Houding</h3>
+                <p style="font-size:0.92rem; color:#4a5568; line-height:1.5;">
+                    Beschrijf in het reflectie-onderdeel van je verslag:
+                </p>
+                <ul style="font-size:0.9rem; color:#4a5568; padding-left:1.2rem; line-height:1.6;">
+                    <li><strong>Communicatie & De-escalatie:</strong> Hoe verliep de interactie? Was de benadering professioneel en de-escalerend?</li>
+                    <li><strong>Samenwerking:</strong> Hoe was de taakverdeling met de collega/partner tijdens de casus?</li>
+                    <li><strong>Verbeterpunten:</strong> Wat zou je in een soortgelijke praktijksituatie een volgende keer anders of scherper aanpakken?</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- TAB 5: TERMIJNSCHEMA -->
         <div id="schema-tab" class="tab-content">
             <h2 style="color: var(--primary); font-size: 1.2rem; margin-bottom: 1rem;">Opeenvolging Vrijheidsbeneming & Dwangmiddelen</h2>
             
@@ -538,7 +639,7 @@
                 <div style="width:38px; height:38px; background:var(--secondary); color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold; flex-shrink:0;">2</div>
                 <div style="background:white; padding:1rem; border-radius:6px; border:1px solid var(--border); flex:1;">
                     <h4 style="margin:0 0 0.4rem 0; color:var(--primary);">Ophouden voor onderzoek (Art. 56a & 56b Sv)</h4>
-                    <p style="margin:0; font-size:0.9rem; color:#4a5568;">Max 6 uur (geen VH) or 9 uur (wel VH). Nachturen (00:00 - 09:00) tellen niet mee. Eventueel 6 uur verlenging ex art. 56b Sv.</p>
+                    <p style="margin:0; font-size:0.9rem; color:#4a5568;">Max 6 uur (geen VH) of 9 uur (wel VH). Nachturen (00:00 - 09:00) tellen niet mee. Eventueel 6 uur verlenging ex art. 56b Sv.</p>
                 </div>
             </div>
 
@@ -665,7 +766,7 @@
             },
             {
                 id: "sr300_302", law: "Wetboek van Strafrecht", article: "Artikel 300 & 302", title: "Mishandeling & Zware mishandeling", inMatrix: true, vh: true, exam: true, tax: "T",
-                eis: "De student kan bepalen of er sprake is van eenvoudig of zware mishandeling.",
+                eis: "De student kan bepalen of er sprake is van eenvoudig en zware mishandeling.",
                 text: "Art. 300: Mishandeling. Poging NIET strafbaar.\nArt. 302: Opzettelijk zwaar lichamelijk letsel toebrengen.",
                 explanation: "Eenvoudige mishandeling is een VH-feit; poging daartoe is echter niet strafbaar gesteld.",
                 connection: "Criteria zwaar letsel Hoge Raad."
@@ -762,7 +863,7 @@
             {
                 id: "sv96", law: "Wetboek van Strafvordering", article: "Artikel 96", title: "Betreden van plaatsen ter inbeslagneming", inMatrix: false, vh: false, exam: false, tax: "T",
                 text: "In geval van ontdekking op heterdaad of bij een VH-feit is de opsporingsambtenaar bevoegd elke plaats te betreden ter inbeslagneming.",
-                explanation: "Bevoegdheid om plaatsen (met uitzondering van woningen zonder toestemming) te betreden ter inbeslagneming.",
+                explanation: "Bevoegdheid om plaatsen te betreden ter inbeslagneming.",
                 connection: "Sv art. 94 & Awbi."
             },
             {
@@ -786,19 +887,19 @@
             {
                 id: "sr139", law: "Wetboek van Strafrecht", article: "Artikel 139", title: "Lokaalvredebreuk", inMatrix: false, vh: false, exam: false, tax: "T",
                 text: "Hij die in een voor de openbare dienst bestemd besloten lokaal wederrechtelijk binnendringt, of zich op vordering niet verwijderd.",
-                explanation: "De tegenhanger van huisvredebreuk, maar gericht op openbare of voor de dienst bestemde lokalen (zoals een gemeentehuis of politiebureau).",
+                explanation: "De tegenhanger van huisvredebreuk gericht op openbare lokalen (zoals gemeentehuis of politiebureau).",
                 connection: "Sr art. 138."
             },
             {
                 id: "sr180", law: "Wetboek van Strafrecht", article: "Artikel 180", title: "Weerstand bieden tegen ambtenaar in functie", inMatrix: false, vh: true, exam: false, tax: "T",
                 text: "Hij die zich met geweld of bedreiging met geweld verzet tegen een ambtenaar werkzaam in de rechtmatige uitoefening van zijn bediening.",
-                explanation: "Actief fysiek verzet of geweld tegen een ambtenaar (zoals een politieagent) tijdens de uitvoering van de taak. Aangewezen VH-feit.",
+                explanation: "Actief fysiek verzet of geweld tegen een ambtenaar tijdens de uitvoering van de taak. VH-feit.",
                 connection: "Sr art. 181 & 182."
             },
             {
                 id: "sr184", law: "Wetboek van Strafrecht", article: "Artikel 184", title: "Niet voldoen aan ambtelijk bevel of vordering", inMatrix: false, vh: false, exam: false, tax: "T",
                 text: "Hij die opzettelijk niet voldoet aan een bevel of een vordering, krachtens wettelijk voorschrift gedaan door een bevoegde ambtenaar.",
-                explanation: "Het weigeren op te volgen van een rechtmatig ambtelijk bevel (bijv. vordering om weg te gaan bij een amokmakerij).",
+                explanation: "Het weigeren op te volgen van een rechtmatig ambtelijk bevel.",
                 connection: "Politiewet art. 7/8."
             },
             {
@@ -816,37 +917,37 @@
             {
                 id: "sr321", law: "Wetboek van Strafrecht", article: "Artikel 321", title: "Verduistering", inMatrix: false, vh: true, exam: false, tax: "T",
                 text: "Hij die opzettelijk een goed dat hem anders dan door misdrijf onder zich heeft, wederrechtelijk zich toeeigent.",
-                explanation: "Het verschil met diefstal: bij verduistering heeft de dader het goed al rechtmatig onder zich (bijv. een gehuurde auto niet terugbrengen). VH-feit.",
+                explanation: "Het goed is vooraf al rechtmatig onder de dader. VH-feit.",
                 connection: "Sr art. 310."
             },
             {
                 id: "sr326", law: "Wetboek van Strafrecht", article: "Artikel 326", title: "Oplichting", inMatrix: false, vh: true, exam: false, tax: "T",
                 text: "Hij die met het oogmerk om zich wederrechtelijk te bevoordelen, door het aannemen van een valse naam of een listige kunstgreep iemand beweegt tot afgifte van een goed.",
-                explanation: "Vorm van vermogenscriminaliteit waarbij een misleidend oplichtingsmiddel wordt gebruikt. VH-feit.",
+                explanation: "Misleidend oplichtingsmiddel gebruikt voor afgifte van geld/goederen. VH-feit.",
                 connection: "Sr art. 310 & 321."
             },
             {
                 id: "sr350", law: "Wetboek van Strafrecht", article: "Artikel 350", title: "Zaaksbeschadiging / Vernieling", inMatrix: false, vh: true, exam: false, tax: "T",
                 text: "Hij die opzettelijk en wederrechtelijk enig goed dat geheel of ten dele aan een ander toebehoort, vernielt, beschadigt, onbruikbaar maakt of wegmaken.",
-                explanation: "Het opzettelijk slopen of besmeuren van property. Aangewezen VH-feit.",
+                explanation: "Het opzettelijk slopen van eigendommen van een ander. VH-feit.",
                 connection: "Sr art. 141."
             },
             {
                 id: "sr416", law: "Wetboek van Strafrecht", article: "Artikel 416", title: "Opzetheling", inMatrix: false, vh: true, exam: false, tax: "T",
                 text: "Hij die een goed verwerft, voorhanden heeft of overdraagt, terwijl hij ten tijde van de verwerving wist dat het een door misdrijf verkregen goed betrof.",
-                explanation: "Kopen of bezitten van goederen waarvan dader wist dat ze van misdrijf (bijv. diefstal) afkomstig waren. VH-feit.",
+                explanation: "Kopen of bezitten van goederen waarvan dader wist dat ze van misdrijf afkomstig waren. VH-feit.",
                 connection: "Sr art. 310 & 417bis."
             },
             {
                 id: "sr435", law: "Wetboek van Strafrecht", article: "Artikel 435", title: "Opgeven valse personalia", inMatrix: false, vh: false, exam: false, tax: "K",
                 text: "Hij die aan de bevoegde ambtenaar valse namen, voornamen, geboortedatum of woonadres opgeeft.",
-                explanation: "Overtreding: het bewust doorgeven van een verzonnen naam of valse geboortedatum bij staandehouding.",
+                explanation: "Overtreding: het bewust doorgeven van een verzonnen naam of valse geboortedatum.",
                 connection: "Sv art. 52 & Sr art. 447e."
             },
             {
                 id: "sr447e", law: "Wetboek van Strafrecht", article: "Artikel 447e", title: "Niet tonen van identiteitsbewijs op vordering", inMatrix: false, vh: false, exam: false, tax: "T",
                 text: "Hij die niet voldoet aan de verplichting om een identiteitsbewijs ter inzage aan te bieden, op de vordering gedaan door een bevoegde ambtenaar.",
-                explanation: "Overtreding bij het weigeren te voldoen aan een rechtmatige ID-vordering ex art. 8 Politiewet / art. 52 Sv.",
+                explanation: "Overtreding bij het weigeren te voldoen aan een rechtmatige ID-vordering.",
                 connection: "Politiewet art. 8 & Wid art. 2."
             }
         ];
