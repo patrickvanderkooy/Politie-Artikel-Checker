@@ -341,52 +341,75 @@
             cursor: pointer;
         }
 
-        .flow-step {
+        /* Stroomdiagram Styling */
+        .flow-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            position: relative;
+        }
+
+        .flow-step-card {
             background: white;
             border-radius: 8px;
             border: 1px solid var(--border);
-            padding: 1.2rem;
-            margin-bottom: 1.2rem;
+            padding: 1.5rem;
             position: relative;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+            border-left: 5px solid var(--secondary);
         }
 
-        .flow-step-number {
-            display: inline-block;
+        .flow-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .flow-number {
             background: var(--primary);
             color: white;
-            width: 28px;
-            height: 28px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
-            text-align: center;
-            line-height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-weight: bold;
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            flex-shrink: 0;
         }
 
         .flow-title {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             font-weight: bold;
             color: var(--primary);
-            margin: 0 0 0.5rem 0;
+            margin: 0;
         }
 
-        .flow-laws {
+        .flow-laws-tag {
             background: #f0f4f8;
-            padding: 0.6rem 0.8rem;
+            padding: 0.5rem 0.8rem;
             border-radius: 6px;
             font-size: 0.88rem;
             font-weight: bold;
             color: var(--secondary);
-            margin-bottom: 0.6rem;
-            border-left: 3px solid var(--secondary);
+            margin-bottom: 0.8rem;
+            border-left: 3px solid var(--accent);
         }
 
-        .flow-desc {
-            font-size: 0.92rem;
-            line-height: 1.5;
+        .flow-body {
+            font-size: 0.93rem;
+            line-height: 1.6;
             color: #4a5568;
+        }
+
+        .flow-arrow-down {
+            text-align: center;
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin: -0.5rem 0;
+            font-weight: bold;
         }
 
         .norm-badge {
@@ -504,47 +527,106 @@
 
         <!-- TAB 3: STROOMDIAGRAMMEN -->
         <div id="flow-tab" class="tab-content">
-            <h2 style="color: var(--primary); font-size: 1.25rem; margin-bottom: 0.5rem;">Chronologisch Stroomdiagram: Van Straat tot Insluiting</h2>
-            <p style="color: #64748b; font-size: 0.92rem; margin-bottom: 1.5rem;">Stap-voor-stap doorloping van een aanhoudings- en vrijheidsbenemingssituatie inclusief alle wettelijke grondslagen.</p>
+            <h2 style="color: var(--primary); font-size: 1.3rem; margin-bottom: 0.4rem;">Visueel Stroomdiagram: Van Straat tot Insluiting</h2>
+            <p style="color: #64748b; font-size: 0.92rem; margin-bottom: 1.5rem;">Stap-voor-stap doorloping van politieoptreden en bevoegdheden. Klik op een wetsartikel om direct de uitleg te bekijken.</p>
 
-            <div class="flow-step">
-                <div class="flow-step-number">1</div>
-                <h3 class="flow-title">Optreden & Staandehouding op straat</h3>
-                <div class="flow-laws">Wetsartikelen: Art. 3 & 8 Politiewet 2012 | Art. 52 Sv | Art. 27a Sv | Art. 2 Wid</div>
-                <div class="flow-desc">
-                    • <strong>Taakstelling (Art. 3 Pw):</strong> Handhaving rechtsorde en hulpverlening.<br>
-                    • <strong>Identificatie (Art. 8 Pw & Art. 2 Wid):</strong> Vordering ID-bewijs is verplicht vanaf 14 jaar.<br>
-                    • <strong>Staandehouding (Art. 52 Sv):</strong> Alleen bij een <em>verdachte</em> (art. 27 Sv) ter vaststelling van personalia (art. 27a Sv).
+            <div class="flow-container">
+                
+                <!-- STAP 1 -->
+                <div class="flow-step-card">
+                    <div class="flow-header">
+                        <div class="flow-number">1</div>
+                        <h3 class="flow-title">Optreden op Straat & Staandehouding</h3>
+                    </div>
+                    <div class="flow-laws-tag">Wetsartikelen: <a class="law-link" onclick="searchArticle('Politiewet art. 3')">Politiewet art. 3</a> | <a class="law-link" onclick="searchArticle('Politiewet art. 8')">Politiewet art. 8</a> | <a class="law-link" onclick="searchArticle('Sv art. 52')">Sv art. 52</a> | <a class="law-link" onclick="searchArticle('Sv art. 27a')">Sv art. 27a</a></div>
+                    <div class="flow-body">
+                        • <strong>Taakstelling & Inzet (<a class="law-link" onclick="searchArticle('Politiewet art. 3')">Politiewet art. 3</a>):</strong> Handhaving van de rechtsorde en verlenen van hulp onder gezag.<br>
+                        • <strong>Identificatieplicht (<a class="law-link" onclick="searchArticle('Politiewet art. 8')">Politiewet art. 8</a> & <a class="law-link" onclick="searchArticle('Wet op de identificatieplicht art. 2')">Wid art. 2</a>):</strong> Vordering ID-bewijs vanaf 14 jaar.<br>
+                        • <strong>Staandehouding (<a class="law-link" onclick="searchArticle('Sv art. 52')">Sv art. 52</a>):</strong> Alleen bij een <em>verdachte</em> (<a class="law-link" onclick="searchArticle('Sv art. 27')">Sv art. 27</a>) om diens identificerende persoonsgegevens (<a class="law-link" onclick="searchArticle('Sv art. 27a')">Sv art. 27a</a>) vast te stellen. Weigering is strafbaar (<a class="law-link" onclick="searchArticle('Sr art. 447e')">Sr art. 447e</a>).
+                    </div>
                 </div>
-            </div>
 
-            <div class="flow-step">
-                <div class="flow-step-number">2</div>
-                <h3 class="flow-title">Aanhouding (Heterdaad vs. Buiten Heterdaad)</h3>
-                <div class="flow-laws">Wetsartikelen: Art. 53 Sv (Heterdaad) & Art. 54 Sv (Buiten heterdaad)</div>
-                <div class="flow-desc">
-                    • <strong>Heterdaad (Art. 53 Sv):</strong> Iedereen bevoegd aan te houden, maar moet verdachte terstond overdragen.<br>
-                    • <strong>Buiten heterdaad (Art. 54 Sv):</strong> Uitsluitend opsporingsambtenaren op bevel van de (H)OvJ bij VH-feiten (art. 67 Sv).
-                </div>
-            </div>
+                <div class="flow-arrow-down">↓</div>
 
-            <div class="flow-step">
-                <div class="flow-step-number">3</div>
-                <h3 class="flow-title">Ophouden voor onderzoek & Verlenging</h3>
-                <div class="flow-laws">Wetsartikelen: Art. 56a & 56b Sv</div>
-                <div class="flow-desc">
-                    • <strong>Art. 56a Sv:</strong> Max 6 uur (geen VH) of max 9 uur (wel VH). Nachturen (00:00 - 09:00) tellen NIET mee.<br>
-                    • <strong>Art. 56b Sv:</strong> Verlenging identificatie met max 6 uur bij niet-VH feiten op bevel van (H)OvJ.
+                <!-- STAP 2 -->
+                <div class="flow-step-card">
+                    <div class="flow-header">
+                        <div class="flow-number">2</div>
+                        <h3 class="flow-title">Aanhouding (Heterdaad of Buiten Heterdaad)</h3>
+                    </div>
+                    <div class="flow-laws-tag">Wetsartikelen: <a class="law-link" onclick="searchArticle('Sv art. 53')">Sv art. 53</a> | <a class="law-link" onclick="searchArticle('Sv art. 54')">Sv art. 54</a> | <a class="law-link" onclick="searchArticle('Sv art. 67')">Sv art. 67</a></div>
+                    <div class="flow-body">
+                        • <strong>Heterdaad (<a class="law-link" onclick="searchArticle('Sv art. 53')">Sv art. 53</a>):</strong> Ontdekking op heterdaad. <em>Elke burger</em> is bevoegd aan te houden, maar moet de verdachte terstond overdragen aan een opsporingsambtenaar.<br>
+                        • <strong>Buiten heterdaad (<a class="law-link" onclick="searchArticle('Sv art. 54')">Sv art. 54</a>):</strong> Uitsluitend bevoegd voor opsporingsambtenaren op schriftelijk of mondeling bevel van de (H)OvJ. Vereist dat het een voorlopige hechtenisfeit betreft (<a class="law-link" onclick="searchArticle('Sv art. 67')">Sv art. 67</a>).<br>
+                        • <strong>Rechten mededelen (<a class="law-link" onclick="searchArticle('Sv art. 27c')">Sv art. 27c</a> & <a class="law-link" onclick="searchArticle('Sv art. 29')">Sv art. 29</a>):</strong> Mededeling van de verdenking en geven van de cautie (zwijgrecht).
+                    </div>
                 </div>
-            </div>
 
-            <div class="flow-step">
-                <div class="flow-step-number">4</div>
-                <h3 class="flow-title">Inverzekeringstelling (IVS)</h3>
-                <div class="flow-laws">Wetsartikelen: Art. 57 & 58 Sv | Art. 67, 67a & 67b Sv</div>
-                <div class="flow-desc">
-                    • Bevoegdheid van de (H)OvJ na verhoor. Uitsluitend bij VH-feiten (art. 67 Sv). Duur: max 3 dagen, 1x te verlengen met 3 dagen (art. 58 Sv).
+                <div class="flow-arrow-down">↓</div>
+
+                <!-- STAP 3 -->
+                <div class="flow-step-card">
+                    <div class="flow-header">
+                        <div class="flow-number">3</div>
+                        <h3 class="flow-title">Overbrenging & Fouillering</h3>
+                    </div>
+                    <div class="flow-laws-tag">Wetsartikelen: <a class="law-link" onclick="searchArticle('Sv art. 55')">Sv art. 55</a> | <a class="law-link" onclick="searchArticle('Sv art. 55b')">Sv art. 55b</a> | <a class="law-link" onclick="searchArticle('Sv art. 56')">Sv art. 56</a> | <a class="law-link" onclick="searchArticle('Sv art. 94')">Sv art. 94</a></div>
+                    <div class="flow-body">
+                        • <strong>Overbrenging (<a class="law-link" onclick="searchArticle('Sv art. 55')">Sv art. 55</a>):</strong> Transport naar het politiebureau voor verhoor en verdere afhandeling.<br>
+                        • <strong>Identificatiefouillering (<a class="law-link" onclick="searchArticle('Sv art. 55b')">Sv art. 55b</a>):</strong> Kledingonderzoek ter vaststelling van de identiteit.<br>
+                        • <strong>Opsporingsfouillering & Inbeslagneming (<a class="law-link" onclick="searchArticle('Sv art. 56')">Sv art. 56</a> & <a class="law-link" onclick="searchArticle('Sv art. 94')">Sv art. 94</a>):</strong> Onderzoek aan kleding/lichaam op bevel van (h)OvJ en inbeslagname van goederen die voor de waarheid of het bewijs dienen.
+                    </div>
                 </div>
+
+                <div class="flow-arrow-down">↓</div>
+
+                <!-- STAP 4 -->
+                <div class="flow-step-card">
+                    <div class="flow-header">
+                        <div class="flow-number">4</div>
+                        <h3 class="flow-title">Ophouden voor Onderzoek (Bureau)</h3>
+                    </div>
+                    <div class="flow-laws-tag">Wetsartikelen: <a class="law-link" onclick="searchArticle('Sv art. 56a')">Sv art. 56a</a> | <a class="law-link" onclick="searchArticle('Sv art. 56b')">Sv art. 56b</a></div>
+                    <div class="flow-body">
+                        • <strong>Termijnregeling (<a class="law-link" onclick="searchArticle('Sv art. 56a')">Sv art. 56a</a>):</strong> 
+                          - Maximaal <strong>6 uur</strong> bij niet-VH feiten.<br>
+                          - Maximaal <strong>9 uur</strong> bij VH-feiten.<br>
+                          - <em>Belangrijk:</em> De nachturen tussen 00:00 uur en 09:00 uur tellen <strong>niet</strong> mee bij de berekening van deze uren!<br>
+                        • <strong>Identificatieverlenging (<a class="law-link" onclick="searchArticle('Sv art. 56b')">Sv art. 56b</a>):</strong> Bij niet-VH feiten kan de (h)OvJ de termijn met maximaal 6 uur verlengen voor identificatie.
+                    </div>
+                </div>
+
+                <div class="flow-arrow-down">↓</div>
+
+                <!-- STAP 5 -->
+                <div class="flow-step-card">
+                    <div class="flow-header">
+                        <div class="flow-number">5</div>
+                        <h3 class="flow-title">Inverzekeringstelling (IVS)</h3>
+                    </div>
+                    <div class="flow-laws-tag">Wetsartikelen: <a class="law-link" onclick="searchArticle('Sv art. 57')">Sv art. 57</a> | <a class="law-link" onclick="searchArticle('Sv art. 58')">Sv art. 58</a> | <a class="law-link" onclick="searchArticle('Sv art. 67')">Sv art. 67</a></div>
+                    <div class="flow-body">
+                        • <strong>Bevel IVS (<a class="law-link" onclick="searchArticle('Sv art. 57')">Sv art. 57</a>):</strong> Kan enkel worden bevolen door de (H)Officier van Justitie na verhoor van de verdachte in het belang van het onderzoek.<br>
+                        • <strong>Voorwaarde:</strong> Uitsluitend toegestaan bij feiten waarvoor voorlopige hechtenis is toegelaten (<a class="law-link" onclick="searchArticle('Sv art. 67')">Sv art. 67</a> / Paars VH-feit).<br>
+                        • <strong>Duur (<a class="law-link" onclick="searchArticle('Sv art. 58')">Sv art. 58</a>):</strong> Maximaal 3 dagen. Kan door de OvJ eenmalig met 3 dagen worden verlengd (totaal 6 dagen).
+                    </div>
+                </div>
+
+                <div class="flow-arrow-down">↓</div>
+
+                <!-- STAP 6 -->
+                <div class="flow-step-card">
+                    <div class="flow-header">
+                        <div class="flow-number">6</div>
+                        <h3 class="flow-title">Verdere Vervolging of Invrijheidstelling</h3>
+                    </div>
+                    <div class="flow-laws-tag">Wetsartikelen: <a class="law-link" onclick="searchArticle('Sv art. 63')">Sv art. 63</a> | <a class="law-link" onclick="searchArticle('Sv art. 65')">Sv art. 65</a></div>
+                    <div class="flow-body">
+                        • <strong>Inbewaringstelling (<a class="law-link" onclick="searchArticle('Sv art. 65')">Sv art. 65</a>):</strong> Vervolgstap waarbij de Rechter-Commissaris op vordering van de OvJ de verdachte in bewaring stelt.<br>
+                        • <strong>Invrijheidstelling (<a class="law-link" onclick="searchArticle('Sv art. 63')">Sv art. 63</a>):</strong> Zodra de noodzaak voor vrijheidsbeneming vervalt, wordt de verdachte onmiddellijk in liberdade gesteld.
+                    </div>
+                </div>
+
             </div>
         </div>
 
