@@ -45,7 +45,7 @@
             padding: 0.8rem 1rem;
             text-align: center;
             font-size: 0.9rem;
-            display: none; /* Standaard verborgen, getoond via JS indien niet eerder gesloten */
+            display: none;
             justify-content: space-between;
             align-items: center;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -474,7 +474,7 @@
         <div id="articles-tab" class="tab-content active">
             <div class="search-box">
                 <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
-                <input type="text" id="searchInput" placeholder="Zoek op artikel (bijv. '67b', '311 lid 4', '27a', '184', 'Grondwet 1') of trefwoord..." onkeyup="filterArticles()">
+                <input type="text" id="searchInput" placeholder="Zoek op artikel (bijv. '67b', '311 lid 4', '27a', '184', 'Grondwet 1') ou trefwoord..." onkeyup="filterArticles()">
             </div>
 
             <div class="filters">
@@ -686,7 +686,7 @@
         <!-- LAATSTE TAB: ROOSTER & LESSEN -->
         <div id="rooster-tab" class="tab-content">
             <h2 style="color: var(--primary); font-size: 1.25rem; margin-bottom: 0.5rem;">Inforooster BPO/LEU/PSI/2639/B</h2>
-            <p style="color: #64748b; font-size: 0.92rem; margin-bottom: 1.5rem;">Overzicht van lesweken, datums, vakanties, docenten (o.a. Jovanny Bos, Carel Schott) en gekoppelde lesstof uit de opleiding.</p>
+            <p style="color: #64748b; font-size: 0.92rem; margin-bottom: 1.5rem;">Overzicht van lesweken, datums, docenten (o.a. Jovanny Bos, Carel Schott) en gekoppelde lesstof uit de opleiding (inclusief correcte lesweken zoals week 43).</p>
 
             <div class="schedule-card">
                 <div class="card-header">
@@ -732,14 +732,14 @@
                 <strong>Dinsdag (Online):</strong> Vervolg Blok 4 strafvordering[span_11](start_span)[span_11](end_span).</p>
             </div>
 
-            <div class="schedule-card" style="border-left: 4px solid #e53e3e;">
+            <div class="schedule-card">
                 <div class="card-header">
                     <div>
-                        <span class="badge badge-vakantie">Herfstavond / Vakantie / Roosterpauze</span>
-                        <h3>Week 43 (19 okt 2026 - 24 okt 2026)</h3>
+                        <span class="badge badge-exam">Week 43 (19 okt 2026 - 24 okt 2026)</span>
+                        <h3>Blok 4: Voortzetting Strafvordering</h3>
                     </div>
                 </div>
-                <p>Geen reguliere lessen ingeroosterd in verband met vakantie/vrije week.</p>
+                <p><strong>Actieve lesweek:</strong> Voortzetting van de onderdelen binnen Blok 4 (Strafvordering) en praktijkvoorbereiding.</p>
             </div>
 
             <div class="schedule-card">
@@ -772,7 +772,7 @@
                     </div>
                 </div>
                 <p><strong>Maandag:</strong> Specifieke inzet 6.3 & Simulatie Blok 3/4 (Acteurs aanwezig)[span_19](start_span)[span_19](end_span).<br>
-                <strong>Dinsdag: 🎓 EXAMENPSI (Examenopdracht 1) & Inzage</strong>[span_20](start_span)[span_20](end_span).</p>
+                <strong>Dinsdag: 🎓 EXAMEN PSI (Examenopdracht 1) & Inzage</strong>[span_20](start_span)[span_20](end_span).</p>
             </div>
 
             <div class="schedule-card">
@@ -1222,7 +1222,6 @@
             document.getElementById('quiz-next-btn').style.display = 'inline-block';
         }
 
-        // Initialiseer de artikelenbank bij openen
         renderArticles(database);
     </script>
 </body>
