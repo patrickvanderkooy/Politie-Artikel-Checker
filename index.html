@@ -268,6 +268,18 @@
             color: #7b341e;
         }
 
+        /* Klikbare links binnen wetverbanden */
+        .law-link {
+            color: #dd6b20;
+            font-weight: bold;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .law-link:hover {
+            color: #c05621;
+        }
+
         /* Quiz styling */
         .quiz-container {
             background: white;
@@ -458,7 +470,7 @@
     </header>
 
     <nav>
-        <button class="nav-btn active" onclick="switchTab('articles-tab', this)">Artikelenbank (Home)</button>
+        <button class="nav-btn active" id="btn-articles-tab" onclick="switchTab('articles-tab', this)">Artikelenbank (Home)</button>
         <button class="nav-btn" onclick="switchTab('quiz-tab', this)">Toets Quiz</button>
         <button class="nav-btn" onclick="switchTab('flow-tab', this)">Stroomdiagrammen</button>
         <button class="nav-btn" onclick="switchTab('ex1-tab', this)">Examen 1</button>
@@ -683,7 +695,7 @@
             </div>
         </div>
 
-        <!-- LAATSTE TAB: ROOSTER & LESSEN (SCHOON VAN ARTEFACTEN) -->
+        <!-- LAATSTE TAB: ROOSTER & LESSEN -->
         <div id="rooster-tab" class="tab-content">
             <h2 style="color: var(--primary); font-size: 1.25rem; margin-bottom: 0.5rem;">Inforooster BPO/LEU/PSI/2639/B</h2>
             <p style="color: #64748b; font-size: 0.92rem; margin-bottom: 1.5rem;">Overzicht van lesweken, datums, docenten (o.a. Jovanny Bos, Carel Schott) en gekoppelde lesstof uit de opleiding.</p>
@@ -846,7 +858,7 @@
     </footer>
 
     <script>
-        // Installatiebanner logica (wordt slechts 1x gevraagd dankzij localStorage)
+        // Installatiebanner logica
         window.addEventListener('DOMContentLoaded', () => {
             const dismissed = localStorage.getItem('pol_install_dismissed');
             if (!dismissed) {
@@ -864,6 +876,32 @@
             dismissInstallBanner();
         }
 
+        // Functie om direct naar een artikel te zoeken vanaf een wetverband link
+        function searchArticle(term) {
+            switchTab('articles-tab', document.getElementById('btn-articles-tab'));
+            const searchInput = document.getElementById('searchInput');
+            searchInput.value = term;
+            filterArticles();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Helper om tekst om te zetten naar doorklikbare HTML-links voor Wetsverbanden
+        function formatConnections(connText) {
+            if (!connText) return '';
+            
+            // RegEx koppelingen voor bekende artikelen
+            let formatted = connText
+                .replace(/Sr art\. (\d+[a-z]*)/gi, '<span class="law-link" onclick="searchArticle(\'$1\')">Sr art. $1</span>')
+                .replace(/Sv art\. (\d+[a-z]*)/gi, '<span class="law-link" onclick="searchArticle(\'$1\')">Sv art. $1</span>')
+                .replace(/art\. (\d+[a-z]*)\b/gi, '<span class="law-link" onclick="searchArticle(\'$1\')">art. $1</span>')
+                .replace(/Grondwet art\. (\d+)/gi, '<span class="law-link" onclick="searchArticle(\'Grondwet $1\')">Grondwet art. $1</span>')
+                .replace(/Politiewet art\. (\d+)/gi, '<span class="law-link" onclick="searchArticle(\'Artikel $1\')">Politiewet art. $1</span>')
+                .replace(/Awbi art\. ([\d, ]+)/gi, '<span class="law-link" onclick="searchArticle(\'Awbi\')">Awbi art. $1</span>')
+                .replace(/Ambtsinstructie art\. (\d+)/gi, '<span class="law-link" onclick="searchArticle(\'Ambtsinstructie\')">Ambtsinstructie art. $1</span>');
+
+            return formatted;
+        }
+
         const database = [
             {
                 id: "gw1", law: "Grondwet", article: "Artikel 1", title: "Gelijkheid & Non-discriminatie", inMatrix: true, vh: false, exam: true,
@@ -877,7 +915,7 @@
                 eis: "De student kan in een praktijksituatie bepalen wanneer de politie inbreuk mag maken op grondrechten.",
                 text: "Art. 10: Ieder heeft recht op eerbiediging van zijn persoonlijke levenssfeer.\nArt. 11: Ieder heeft recht op onaantastbaarheid van zijn lichaam.",
                 explanation: "Bescherming van privacy en lichamelijke integriteit. Inbreuk uitsluitend indien bij de wet geregeld.",
-                connection: "WvSv fouilleringsartikelen (art. 55b, 56 Sv)."
+                connection: "WvSv fouilleringsartikelen (Sv art. 55b, 56 Sv)."
             },
             {
                 id: "gw12", law: "Grondwet", article: "Artikel 12", title: "Huisrecht", inMatrix: true, vh: false, exam: false,
@@ -905,7 +943,7 @@
                 eis: "De student kan bepalen of hij inzage van een identiteitsbewijs mag vorderen.",
                 text: "Bevoegd tot vorderen inzage ID-bewijs voor zover dat redelijkerwijs noodzakelijk is voor de uitoefening van de politietaak.",
                 explanation: "Geldt vanaf 14 jaar. Niet voldoen is strafbaar ex art. 447e Sr.",
-                connection: "Wet op de identificatieplicht art. 2."
+                connection: "Wet op de identificatieplicht art. 2 & Sr art. 447e."
             },
             {
                 id: "sr41", law: "Wetboek van Strafrecht", article: "Artikel 41", title: "Noodweer & Noodweerexces", inMatrix: true, vh: true, exam: false,
@@ -930,32 +968,32 @@
                 id: "sr184", law: "Wetboek van Strafrecht", article: "Artikel 184", title: "Niet voldoen aan bevel of vordering", inMatrix: false, vh: false, exam: false,
                 text: "Hij die opzettelijk niet voldoet aan een bevel of vordering, krachtens wettelijk voorschrift gedaan door een ambtenaar...",
                 explanation: "Overtreding bij het weigeren op te volgen van ambtelijke bevelen.",
-                connection: "Politiewet art. 7/8."
+                connection: "Politiewet art. 7 & Politiewet art. 8."
             },
             {
                 id: "sr285", law: "Wetboek van Strafrecht", article: "Artikel 285", title: "Bedreiging", inMatrix: true, vh: true, exam: true,
                 eis: "De student kan bepalen of er sprake is van bedreiging.",
                 text: "Lid 1: Bedreiging met openlijk geweld, misdrijf tegen het leven, gijzeling of zware mishandeling.\nLid 2: Strafverzwaring bij gepleegd tegen ambtenaren in functie.",
                 explanation: "Aangewezen VH-feit (groene tekst). Extra strafverzwaring voor politie.",
-                connection: "Sr art. 67."
+                connection: "Sv art. 67."
             },
             {
                 id: "sr287_289", law: "Wetboek van Strafrecht", article: "Artikel 287 & 289", title: "Doodslag & Moord", inMatrix: true, vh: true, exam: true,
                 text: "Art. 287 (Doodslag): Opzettelijk een ander van het leven beroven.\nArt. 289 (Moord): Opzettelijk en met voorbedachten rade.",
                 explanation: "Aangewezen VH-feiten (paars/groen). Moord vereist 'voorbedachten rade'.",
-                connection: "Sr art. 67."
+                connection: "Sv art. 67."
             },
             {
                 id: "sr300_302", law: "Wetboek van Strafrecht", article: "Artikel 300 & 302", title: "Mishandeling & Zware mishandeling", inMatrix: true, vh: true, exam: true,
                 text: "Art. 300: Mishandeling (poging daartoe is niet strafbaar).\nArt. 302: Zware mishandeling (toebrengen zwaar lichamelijk letsel).",
                 explanation: "Eenvoudige mishandeling is een VH-feit; poging is niet strafbaar gesteld.",
-                connection: "Hoge Raad criteria."
+                connection: "Hoge Raad criteria & Sv art. 67."
             },
             {
                 id: "sr310_311", law: "Wetboek van Strafrecht", article: "Artikel 310 & Artikel 311 (Lid 1 t/m 4)", title: "Diefstal & Gekwalificeerde diefstal", inMatrix: true, vh: true, exam: true,
                 text: "Art. 310: Wegnemen goed met oogmerk van wederrechtelijke toe-eigening.\nArt. 311 lid 4: Diefstal gepleegd gedurende de voor de nachtrust bestemde tijd in een woning of besloten lokaal.",
                 explanation: "Art. 311 lid 4 is een zwaarder gekwalificeerd VH-feit (woninginbraak/nachtelijke diefstal).",
-                connection: "Sr art. 67."
+                connection: "Sv art. 67."
             },
             {
                 id: "sr312", law: "Wetboek van Strafrecht", article: "Artikel 312", title: "Diefstal met geweld (Roofoverval)", inMatrix: true, vh: true, exam: true,
@@ -964,16 +1002,22 @@
                 connection: "Sr art. 317."
             },
             {
+                id: "sr317", law: "Wetboek van Strafrecht", article: "Artikel 317", title: "Afpersing", inMatrix: true, vh: true, exam: false,
+                text: "Hij die, met oogmerk om zich of een ander wederrechtelijk te bevoordelen, door geweld of bedreiging met geweld iemand dwingt tot de afgifte van enig goed.",
+                explanation: "Aangewezen VH-feit met dwang/geweld elementen.",
+                connection: "Sr art. 312."
+            },
+            {
                 id: "sr447e", law: "Wetboek van Strafrecht", article: "Artikel 447e", title: "Niet tonen ID-bewijs", inMatrix: false, vh: false, exam: false,
                 text: "Degene die niet voldoet aan de vordering tot inzage van een identiteitsbewijs, wordt gestraft met geldboete.",
                 explanation: "Overtreding gekoppeld aan Politiewet art. 8.",
-                connection: "Wet op de identificatieplicht."
+                connection: "Politiewet art. 8 & Wet op de identificatieplicht."
             },
             {
                 id: "sv27", law: "Wetboek van Strafvordering", article: "Artikel 27", title: "Definitie verdachte", inMatrix: false, vh: false, exam: false,
                 text: "Als verdachte wordt aangemerkt degene te wiens aanzien uit feiten of omstandigheden een redelijk vermoeden van schuld voortvloeit.",
                 explanation: "Basis voor alle strafvorderlijke bevoegdheden.",
-                connection: "Sv art. 52 & 53."
+                connection: "Sv art. 52 & Sv art. 53."
             },
             {
                 id: "sv27a", law: "Wetboek van Strafvordering", article: "Artikel 27a", title: "Vaststellen personalia verdachte", inMatrix: false, vh: false, exam: false,
@@ -1015,7 +1059,7 @@
                 id: "sv67_67a_67b", law: "Wetboek van Strafvordering", article: "Artikel 67, 67a & 67b", title: "Voorlopige hechtenis (Gronden & Toepassing)", inMatrix: true, vh: true, exam: true,
                 text: "Art. 67: VH-feiten (straf van 4 jaar of meer + specifieke feiten).\nArt. 67a: Gronden (vluchtgevaar, geschokte rechtsorde, recidivegevaar).\nArt. 67b: Geen VH bij uitsluitend geldboete.",
                 explanation: "De wettelijke basis voor IVS en gevangenneming.",
-                connection: "Sr VH-lijst."
+                connection: "Sr art. 311 & Sr art. 312."
             }
         ];
 
@@ -1066,6 +1110,8 @@
                 if (item.vh) badgesHtml += ` <span class="badge badge-vh">VH-feit (Paars)</span>`;
                 if (item.exam) badgesHtml += ` <span class="badge badge-exam">Recente Toets (Groen)</span>`;
 
+                const formattedConnection = formatConnections(item.connection);
+
                 card.innerHTML = `
                     <div class="card-header">
                         <div>
@@ -1080,7 +1126,7 @@
                     ${item.eis ? `<div class="eis-box"><strong>Eis Toetsmatrijs:</strong> ${item.eis}</div>` : ''}
                     <div class="article-text">${item.text}</div>
                     <div class="explanation"><strong>Toelichting:</strong> ${item.explanation}</div>
-                    ${item.connection ? `<div class="connection-box"><strong>Wetsverband:</strong> ${item.connection}</div>` : ''}
+                    ${item.connection ? `<div class="connection-box"><strong>Wetsverband:</strong> ${formattedConnection}</div>` : ''}
                 `;
                 container.appendChild(card);
             });
