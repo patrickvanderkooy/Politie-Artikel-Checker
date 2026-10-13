@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Politie PSI Examen Assistent & Rooster</title>
+    <title>Politie Wetboeken & PSI Examen Assistent</title>
     <!-- PWA / App Manifest instellingen -->
     <meta name="theme-color" content="#1a365d">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Politie PSI">
     <link rel="manifest" href="data:application/manifest+json;charset=utf-8,{
-      %22name%22: %22Politie Toetsmatrijs & Rooster PSI%22,
+      %22name%22: %22Politie Wetboeken & Rooster PSI%22,
       %22short_name%22: %22Politie PSI%22,
       %22start_url%22: %22.%22,
       %22display%22: %22standalone%22,
@@ -45,7 +45,7 @@
             padding: 0.8rem 1rem;
             text-align: center;
             font-size: 0.9rem;
-            display: flex;
+            display: none; /* Standaard verborgen, getoond via JS indien niet eerder gesloten */
             justify-content: space-between;
             align-items: center;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -446,185 +446,32 @@
 
     <div class="install-banner" id="installBanner">
         <span>📲 Wil je deze app als icoontje op je startscherm?</span>
-        <button onclick="showInstallHelp()">Installeer App</button>
+        <div>
+            <button onclick="showInstallHelp()" style="margin-right: 5px;">Installeren</button>
+            <button onclick="dismissInstallBanner()" style="background: transparent; border: 1px solid white; color: white;">Niet meer tonen</button>
+        </div>
     </div>
 
     <header>
-        <h1>Politie PSI Examen Assistent & Rooster</h1>
-        <p>Inclusief Inforooster BPO/LEU/PSI/2639/B, Wetboeken, Toetsmatrijs & Examens</p>
+        <h1>Politie Wetboeken & PSI Examen Assistent</h1>
+        <p>Volledige Artikelenbank (Sr, Sv, Pw, Gw) & Inforooster BPO/LEU/PSI/2639/B</p>
     </header>
 
     <nav>
-        <button class="nav-btn active" onclick="switchTab('rooster-tab', this)">📅 Rooster & Lessen</button>
-        <button class="nav-btn" onclick="switchTab('articles-tab', this)">Artikelenbank</button>
+        <button class="nav-btn active" onclick="switchTab('articles-tab', this)">Artikelenbank (Home)</button>
         <button class="nav-btn" onclick="switchTab('quiz-tab', this)">Toets Quiz</button>
         <button class="nav-btn" onclick="switchTab('flow-tab', this)">Stroomdiagrammen</button>
         <button class="nav-btn" onclick="switchTab('ex1-tab', this)">Examen 1</button>
         <button class="nav-btn" onclick="switchTab('ex2-tab', this)">Examen 2 (Video)</button>
         <button class="nav-btn" onclick="switchTab('ex3-tab', this)">Examen 3 (Presentatie)</button>
         <button class="nav-btn" onclick="switchTab('ex4-tab', this)">Examen 4 (Analyse PV)</button>
+        <button class="nav-btn" onclick="switchTab('rooster-tab', this)">📅 Rooster & Lessen</button>
     </nav>
 
     <div class="container">
 
-        <!-- TAB 0: ROOSTER & LESSEN (NIEUW OP BASIS VAN PDF) -->
-        <div id="rooster-tab" class="tab-content active">
-            <h2 style="color: var(--primary); font-size: 1.25rem; margin-bottom: 0.5rem;">Inforooster BPO/LEU/PSI/2639/B</h2>
-            <p style="color: #64748b; font-size: 0.92rem; margin-bottom: 1.5rem;">Overzicht van lesweken, datums, vakanties, docenten (o.a. Jovanny Bos, Carel Schott) en gekoppelde lesstof uit de opleiding.</p>
-
-            <div class="schedule-card">
-                <div class="card-header">
-                    <div>
-                        <span class="badge badge-exam">Week 39 (21 sep 2026 - 26 sep 2026)</span>
-                        <h3>Start Opleiding & Blok 1 / Blok 3</h3>
-                    </div>
-                </div>
-                <p><strong>Maandag:</strong> Welkom bij PSI opleiding (Jovanny Bos)[span_0](start_span)[span_0](end_span) & Blok 1: Werken bij de Nederlandse politie 1.3[span_1](start_span)[span_1](end_span).<br>
-                <strong>Dinsdag (Online):</strong> Blok 1: Werken bij de Nederlandse Politie 1.2[span_2](start_span)[span_2](end_span) & Blok 3: Rechtmatig handelen / strafrecht 3.1 (Jovanny Bos)[span_3](start_span)[span_3](end_span).</p>
-            </div>
-
-            <div class="schedule-card">
-                <div class="card-header">
-                    <div>
-                        <span class="badge badge-exam">Week 40 (28 sep 2026 - 3 okt 2026)</span>
-                        <h3>Blok 3: Rechtmatig handelen / strafrecht</h3>
-                    </div>
-                </div>
-                <p><strong>Maandag:</strong> Blok 3 / Strafrecht 3.2 & 3.3 (Jovanny Bos, lokaal 101)[span_4](start_span)[span_4](end_span).<br>
-                <strong>Dinsdag (Online):</strong> Blok 3 / Strafrecht 3.2 t/m 3.4 (Jovanny Bos)[span_5](start_span)[span_5](end_span).</p>
-            </div>
-
-            <div class="schedule-card">
-                <div class="card-header">
-                    <div>
-                        <span class="badge badge-exam">Week 41 (5 okt 2026 - 10 okt 2026)</span>
-                        <h3>Blok 2 & Blok 3</h3>
-                    </div>
-                </div>
-                <p><strong>Maandag:</strong> Blok 2 / Prof. beroepsidentiteit en vaardigheden 2.1[span_6](start_span)[span_6](end_span) & Blok 3 / Strafrecht 3.5 (Jovanny Bos)[span_7](start_span)[span_7](end_span).<br>
-                <strong>Dinsdag (Online):</strong> Blok 3 / Strafrecht 3.6 & 3.7 (Jovanny Bos)[span_8](start_span)[span_8](end_span).</p>
-            </div>
-
-            <div class="schedule-card">
-                <div class="card-header">
-                    <div>
-                        <span class="badge badge-exam">Week 42 (12 okt 2026 - 17 okt 2026)</span>
-                        <h3>Blok 2 & Blok 4 (Strafvordering)</h3>
-                    </div>
-                </div>
-                <p><strong>Maandag:</strong> Blok 2 / Prof. beroepsidentiteit en vaardigheden 2.5 (Carel Schott, lokaal 101)[span_9](start_span)[span_9](end_span) & Blok 4 / Strafvordering 4.1-4.2 (Jovanny Bos)[span_10](start_span)[span_10](end_span).<br>
-                <strong>Dinsdag (Online):</strong> Vervolg Blok 4 strafvordering[span_11](start_span)[span_11](end_span).</p>
-            </div>
-
-            <div class="schedule-card" style="border-left: 4px solid #e53e3e;">
-                <div class="card-header">
-                    <div>
-                        <span class="badge badge-vakantie">Herfstavond / Vakantie / Roosterpauze</span>
-                        <h3>Week 43 (19 okt 2026 - 24 okt 2026)</h3>
-                    </div>
-                </div>
-                <p>Geen reguliere lessen ingeroosterd in verband met vakantie/vrije week.</p>
-            </div>
-
-            <div class="schedule-card">
-                <div class="card-header">
-                    <div>
-                        <span class="badge badge-exam">Week 44 (26 okt 2026 - 31 okt 2026)</span>
-                        <h3>Blok 4: Strafvordering & Gastles OvJ</h3>
-                    </div>
-                </div>
-                <p><strong>Maandag:</strong> Gastles OvJ 4.8 (Jovanny Bos, TBA/Gast l. 103)[span_12](start_span)[span_12](end_span) & Strafvordering 4.8[span_13](start_span)[span_13](end_span).<br>
-                <strong>Dinsdag (Online):</strong> Blok 4 / Strafvordering 4.1 t/m 4.8 (Jovanny Bos)[span_14](start_span)[span_14](end_span).</p>
-            </div>
-
-            <div class="schedule-card">
-                <div class="card-header">
-                    <div>
-                        <span class="badge badge-exam">Week 45 (2 nov 2026 - 7 nov 2026)</span>
-                        <h3>Blok 2, Blok 5 & Voorbereiding Simulatie</h3>
-                    </div>
-                </div>
-                <p><strong>Maandag:</strong> Blok 2 / Prof. beroepsidentiteit 2.3 (Jovanny Bos, Carel Schott)[span_15](start_span)[span_15](end_span) & Blok 5 / Overige wet- en regelgeving 5.1-5.3[span_16](start_span)[span_16](end_span).<br>
-                <strong>Dinsdag:</strong> Blok 6 / Specifieke inzet 6.5 (Willem Harmannij)[span_17](start_span)[span_17](end_span) & Voorbereiding Simulatie Blok 3 en 4[span_18](start_span)[span_18](end_span).</p>
-            </div>
-
-            <div class="schedule-card" style="border-left: 4px solid #3182ce;">
-                <div class="card-header">
-                    <div>
-                        <span class="badge badge-matrix">EXAMEN WEEK</span>
-                        <h3>Week 46 (9 nov 2026 - 14 nov 2026)</h3>
-                    </div>
-                </div>
-                <p><strong>Maandag:</strong> Specifieke inzet 6.3 & Simulatie Blok 3/4 (Acteurs aanwezig)[span_19](start_span)[span_19](end_span).<br>
-                <strong>Dinsdag: 🎓 EXAMENPSI (Examenopdracht 1) & Inzage</strong>[span_20](start_span)[span_20](end_span).</p>
-            </div>
-
-            <div class="schedule-card">
-                <div class="card-header">
-                    <div>
-                        <span class="badge badge-exam">Week 47 (16 nov 2026 - 21 nov 2026)</span>
-                        <h3>Blok 6: Specifieke inzet en begrenzing</h3>
-                    </div>
-                </div>
-                <p><strong>Maandag & Dinsdag:</strong> Verdieping Blok 6 (Specifieke inzet en begrenzing 6.3) en online praktijkopdrachten (Jovanny Bos)[span_21](start_span)[span_21](end_span).</p>
-            </div>
-
-            <div class="schedule-card" style="border-left: 4px solid #3182ce;">
-                <div class="card-header">
-                    <div>
-                        <span class="badge badge-matrix">EXAMEN / HERKANSING WEEK</span>
-                        <h3>Week 48 (23 nov 2026 - 28 nov 2026)</h3>
-                    </div>
-                </div>
-                <p><strong>Maandag & Dinsdag:</strong> Blok 6 verdieping (6.4, 6.5, 6.6) met gastdocenten Joyce Engelen en Willem Harmannij[span_22](start_span)[span_22](end_span).<br>
-                <strong>Woensdag: 🔄 1e Herkansing Examen PSI (Examenopdracht 1) & Inzage</strong>[span_23](start_span)[span_23](end_span).</p>
-            </div>
-
-            <div class="schedule-card">
-                <div class="card-header">
-                    <div>
-                        <span class="badge badge-exam">Week 49 (30 nov 2026 - 5 dec 2026)</span>
-                        <h3>Blok 6 & Film RAUW</h3>
-                    </div>
-                </div>
-                <p><strong>Maandag:</strong> Blok 6 / Specifieke inzet en begrenzing & PSI opleiding evaluatie[span_24](start_span)[span_24](end_span).<br>
-                <strong>Dinsdag:</strong> Blok 6 praktijk + Blok 2 / Prof. beroepsidentiteit Film RAUW (Jovanny Bos)[span_25](start_span)[span_25](end_span).</p>
-            </div>
-
-            <div class="schedule-card" style="border-left: 4px solid #3182ce;">
-                <div class="card-header">
-                    <div>
-                        <span class="badge badge-matrix">EXAMEN WEEK</span>
-                        <h3>Week 50 (7 dec 2026 - 12 dec 2026)</h3>
-                    </div>
-                </div>
-                <p><strong>Maandag t/m Dinsdag: 🎓 EXAMEN PSI (Examenopdracht 3 en Examenopdracht 4)</strong> onder toezicht (TBA)[span_26](start_span)[span_26](end_span).</p>
-            </div>
-
-            <div class="schedule-card" style="border-left: 4px solid #e53e3e;">
-                <div class="card-header">
-                    <div>
-                        <span class="badge badge-vakantie">Kerstvakantie</span>
-                        <h3>Week 51 & 53 (Dec 2026 / Jan 2027)</h3>
-                    </div>
-                </div>
-                <p>Kerstvakantie en jaarwisseling. Geen lessen.</p>
-            </div>
-
-            <div class="schedule-card" style="border-left: 4px solid #3182ce;">
-                <div class="card-header">
-                    <div>
-                        <span class="badge badge-matrix">HERKANSINGEN</span>
-                        <h3>Week 52 (21 dec 2026) & Week 54 (4 jan 2027)</h3>
-                    </div>
-                </div>
-                <p><strong>Week 52 (21 dec):</strong> Herkansing Examen PSI (Examenopdracht 3)[span_27](start_span)[span_27](end_span).<br>
-                <strong>Week 54 (4 jan 2027):</strong> Herexamen PSI (Examenopdracht 4 - Jan Horstink)[span_28](start_span)[span_28](end_span).</p>
-            </div>
-        </div>
-
-        <!-- TAB 1: ARTIKELEN EN ZOEKEN -->
-        <div id="articles-tab" class="tab-content">
+        <!-- HOMEPAGE / TAB 1: ARTIKELEN EN ZOEKEN -->
+        <div id="articles-tab" class="tab-content active">
             <div class="search-box">
                 <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
                 <input type="text" id="searchInput" placeholder="Zoek op artikel (bijv. '67b', '311 lid 4', '27a', '184', 'Grondwet 1') of trefwoord..." onkeyup="filterArticles()">
@@ -836,6 +683,162 @@
             </div>
         </div>
 
+        <!-- LAATSTE TAB: ROOSTER & LESSEN -->
+        <div id="rooster-tab" class="tab-content">
+            <h2 style="color: var(--primary); font-size: 1.25rem; margin-bottom: 0.5rem;">Inforooster BPO/LEU/PSI/2639/B</h2>
+            <p style="color: #64748b; font-size: 0.92rem; margin-bottom: 1.5rem;">Overzicht van lesweken, datums, vakanties, docenten (o.a. Jovanny Bos, Carel Schott) en gekoppelde lesstof uit de opleiding.</p>
+
+            <div class="schedule-card">
+                <div class="card-header">
+                    <div>
+                        <span class="badge badge-exam">Week 39 (21 sep 2026 - 26 sep 2026)</span>
+                        <h3>Start Opleiding & Blok 1 / Blok 3</h3>
+                    </div>
+                </div>
+                <p><strong>Maandag:</strong> Welkom bij PSI opleiding (Jovanny Bos)[span_0](start_span)[span_0](end_span) & Blok 1: Werken bij de Nederlandse politie 1.3[span_1](start_span)[span_1](end_span).<br>
+                <strong>Dinsdag (Online):</strong> Blok 1: Werken bij de Nederlandse Politie 1.2[span_2](start_span)[span_2](end_span) & Blok 3: Rechtmatig handelen / strafrecht 3.1 (Jovanny Bos)[span_3](start_span)[span_3](end_span).</p>
+            </div>
+
+            <div class="schedule-card">
+                <div class="card-header">
+                    <div>
+                        <span class="badge badge-exam">Week 40 (28 sep 2026 - 3 okt 2026)</span>
+                        <h3>Blok 3: Rechtmatig handelen / strafrecht</h3>
+                    </div>
+                </div>
+                <p><strong>Maandag:</strong> Blok 3 / Strafrecht 3.2 & 3.3 (Jovanny Bos, lokaal 101)[span_4](start_span)[span_4](end_span).<br>
+                <strong>Dinsdag (Online):</strong> Blok 3 / Strafrecht 3.2 t/m 3.4 (Jovanny Bos)[span_5](start_span)[span_5](end_span).</p>
+            </div>
+
+            <div class="schedule-card">
+                <div class="card-header">
+                    <div>
+                        <span class="badge badge-exam">Week 41 (5 okt 2026 - 10 okt 2026)</span>
+                        <h3>Blok 2 & Blok 3</h3>
+                    </div>
+                </div>
+                <p><strong>Maandag:</strong> Blok 2 / Prof. beroepsidentiteit en vaardigheden 2.1[span_6](start_span)[span_6](end_span) & Blok 3 / Strafrecht 3.5 (Jovanny Bos)[span_7](start_span)[span_7](end_span).<br>
+                <strong>Dinsdag (Online):</strong> Blok 3 / Strafrecht 3.6 & 3.7 (Jovanny Bos)[span_8](start_span)[span_8](end_span).</p>
+            </div>
+
+            <div class="schedule-card">
+                <div class="card-header">
+                    <div>
+                        <span class="badge badge-exam">Week 42 (12 okt 2026 - 17 okt 2026)</span>
+                        <h3>Blok 2 & Blok 4 (Strafvordering)</h3>
+                    </div>
+                </div>
+                <p><strong>Maandag:</strong> Blok 2 / Prof. beroepsidentiteit en vaardigheden 2.5 (Carel Schott, lokaal 101)[span_9](start_span)[span_9](end_span) & Blok 4 / Strafvordering 4.1-4.2 (Jovanny Bos)[span_10](start_span)[span_10](end_span).<br>
+                <strong>Dinsdag (Online):</strong> Vervolg Blok 4 strafvordering[span_11](start_span)[span_11](end_span).</p>
+            </div>
+
+            <div class="schedule-card" style="border-left: 4px solid #e53e3e;">
+                <div class="card-header">
+                    <div>
+                        <span class="badge badge-vakantie">Herfstavond / Vakantie / Roosterpauze</span>
+                        <h3>Week 43 (19 okt 2026 - 24 okt 2026)</h3>
+                    </div>
+                </div>
+                <p>Geen reguliere lessen ingeroosterd in verband met vakantie/vrije week.</p>
+            </div>
+
+            <div class="schedule-card">
+                <div class="card-header">
+                    <div>
+                        <span class="badge badge-exam">Week 44 (26 okt 2026 - 31 okt 2026)</span>
+                        <h3>Blok 4: Strafvordering & Gastles OvJ</h3>
+                    </div>
+                </div>
+                <p><strong>Maandag:</strong> Gastles OvJ 4.8 (Jovanny Bos, TBA/Gast l. 103)[span_12](start_span)[span_12](end_span) & Strafvordering 4.8[span_13](start_span)[span_13](end_span).<br>
+                <strong>Dinsdag (Online):</strong> Blok 4 / Strafvordering 4.1 t/m 4.8 (Jovanny Bos)[span_14](start_span)[span_14](end_span).</p>
+            </div>
+
+            <div class="schedule-card">
+                <div class="card-header">
+                    <div>
+                        <span class="badge badge-exam">Week 45 (2 nov 2026 - 7 nov 2026)</span>
+                        <h3>Blok 2, Blok 5 & Voorbereiding Simulatie</h3>
+                    </div>
+                </div>
+                <p><strong>Maandag:</strong> Blok 2 / Prof. beroepsidentiteit 2.3 (Jovanny Bos, Carel Schott)[span_15](start_span)[span_15](end_span) & Blok 5 / Overige wet- en regelgeving 5.1-5.3[span_16](start_span)[span_16](end_span).<br>
+                <strong>Dinsdag:</strong> Blok 6 / Specifieke inzet 6.5 (Willem Harmannij)[span_17](start_span)[span_17](end_span) & Voorbereiding Simulatie Blok 3 en 4[span_18](start_span)[span_18](end_span).</p>
+            </div>
+
+            <div class="schedule-card" style="border-left: 4px solid #3182ce;">
+                <div class="card-header">
+                    <div>
+                        <span class="badge badge-matrix">EXAMEN WEEK</span>
+                        <h3>Week 46 (9 nov 2026 - 14 nov 2026)</h3>
+                    </div>
+                </div>
+                <p><strong>Maandag:</strong> Specifieke inzet 6.3 & Simulatie Blok 3/4 (Acteurs aanwezig)[span_19](start_span)[span_19](end_span).<br>
+                <strong>Dinsdag: 🎓 EXAMENPSI (Examenopdracht 1) & Inzage</strong>[span_20](start_span)[span_20](end_span).</p>
+            </div>
+
+            <div class="schedule-card">
+                <div class="card-header">
+                    <div>
+                        <span class="badge badge-exam">Week 47 (16 nov 2026 - 21 nov 2026)</span>
+                        <h3>Blok 6: Specifieke inzet en begrenzing</h3>
+                    </div>
+                </div>
+                <p><strong>Maandag & Dinsdag:</strong> Verdieping Blok 6 (Specifieke inzet en begrenzing 6.3) en online praktijkopdrachten (Jovanny Bos)[span_21](start_span)[span_21](end_span).</p>
+            </div>
+
+            <div class="schedule-card" style="border-left: 4px solid #3182ce;">
+                <div class="card-header">
+                    <div>
+                        <span class="badge badge-matrix">EXAMEN / HERKANSING WEEK</span>
+                        <h3>Week 48 (23 nov 2026 - 28 nov 2026)</h3>
+                    </div>
+                </div>
+                <p><strong>Maandag & Dinsdag:</strong> Blok 6 verdieping (6.4, 6.5, 6.6) met gastdocenten Joyce Engelen en Willem Harmannij[span_22](start_span)[span_22](end_span).<br>
+                <strong>Woensdag: 🔄 1e Herkansing Examen PSI (Examenopdracht 1) & Inzage</strong>[span_23](start_span)[span_23](end_span).</p>
+            </div>
+
+            <div class="schedule-card">
+                <div class="card-header">
+                    <div>
+                        <span class="badge badge-exam">Week 49 (30 nov 2026 - 5 dec 2026)</span>
+                        <h3>Blok 6 & Film RAUW</h3>
+                    </div>
+                </div>
+                <p><strong>Maandag:</strong> Blok 6 / Specifieke inzet en begrenzing & PSI opleiding evaluatie[span_24](start_span)[span_24](end_span).<br>
+                <strong>Dinsdag:</strong> Blok 6 praktijk + Blok 2 / Prof. beroepsidentiteit Film RAUW (Jovanny Bos)[span_25](start_span)[span_25](end_span).</p>
+            </div>
+
+            <div class="schedule-card" style="border-left: 4px solid #3182ce;">
+                <div class="card-header">
+                    <div>
+                        <span class="badge badge-matrix">EXAMEN WEEK</span>
+                        <h3>Week 50 (7 dec 2026 - 12 dec 2026)</h3>
+                    </div>
+                </div>
+                <p><strong>Maandag t/m Dinsdag: 🎓 EXAMEN PSI (Examenopdracht 3 en Examenopdracht 4)</strong> onder toezicht (TBA)[span_26](start_span)[span_26](end_span).</p>
+            </div>
+
+            <div class="schedule-card" style="border-left: 4px solid #e53e3e;">
+                <div class="card-header">
+                    <div>
+                        <span class="badge badge-vakantie">Kerstvakantie</span>
+                        <h3>Week 51 & 53 (Dec 2026 / Jan 2027)</h3>
+                    </div>
+                </div>
+                <p>Kerstvakantie en jaarwisseling. Geen lessen.</p>
+            </div>
+
+            <div class="schedule-card" style="border-left: 4px solid #3182ce;">
+                <div class="card-header">
+                    <div>
+                        <span class="badge badge-matrix">HERKANSINGEN</span>
+                        <h3>Week 52 (21 dec 2026) & Week 54 (4 jan 2027)</h3>
+                    </div>
+                </div>
+                <p><strong>Week 52 (21 dec):</strong> Herkansing Examen PSI (Examenopdracht 3)[span_27](start_span)[span_27](end_span).<br>
+                <strong>Week 54 (4 jan 2027):</strong> Herexamen PSI (Examenopdracht 4 - Jan Horstink)[span_28](start_span)[span_28](end_span).</p>
+            </div>
+        </div>
+
     </div>
 
     <footer>
@@ -843,8 +846,22 @@
     </footer>
 
     <script>
+        // Installatiebanner logica (wordt slechts 1x gevraagd dankzij localStorage)
+        window.addEventListener('DOMContentLoaded', () => {
+            const dismissed = localStorage.getItem('pol_install_dismissed');
+            if (!dismissed) {
+                document.getElementById('installBanner').style.display = 'flex';
+            }
+        });
+
+        function dismissInstallBanner() {
+            localStorage.setItem('pol_install_dismissed', 'true');
+            document.getElementById('installBanner').style.display = 'none';
+        }
+
         function showInstallHelp() {
             alert("Om deze app direct op je beginscherm te plaatsen:\n\n- Android (Chrome): Tik rechtsboven op de 3 puntjes (⋮) en kies 'Toevoegen aan startscherm' of 'App installeren'.\n- iPhone (Safari): Tik onderaan op het deel-icoontje (vierkantje met pijl) en kies 'Zet op beginscherm'.");
+            dismissInstallBanner();
         }
 
         const database = [
@@ -1205,6 +1222,7 @@
             document.getElementById('quiz-next-btn').style.display = 'inline-block';
         }
 
+        // Initialiseer de artikelenbank bij openen
         renderArticles(database);
     </script>
 </body>
