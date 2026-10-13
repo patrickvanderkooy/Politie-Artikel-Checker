@@ -268,7 +268,6 @@
             color: #7b341e;
         }
 
-        /* Klikbare links binnen wetverbanden */
         .law-link {
             color: #dd6b20;
             font-weight: bold;
@@ -486,7 +485,7 @@
         <div id="articles-tab" class="tab-content active">
             <div class="search-box">
                 <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
-                <input type="text" id="searchInput" placeholder="Zoek op artikel (bijv. '67b', '311 lid 4', '27a', '184', 'Grondwet 1') of trefwoord..." onkeyup="filterArticles()">
+                <input type="text" id="searchInput" placeholder="Zoek op artikel (bijv. '67b', '311', '52 Sv', '41 Sr') of trefwoord..." onkeyup="filterArticles()">
             </div>
 
             <div class="filters">
@@ -876,7 +875,6 @@
             dismissInstallBanner();
         }
 
-        // Functie om direct naar een artikel te zoeken vanaf een wetverband link
         function searchArticle(term) {
             switchTab('articles-tab', document.getElementById('btn-articles-tab'));
             const searchInput = document.getElementById('searchInput');
@@ -885,20 +883,14 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Helper om tekst om te zetten naar doorklikbare HTML-links voor Wetsverbanden
         function formatConnections(connText) {
             if (!connText) return '';
-            
-            // RegEx koppelingen voor bekende artikelen
             let formatted = connText
                 .replace(/Sr art\. (\d+[a-z]*)/gi, '<span class="law-link" onclick="searchArticle(\'$1\')">Sr art. $1</span>')
                 .replace(/Sv art\. (\d+[a-z]*)/gi, '<span class="law-link" onclick="searchArticle(\'$1\')">Sv art. $1</span>')
                 .replace(/art\. (\d+[a-z]*)\b/gi, '<span class="law-link" onclick="searchArticle(\'$1\')">art. $1</span>')
                 .replace(/Grondwet art\. (\d+)/gi, '<span class="law-link" onclick="searchArticle(\'Grondwet $1\')">Grondwet art. $1</span>')
-                .replace(/Politiewet art\. (\d+)/gi, '<span class="law-link" onclick="searchArticle(\'Artikel $1\')">Politiewet art. $1</span>')
-                .replace(/Awbi art\. ([\d, ]+)/gi, '<span class="law-link" onclick="searchArticle(\'Awbi\')">Awbi art. $1</span>')
-                .replace(/Ambtsinstructie art\. (\d+)/gi, '<span class="law-link" onclick="searchArticle(\'Ambtsinstructie\')">Ambtsinstructie art. $1</span>');
-
+                .replace(/Politiewet art\. (\d+)/gi, '<span class="law-link" onclick="searchArticle(\'Artikel $1\')">Politiewet art. $1</span>');
             return formatted;
         }
 
@@ -907,158 +899,158 @@
                 id: "gw1", law: "Grondwet", article: "Artikel 1", title: "Gelijkheid & Non-discriminatie", inMatrix: true, vh: false, exam: true,
                 eis: "De student kan benoemen in welke wet het gelijkheidsbeginsel is geregeld en hoe wordt omgegaan met discriminatie.",
                 text: "Allen die zich in Nederland bevinden, worden in gelijke gevallen gelijk behandeld. Discriminatie wegens godsdienst, levensovertuiging, politieke gezindheid, ras, geslacht, handicap, seksuele gerichtheid of op welke grond dan ook, is niet toegestaan.",
-                explanation: "Gelijkheidsbeginsel. Gelijke gevallen gelijk behandelen, tenzij onderscheid objectief en wetmatig gerechtvaardigd is.",
-                connection: "Grondwet art. 1 gekoppeld aan Sr art. 44bis en 137c Sr."
+                explanation: "<strong>Uitleg & Toelichting:</strong> Dit is het fundamentele gelijkheidsbeginsel. Overheid en politie mogen burgers in gelijke gevallen niet op oneigenlijke gronden (zoals ras, geslacht of geaardheid) onderscheiden of achterstellen.",
+                connection: "Grondwet art. 1 gekoppeld aan Sr art. 44bis en Sr art. 137c."
             },
             {
                 id: "gw10_11", law: "Grondwet", article: "Artikel 10 & 11", title: "Eerbiediging persoonlijke levenssfeer & Onaantastbaarheid lichaam", inMatrix: true, vh: false, exam: false,
                 eis: "De student kan in een praktijksituatie bepalen wanneer de politie inbreuk mag maken op grondrechten.",
-                text: "Art. 10: Ieder heeft recht op eerbiediging van zijn persoonlijke levenssfeer.\nArt. 11: Ieder heeft recht op onaantastbaarheid van zijn lichaam.",
-                explanation: "Bescherming van privacy en lichamelijke integriteit. Inbreuk uitsluitend indien bij de wet geregeld.",
-                connection: "WvSv fouilleringsartikelen (Sv art. 55b, 56 Sv)."
+                text: "Art. 10: Ieder heeft recht op eerbiediging van zijn persoonlijke levenssfeer, behoudens bij of krachtens de wet te stellen beperkingen.\nArt. 11: Ieder heeft, behoudens bij of krachtens de wet te stellen beperkingen, recht op onaantastbaarheid van zijn lichaam.",
+                explanation: "<strong>Uitleg & Toelichting:</strong> Bescherming van de persoonlijke privacy en het menselijk lichaam. Inbreuk door de politie (zoals fouillering of binnentreden) mag uitsluitend als de wet daar een uitdrukkelijke grondslag voor biedt.",
+                connection: "WvSv fouilleringsartikelen (Sv art. 55b, Sv art. 56)."
             },
             {
                 id: "gw12", law: "Grondwet", article: "Artikel 12", title: "Huisrecht", inMatrix: true, vh: false, exam: false,
                 eis: "De student kan uitleggen onder welke voorwaarden binnentreden in een woning zonder toestemming is toegestaan.",
-                text: "Het binnentreden in een woning zonder toestemming van de bewoner is alleen geoorloofd in de gevallen bij en krachtens de wet bepaald.",
-                explanation: "Zonder toestemming betreden mag bij hulpverlening (Politiewet art. 7 lid 2) of wettelijke bevoegdheid i.c.m. Awbi.",
-                connection: "Politiewet art. 7 lid 2 & Awbi art. 1, 2, 7, 9."
+                text: "Lid 1: Het binnentreden in een woning zonder toestemming van de bewoner is alleen geoorloofd in de gevallen bij en krachtens de wet bepaald, door hen die daartoe bij of krachtens de wet zijn aangewezen.",
+                explanation: "<strong>Uitleg & Toelichting:</strong> Het huisrecht is een zwaarwegend grondrecht. Zonder toestemming van de bewoner mag een woning enkel worden betreden op basis van een wettelijke bevoegdheid (zoals heterdaad, arrestatiebevel of Algemene wet op het binnentreden).",
+                connection: "Politiewet art. 7 en Awbi art. 1, 2, 7, 9."
             },
             {
                 id: "pw3", law: "Politiewet 2012", article: "Artikel 3", title: "Taak van de politie", inMatrix: true, vh: false, exam: false,
                 eis: "De student kan beschrijven wat de taak van de politie is.",
-                text: "De politie heeft tot taak in ondergeschiktheid aan het bevoegd gezag en in overeenstemming met de geldende rechtsregels te zorgen voor de daadwerkelijke handhaving van de rechtsorde en het verlenen van hulp.",
-                explanation: "Bevoegd gezag: Burgemeester (openbare orde) en OvJ (opsporing).",
+                text: "De politie heeft tot taak in ondergeschiktheid aan het bevoegd gezag en in overeenstemming met de geldende rechtsregels te zorgen voor de daadwerkelijke handhaving van de rechtsorde en het verlenen van hulp aan hen die deze behoeven.",
+                explanation: "<strong>Uitleg & Toelichting:</strong> De kern van het politiewerk omvat twee pijlers: strafrechtelijke handhaving onder gezag van de Officier van Justitie / handhaving openbare orde onder gezag van de Burgemeester, en actieve hulpverlening.",
                 connection: "Sv art. 141."
             },
             {
                 id: "pw7_1", law: "Politiewet 2012", article: "Artikel 7 lid 1 & lid 2", title: "Geweldsaanwending & Hulpverlening", inMatrix: true, vh: false, exam: false,
                 eis: "De student kan in een praktijksituatie beoordelen of het gebruik van geweld rechtmatig is.",
-                text: "Lid 1: De ambtenaar is bevoegd tot het gebruik van geweld wanneer het doel dit rechtvaardigt en niet anders bereikt kan worden (proportionaliteit & subsidiariteit).\nLid 2: Verlenen van noodzakelijke hulp.",
-                explanation: "Grondslag voor geweldstoepassing conform de Ambtsinstructie en optreden in woningen bij nood.",
+                text: "Lid 1: De ambtenaar is bevoegd tot het gebruik van geweld wanneer het doel dit rechtvaardigt en dit doel niet op een andere, minder ingrijpende wijze kan worden bereikt (proportionaliteit en subsidiariteit).\nLid 2: Het verlenen van noodzakelijke hulp.",
+                explanation: "<strong>Uitleg & Toelichting:</strong> Geweld mag nooit een doel op zich zijn. Elke geweldstoepassing wordt getoetst aan proportionaliteit (is hetmiddel in verhouding tot het doel?) en subsidiariteit (was er geen zachter alternatief?).",
                 connection: "Ambtsinstructie art. 4."
             },
             {
                 id: "pw8", law: "Politiewet 2012", article: "Artikel 8", title: "Vorderen inzage identiteitsbewijs", inMatrix: true, vh: false, exam: false,
                 eis: "De student kan bepalen of hij inzage van een identiteitsbewijs mag vorderen.",
-                text: "Bevoegd tot vorderen inzage ID-bewijs voor zover dat redelijkerwijs noodzakelijk is voor de uitoefening van de politietaak.",
-                explanation: "Geldt vanaf 14 jaar. Niet voldoen is strafbaar ex art. 447e Sr.",
+                text: "De ambtenaar is bevoegd ter uitoefening van de politietaak inzage te vorderen van een identiteitsbewijs als bedoeld in artikel 1 van de Wet op de identificatieplicht.",
+                explanation: "<strong>Uitleg & Toelichting:</strong> De politie mag op grond van de taakuitoefening altijd naar een ID-bewijs vragen. Dit geldt in Nederland voor eenieder vanaf 14 jaar. Weigering is strafbaar gesteld.",
                 connection: "Wet op de identificatieplicht art. 2 & Sr art. 447e."
             },
             {
                 id: "sr41", law: "Wetboek van Strafrecht", article: "Artikel 41", title: "Noodweer & Noodweerexces", inMatrix: true, vh: true, exam: false,
                 eis: "De student kan bepalen of er sprake is van noodweer of noodweerexces.",
-                text: "Lid 1: Niet strafbaar is het feit behoudens noodzakelijke verdediging tegen ogenblikkelijke, wederrechtelijke aanranding.\nLid 2: Overschrijding van de grenzen door hevige gemoedsbeweging.",
-                explanation: "Noodweer = rechtvaardigingsgrond. Noodweerexces = schulduitsluitingsgrond.",
+                text: "Lid 1: Niet strafbaar is het feit, begaan in noodzakelijke verdediging tegen een ogenblikkelijke, wederrechtelijke aanranding, gericht tegen eigen of een anders lijf, eerbaarheid of goed.\nLid 2: Overschrijding van de grenzen van noodzakelijke verdediging, veroorzaakt door een hevige gemoedsbeweging door de aanranding veroorzaakt.",
+                explanation: "<strong>Uitleg & Toelichting:</strong> Noodweer is een rechtvaardigingsgrond (geen straf omdat het verdedigen geboden was). Noodweerexces is een schulduitsluitingsgrond (de paniek/emotie door de aanval was zo groot dat de verdediging te ver doorschoot).",
                 connection: "Proportionaliteit en subsidiariteit."
             },
             {
                 id: "sr138", law: "Wetboek van Strafrecht", article: "Artikel 138", title: "Huisvredebreuk", inMatrix: true, vh: true, exam: false,
-                text: "Lid 1: Hij die in de woning of het besloten lokaal of erf bij een ander in gebruik, wederrechtelijk binnendringt... wordt gestraft.",
-                explanation: "Aangewezen VH-feit (paars). Actief binnendringen of passief weigeren te vertrekken na vordering.",
+                text: "Lid 1: Hij die in de woning of het besloten lokaal of erf, bij een ander in gebruik, wederrechtelijk binnendringt of, aldaar wederrechtelijk vertoevende, zich niet op de vordering van of vanwege de rechthebbende aanstonds verwijdert, wordt gestraft...",
+                explanation: "<strong>Uitleg & Toelichting:</strong> Dit betreft een formeel VH-feit (paars). Strafbaar is zowel het actief binnendringen als het passief weigeren om weg te gaan na een ambtelijke of eigenaarsvordering.",
                 connection: "Sr art. 370."
             },
             {
                 id: "sr141", law: "Wetboek van Strafrecht", article: "Artikel 141", title: "Openlijke geweldpleging", inMatrix: true, vh: true, exam: false,
                 text: "Lid 1: Zij die openlijk in vereniging geweld plegen tegen personen of goederen, worden gestraft...",
-                explanation: "Aangewezen VH-feit (paars). Groepsaansprakelijkheid bij geweld.",
+                explanation: "<strong>Uitleg & Toelichting:</strong> Paars VH-feit. Groepsaansprakelijkheid: als je je aansluit bij een groep die openlijk geweld pleegt en je distantieert je daar niet van, ben je strafbaar voor het geweld van de hele groep.",
                 connection: "Sr art. 350."
             },
             {
                 id: "sr184", law: "Wetboek van Strafrecht", article: "Artikel 184", title: "Niet voldoen aan bevel of vordering", inMatrix: false, vh: false, exam: false,
-                text: "Hij die opzettelijk niet voldoet aan een bevel of vordering, krachtens wettelijk voorschrift gedaan door een ambtenaar...",
-                explanation: "Overtreding bij het weigeren op te volgen van ambtelijke bevelen.",
+                text: "Lid 1: Hij die opzettelijk niet voldoet aan een bevel of vordering, krachtens wettelijk voorschrift gedaan door een ambtenaar belast met de uitoefening van enig toezicht...",
+                explanation: "<strong>Uitleg & Toelichting:</strong> Een overtreding die van toepassing is wanneer burgers weigeren rechtmatige ambtelijke bevelen (zoals vorderingen op grond van de Politiewet) op te volgen.",
                 connection: "Politiewet art. 7 & Politiewet art. 8."
             },
             {
                 id: "sr285", law: "Wetboek van Strafrecht", article: "Artikel 285", title: "Bedreiging", inMatrix: true, vh: true, exam: true,
                 eis: "De student kan bepalen of er sprake is van bedreiging.",
-                text: "Lid 1: Bedreiging met openlijk geweld, misdrijf tegen het leven, gijzeling of zware mishandeling.\nLid 2: Strafverzwaring bij gepleegd tegen ambtenaren in functie.",
-                explanation: "Aangewezen VH-feit (groene tekst). Extra strafverzwaring voor politie.",
+                text: "Lid 1: Bedreiging met openlijk geweld tegen personen of goederen, met misdrijf tegen het leven gericht, met zware mishandeling of met gijzeling, wordt gestraft...\nLid 2: Strafverzwaring indien gepleegd tegen personen met een publieke taak zoals politieambtenaren.",
+                explanation: "<strong>Uitleg & Toelichting:</strong> Groen/paars VH-feit. De bedreiging moet van dien aard zijn dat bij de bedreigde de redelijke vrees kan ontstaan dat het misdrijf zal worden gepleegd. Extra zware straffen gelden bij agressie tegen hulpverleners.",
                 connection: "Sv art. 67."
             },
             {
                 id: "sr287_289", law: "Wetboek van Strafrecht", article: "Artikel 287 & 289", title: "Doodslag & Moord", inMatrix: true, vh: true, exam: true,
-                text: "Art. 287 (Doodslag): Opzettelijk een ander van het leven beroven.\nArt. 289 (Moord): Opzettelijk en met voorbedachten rade.",
-                explanation: "Aangewezen VH-feiten (paars/groen). Moord vereist 'voorbedachten rade'.",
+                text: "Art. 287 (Doodslag): Hij die opzettelijk een ander van het leven berooft, wordt, als schuldig aan doodslag, gestraft...\nArt. 289 (Moord): Hij die opzettelijk en met voorbedachten rade een ander van het leven berooft, wordt, als schuldig aan moord, gestraft...",
+                explanation: "<strong>Uitleg & Toelichting:</strong> Zware misdrijven en VH-feiten. Het cruciale verschil is 'voorbedachten rade' bij moord: de dader moet tijd hebben gehad om zich te beraden op het besluit, zodat er sprake was van kalm beraad en rustig overleg.",
                 connection: "Sv art. 67."
             },
             {
                 id: "sr300_302", law: "Wetboek van Strafrecht", article: "Artikel 300 & 302", title: "Mishandeling & Zware mishandeling", inMatrix: true, vh: true, exam: true,
-                text: "Art. 300: Mishandeling (poging daartoe is niet strafbaar).\nArt. 302: Zware mishandeling (toebrengen zwaar lichamelijk letsel).",
-                explanation: "Eenvoudige mishandeling is een VH-feit; poging is niet strafbaar gesteld.",
+                text: "Art. 300: Mishandeling wordt gestraft met gevangenisstraf...\nArt. 302: Hij die aan een ander opzettelijk zwaar lichamelijk letsel toebrengt, wordt gestraft als schuldig aan zware mishandeling.",
+                explanation: "<strong>Uitleg & Toelichting:</strong> Eenvoudige mishandeling is een VH-feit. Poging tot eenvoudige mishandeling is niet strafbaar gesteld, maar poging tot zware mishandeling (art. 302 jo. art. 45 Sr) wel.",
                 connection: "Hoge Raad criteria & Sv art. 67."
             },
             {
                 id: "sr310_311", law: "Wetboek van Strafrecht", article: "Artikel 310 & Artikel 311 (Lid 1 t/m 4)", title: "Diefstal & Gekwalificeerde diefstal", inMatrix: true, vh: true, exam: true,
-                text: "Art. 310: Wegnemen goed met oogmerk van wederrechtelijke toe-eigening.\nArt. 311 lid 4: Diefstal gepleegd gedurende de voor de nachtrust bestemde tijd in een woning of besloten lokaal.",
-                explanation: "Art. 311 lid 4 is een zwaarder gekwalificeerd VH-feit (woninginbraak/nachtelijke diefstal).",
+                text: "Art. 310: Hij die wegneemt enig goed dat geheel of ten dele aan een ander toebehoort, met het oogmerk om zich dat wederrechtelijk toe te eigenen, wordt als schuldig aan diefstal gestraft.\nArt. 311 lid 4: Diefstal in een woning gepleegd tijdens de voor de nachtrust bestemde tijd.",
+                explanation: "<strong>Uitleg & Toelichting:</strong> Gronddelict is diefstal (art. 310 Sr). Artikel 311 lid 4 betreft een verzwaarde vorm (woninginbraak / nachtelijke inbraak) en is een expliciet VH-feit (paars).",
                 connection: "Sv art. 67."
             },
             {
                 id: "sr312", law: "Wetboek van Strafrecht", article: "Artikel 312", title: "Diefstal met geweld (Roofoverval)", inMatrix: true, vh: true, exam: true,
-                text: "Diefstal voorafgegaan, vergezeld of gevolgd van geweld tegen personen, gepleegd met het oogmerk om de diefstal voor te bereiden of te gemakkelijken.",
-                explanation: "Zwaar VH-feit.",
+                text: "Diefstal, voorafgegaan, vergezeld of gevolgd van geweld tegen personen, gepleegd met het oogmerk om die diefstal voor te bereiden of te gemakkelijken, of om bij betrapping op heterdaad aan zichzelf of andere deelnemers aan het misdrijf de vlucht mogelijk te maken...",
+                explanation: "<strong>Uitleg & Toelichting:</strong> Een ernstig misdrijf (roofoverval). Zowel geweld vóór, tijdens als direct na de diefstal (om te vluchten) valt hieronder.",
                 connection: "Sr art. 317."
             },
             {
                 id: "sr317", law: "Wetboek van Strafrecht", article: "Artikel 317", title: "Afpersing", inMatrix: true, vh: true, exam: false,
-                text: "Hij die, met oogmerk om zich of een ander wederrechtelijk te bevoordelen, door geweld of bedreiging met geweld iemand dwingt tot de afgifte van enig goed.",
-                explanation: "Aangewezen VH-feit met dwang/geweld elementen.",
+                text: "Hij die, met het oogmerk om zich of een ander wederrechtelijk te bevoordelen, door geweld of bedreiging met geweld iemand dwingt tot de afgifte van enig goed...",
+                explanation: "<strong>Uitleg & Toelichting:</strong> Nauw verwant aan roofoverval, waarbij het slachtoffer door geweld of bedreiging wordt gedwongen zelf goederen af te geven.",
                 connection: "Sr art. 312."
             },
             {
                 id: "sr447e", law: "Wetboek van Strafrecht", article: "Artikel 447e", title: "Niet tonen ID-bewijs", inMatrix: false, vh: false, exam: false,
-                text: "Degene die niet voldoet aan de vordering tot inzage van een identiteitsbewijs, wordt gestraft met geldboete.",
-                explanation: "Overtreding gekoppeld aan Politiewet art. 8.",
+                text: "Degene die niet voldoet aan de vordering tot inzage van een identiteitsbewijs, gedaan krachtens artikel 8 van de Politiewet 2012, wordt gestraft met geldboete.",
+                explanation: "<strong>Uitleg & Toelichting:</strong> Dit is een overtreding. Het vormt de strafbare handhaving achter de vordering van de politie om een identiteitsbewijs te tonen.",
                 connection: "Politiewet art. 8 & Wet op de identificatieplicht."
             },
             {
                 id: "sv27", law: "Wetboek van Strafvordering", article: "Artikel 27", title: "Definitie verdachte", inMatrix: false, vh: false, exam: false,
-                text: "Als verdachte wordt aangemerkt degene te wiens aanzien uit feiten of omstandigheden een redelijk vermoeden van schuld voortvloeit.",
-                explanation: "Basis voor alle strafvorderlijke bevoegdheden.",
+                text: "Lid 1: Als verdachte wordt aangemerkt degene te wiens aanzien uit feiten of omstandigheden een redelijk vermoeden van schuld aan een strafbaar feit voortvloeit.",
+                explanation: "<strong>Uitleg & Toelichting:</strong> Cruciaal wetsartikel. Zonder een 'redelijk vermoeden van schuld' kan iemand juridisch geen verdachte zijn, waardoor strafvorderlijke dwangmiddelen (zoals staandehouding of aanhouding) onrechtmatig zijn.",
                 connection: "Sv art. 52 & Sv art. 53."
             },
             {
                 id: "sv27a", law: "Wetboek van Strafvordering", article: "Artikel 27a", title: "Vaststellen personalia verdachte", inMatrix: false, vh: false, exam: false,
-                text: "Onder de verdachte wordt verstaan degene aan wie personalia worden gevraagd: naam, voornamen, geboortedatum, geboorteplaats, adres en woonplaats.",
-                explanation: "Gekoppeld aan staandehouding.",
+                text: "Onder de verdachte wordt mede verstaan degene aan wie in het kader van de opsporing door een opsporingsambtenaar op grond van een wettelijk voorschrift opgave wordt gevraagd van zijn personalia.",
+                explanation: "<strong>Uitleg & Toelichting:</strong> Geeft de wettelijke reikwijdte aan voor het vragen van naam, voornamen, geboortedatum, geboorteplaats, adres en woonplaats.",
                 connection: "Sv art. 52."
             },
             {
                 id: "sv29", law: "Wetboek van Strafvordering", article: "Artikel 29", title: "Zwijgrecht & Cautie", inMatrix: false, vh: false, exam: false,
-                text: "Lid 1: De verdachte is niet verplicht te antwoorden. Vóór het verhoor wordt hem medegedeeld dat hij niet tot antwoorden verplicht is (cautie).",
-                explanation: "Fundamenteel vormvoorschrift bij elk verhoor.",
+                text: "Lid 1: In alle gevallen waarin de verdachte wordt gehoord, draagt de ambtenaar er zorg voor dat de verdachte niet tot antwoorden wordt verplicht.\nLid 2: Vóór het verhoor wordt de verdachte medegedeeld dat hij niet verplicht is te antwoorden (cautie).",
+                explanation: "<strong>Uitleg & Toelichting:</strong> Fundamenteel vormvoorschrift. Vóór elke vraag over een strafbaar feit moet de cautie ('U bent niet verplicht te antwoorden...') worden medegedeeld.",
                 connection: "EVRM art. 6."
             },
             {
                 id: "sv52", law: "Wetboek van Strafvordering", article: "Artikel 52", title: "Staandehouding", inMatrix: true, vh: false, exam: false,
-                text: "In geval van ontdekking op heterdaad of wanneer er een redelijk vermoeden van schuld is, is iedere opsporingsambtenaar bevoegd de verdachte staande te houden ter vaststelling van diens identiteit.",
-                explanation: "Alleen op een verdachte toegepast.",
+                text: "In geval van ontdekking op heterdaad van een strafbaar feit, is eenieder bevoegd, en in geval van verdacht zijn van een strafbaar feit is de opsporingsambtenaar bevoegd, de verdachte staande te houden ter vaststelling van diens identiteit.",
+                explanation: "<strong>Uitleg & Toelichting:</strong> Staandehouding is het op straat staande houden van een verdachte om zijn personalia te controleren. Het is géén vrijheidsbeneming om hem mee te nemen naar het bureau.",
                 connection: "Sv art. 27a."
             },
             {
                 id: "sv53_54", law: "Wetboek van Strafvordering", article: "Artikel 53 & 54", title: "Aanhouding (Heterdaad & Buiten heterdaad)", inMatrix: true, vh: false, exam: false,
-                text: "Art. 53 lid 1: In geval van ontdekking op heterdaad is eenieder bevoegd de verdachte aan te houden.\nArt. 54 lid 1: Buiten heterdaad is de opsporingsambtenaar bevoegd tot aanhouding op schriftelijk bevel van de OvJ bij VH-feiten.",
-                explanation: "Heterdaad = iedereen. Buiten heterdaad = bevel OvJ bij VH-feiten.",
+                text: "Art. 53 lid 1: In geval van ontdekking op heterdaad is eenieder bevoegd de verdachte aan te houden.\nArt. 54 lid 1: Buiten heterdaad is de opsporingsambtenaar bevoegd tot aanhouding op schriftelijk bevel van de Officier van Justitie bij VH-feiten.",
+                explanation: "<strong>Uitleg & Toelichting:</strong> Heterdaad geeft iedereen aanhoudingsbevoegdheid (wel verplicht tot onmiddellijke overdracht aan politie). Buiten heterdaad mag uitsluitend door opsporingsambtenaren op bevel van de OvJ bij voorlopige hechtenis feiten.",
                 connection: "Sv art. 67."
             },
             {
                 id: "sv56a_b", law: "Wetboek van Strafvordering", article: "Artikel 56a & 56b", title: "Ophouden voor onderzoek & Identificatie", inMatrix: true, vh: true, exam: true,
-                text: "Art. 56a: Ophouden duurt max 6 uur (geen VH) of 9 uur (wel VH). Nachturen (00:00 - 09:00) tellen niet mee.\nArt. 56b: Verlenging identificatie met max 6 uur bij niet-VH feiten op bevel OvJ.",
-                explanation: "Essentiële termijnregeling uit de toetsmatrijs.",
+                text: "Art. 56a: De verdachte kan worden opgehouden voor onderzoek gedurende ten hoogste negen uren indien het een VH-feit betreft (of zes uren bij andere feiten). De nachtelijke uren (00:00 tot 09:00) tellen niet mee.",
+                explanation: "<strong>Uitleg & Toelichting:</strong> Strenge termijnregeling voor het ophouden op het politiebureau voor verhoor en onderzoek. Let op de uitsluiting van de nachturen!",
                 connection: "Sv art. 57."
             },
             {
                 id: "sv57_58", law: "Wetboek van Strafvordering", article: "Artikel 57 & 58", title: "Inverzekeringstelling (IVS)", inMatrix: true, vh: true, exam: true,
-                text: "Art. 57: Bevoegdheid (H)OvJ tot IVS na verhoor bij VH-feiten.\nArt. 58: Duur is maximaal 3 dagen, eenmaal met 3 dagen te verlengen.",
-                explanation: "Vrijheidsbeneming in het belang van het onderzoek.",
-                connection: "Sv art. 67, 67a, 67b."
+                text: "Art. 57: De officier van justitie is bevoegd tot inverzekeringstelling te bevelen van de verdachte in het belang van het onderzoek bij een VH-feit na verhoor.\nArt. 58: De inverzekeringstelling duurt ten hoogste drie dagen.",
+                explanation: "<strong>Uitleg & Toelichting:</strong> Volgende stap na aanhouding en ophouden. Mag alleen door de OvJ worden bevolen bij misdrijven waarvoor voorlopige hechtenis is toegestaan. Kan 1x met 3 dagen worden verlengd.",
+                connection: "Sv art. 67, Sv art. 67a, Sv art. 67b."
             },
             {
                 id: "sv67_67a_67b", law: "Wetboek van Strafvordering", article: "Artikel 67, 67a & 67b", title: "Voorlopige hechtenis (Gronden & Toepassing)", inMatrix: true, vh: true, exam: true,
-                text: "Art. 67: VH-feiten (straf van 4 jaar of meer + specifieke feiten).\nArt. 67a: Gronden (vluchtgevaar, geschokte rechtsorde, recidivegevaar).\nArt. 67b: Geen VH bij uitsluitend geldboete.",
-                explanation: "De wettelijke basis voor IVS en gevangenneming.",
+                text: "Art. 67: Voorlopige hechtenis is mogelijk bij feiten waarop naar de wettelijke omschrijving gevangenisstraf van vier jaren of meer staat, alsmede bij specifiek aangewezen misdrijven.\nArt. 67a: Gronden zoals vluchtgevaar of ernstige schok van de rechtsorde.",
+                explanation: "<strong>Uitleg & Toelichting:</strong> De basislijst van VH-feiten (vaak paars gemarkeerd in examens). Kan alleen worden ingezet als er aan de specifieke wettelijke gronden van artikel 67a wordt voldaan.",
                 connection: "Sr art. 311 & Sr art. 312."
             }
         ];
@@ -1097,7 +1089,7 @@
             resultsInfo.textContent = `${items.length} artikel(en) weergegeven`;
 
             if (items.length === 0) {
-                container.innerHTML = `<div class="card" style="text-align:center; padding:2rem;">Geen resultaten gevonden. Probeer een ander zoekwoord (bijv. '67b' of '311').</div>`;
+                container.innerHTML = `<div class="card" style="text-align:center; padding:2rem;">Geen resultaten gevonden. Probeer een ander zoekwoord (bijv. '67b', '311', '52').</div>`;
                 return;
             }
 
@@ -1125,7 +1117,7 @@
                     </div>
                     ${item.eis ? `<div class="eis-box"><strong>Eis Toetsmatrijs:</strong> ${item.eis}</div>` : ''}
                     <div class="article-text">${item.text}</div>
-                    <div class="explanation"><strong>Toelichting:</strong> ${item.explanation}</div>
+                    <div class="explanation">${item.explanation}</div>
                     ${item.connection ? `<div class="connection-box"><strong>Wetsverband:</strong> ${formattedConnection}</div>` : ''}
                 `;
                 container.appendChild(card);
@@ -1200,7 +1192,7 @@
                     "Alleen indien de verdachte niet meewerkt aan identificatie"
                 ];
             } else if (questionType === 1) {
-                questionText = `<strong>Wettekst Herkenning:</strong> Welk wetsartikel uit de toetsmatrijs hoort exact bij deze bepaling of omschrijving?<br><em>"${item.text}"</em>`;
+                questionText = `<strong>Wettekst Herkenning:</strong> Welk wetsartikel uit de toetsmatrijs hoort exact bij deze bepaling of omschrijving?<br><em>"${item.text.substring(0, 90)}..."</em>`;
                 correctAnswer = `${item.law} - ${item.article}: ${item.title}`;
                 
                 const otherItems = matrixItems.filter(d => d.id !== item.id).sort(() => 0.5 - Math.random());
