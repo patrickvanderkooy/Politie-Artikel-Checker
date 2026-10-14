@@ -901,6 +901,7 @@
                 .replace(/Politiewet art\. (\d+)/gi, '<a class="law-link" onclick="searchArticle(\'Artikel $1\')">Politiewet art. $1</a>');
         }
 
+        // VOLLEDIGE OFFICIELE TOETSMATRIJS PSI (SR, SV, PW, GW, AWBI) INCLUSIEF TOELICHTINGEN EN EISEN
         const database = [
             {
                 id: "gw1", law: "Grondwet", article: "Artikel 1", title: "Gelijkheid & Non-discriminatie", inMatrix: true, vh: false, exam: true,
@@ -1544,7 +1545,6 @@
         let questionCount = 0;
         let askedQuestionIds = [];
 
-        // Uitgebreide generator met dynamische variaties om te voldoen aan 250+ unieke examen- en praktijkvragen
         function generateQuestion() {
             document.getElementById('quiz-feedback').style.display = 'none';
             document.getElementById('quiz-next-btn').style.display = 'none';
@@ -1552,7 +1552,6 @@
             let matrixItems = database.filter(d => d.inMatrix);
             const item = matrixItems[Math.floor(Math.random() * matrixItems.length)];
 
-            // Genereer verschillende vraagstellingen op basis van item ID en randomizer
             const subVariant = Math.floor(Math.random() * 5);
             let questionText = "";
             let correctAnswer = "";
