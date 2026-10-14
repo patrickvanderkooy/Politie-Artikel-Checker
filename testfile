@@ -95,11 +95,16 @@
             opacity: 0.85;
         }
 
-        .dark-toggle {
+        .header-btns {
             position: absolute;
-            right: 1rem;
+            right: 0.8rem;
             top: 50%;
             transform: translateY(-50%);
+            display: flex;
+            gap: 0.4rem;
+        }
+
+        .dark-toggle, .back-btn-header {
             background: rgba(255, 255, 255, 0.2);
             border: none;
             color: white;
@@ -108,6 +113,14 @@
             cursor: pointer;
             font-size: 0.85rem;
             font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .back-btn-header:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
         }
 
         nav {
@@ -524,20 +537,23 @@
     <header>
         <h1>Politie Wetboeken & PSI Examen Assistent</h1>
         <p>Artikelenbank, Stroomdiagrammen, PV Checklist, Casus Generator & Rooster BPO/LEU/PSI/2639/B</p>
-        <button class="dark-toggle" onclick="toggleDarkMode()" id="darkModeBtn">🌙 Dark</button>
+        <div class="header-btns">
+            <button class="back-btn-header" id="backBtn" onclick="goBackHistory()" disabled title="Ga naar vorige pagina/zoekopdracht">↩️ Vorige</button>
+            <button class="dark-toggle" onclick="toggleDarkMode()" id="darkModeBtn">🌙 Dark</button>
+        </div>
     </header>
 
     <nav>
         <button class="nav-btn active" id="btn-articles-tab" onclick="switchTab('articles-tab', this)">Artikelenbank</button>
-        <button class="nav-btn" onclick="switchTab('quiz-tab', this)">Toets Quiz</button>
-        <button class="nav-btn" onclick="switchTab('flow-tab', this)">Stroomdiagrammen</button>
-        <button class="nav-btn" onclick="switchTab('pv-tab', this)">📋 PV Stevigheidstoets</button>
-        <button class="nav-btn" onclick="switchTab('scenario-tab', this)">💡 Casus Generator</button>
-        <button class="nav-btn" onclick="switchTab('ex1-tab', this)">Examen 1</button>
-        <button class="nav-btn" onclick="switchTab('ex2-tab', this)">Examen 2 (Video)</button>
-        <button class="nav-btn" onclick="switchTab('ex3-tab', this)">Examen 3 (Presentatie)</button>
-        <button class="nav-btn" onclick="switchTab('ex4-tab', this)">Examen 4 (Analyse PV)</button>
-        <button class="nav-btn" onclick="switchTab('rooster-tab', this)">📅 Rooster</button>
+        <button class="nav-btn" id="btn-quiz-tab" onclick="switchTab('quiz-tab', this)">Toets Quiz</button>
+        <button class="nav-btn" id="btn-flow-tab" onclick="switchTab('flow-tab', this)">Stroomdiagrammen</button>
+        <button class="nav-btn" id="btn-pv-tab" onclick="switchTab('pv-tab', this)">📋 PV Stevigheidstoets</button>
+        <button class="nav-btn" id="btn-scenario-tab" onclick="switchTab('scenario-tab', this)">💡 Casus Generator</button>
+        <button class="nav-btn" id="btn-ex1-tab" onclick="switchTab('ex1-tab', this)">Examen 1</button>
+        <button class="nav-btn" id="btn-ex2-tab" onclick="switchTab('ex2-tab', this)">Examen 2 (Video)</button>
+        <button class="nav-btn" id="btn-ex3-tab" onclick="switchTab('ex3-tab', this)">Examen 3 (Presentatie)</button>
+        <button class="nav-btn" id="btn-ex4-tab" onclick="switchTab('ex4-tab', this)">Examen 4 (Analyse PV)</button>
+        <button class="nav-btn" id="btn-rooster-tab" onclick="switchTab('rooster-tab', this)">📅 Rooster</button>
     </nav>
 
     <div class="container">
@@ -546,7 +562,7 @@
         <div id="articles-tab" class="tab-content active">
             <div class="search-box">
                 <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
-                <input type="text" id="searchInput" placeholder="Zoek op artikel (bijv. '310 Sr', '27a Sv', 'Ambtsinstructie', 'Opiumwet') of trefwoord..." onkeyup="filterArticles()">
+                <input type="text" id="searchInput" placeholder="Zoek op artikel (bijv. '52', '310 Sr', '27a Sv', 'Opiumwet') of trefwoord..." onkeyup="filterArticles()">
             </div>
 
             <div class="filters">
@@ -590,21 +606,21 @@
                     • <strong>Staandehouding (Art. 52 Sv):</strong> Alleen bij een <em>verdachte</em> (art. 27 Sv) ter vaststelling van personalia (art. 27a Sv).
                 </div>
                 <div class="flow-dropdown-container">
-                    <select class="flow-dropdown" onchange="if(this.value) searchArticle(this.value)">
+                    <select class="flow-dropdown" onchange="if(this.value) { searchArticle(this.value); this.value=''; }">
                         <option value="">-- Ga naar: Politiewet Art. 3 (Taak politie) --</option>
-                        <option value="Artikel 3">Politiewet Art. 3 (Taak politie)</option>
+                        <option value="3 Politiewet">Politiewet Art. 3 (Taak politie)</option>
                     </select>
-                    <select class="flow-dropdown" onchange="if(this.value) searchArticle(this.value)">
+                    <select class="flow-dropdown" onchange="if(this.value) { searchArticle(this.value); this.value=''; }">
                         <option value="">-- Ga naar: Politiewet Art. 8 (Vorderen ID) --</option>
-                        <option value="Artikel 8">Politiewet Art. 8 (Vorderen ID)</option>
+                        <option value="8 Politiewet">Politiewet Art. 8 (Vorderen ID)</option>
                     </select>
-                    <select class="flow-dropdown" onchange="if(this.value) searchArticle(this.value)">
+                    <select class="flow-dropdown" onchange="if(this.value) { searchArticle(this.value); this.value=''; }">
                         <option value="">-- Ga naar: Sv Art. 52 (Staandehouding) --</option>
-                        <option value="Artikel 52">Sv Art. 52 (Staandehouding)</option>
+                        <option value="52">Sv Art. 52 (Staandehouding)</option>
                     </select>
-                    <select class="flow-dropdown" onchange="if(this.value) searchArticle(this.value)">
+                    <select class="flow-dropdown" onchange="if(this.value) { searchArticle(this.value); this.value=''; }">
                         <option value="">-- Ga naar: Sv Art. 27a (Personalia) --</option>
-                        <option value="Artikel 27a">Sv Art. 27a (Personalia)</option>
+                        <option value="27a">Sv Art. 27a (Personalia)</option>
                     </select>
                 </div>
             </div>
@@ -619,13 +635,13 @@
                     • <strong>Veiligheidsfouillering (Politiewet Art. 7 lid 3):</strong> Onderzoek aan kleding direct op straat bij een onmiddellijk dreigend gevaar voor leven of veiligheid.
                 </div>
                 <div class="flow-dropdown-container">
-                    <select class="flow-dropdown" onchange="if(this.value) searchArticle(this.value)">
+                    <select class="flow-dropdown" onchange="if(this.value) { searchArticle(this.value); this.value=''; }">
                         <option value="">-- Ga naar: Sv Art. 53 & 54 (Aanhouding) --</option>
-                        <option value="Artikel 53">Sv Art. 53 & 54 (Aanhouding)</option>
+                        <option value="53">Sv Art. 53 & 54 (Aanhouding)</option>
                     </select>
-                    <select class="flow-dropdown" onchange="if(this.value) searchArticle(this.value)">
+                    <select class="flow-dropdown" onchange="if(this.value) { searchArticle(this.value); this.value=''; }">
                         <option value="">-- Ga naar: Politiewet Art. 7 lid 3 (Veiligheidsfouillering) --</option>
-                        <option value="Politiewet Art. 7">Politiewet Art. 7 lid 3 (Veiligheidsfouillering)</option>
+                        <option value="7 Politiewet">Politiewet Art. 7 lid 3 (Veiligheidsfouillering)</option>
                     </select>
                 </div>
             </div>
@@ -640,17 +656,17 @@
                     • <strong>Vervoers- en Insluitingsfouillering (Politiewet Art. 7 lid 4):</strong> Verplicht onderzoek aan kleding op gevaarlijke voorwerpen voor transport en celinsluiting.
                 </div>
                 <div class="flow-dropdown-container">
-                    <select class="flow-dropdown" onchange="if(this.value) searchArticle(this.value)">
+                    <select class="flow-dropdown" onchange="if(this.value) { searchArticle(this.value); this.value=''; }">
                         <option value="">-- Ga naar: Sv Art. 55 (Overbrenging) --</option>
-                        <option value="Artikel 55">Sv Art. 55 (Overbrenging)</option>
+                        <option value="55">Sv Art. 55 (Overbrenging)</option>
                     </select>
-                    <select class="flow-dropdown" onchange="if(this.value) searchArticle(this.value)">
+                    <select class="flow-dropdown" onchange="if(this.value) { searchArticle(this.value); this.value=''; }">
                         <option value="">-- Ga naar: Sv Art. 94 (Inbeslagneming) --</option>
-                        <option value="Artikel 94">Sv Art. 94 (Inbeslagneming)</option>
+                        <option value="94">Sv Art. 94 (Inbeslagneming)</option>
                     </select>
-                    <select class="flow-dropdown" onchange="if(this.value) searchArticle(this.value)">
+                    <select class="flow-dropdown" onchange="if(this.value) { searchArticle(this.value); this.value=''; }">
                         <option value="">-- Ga naar: Politiewet Art. 7 lid 4 (Vervoersfouillering) --</option>
-                        <option value="Politiewet Art. 7">Politiewet Art. 7 lid 4 (Vervoersfouillering)</option>
+                        <option value="7 Politiewet">Politiewet Art. 7 lid 4 (Vervoersfouillering)</option>
                     </select>
                 </div>
             </div>
@@ -665,21 +681,21 @@
                     • <strong>De Cautie (Art. 29 Sv):</strong> Vóór de aanvang van elk verhoor verplicht mededelen dat de verdachte niet tot antwoorden verplicht is (zwijgrecht).
                 </div>
                 <div class="flow-dropdown-container">
-                    <select class="flow-dropdown" onchange="if(this.value) searchArticle(this.value)">
+                    <select class="flow-dropdown" onchange="if(this.value) { searchArticle(this.value); this.value=''; }">
                         <option value="">-- Ga naar: Sv Art. 56a (Ophouden voor onderzoek) --</option>
-                        <option value="Artikel 56a">Sv Art. 56a (Ophouden voor onderzoek)</option>
+                        <option value="56a">Sv Art. 56a (Ophouden voor onderzoek)</option>
                     </select>
-                    <select class="flow-dropdown" onchange="if(this.value) searchArticle(this.value)">
+                    <select class="flow-dropdown" onchange="if(this.value) { searchArticle(this.value); this.value=''; }">
                         <option value="">-- Ga naar: Sv Art. 27c (Rechten verdachte) --</option>
-                        <option value="Artikel 27c">Sv Art. 27c (Rechten verdachte)</option>
+                        <option value="27c">Sv Art. 27c (Rechten verdachte)</option>
                     </select>
-                    <select class="flow-dropdown" onchange="if(this.value) searchArticle(this.value)">
+                    <select class="flow-dropdown" onchange="if(this.value) { searchArticle(this.value); this.value=''; }">
                         <option value="">-- Ga naar: Sv Art. 29 (Zwijgrecht & Cautie) --</option>
-                        <option value="Artikel 29">Sv Art. 29 (Zwijgrecht & Cautie)</option>
+                        <option value="29">Sv Art. 29 (Zwijgrecht & Cautie)</option>
                     </select>
-                    <select class="flow-dropdown" onchange="if(this.value) searchArticle(this.value)">
+                    <select class="flow-dropdown" onchange="if(this.value) { searchArticle(this.value); this.value=''; }">
                         <option value="">-- Ga naar: Sv Art. 28 (Rechtsbijstand) --</option>
-                        <option value="Artikel 28">Sv Art. 28 (Rechtsbijstand)</option>
+                        <option value="28">Sv Art. 28 (Rechtsbijstand)</option>
                     </select>
                 </div>
             </div>
@@ -692,19 +708,19 @@
                     • <strong>Inverzekeringstelling (Art. 57 & 58 Sv):</strong> Bevoegdheid van de (H)OvJ na verhoor. Uitsluitend bij VH-feiten. Duur: max 3 dagen, 1x te verlengen met 3 dagen.
                 </div>
                 <div class="flow-dropdown-container">
-                    <select class="flow-dropdown" onchange="if(this.value) searchArticle(this.value)">
+                    <select class="flow-dropdown" onchange="if(this.value) { searchArticle(this.value); this.value=''; }">
                         <option value="">-- Ga naar: Sv Art. 57 & 58 (Inverzekeringstelling) --</option>
-                        <option value="Artikel 57">Sv Art. 57 & 58 (Inverzekeringstelling)</option>
+                        <option value="57">Sv Art. 57 & 58 (Inverzekeringstelling)</option>
                     </select>
-                    <select class="flow-dropdown" onchange="if(this.value) searchArticle(this.value)">
+                    <select class="flow-dropdown" onchange="if(this.value) { searchArticle(this.value); this.value=''; }">
                         <option value="">-- Ga naar: Sv Art. 67 (Voorlopige hechtenis) --</option>
-                        <option value="Artikel 67">Sv Art. 67 (Voorlopige hechtenis)</option>
+                        <option value="67">Sv Art. 67 (Voorlopige hechtenis)</option>
                     </select>
                 </div>
             </div>
         </div>
 
-        <!-- TAB 4: PV STEVIGHEIDSTOETS (NIEUW) -->
+        <!-- TAB 4: PV STEVIGHEIDSTOETS -->
         <div id="pv-tab" class="tab-content">
             <div class="exam-card">
                 <h3>📋 Proces-verbaal (PV) Stevigheidstoets & Checklist</h3>
@@ -738,7 +754,7 @@
             </div>
         </div>
 
-        <!-- TAB 5: CASUS GENERATOR (NIEUW) -->
+        <!-- TAB 5: CASUS GENERATOR -->
         <div id="scenario-tab" class="tab-content">
             <div class="exam-card">
                 <h3>💡 Praktijk Casus & Scenario Generator</h3>
@@ -1033,6 +1049,59 @@
     </footer>
 
     <script>
+        // NAVIGATIE GESCHIEDENIS SYSTEEM
+        let historyStack = [];
+        let currentTabId = 'articles-tab';
+
+        function recordHistoryState() {
+            const currentSearch = document.getElementById('searchInput') ? document.getElementById('searchInput').value : '';
+            historyStack.push({
+                tabId: currentTabId,
+                searchQuery: currentSearch
+            });
+            if (historyStack.length > 20) historyStack.shift(); // Max 20 stappen
+            document.getElementById('backBtn').disabled = historyStack.length <= 1;
+        }
+
+        function goBackHistory() {
+            if (historyStack.length <= 1) return;
+            // Verwijder huidige staat
+            historyStack.pop();
+            // Pak vorige staat
+            const previousState = historyStack[historyStack.length - 1];
+            
+            if (previousState) {
+                const targetBtn = document.getElementById(`btn-${previousState.tabId}`);
+                switchTabInternal(previousState.tabId, targetBtn, false);
+                if (previousState.tabId === 'articles-tab') {
+                    const searchInput = document.getElementById('searchInput');
+                    searchInput.value = previousState.searchQuery;
+                    filterArticles();
+                }
+            }
+            document.getElementById('backBtn').disabled = historyStack.length <= 1;
+        }
+
+        function switchTab(tabId, btn) {
+            switchTabInternal(tabId, btn, true);
+        }
+
+        function switchTabInternal(tabId, btn, record = true) {
+            currentTabId = tabId;
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            if (btn) btn.classList.add('active');
+
+            if (record) {
+                recordHistoryState();
+            }
+
+            if (tabId === 'quiz-tab') {
+                generateQuestion();
+            }
+        }
+
         window.addEventListener('DOMContentLoaded', () => {
             const dismissed = localStorage.getItem('pol_install_dismissed');
             if (!dismissed) {
@@ -1043,6 +1112,8 @@
                 document.body.classList.add('dark-mode');
                 document.getElementById('darkModeBtn').textContent = '☀️ Light';
             }
+            // Meteen eerste staat vastleggen
+            recordHistoryState();
         });
 
         function toggleDarkMode() {
@@ -1129,7 +1200,7 @@
             }
         }
 
-        // VOLLEDIGE ARTIKELENBANK (TOETSMATRIJS + AMBTSINSTRUCTIE + PRAKTIJK)
+        // VOLLEDIGE ARTIKELENBANK
         const database = [
             // --- GRONDWET ---
             {
@@ -1142,7 +1213,7 @@
             {
                 id: "gw10_11", law: "Grondwet", article: "Art. 10 & 11", title: "Eerbiediging persoonlijke levenssfeer & Onaantastbaarheid lichaam", inMatrix: true, vh: false, exam: false,
                 eis: "De student kan in een praktijksituatie bepalen wanneer de politie bij het uitvoeren van haar taken inbreuk mag maken op rechten uit de Grondwet.",
-                text: "Art. 10. Ieder heeft, behoudens bij of krachtens de wet te stellen beperkingen, recht op eerbiediging van zijn persoonlijke levenssfeer.\nArt. 11. Ieder heeft, behoudens bij of krachtens de wet te stellen beperkingen, recht op onaantastbaarheid van zijn lichaam.",
+                text: "Art. 10. Ieder heeft, behoudens bij of krachtens de wet te stellen beperkingen, recht op eerbiediging van zijn persoonlijke levenssfeer.\nArt. 11. Ieder heeft, behoudens bij en krachtens de wet te stellen beperkingen, recht op onaantastbaarheid van zijn lichaam.",
                 explanation: "Toelichting: Grondrechten die de privacy en het lichaam beschermen. Inbreuk door politie is alleen toegestaan op basis van een specifieke wettelijke grondslag.",
                 connection: "AVG, WPG, WvSv dwangmiddelen."
             },
@@ -1163,7 +1234,7 @@
 
             // --- POLITIEWET 2012 & AMBTSINSTRUCTIE ---
             {
-                id: "pw2_3", law: "Politiewet 2012", article: "Art. 2 & 3", title: "Ambtenaren van politie & Taak politie", inMatrix: true, vh: false, exam: false,
+                id: "pw2_3", law: "Politiewet 2012", article: "Art. 3", title: "Ambtenaren van politie & Taak politie", inMatrix: true, vh: false, exam: false,
                 eis: "De student kan beschrijven wie volgens de wet als ambtenaren van politie worden beschouwd en wat de taak van de politie is.",
                 text: "Art. 3: De politie heeft tot taak in ondergeschiktheid aan het bevoegd gezag en in overeenstemming met de geldende rechtsregels te zorgen voor de daadwerkelijke handhaving van de rechtsorde en het verlenen van hulp aan hen die deze behoeven.",
                 explanation: "Toelichting: Kernopdracht: handhaving rechtsorde (strafrecht & openbare orde) én hulpverlening.",
@@ -1177,31 +1248,17 @@
                 connection: "Politiewet art. 3."
             },
             {
-                id: "pw7_1_2", law: "Politiewet 2012", article: "Art. 7 lid 1 & lid 2", title: "Bevoegdheden geweld & Toegang ter hulpverlening", inMatrix: true, vh: false, exam: false,
+                id: "pw7_1_2", law: "Politiewet 2012", article: "Art. 7", title: "Bevoegdheden geweld & Toegang ter hulpverlening", inMatrix: true, vh: false, exam: false,
                 eis: "De student kan beoordelen of geweld/vrijheidsbeperking rechtmatig is en plaatsen betreden ter hulpverlening.",
-                text: "Lid 1: Bevoegd tot geweld of vrijheidsbeperking in de rechtmatige uitoefening van de bediening mits noodzakelijk, proportioneel en subsidiair.\nLid 2: Toegang tot elke plaats voor zover nodig voor hulpverlening.",
-                explanation: "Toelichting: Wettelijke basis voor geweldgebruik en voor het betreden van plaatsen/woningen bij spoedeisende hulpverlening.",
+                text: "Lid 1: Bevoegd tot geweld of vrijheidsbeperking in de rechtmatige uitoefening van de bediening mits noodzakelijk, proportioneel en subsidiair.\nLid 2: Toegang tot elke plaats voor zover nodig voor hulpverlening.\nLid 3: Veiligheidsfouillering bij acuut gevaar.\nLid 4: Vervoersfouillering.",
+                explanation: "Toelichting: Wettelijke basis voor geweldgebruik, hulpverlening en veiligheidsfouillering.",
                 connection: "Ambtsinstructie, Awbi."
-            },
-            {
-                id: "pw7_3_4", law: "Politiewet 2012", article: "Art. 7 lid 3 & lid 4", title: "Veiligheidsfouillering & Vervoersfouillering", inMatrix: true, vh: false, exam: false,
-                eis: "De student kan beschrijven onder welke voorwaarden veiligheids- en vervoersfouillering worden uitgevoerd.",
-                text: "Lid 3: Onderzoek aan kleding/voorwerpen bij onmiddellijk dreigend gevaar voor leven of veiligheid.\nLid 4: Onderzoek aan kleding/voorwerpen van te vervoeren of in te sluiten personen op gevaarlijke voorwerpen.",
-                explanation: "Toelichting: Veiligheidsfouillering vereist acuut gevaar. Vervoers- en insluitingsfouillering mag standaard bij transport/cel.",
-                connection: "WvSv art. 56."
-            },
-            {
-                id: "pw7_7", law: "Politiewet 2012", article: "Art. 7 lid 7", title: "Proportionaliteit en subsidiariteit", inMatrix: true, vh: false, exam: false,
-                eis: "De student kan de beginselen van proportionaliteit en subsidiariteit toepassen bij geweldgebruik.",
-                text: "De uitoefening van bevoegdheden dient in verhouding tot het beoogde doel redelijk en gematigd te zijn.",
-                explanation: "Toelichting: Het gekozen middel moet zo licht mogelijk zijn (subsidiariteit) en in verhouding staan tot het doel (proportionaliteit).",
-                connection: "Politiewet art. 7 lid 1."
             },
             {
                 id: "pw8", law: "Politiewet 2012", article: "Art. 8", title: "Vorderen inzage identiteitsbewijs", inMatrix: true, vh: false, exam: false,
                 eis: "De student kan bepalen of hij inzage van een ID-bewijs mag vorderen.",
                 text: "Bevoegd tot het vorderen van inzage van een identiteitsbewijs voor zover dat redelijkerwijs noodzakelijk is voor de uitvoering van de politietaak.",
-                explanation: "Toelichting: Koppeling met ID-plicht. Mag uitsluitend bij een concrete uitoefening van de politietaak (niet zomaar op straat).",
+                explanation: "Toelichting: Koppeling met ID-plicht. Mag uitsluitend bij een concrete uitoefening van de politietaak.",
                 connection: "Wid art. 2, Sr art. 447e."
             },
             {
@@ -1249,14 +1306,14 @@
                 connection: "Sr art. 41."
             },
             {
-                id: "sr45_46_46b", law: "Wetboek van Strafrecht", article: "Art. 45, 46 & 46b", title: "Poging, Voorbereiding & Vrijwillige terugtred", inMatrix: true, vh: true, exam: true,
+                id: "sr45_46_46b", law: "Wetboek van Strafrecht", article: "Art. 45", title: "Poging, Voorbereiding & Vrijwillige terugtred", inMatrix: true, vh: true, exam: true,
                 eis: "De student kan bepalen wanneer sprake is van poging, voorbereiding of vrijwillige terugtred.",
                 text: "Art. 45: Poging tot misdrijf is strafbaar bij een begin van uitvoering.\nArt. 46: Voorbereiding bij misdrijven met 8+ jaar gevangenisstraf.\nArt. 46b: Vrijwillige terugtred heft strafbaarheid op.",
                 explanation: "Toelichting: Poging vereist voornemen en begin van uitvoering.",
                 connection: "Sr art. 45."
             },
             {
-                id: "sr47_48", law: "Wetboek van Strafrecht", article: "Art. 47 & 48", title: "Dadership & Medeplichtigheid", inMatrix: true, vh: true, exam: true,
+                id: "sr47_48", law: "Wetboek van Strafrecht", article: "Art. 47", title: "Dadership & Medeplichtigheid", inMatrix: true, vh: true, exam: true,
                 eis: "De student kan beoordelen wie als dader, medepleger, uitlokker of medeplichtige geldt.",
                 text: "Art. 47: Plegers, medeplegers, doen-plegers en uitlokkers.\nArt. 48: Medeplichtigen (opzettelijk hulp verlenen bij misdrijf).",
                 explanation: "Toelichting: Medeplegen = bewuste en nauwe samenwerking.",
@@ -1291,7 +1348,7 @@
                 connection: "Politiewet art. 8, Gemeentewet art. 172."
             },
             {
-                id: "sr251", law: "Wetboek van Strafrecht", article: "Art. 251 lid 1 onder c", title: "Grooming / Sexchatting", inMatrix: true, vh: true, exam: true,
+                id: "sr251", law: "Wetboek van Strafrecht", article: "Art. 251", title: "Grooming / Sexchatting", inMatrix: true, vh: true, exam: true,
                 eis: "De student kan bepalen of sprake is van grooming.",
                 text: "Een minderjarige beneden 16 jaar een ontmoeting voorstellen voor seksuele doeleinden en daartoe handelingen verrichten.",
                 explanation: "Toelichting: Paars VH-feit.",
@@ -1333,7 +1390,7 @@
                 connection: "Sr art. 45, Sv art. 67."
             },
             {
-                id: "sr310_311", law: "Wetboek van Strafrecht", article: "Art. 310 & 311", title: "Diefstal & Gekwalificeerde diefstal", inMatrix: true, vh: true, exam: true,
+                id: "sr310_311", law: "Wetboek van Strafrecht", article: "Art. 310", title: "Diefstal & Gekwalificeerde diefstal", inMatrix: true, vh: true, exam: true,
                 eis: "De student kan bepalen wanneer sprake is van diefstal en inbraak.",
                 text: "Art. 310: Enig goed wegnemen met het oogmerk van wederrechtelijke toe-eigening.\nArt. 311: Diefstal bij nacht, in woning, met braak of door 2+ personen.",
                 explanation: "Toelichting: Gronddelict en gekwalificeerde vormen (inbraak).",
@@ -1384,6 +1441,13 @@
                 connection: "Sv art. 52."
             },
             {
+                id: "sv28", law: "Wetboek van Strafvordering", article: "Art. 28", title: "Recht op rechtsbijstand (Raadsman)", inMatrix: true, vh: false, exam: false,
+                eis: "De student kan beschrijven hoe het recht op een advocaat is geregeld.",
+                text: "De verdachte heeft het recht zich te doen bijstaan door een raadsman (consultatie- en verhoorbijstand).",
+                explanation: "Toelichting: Salduz-jurisprudentie.",
+                connection: "Sv art. 29."
+            },
+            {
                 id: "sv29", law: "Wetboek van Strafvordering", article: "Art. 29", title: "Zwijgrecht & Cautie", inMatrix: true, vh: false, exam: true,
                 eis: "De student kan beschrijven wat het zwijgrecht inhoudt en wanneer de cautie gegeven moet worden.",
                 text: "Lid 1: Verbod op ongeoorloofde druk.\nLid 2: Vóór de aanvang van het verhoor wordt mededeling gedaan dat verdachte niet tot antwoorden verplicht is.",
@@ -1398,7 +1462,7 @@
                 connection: "Sv art. 27a, Politiewet art. 8."
             },
             {
-                id: "sv53_54", law: "Wetboek van Strafvordering", article: "Art. 53 & 54", title: "Aanhouding (Heterdaad & Buiten heterdaad)", inMatrix: true, vh: false, exam: true,
+                id: "sv53_54", law: "Wetboek van Strafvordering", article: "Art. 53", title: "Aanhouding (Heterdaad & Buiten heterdaad)", inMatrix: true, vh: false, exam: true,
                 eis: "De student kan benoemen wanneer een verdachte mag worden aangehouden op of buiten heterdaad.",
                 text: "Art. 53: Bij ontdekking op heterdaad is EENIEDER bevoegd aan te houden.\nArt. 54: Buiten heterdaad is uitsluitend de opsporingsambtenaar bevoegd op bevel van (H)OvJ bij VH-feiten.",
                 explanation: "Toelichting: Heterdaad = iedereen. Buiten heterdaad = opsporingsambtenaar + bevel OvJ + VH-feit.",
@@ -1419,14 +1483,14 @@
                 connection: "Sv art. 55b."
             },
             {
-                id: "sv56a_b", law: "Wetboek van Strafvordering", article: "Art. 56a & 56b", title: "Ophouden voor onderzoek", inMatrix: true, vh: true, exam: true,
+                id: "sv56a_b", law: "Wetboek van Strafvordering", article: "Art. 56a", title: "Ophouden voor onderzoek", inMatrix: true, vh: true, exam: true,
                 eis: "De student kan bepalen hoe lang een verdachte mag worden opgehouden op het bureau.",
                 text: "Art. 56a: Max 9 uur (VH-feit) of max 6 uur (geen VH). Nachturen (00:00 - 09:00) tellen NIET mee.",
                 explanation: "Toelichting: Strenge termijnregeling op het bureau.",
                 connection: "Sv art. 57."
             },
             {
-                id: "sv57_58", law: "Wetboek van Strafvordering", article: "Art. 57 & 58", title: "Inverzekeringstelling (IVS)", inMatrix: true, vh: true, exam: true,
+                id: "sv57_58", law: "Wetboek van Strafvordering", article: "Art. 57", title: "Inverzekeringstelling (IVS)", inMatrix: true, vh: true, exam: true,
                 eis: "De student kan beschrijven wanneer en hoe lang een verdachte in verzekering kan worden gesteld.",
                 text: "Art. 57: De (h)OvJ kan na verhoor IVS bevelen in het belang van het onderzoek.\nArt. 58: Uitsluitend bij VH-feiten, max 3 dagen, 1x te verlengen met 3 dagen.",
                 explanation: "Toelichting: Vrijheidsbeneming in een cel op het bureau.",
@@ -1446,45 +1510,38 @@
                 explanation: "Toelichting: Doel = waarheidsvinding.",
                 connection: "Sv art. 95, 96."
             },
-            {
-                id: "sv338_339_342", law: "Wetboek van Strafvordering", article: "Art. 338, 339 & 342", title: "Bewijsrecht & Bewijsminimumregel", inMatrix: true, vh: false, exam: false,
-                eis: "De student kan benoemen wat wettige bewijsmiddelen zijn en wat de bewijsminimumregel inhoudt.",
-                text: "Art. 339: Wettige bewijsmiddelen zijn eigen waarneming rechter, verklaring verdachte, getuige, deskundige en bescheiden.\nArt. 342 lid 2: Het bewijs dat de verdachte het tenlastegelegde heeft begaan, kan door de rechter niet uitsluitend worden aangenomen op de verklaring van één getuige (bewijsminimum).",
-                explanation: "Toelichting: Fundamentele bewijsregel in het strafrecht.",
-                connection: "Sv art. 338."
-            },
 
-            // --- BIJZONDERE WETGEVING (WWM, OPIUMWET, WVW) ---
+            // --- BIJZONDERE WETGEVING ---
             {
-                id: "wid1_2", law: "Wet op de identificatieplicht", article: "Art. 1 & 2", title: "Toonplicht identiteitsbewijs", inMatrix: true, vh: false, exam: false,
+                id: "wid1_2", law: "Wet op de identificatieplicht", article: "Art. 2", title: "Toonplicht identiteitsbewijs", inMatrix: true, vh: false, exam: false,
                 eis: "De student kan beschrijven vanaf welke leeftijd de toonplicht geldt (14 jaar).",
                 text: "Eenieder vanaf 14 jaar is verplicht op eerste vordering van een opsporingsambtenaar een ID-bewijs ter inzage aan te bieden.",
                 explanation: "Toelichting: Toonplicht geldt vanaf 14 jaar.",
                 connection: "Politiewet art. 8."
             },
             {
-                id: "awbi1_2_3_7_9", law: "Algemene wet op het binnentreden (Awbi)", article: "Art. 1, 2, 3, 7 & 9", title: "Vormvoorschriften binnentreden woning", inMatrix: true, vh: false, exam: false,
+                id: "awbi1_2_3_7_9", law: "Algemene wet op het binnentreden (Awbi)", article: "Art. 1", title: "Vormvoorschriften binnentreden woning", inMatrix: true, vh: false, exam: false,
                 eis: "De student kan de voorwaarden benoemen voor binnentreden in een woning.",
                 text: "Legitimatie en doel mededelen, schriftelijke machtiging (h)OvJ vereist (behalve bij acuut gevaar).",
                 explanation: "Toelichting: Waarborgen rond het grondwettelijk huisrecht.",
                 connection: "Grondwet art. 12."
             },
             {
-                id: "wwm2_13_26_extra", law: "Wet Wapens en Munitie (WWM)", article: "Art. 2, 13 & 26", title: "Wapenencategorieën & Verbod", inMatrix: false, vh: true, exam: false,
+                id: "wwm2_13_26_extra", law: "Wet Wapens en Munitie (WWM)", article: "Art. 2", title: "Wapenencategorieën & Verbod", inMatrix: false, vh: true, exam: false,
                 eis: null,
                 text: "Art. 2: Indeling wapens in Cat I t/m IV.\nArt. 13 & 26: Verbod op dragen en voorhanden hebben van wapens en munitie.",
                 explanation: "Toelichting [PRAKTIJK]: Vuurwapens en verboden messen zijn Paarse VH-feiten.",
                 connection: "Sv art. 67."
             },
             {
-                id: "opium2_3_9_extra", law: "Opiumwet", article: "Art. 2, 3 & 9", title: "Harddrugs, Softdrugs & Opiumwetfouillering", inMatrix: false, vh: true, exam: false,
+                id: "opium2_3_9_extra", law: "Opiumwet", article: "Art. 2", title: "Harddrugs, Softdrugs & Opiumwetfouillering", inMatrix: false, vh: true, exam: false,
                 eis: null,
                 text: "Art. 2 & 3: Verbod op bezit, teelt en handel in middelen van Lijst I (Harddrugs) en Lijst II (Softdrugs).\nArt. 9: Bevoegdheid tot doorzoeking en fouillering bij vermoeden.",
                 explanation: "Toelichting [PRAKTIJK]: Handel in harddrugs is een Paars VH-feit.",
                 connection: "Sv art. 67."
             },
             {
-                id: "wvw8_160_extra", law: "Wegenverkeerswet 1994 (WVW)", article: "Art. 8 & 160", title: "Rijden onder invloed & Verkeersvorderingen", inMatrix: false, vh: true, exam: false,
+                id: "wvw8_160_extra", law: "Wegenverkeerswet 1994 (WVW)", article: "Art. 8", title: "Rijden onder invloed & Verkeersvorderingen", inMatrix: false, vh: true, exam: false,
                 eis: null,
                 text: "Art. 8: Besturen onder invloed van alcohol/drugs.\nArt. 160: Bevoegdheid tot stopteken, rijbewijscontrole en ademtest.",
                 explanation: "Toelichting [PRAKTIJK]: Basisartikelen voor verkeerscontroles.",
@@ -1494,17 +1551,6 @@
 
         let favorites = JSON.parse(localStorage.getItem('pol_favs') || '[]');
         let currentFilter = 'all';
-
-        function switchTab(tabId, btn) {
-            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById(tabId).classList.add('active');
-            btn.classList.add('active');
-
-            if (tabId === 'quiz-tab') {
-                generateQuestion();
-            }
-        }
 
         function toggleFav(id, btn) {
             if (favorites.includes(id)) {
@@ -1566,9 +1612,18 @@
             });
         }
 
+        // GEAVANCEERDE SLIMME FILTER MET PRIO VOOR EXACT ARTIKEL BOVENAAN
         function filterArticles() {
             const rawQuery = document.getElementById('searchInput').value.toLowerCase().trim();
-            // Normaliseer zoekopdracht (vervang 'artikel' door 'art', haal punten weg voor flexibele matching)
+            if (!rawQuery) {
+                renderArticles(database);
+                return;
+            }
+
+            // Strippen van puur het artikelnummer (bijv. "52" uit "Artikel 52" of "art 52")
+            const justNumMatch = rawQuery.match(/\b\d+[a-z]?\b/i);
+            const targetNum = justNumMatch ? justNumMatch[0].toLowerCase() : null;
+
             const normQuery = rawQuery.replace(/artikel/g, 'art').replace(/\./g, '').replace(/\s+/g, ' ');
             const queryTokens = normQuery.split(' ');
 
@@ -1584,7 +1639,7 @@
                 const combinedText = `${normArticle} ${normLaw} ${normTitle} ${normText} ${normExpl} ${normEis} ${normConn}`;
                 
                 const matchesAll = queryTokens.every(token => combinedText.includes(token));
-                const articleMatch = normArticle.includes(normQuery) || normQuery.includes(normArticle);
+                const articleMatch = targetNum && normArticle.includes(targetNum);
 
                 if (!(matchesAll || articleMatch)) return false;
 
@@ -1596,13 +1651,22 @@
                 return true;
             });
 
-            if (rawQuery) {
-                filtered.sort((a, b) => {
-                    const aMatch = a.article.toLowerCase().includes(rawQuery) ? 1 : 0;
-                    const bMatch = b.article.toLowerCase().includes(rawQuery) ? 1 : 0;
-                    return bMatch - aMatch;
-                });
-            }
+            // SORTEER-LOGICA: Exact matchend artikelnummer komt BOVENAAN!
+            filtered.sort((a, b) => {
+                const numA = a.article.toLowerCase().match(/\b\d+[a-z]?\b/i)?.[0] || '';
+                const numB = b.article.toLowerCase().match(/\b\d+[a-z]?\b/i)?.[0] || '';
+
+                if (targetNum) {
+                    const isExactA = numA === targetNum;
+                    const isExactB = numB === targetNum;
+                    if (isExactA && !isExactB) return -1;
+                    if (!isExactA && isExactB) return 1;
+                }
+
+                const aMatch = a.article.toLowerCase().includes(rawQuery) ? 1 : 0;
+                const bMatch = b.article.toLowerCase().includes(rawQuery) ? 1 : 0;
+                return bMatch - aMatch;
+            });
 
             renderArticles(filtered);
         }
