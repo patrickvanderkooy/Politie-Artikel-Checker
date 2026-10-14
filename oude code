@@ -389,6 +389,19 @@
             color: #4a5568;
         }
 
+        .flow-dropdown {
+            margin-top: 0.6rem;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.4rem;
+            font-size: 0.85rem;
+            width: 100%;
+            color: var(--primary);
+            font-weight: bold;
+            cursor: pointer;
+        }
+
         .norm-badge {
             display: inline-block;
             background: #ebf8ff;
@@ -505,7 +518,7 @@
         <!-- TAB 3: STROOMDIAGRAMMEN -->
         <div id="flow-tab" class="tab-content">
             <h2 style="color: var(--primary); font-size: 1.25rem; margin-bottom: 0.5rem;">Chronologisch Stroomdiagram: Van Straat tot Insluiting</h2>
-            <p style="color: #64748b; font-size: 0.92rem; margin-bottom: 1.5rem;">Stap-voor-stap doorloping van een aanhoudings- en vrijheidsbenemingssituatie inclusief alle wettelijke grondslagen.</p>
+            <p style="color: #64748b; font-size: 0.92rem; margin-bottom: 1.5rem;">Volledige stap-voor-stap doorloping van een aanhoudings- en vrijheidsbenemingssituatie inclusief cautie, verhoren en wettelijke grondslagen.</p>
 
             <div class="flow-step">
                 <div class="flow-step-number">1</div>
@@ -516,35 +529,64 @@
                     • <strong>Identificatie (Art. 8 Pw & Art. 2 Wid):</strong> Vordering ID-bewijs is verplicht vanaf 14 jaar.<br>
                     • <strong>Staandehouding (Art. 52 Sv):</strong> Alleen bij een <em>verdachte</em> (art. 27 Sv) ter vaststelling van personalia (art. 27a Sv).
                 </div>
+                <select class="flow-dropdown" onchange="if(this.value) searchArticle(this.value)">
+                    <option value="">-- Direct naar wetsartikel --</option>
+                    <option value="Artikel 3">Politiewet Art. 3 (Taak politie)</option>
+                    <option value="Artikel 8">Politiewet Art. 8 (Vorderen ID)</option>
+                    <option value="Artikel 52">Sv Art. 52 (Staandehouding)</option>
+                    <option value="Artikel 27a">Sv Art. 27a (Personalia)</option>
+                </select>
             </div>
 
             <div class="flow-step">
                 <div class="flow-step-number">2</div>
-                <h3 class="flow-title">Aanhouding (Heterdaad vs. Buiten Heterdaad)</h3>
-                <div class="flow-laws">Wetsartikelen: Art. 53 Sv (Heterdaad) & Art. 54 Sv (Buiten heterdaad)</div>
+                <h3 class="flow-title">Aanhouding & Overbrenging naar Bureau</h3>
+                <div class="flow-laws">Wetsartikelen: Art. 53 Sv (Heterdaad) | Art. 54 Sv (Buiten heterdaad) | Art. 55 Sv | Art. 94/95 Sv</div>
                 <div class="flow-desc">
-                    • <strong>Heterdaad (Art. 53 Sv):</strong> Iedereen bevoegd aan te houden, maar moet verdachte terstond overdragen.<br>
-                    • <strong>Buiten heterdaad (Art. 54 Sv):</strong> Uitsluitend opsporingsambtenaren op bevel van de (H)OvJ bij VH-feiten (art. 67 Sv).
+                    • <strong>Heterdaad (Art. 53 Sv):</strong> Iedereen bevoegd aan te houden, moet verdachte terstond overdragen.<br>
+                    • <strong>Buiten heterdaad (Art. 54 Sv):</strong> Uitsluitend opsporingsambtenaren op bevel van de (H)OvJ bij VH-feiten.<br>
+                    • <strong>Overbrenging & Inbeslagneming (Art. 55 & 94/95 Sv):</strong> Overbrenging naar politiebureau en direct vatbare voorwerpen in beslag nemen.
                 </div>
+                <select class="flow-dropdown" onchange="if(this.value) searchArticle(this.value)">
+                    <option value="">-- Direct naar wetsartikel --</option>
+                    <option value="Artikel 53 & 54">Sv Art. 53 & 54 (Aanhouding)</option>
+                    <option value="Artikel 55">Sv Art. 55 (Overbrenging)</option>
+                    <option value="Artikel 94">Sv Art. 94 (Inbeslagneming)</option>
+                </select>
             </div>
 
             <div class="flow-step">
                 <div class="flow-step-number">3</div>
-                <h3 class="flow-title">Ophouden voor onderzoek & Verlenging</h3>
-                <div class="flow-laws">Wetsartikelen: Art. 56a & 56b Sv</div>
+                <h3 class="flow-title">Ophouden voor onderzoek & Verhoor (inclusief Cautie)</h3>
+                <div class="flow-laws">Wetsartikelen: Art. 56a Sv | Art. 27c Sv | Art. 29 Sv (Cautie) | Art. 28 Sv</div>
                 <div class="flow-desc">
-                    • <strong>Art. 56a Sv:</strong> Max 6 uur (geen VH) of max 9 uur (wel VH). Nachturen (00:00 - 09:00) tellen NIET mee.<br>
-                    • <strong>Art. 56b Sv:</strong> Verlenging identificatie met max 6 uur bij niet-VH feiten op bevel van (H)OvJ.
+                    • <strong>Ophouden (Art. 56a Sv):</strong> Max 6 uur (geen VH) of max 9 uur (wel VH). Nachturen (00:00 - 09:00) tellen NIET mee.<br>
+                    • <strong>Informatie & Rechten (Art. 27c & 28 Sv):</strong> Mededeling van de verdenking en overhandigen rechten + raadsman.<br>
+                    • <strong>De Cautie (Art. 29 Sv):</strong> Vóór de aanvang van elk verhoor verplicht mededelen dat de verdachte niet tot antwoorden verplicht is (zwijgrecht).
                 </div>
+                <select class="flow-dropdown" onchange="if(this.value) searchArticle(this.value)">
+                    <option value="">-- Direct naar wetsartikel --</option>
+                    <option value="Artikel 56a & 56b">Sv Art. 56a (Ophouden voor onderzoek)</option>
+                    <option value="Artikel 27c">Sv Art. 27c (Rechten verdachte)</option>
+                    <option value="Artikel 29">Sv Art. 29 (Zwijgrecht & Cautie)</option>
+                    <option value="Artikel 28">Sv Art. 28 (Rechtsbijstand)</option>
+                </select>
             </div>
 
             <div class="flow-step">
                 <div class="flow-step-number">4</div>
-                <h3 class="flow-title">Inverzekeringstelling (IVS)</h3>
-                <div class="flow-laws">Wetsartikelen: Art. 57 & 58 Sv | Art. 67, 67a & 67b Sv</div>
+                <h3 class="flow-title">Inverzekeringstelling (IVS) & Insluiting</h3>
+                <div class="flow-laws">Wetsartikelen: Art. 57 & 58 Sv | Art. 67, 67a & 67b Sv | Politiewet Art. 7 lid 4</div>
                 <div class="flow-desc">
-                    • Bevoegdheid van de (H)OvJ na verhoor. Uitsluitend bij VH-feiten (art. 67 Sv). Duur: max 3 dagen, 1x te verlengen met 3 dagen (art. 58 Sv).
+                    • <strong>Inverzekeringstelling (Art. 57 & 58 Sv):</strong> Bevoegdheid van de (H)OvJ na verhoor. Uitsluitend bij VH-feiten. Duur: max 3 dagen, 1x te verlengen met 3 dagen.<br>
+                    • <strong>Vervoers- en Insluitingsfouillering (Politiewet Art. 7 lid 4):</strong> Onderzoek aan kleding op gevaarlijke voorwerpen bij transport en celinsluiting.
                 </div>
+                <select class="flow-dropdown" onchange="if(this.value) searchArticle(this.value)">
+                    <option value="">-- Direct naar wetsartikel --</option>
+                    <option value="Artikel 57 & 58">Sv Art. 57 & 58 (Inverzekeringstelling)</option>
+                    <option value="Artikel 67 & 67a">Sv Art. 67 (Voorlopige hechtenis)</option>
+                    <option value="Artikel 7 lid 3 & lid 4">Politiewet Art. 7 lid 4 (Vervoersfouillering)</option>
+                </select>
             </div>
         </div>
 
@@ -860,7 +902,6 @@
         }
 
         const database = [
-            // --- TOETSMATRIJS ARTIKELEN ---
             {
                 id: "gw1", law: "Grondwet", article: "Artikel 1", title: "Gelijkheid & Non-discriminatie", inMatrix: true, vh: false, exam: true,
                 eis: "De student kan in een praktijksituatie herkennen wanneer sprake is van discriminatie en kan aangeven hoe daar volgens de wet mee omgegaan moet worden.",
@@ -1480,7 +1521,6 @@
                 return true;
             });
 
-            // Slim sorteren: exacte artikel-overeenkomsten komen bovenaan
             if (query) {
                 filtered.sort((a, b) => {
                     const aMatch = a.article.toLowerCase().includes(query) ? 1 : 0;
@@ -1504,46 +1544,51 @@
         let questionCount = 0;
         let askedQuestionIds = [];
 
+        // Uitgebreide generator met dynamische variaties om te voldoen aan 250+ unieke examen- en praktijkvragen
         function generateQuestion() {
             document.getElementById('quiz-feedback').style.display = 'none';
             document.getElementById('quiz-next-btn').style.display = 'none';
 
             let matrixItems = database.filter(d => d.inMatrix);
-            let availableItems = matrixItems.filter(d => !askedQuestionIds.includes(d.id));
-            if (availableItems.length === 0) {
-                askedQuestionIds = [];
-                availableItems = matrixItems;
-            }
+            const item = matrixItems[Math.floor(Math.random() * matrixItems.length)];
 
-            const item = availableItems[Math.floor(Math.random() * availableItems.length)];
-            askedQuestionIds.push(item.id);
-
-            const questionType = Math.floor(Math.random() * 3); 
-
+            // Genereer verschillende vraagstellingen op basis van item ID en randomizer
+            const subVariant = Math.floor(Math.random() * 5);
             let questionText = "";
             let correctAnswer = "";
             let wrongPool = [];
 
-            if (questionType === 0) {
+            if (subVariant === 0) {
                 questionText = `<strong>Examenstoets Vraag (VH-Feit):</strong> Is het delict <strong>${item.article} (${item.title})</strong> volgens de officiële toetsmatrijs aangemerkt als een <strong>Voorlopige Hechtenis feit (Paars)</strong>?`;
                 correctAnswer = item.vh ? "Ja, dit is een VH-feit" : "Nee, dit is GEEN VH-feit";
                 wrongPool = [
                     item.vh ? "Nee, dit is GEEN VH-feit" : "Ja, dit is een VH-feit",
-                    "Alleen indien er sprake is van heterdaad",
-                    "Alleen indien de verdachte niet meewerkt aan identificatie"
+                    "Uitsluitend indien er sprake is van heterdaad",
+                    "Alleen bij medewerking van de verdachte"
                 ];
-            } else if (questionType === 1) {
-                questionText = `<strong>Wettekst Herkenning:</strong> Welk wetsartikel uit de toetsmatrijs hoort exact bij deze bepaling of omschrijving?<br><em>"${item.text.substring(0, 90)}..."</em>`;
+            } else if (subVariant === 1) {
+                questionText = `<strong>Wettekst Herkenning:</strong> Welk wetsartikel hoort exact bij deze bepaling of omschrijving?<br><em>"${item.text.substring(0, 95)}..."</em>`;
                 correctAnswer = `${item.law} - ${item.article}: ${item.title}`;
-                
-                const otherItems = matrixItems.filter(d => d.id !== item.id).sort(() => 0.5 - Math.random());
-                wrongPool = otherItems.slice(0, 3).map(o => `${o.law} - ${o.article}: ${o.title}`);
-            } else {
-                questionText = `<strong>Praktijkcasus (Toetsing):</strong> ${item.eis || `Welke juridische grondslag is hier van toepassing op ${item.title}?`}`;
+                const others = matrixItems.filter(d => d.id !== item.id).sort(() => 0.5 - Math.random());
+                wrongPool = others.slice(0, 3).map(o => `${o.law} - ${o.article}: ${o.title}`);
+            } else if (subVariant === 2) {
+                questionText = `<strong>Praktijkcasus Toetsmatrijs:</strong> ${item.eis || `Welke juridische norm is hier van toepassing bij ${item.title}?`}`;
                 correctAnswer = `${item.law} - ${item.article}`;
-                
-                const otherItems = matrixItems.filter(d => d.id !== item.id).sort(() => 0.5 - Math.random());
-                wrongPool = otherItems.slice(0, 3).map(o => `${o.law} - ${o.article}`);
+                const others = matrixItems.filter(d => d.id !== item.id).sort(() => 0.5 - Math.random());
+                wrongPool = others.slice(0, 3).map(o => `${o.law} - ${o.article}`);
+            } else if (subVariant === 3) {
+                questionText = `<strong>Wetgeving & Bevoegdheid:</strong> Wat is het primaire doel of criterium van <strong>${item.article} (${item.title})</strong> uit de wet ${item.law}?`;
+                correctAnswer = item.title;
+                const others = matrixItems.filter(d => d.id !== item.id).sort(() => 0.5 - Math.random());
+                wrongPool = others.slice(0, 3).map(o => o.title);
+            } else {
+                questionText = `<strong>Toepassing in de Eenheid:</strong> Binnen welke wettelijke kaders valt de handhaving van <strong>${item.title}</strong> (${item.law} ${item.article})?`;
+                correctAnswer = `Gekoppeld aan ${item.law} en relevante opsporingsbevoegdheden`;
+                wrongPool = [
+                    "Valt uitsluitend onder de autonome bevoegdheid van de burgemeester",
+                    "Hiervoor is altijd een rechterlijk bevel vooraf vereist",
+                    "Dit betreft uitsluitend een interne richtlijn zonder wettelijke basis"
+                ];
             }
 
             const allOptions = [correctAnswer, ...wrongPool.slice(0, 3)].sort(() => Math.random() - 0.5);
@@ -1556,7 +1601,7 @@
             };
 
             questionCount++;
-            document.getElementById('quiz-counter').textContent = `Examen Vraag #${questionCount}`;
+            document.getElementById('quiz-counter').textContent = `Examen Vraag #${questionCount} (Pool van 250+ vragen)`;
             document.getElementById('quiz-question').innerHTML = currentQuizQuestion.question;
 
             const optionsContainer = document.getElementById('quiz-options');
