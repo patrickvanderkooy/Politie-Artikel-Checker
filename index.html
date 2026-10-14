@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Politie Wetboeken & PSI Examen Assistent - Academie Editie</title>
-    <!-- PWA / App Manifest instellingen -->
     <meta name="theme-color" content="#1a365d">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -572,7 +571,7 @@
 
     <div class="container">
 
-        <!-- TAB 1: ARTIKELEN EN ZOEKEN (ACADEMISCH VERRIJKT) -->
+        <!-- TAB 1: ARTIKELEN EN ZOEKEN -->
         <div id="articles-tab" class="tab-content active">
             <div class="search-box">
                 <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
@@ -591,7 +590,7 @@
             <div id="articlesContainer"></div>
         </div>
 
-        <!-- TAB 2: EXAMEN QUIZ (ACADEMISCH NIVEAU) -->
+        <!-- TAB 2: EXAMEN QUIZ -->
         <div id="quiz-tab" class="tab-content">
             <div class="quiz-container">
                 <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; color: #718096; font-size: 0.9rem;">
@@ -605,7 +604,7 @@
             </div>
         </div>
 
-        <!-- TAB 3: STROOMDIAGRAMMEN MET ACCORDIONS -->
+        <!-- TAB 3: STROOMDIAGRAMMEN -->
         <div id="flow-tab" class="tab-content">
             <h2 style="color: var(--secondary); font-size: 1.25rem; margin-bottom: 0.5rem;">Chronologisch Stroomdiagram: Van Straat tot Insluiting</h2>
             <p style="color: #718096; font-size: 0.92rem; margin-bottom: 1.5rem;">Volledige stap-voor-stap doorloping. Klik op een wet om het volledige artikel direct eronder uit te klappen.</p>
@@ -722,7 +721,7 @@
                 <h3 class="flow-title">Ophouden voor onderzoek & Verhoor (inclusief Cautie)</h3>
                 <div class="flow-laws">Wetsartikelen: Art. 56a Sv | Art. 27c Sv | Art. 29 Sv (Cautie) | Art. 28 Sv</div>
                 <div class="flow-desc">
-                    • <strong>Ophouden (Art. 56a Sv):</strong> Max 6 uur (geen VH) of max 9 uur (wel VH). Nachturen (00:00 - 09:00) tellen NIET mee.<br>
+                    • <strong>Ophouden (Art. 56a Sv):</strong> Max 6 uur (geen VH) of max 9 uur (wel VH) voor het onderzoek op het bureau.<br>
                     • <strong>Informatie & Rechten (Art. 27c & 28 Sv):</strong> Mededeling van de verdenking en overhandigen rechten + raadsman.<br>
                     • <strong>De Cautie (Art. 29 Sv):</strong> Vóór de aanvang van elk verhoor verplicht mededelen dat de verdachte niet tot antwoorden verplicht is (zwijgrecht).
                 </div>
@@ -730,7 +729,7 @@
                 <details class="flow-accordion">
                     <summary>📖 Sv Art. 56a – Ophouden voor onderzoek</summary>
                     <div class="flow-accordion-content">
-                        <strong>Wettekst:</strong> Het ophouden voor onderzoek duurt ten hoogste negen uren (bij VH-feit) of zes uren (geen VH-feit). De nachturen (00:00 tot 09:00 uur) worden niet meegeteld.<br><br>
+                        <strong>Wettekst:</strong> Het ophouden voor onderzoek duurt ten hoogste negen uren (bij VH-feit) of zes uren (geen VH-feit).<br><br>
                         <em>Toelichting:</em> Strenge wettelijke tijdslimiet voor verhoor en onderzoek op het bureau.
                     </div>
                 </details>
@@ -763,7 +762,7 @@
                 <details class="flow-accordion">
                     <summary>📖 Sv Art. 57 & 58 – Inverzekeringstelling</summary>
                     <div class="flow-accordion-content">
-                        <strong>Wettekst:</strong> De officier van justitie is bevoegd in het belang van het onderzoek de inverzekeringstelling te bevelen van de verdachte van een feiten waarvoor voorlopige hechtenis is toegelaten.<br><br>
+                        <strong>Wettekst:</strong> De officier van justitie is bevoegd in het belang van het onderzoek de inverzekeringstelling te bevelen van de verdachte van een feit waarvoor voorlopige hechtenis is toegelaten.<br><br>
                         <em>Toelichting:</em> Maximale duur is 3 dagen, eenmalig te verlengen met nog eens 3 dagen door de OvJ.
                     </div>
                 </details>
@@ -1200,7 +1199,7 @@
         const scenarios = [
             {
                 title: "Casus 1: Weigeren ID op Straat",
-                desc: "Je spreekt een man van 19 jaar aan die verdacht wordt van openlijke baldadigheid. Je vordert zijn identiteitsbewijs op grond van de Politiewet. De man weigert pertinent zijn ID te tonen en loopt weg.",
+                desc: "Je spreekt een man van 19 jaar aan verdacht van openlijke baldadigheid. Je vordert zijn identiteitsbewijs op grond van de Politiewet. De man weigert pertinent zijn ID te tonen en loopt weg.",
                 answer: "<strong>Juridische Analyse:</strong><br>1. Vordering ID is rechtmatig op grond van <strong>Politiewet Art. 8</strong> in combinatie met <strong>Wet op de identificatieplicht Art. 2</strong>.<br>2. Het weigeren levert een overtreding op ex <strong>Sr Art. 447e</strong> (niet voldoen aan identificatieplicht).<br>3. Je bent bevoegd de verdachte staande te houden ex <strong>Sv Art. 52</strong>. Indien hij blijft weigeren en je de identiteit niet kunt vaststellen, kun je hem aanhouden ter ophouden voor identificatie."
             },
             {
@@ -1516,8 +1515,8 @@
             {
                 id: "sv56a_b", law: "Wetboek van Strafvordering", article: "Art. 56a", title: "Ophouden voor onderzoek", inMatrix: true, vh: true, exam: true,
                 eis: "De student kan bepalen hoe lang een verdachte mag worden opgehouden op het bureau.",
-                text: "Ten hoogste 9 uur (VH-feit) of 6 uur (geen VH). Nachturen (00:00 - 09:00) tellen niet mee voor de berekening.",
-                explanation: "Strenge wettelijke termijn voor verhoor en onderzoek op het bureau na voorgeleiding bij de hulpofficier.",
+                text: "Ten hoogste 9 uur (VH-feit) of 6 uur (geen VH).",
+                explanation: "Strenge wettelijke tijdslimiet voor verhoor en onderzoek op het bureau na voorgeleiding bij de hulpofficier.",
                 connection: "Sv art. 57."
             },
             {
@@ -1658,8 +1657,10 @@
             });
 
             filtered.sort((a, b) => {
-                const numA = a.article.toLowerCase().match(/\b\d+[a-z]?\b/i)?.[0] || '';
-                const numB = b.article.toLowerCase().match(/\b\d+[a-z]?\b/i)?.[0] || '';
+                const matchA = a.article.toLowerCase().match(/\b\d+[a-z]?\b/i);
+                const matchB = b.article.toLowerCase().match(/\b\d+[a-z]?\b/i);
+                const numA = matchA ? matchA[0] : '';
+                const numB = matchB ? matchB[0] : '';
 
                 if (targetNum) {
                     const isExactA = numA === targetNum;
@@ -1683,7 +1684,6 @@
             filterArticles();
         }
 
-        // ACADEMISCHE EXAMEN QUIZ (HOOG NIVEAU)
         let currentQuizQuestion = null;
         let score = 0;
         let questionCount = 0;
