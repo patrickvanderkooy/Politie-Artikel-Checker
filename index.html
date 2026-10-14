@@ -405,12 +405,18 @@
             color: #4a5568;
         }
 
+        .flow-dropdown-container {
+            margin-top: 0.8rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
         .flow-dropdown {
-            margin-top: 0.6rem;
             background: #fff;
             border: 1px solid var(--border);
             border-radius: 6px;
-            padding: 0.4rem;
+            padding: 0.5rem;
             font-size: 0.85rem;
             width: 100%;
             color: var(--primary);
@@ -547,34 +553,74 @@
                     • <strong>Identificatie (Art. 8 Pw & Art. 2 Wid):</strong> Vordering ID-bewijs is verplicht vanaf 14 jaar.<br>
                     • <strong>Staandehouding (Art. 52 Sv):</strong> Alleen bij een <em>verdachte</em> (art. 27 Sv) ter vaststelling van personalia (art. 27a Sv).
                 </div>
-                <select class="flow-dropdown" onchange="if(this.value) searchArticle(this.value)">
-                    <option value="">-- Direct naar wetsartikel --</option>
-                    <option value="Artikel 3">Politiewet Art. 3 (Taak politie)</option>
-                    <option value="Artikel 8">Politiewet Art. 8 (Vorderen ID)</option>
-                    <option value="Artikel 52">Sv Art. 52 (Staandehouding)</option>
-                    <option value="Artikel 27a">Sv Art. 27a (Personalia)</option>
-                </select>
+                <div class="flow-dropdown-container">
+                    <select class="flow-dropdown" onchange="if(this.value) searchArticle(this.value)">
+                        <option value="">-- Ga naar: Politiewet Art. 3 (Taak politie) --</option>
+                        <option value="Artikel 3">Politiewet Art. 3 (Taak politie)</option>
+                    </select>
+                    <select class="flow-dropdown" onchange="if(this.value) searchArticle(this.value)">
+                        <option value="">-- Ga naar: Politiewet Art. 8 (Vorderen ID) --</option>
+                        <option value="Artikel 8">Politiewet Art. 8 (Vorderen ID)</option>
+                    </select>
+                    <select class="flow-dropdown" onchange="if(this.value) searchArticle(this.value)">
+                        <option value="">-- Ga naar: Sv Art. 52 (Staandehouding) --</option>
+                        <option value="Artikel 52">Sv Art. 52 (Staandehouding)</option>
+                    </select>
+                    <select class="flow-dropdown" onchange="if(this.value) searchArticle(this.value)">
+                        <option value="">-- Ga naar: Sv Art. 27a (Personalia) --</option>
+                        <option value="Artikel 27a">Sv Art. 27a (Personalia)</option>
+                    </select>
+                </div>
             </div>
 
             <div class="flow-step">
                 <div class="flow-step-number">2</div>
-                <h3 class="flow-title">Aanhouding & Overbrenging naar Bureau</h3>
-                <div class="flow-laws">Wetsartikelen: Art. 53 Sv (Heterdaad) | Art. 54 Sv (Buiten heterdaad) | Art. 55 Sv | Art. 94/95 Sv</div>
+                <h3 class="flow-title">Aanhouding & Veiligheidsfouillering op straat</h3>
+                <div class="flow-laws">Wetsartikelen: Art. 53 Sv (Heterdaad) | Art. 54 Sv (Buiten heterdaad) | Politiewet Art. 7 lid 3 (Veiligheid)</div>
                 <div class="flow-desc">
                     • <strong>Heterdaad (Art. 53 Sv):</strong> Iedereen bevoegd aan te houden, moet verdachte terstond overdragen.<br>
                     • <strong>Buiten heterdaad (Art. 54 Sv):</strong> Uitsluitend opsporingsambtenaren op bevel van de (H)OvJ bij VH-feiten.<br>
-                    • <strong>Overbrenging & Inbeslagneming (Art. 55 & 94/95 Sv):</strong> Overbrenging naar politiebureau en direct vatbare voorwerpen in beslag nemen.
+                    • <strong>Veiligheidsfouillering (Politiewet Art. 7 lid 3):</strong> Onderzoek aan kleding direct op straat bij een onmiddellijk dreigend gevaar voor leven of veiligheid.
                 </div>
-                <select class="flow-dropdown" onchange="if(this.value) searchArticle(this.value)">
-                    <option value="">-- Direct naar wetsartikel --</option>
-                    <option value="Artikel 53">Sv Art. 53 & 54 (Aanhouding)</option>
-                    <option value="Artikel 55">Sv Art. 55 (Overbrenging)</option>
-                    <option value="Artikel 94">Sv Art. 94 (Inbeslagneming)</option>
-                </select>
+                <div class="flow-dropdown-container">
+                    <select class="flow-dropdown" onchange="if(this.value) searchArticle(this.value)">
+                        <option value="">-- Ga naar: Sv Art. 53 & 54 (Aanhouding) --</option>
+                        <option value="Artikel 53">Sv Art. 53 & 54 (Aanhouding)</option>
+                    </select>
+                    <select class="flow-dropdown" onchange="if(this.value) searchArticle(this.value)">
+                        <option value="">-- Ga naar: Politiewet Art. 7 lid 3 (Veiligheidsfouillering) --</option>
+                        <option value="Politiewet Art. 7">Politiewet Art. 7 lid 3 (Veiligheidsfouillering)</option>
+                    </select>
+                </div>
             </div>
 
             <div class="flow-step">
                 <div class="flow-step-number">3</div>
+                <h3 class="flow-title">Overbrenging, Inbeslagneming & Vervoersfouillering</h3>
+                <div class="flow-laws">Wetsartikelen: Art. 55 Sv | Art. 94/95 Sv | Politiewet Art. 7 lid 4</div>
+                <div class="flow-desc">
+                    • <strong>Overbrenging (Art. 55 Sv):</strong> Transport van verdachte naar het politiebureau.<br>
+                    • <strong>Inbeslagneming (Art. 94 & 95 Sv):</strong> Veiligstellen van bewijsmiddelen en goederen.<br>
+                    • <strong>Vervoers- en Insluitingsfouillering (Politiewet Art. 7 lid 4):</strong> Verplicht onderzoek aan kleding op gevaarlijke voorwerpen voor transport en celinsluiting.
+                </div>
+                <div class="flow-dropdown-container">
+                    <select class="flow-dropdown" onchange="if(this.value) searchArticle(this.value)">
+                        <option value="">-- Ga naar: Sv Art. 55 (Overbrenging) --</option>
+                        <option value="Artikel 55">Sv Art. 55 (Overbrenging)</option>
+                    </select>
+                    <select class="flow-dropdown" onchange="if(this.value) searchArticle(this.value)">
+                        <option value="">-- Ga naar: Sv Art. 94 (Inbeslagneming) --</option>
+                        <option value="Artikel 94">Sv Art. 94 (Inbeslagneming)</option>
+                    </select>
+                    <select class="flow-dropdown" onchange="if(this.value) searchArticle(this.value)">
+                        <option value="">-- Ga naar: Politiewet Art. 7 lid 4 (Vervoersfouillering) --</option>
+                        <option value="Politiewet Art. 7">Politiewet Art. 7 lid 4 (Vervoersfouillering)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="flow-step">
+                <div class="flow-step-number">4</div>
                 <h3 class="flow-title">Ophouden voor onderzoek & Verhoor (inclusief Cautie)</h3>
                 <div class="flow-laws">Wetsartikelen: Art. 56a Sv | Art. 27c Sv | Art. 29 Sv (Cautie) | Art. 28 Sv</div>
                 <div class="flow-desc">
@@ -582,29 +628,43 @@
                     • <strong>Informatie & Rechten (Art. 27c & 28 Sv):</strong> Mededeling van de verdenking en overhandigen rechten + raadsman.<br>
                     • <strong>De Cautie (Art. 29 Sv):</strong> Vóór de aanvang van elk verhoor verplicht mededelen dat de verdachte niet tot antwoorden verplicht is (zwijgrecht).
                 </div>
-                <select class="flow-dropdown" onchange="if(this.value) searchArticle(this.value)">
-                    <option value="">-- Direct naar wetsartikel --</option>
-                    <option value="Artikel 56a">Sv Art. 56a (Ophouden voor onderzoek)</option>
-                    <option value="Artikel 27c">Sv Art. 27c (Rechten verdachte)</option>
-                    <option value="Artikel 29">Sv Art. 29 (Zwijgrecht & Cautie)</option>
-                    <option value="Artikel 28">Sv Art. 28 (Rechtsbijstand)</option>
-                </select>
+                <div class="flow-dropdown-container">
+                    <select class="flow-dropdown" onchange="if(this.value) searchArticle(this.value)">
+                        <option value="">-- Ga naar: Sv Art. 56a (Ophouden voor onderzoek) --</option>
+                        <option value="Artikel 56a">Sv Art. 56a (Ophouden voor onderzoek)</option>
+                    </select>
+                    <select class="flow-dropdown" onchange="if(this.value) searchArticle(this.value)">
+                        <option value="">-- Ga naar: Sv Art. 27c (Rechten verdachte) --</option>
+                        <option value="Artikel 27c">Sv Art. 27c (Rechten verdachte)</option>
+                    </select>
+                    <select class="flow-dropdown" onchange="if(this.value) searchArticle(this.value)">
+                        <option value="">-- Ga naar: Sv Art. 29 (Zwijgrecht & Cautie) --</option>
+                        <option value="Artikel 29">Sv Art. 29 (Zwijgrecht & Cautie)</option>
+                    </select>
+                    <select class="flow-dropdown" onchange="if(this.value) searchArticle(this.value)">
+                        <option value="">-- Ga naar: Sv Art. 28 (Rechtsbijstand) --</option>
+                        <option value="Artikel 28">Sv Art. 28 (Rechtsbijstand)</option>
+                    </select>
+                </div>
             </div>
 
             <div class="flow-step">
-                <div class="flow-step-number">4</div>
+                <div class="flow-step-number">5</div>
                 <h3 class="flow-title">Inverzekeringstelling (IVS) & Insluiting</h3>
-                <div class="flow-laws">Wetsartikelen: Art. 57 & 58 Sv | Art. 67, 67a & 67b Sv | Politiewet Art. 7 lid 4</div>
+                <div class="flow-laws">Wetsartikelen: Art. 57 & 58 Sv | Art. 67, 67a & 67b Sv</div>
                 <div class="flow-desc">
-                    • <strong>Inverzekeringstelling (Art. 57 & 58 Sv):</strong> Bevoegdheid van de (H)OvJ na verhoor. Uitsluitend bij VH-feiten. Duur: max 3 dagen, 1x te verlengen met 3 dagen.<br>
-                    • <strong>Vervoers- en Insluitingsfouillering (Politiewet Art. 7 lid 4):</strong> Onderzoek aan kleding op gevaarlijke voorwerpen bij transport en celinsluiting.
+                    • <strong>Inverzekeringstelling (Art. 57 & 58 Sv):</strong> Bevoegdheid van de (H)OvJ na verhoor. Uitsluitend bij VH-feiten. Duur: max 3 dagen, 1x te verlengen met 3 dagen.
                 </div>
-                <select class="flow-dropdown" onchange="if(this.value) searchArticle(this.value)">
-                    <option value="">-- Direct naar wetsartikel --</option>
-                    <option value="Artikel 57">Sv Art. 57 & 58 (Inverzekeringstelling)</option>
-                    <option value="Artikel 67">Sv Art. 67 (Voorlopige hechtenis)</option>
-                    <option value="Politiewet Art. 7">Politiewet Art. 7 lid 4 (Vervoersfouillering)</option>
-                </select>
+                <div class="flow-dropdown-container">
+                    <select class="flow-dropdown" onchange="if(this.value) searchArticle(this.value)">
+                        <option value="">-- Ga naar: Sv Art. 57 & 58 (Inverzekeringstelling) --</option>
+                        <option value="Artikel 57">Sv Art. 57 & 58 (Inverzekeringstelling)</option>
+                    </select>
+                    <select class="flow-dropdown" onchange="if(this.value) searchArticle(this.value)">
+                        <option value="">-- Ga naar: Sv Art. 67 (Voorlopige hechtenis) --</option>
+                        <option value="Artikel 67">Sv Art. 67 (Voorlopige hechtenis)</option>
+                    </select>
+                </div>
             </div>
         </div>
 
@@ -1633,7 +1693,6 @@
             document.getElementById('quiz-feedback').style.display = 'none';
             document.getElementById('quiz-next-btn').style.display = 'none';
 
-            // Quiz kiest uitsluitend uit artikelen die WEL in de Toetsmatrijs PSI staan!
             let matrixItems = database.filter(d => d.inMatrix);
             const item = matrixItems[Math.floor(Math.random() * matrixItems.length)];
 
