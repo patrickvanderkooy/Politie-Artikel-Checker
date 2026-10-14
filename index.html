@@ -1243,7 +1243,7 @@
             },
             {
                 id: "sr41", law: "Wetboek van Strafrecht", article: "Art. 41", title: "Noodweer & Noodweerexces", inMatrix: true, vh: true, exam: false,
-                eis: "De student kan bepalen of er sprake is de noodweer of exces.",
+                eis: "De student kan bepalen of er sprake is van noodweer of exces.",
                 text: "Noodzakelijke verdediging van eigen of andermans lijf, eerbaarheid of goed tegen ogenblikkelijke, wederrechtelijke aanranding.",
                 explanation: "Toelichting: Noodweer = rechtvaardigingsgrond. Noodweerexces = schulduitsluitingsgrond (hevige gemoedsbeweging).",
                 connection: "Sr art. 41."
@@ -1567,19 +1567,26 @@
         }
 
         function filterArticles() {
-            const query = document.getElementById('searchInput').value.toLowerCase().trim();
-            
-            let filtered = database.filter(item => {
-                const matchesQuery = 
-                    item.article.toLowerCase().includes(query) ||
-                    item.title.toLowerCase().includes(query) ||
-                    item.text.toLowerCase().includes(query) ||
-                    item.explanation.toLowerCase().includes(query) ||
-                    item.law.toLowerCase().includes(query) ||
-                    (item.eis && item.eis.toLowerCase().includes(query)) ||
-                    (item.connection && item.connection.toLowerCase().includes(query));
+            const rawQuery = document.getElementById('searchInput').value.toLowerCase().trim();
+            // Normaliseer zoekopdracht (vervang 'artikel' door 'art', haal punten weg voor flexibele matching)
+            const normQuery = rawQuery.replace(/artikel/g, 'art').replace(/\./g, '').replace(/\s+/g, ' ');
+            const queryTokens = normQuery.split(' ');
 
-                if (!matchesQuery) return false;
+            let filtered = database.filter(item => {
+                const normArticle = item.article.toLowerCase().replace(/artikel/g, 'art').replace(/\./g, '').replace(/\s+/g, ' ');
+                const normLaw = item.law.toLowerCase().replace(/\./g, '');
+                const normTitle = item.title.toLowerCase();
+                const normText = item.text.toLowerCase();
+                const normExpl = item.explanation.toLowerCase();
+                const normEis = item.eis ? item.eis.toLowerCase() : '';
+                const normConn = item.connection ? item.connection.toLowerCase() : '';
+
+                const combinedText = `${normArticle} ${normLaw} ${normTitle} ${normText} ${normExpl} ${normEis} ${normConn}`;
+                
+                const matchesAll = queryTokens.every(token => combinedText.includes(token));
+                const articleMatch = normArticle.includes(normQuery) || normQuery.includes(normArticle);
+
+                if (!(matchesAll || articleMatch)) return false;
 
                 if (currentFilter === 'matrix') return item.inMatrix;
                 if (currentFilter === 'vh') return item.vh;
@@ -1589,10 +1596,10 @@
                 return true;
             });
 
-            if (query) {
+            if (rawQuery) {
                 filtered.sort((a, b) => {
-                    const aMatch = a.article.toLowerCase().includes(query) ? 1 : 0;
-                    const bMatch = b.article.toLowerCase().includes(query) ? 1 : 0;
+                    const aMatch = a.article.toLowerCase().includes(rawQuery) ? 1 : 0;
+                    const bMatch = b.article.toLowerCase().includes(rawQuery) ? 1 : 0;
                     return bMatch - aMatch;
                 });
             }
