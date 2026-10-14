@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Politie Wetboeken & PSI Examen Assistent</title>
+    <title>Politie Wetboeken & PSI Examen Assistent - Academie Editie</title>
     <!-- PWA / App Manifest instellingen -->
     <meta name="theme-color" content="#1a365d">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Politie PSI">
+    <meta name="apple-mobile-web-app-title" content="Politie PSI Pro">
     <link rel="manifest" href="data:application/manifest+json;charset=utf-8,{
-      %22name%22: %22Politie Wetboeken & Rooster PSI%22,
-      %22short_name%22: %22Politie PSI%22,
+      %22name%22: %22Politie Wetboeken & PSI Academie Assistent%22,
+      %22short_name%22: %22Politie PSI Pro%22,
       %22start_url%22: %22.%22,
       %22display%22: %22standalone%22,
       %22background_color%22: %22#f7fafc%22,
@@ -549,8 +549,8 @@
     </div>
 
     <header>
-        <h1>Politie Wetboeken & PSI Examen Assistent</h1>
-        <p>Artikelenbank (met Volledig Handboek), Stroomdiagrammen, PV Checklist & Uitdagende Examen Quiz</p>
+        <h1>Politie Wetboeken & PSI Examen Assistent - Academie Editie</h1>
+        <p>Volledig handboek (44 kernartikelen), stroomdiagrammen, PV-toets & Academische Examen Quiz</p>
         <div class="header-btns">
             <button class="back-btn-header" id="backBtn" onclick="goBackHistory()" disabled title="Ga naar vorige pagina/zoekopdracht">↩️ Vorige</button>
             <button class="dark-toggle" onclick="toggleDarkMode()" id="darkModeBtn">🌙 Dark</button>
@@ -559,7 +559,7 @@
 
     <nav>
         <button class="nav-btn active" id="btn-articles-tab" onclick="switchTab('articles-tab', this)">Artikelenbank</button>
-        <button class="nav-btn" id="btn-quiz-tab" onclick="switchTab('quiz-tab', this)">Examen Quiz (100+)</button>
+        <button class="nav-btn" id="btn-quiz-tab" onclick="switchTab('quiz-tab', this)">Examen Quiz (Academie)</button>
         <button class="nav-btn" id="btn-flow-tab" onclick="switchTab('flow-tab', this)">Stroomdiagrammen</button>
         <button class="nav-btn" id="btn-pv-tab" onclick="switchTab('pv-tab', this)">📋 PV Stevigheidstoets</button>
         <button class="nav-btn" id="btn-scenario-tab" onclick="switchTab('scenario-tab', this)">💡 Casus Generator</button>
@@ -572,7 +572,7 @@
 
     <div class="container">
 
-        <!-- TAB 1: ARTIKELEN EN ZOEKEN (MET VOLLEDIGE TOELICHTINGEN) -->
+        <!-- TAB 1: ARTIKELEN EN ZOEKEN (ACADEMISCH VERRIJKT) -->
         <div id="articles-tab" class="tab-content active">
             <div class="search-box">
                 <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
@@ -580,7 +580,7 @@
             </div>
 
             <div class="filters">
-                <button class="filter-btn active" onclick="setFilter('all', this)">Alles</button>
+                <button class="filter-btn active" onclick="setFilter('all', this)">Alles (44)</button>
                 <button class="filter-btn" onclick="setFilter('matrix', this)">In Toetsmatrijs PSI</button>
                 <button class="filter-btn" onclick="setFilter('extra', this)">Niet in Matrijs (Praktijk)</button>
                 <button class="filter-btn" onclick="setFilter('vh', this)">VH-feiten (Paars)</button>
@@ -591,7 +591,7 @@
             <div id="articlesContainer"></div>
         </div>
 
-        <!-- TAB 2: UITDAGENDE QUIZ (RUIM 100+ VRAGEN MOGELIJK) -->
+        <!-- TAB 2: EXAMEN QUIZ (ACADEMISCH NIVEAU) -->
         <div id="quiz-tab" class="tab-content">
             <div class="quiz-container">
                 <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; color: #718096; font-size: 0.9rem;">
@@ -601,7 +601,7 @@
                 <div class="quiz-question" id="quiz-question">Vraag laden...</div>
                 <div class="quiz-options" id="quiz-options"></div>
                 <div class="quiz-feedback" id="quiz-feedback"></div>
-                <button class="quiz-btn" id="quiz-next-btn" onclick="generateQuestion()" style="display: none;">Volgende Uitdagende Vraag →</button>
+                <button class="quiz-btn" id="quiz-next-btn" onclick="generateQuestion()" style="display: none;">Volgende Academische Vraag →</button>
             </div>
         </div>
 
@@ -1245,7 +1245,7 @@
             }
         }
 
-        // DATABASE MET VOLLEDIGE TOELICHTINGEN UIT HET STUDIEHANDBOEK
+        // DATABASE MET DE 44 VOLLEDIGE KERNARTIKELEN EN TOELICHTINGEN
         const database = [
             {
                 id: "gw1", law: "Grondwet", article: "Art. 1", title: "Gelijkheid & Discriminatieverbod", inMatrix: true, vh: false, exam: true,
@@ -1577,7 +1577,7 @@
             const resultsInfo = document.getElementById('resultsInfo');
             
             container.innerHTML = '';
-            resultsInfo.textContent = `${items.length} artikel(en) weergegeven`;
+            resultsInfo.textContent = `${items.length} artikel(en) weergegeven (totaal ${database.length} in handboek)`;
 
             if (items.length === 0) {
                 container.innerHTML = `<div class="card" style="text-align:center; padding:2rem;">Geen resultaten gevonden. Probeer een ander zoekwoord.</div>`;
@@ -1683,7 +1683,7 @@
             filterArticles();
         }
 
-        // VERBETERDE EN UITDAGENDE EXAMEN QUIZ (MET VELE VARIATIES EN CASUS)
+        // ACADEMISCHE EXAMEN QUIZ (HOOG NIVEAU)
         let currentQuizQuestion = null;
         let score = 0;
         let questionCount = 0;
@@ -1701,7 +1701,7 @@
             let wrongPool = [];
 
             if (subVariant === 0) {
-                questionText = `<strong>Examenstoets Vraag (Voorlopige Hechtenis):</strong> Is het delict <strong>${item.article} (${item.title})</strong> volgens de officiële toetsmatrijs aangemerkt als een <strong>Voorlopige Hechtenis feit (Paars VH-feit)</strong>?`;
+                questionText = `<strong>Academische Toets (Voorlopige Hechtenis):</strong> Is het delict <strong>${item.article} (${item.title})</strong> volgens de officiële toetsmatrijs aangemerkt als een <strong>Voorlopige Hechtenis feit (Paars VH-feit ex art. 67 Sv)</strong>?`;
                 correctAnswer = item.vh ? "Ja, dit is een aangewezen VH-feit" : "Nee, dit is GEEN VH-feit";
                 wrongPool = [
                     item.vh ? "Nee, dit is GEEN VH-feit" : "Ja, dit is een aangewezen VH-feit",
@@ -1714,17 +1714,17 @@
                 const others = matrixItems.filter(d => d.id !== item.id).sort(() => 0.5 - Math.random());
                 wrongPool = others.slice(0, 3).map(o => `${o.law} - ${o.article}: ${o.title}`);
             } else if (subVariant === 2) {
-                questionText = `<strong>Praktijktoets Casus:</strong> ${item.eis || `Welke juridische norm is hier van toepassing bij ${item.title}?`}`;
+                questionText = `<strong>Casustoets Politieacademie:</strong> ${item.eis || `Welke juridische norm is hier van toepassing bij ${item.title}?`}`;
                 correctAnswer = `${item.law} - ${item.article} (${item.title})`;
                 const others = matrixItems.filter(d => d.id !== item.id).sort(() => 0.5 - Math.random());
                 wrongPool = others.slice(0, 3).map(o => `${o.law} - ${o.article} (${o.title})`);
             } else if (subVariant === 3) {
-                questionText = `<strong>Juridische Toepassing:</strong> Wat is het belangrijkste juridische criterium bij de toepassing van <strong>${item.article} (${item.title})</strong> uit de wet ${item.law}?`;
+                questionText = `<strong>Juridische Systematiek:</strong> Wat is het belangrijkste juridische criterium bij de toepassing van <strong>${item.article} (${item.title})</strong> uit de wet ${item.law}?`;
                 correctAnswer = item.title;
                 const others = matrixItems.filter(d => d.id !== item.id).sort(() => 0.5 - Math.random());
                 wrongPool = others.slice(0, 3).map(o => o.title);
             } else if (subVariant === 4) {
-                questionText = `<strong>Dwangmiddelen & Bevoegdheden:</strong> Welk wettelijk kader is direct van toepassing op de handhaving van <strong>${item.title}</strong> (${item.law} ${item.article})?`;
+                questionText = `<strong>Bevoegdheden & Schakels:</strong> Welk wettelijk kader vormt de directe juridische grondslag en relatie voor de handhaving van <strong>${item.title}</strong> (${item.law} ${item.article})?`;
                 correctAnswer = `Gekoppeld aan ${item.law} en de algemene opsporingsbevoegdheden`;
                 wrongPool = [
                     "Valt uitsluitend onder de autonome verordening van de gemeente",
@@ -1732,7 +1732,7 @@
                     "Dit betreft uitsluitend een interne richtlijn zonder wettelijke basis"
                 ];
             } else {
-                questionText = `<strong>Moeilijke Examenvraag:</strong> Welke stelling over <strong>${item.article} (${item.title})</strong> is juridisch volkomen juist volgens de landelijke toetsmatrijs?`;
+                questionText = `<strong>Verdiepingsvraag Examen:</strong> Welke stelling over <strong>${item.article} (${item.title})</strong> is juridisch volkomen juist volgens de landelijke toetsmatrijs?`;
                 correctAnswer = item.explanation.substring(0, 95) + "...";
                 const others = matrixItems.filter(d => d.id !== item.id).sort(() => 0.5 - Math.random());
                 wrongPool = others.slice(0, 3).map(o => o.explanation.substring(0, 95) + "...");
@@ -1744,7 +1744,7 @@
                 question: questionText,
                 correct: correctAnswer,
                 options: allOptions,
-                explanation: (item.eis ? `<strong>Toetsmatrijs Eis:</strong> ${item.eis}<br><br>` : '') + '<strong>Uitgebreide Toelichting:</strong><br>' + item.explanation + (item.connection ? `<br><br><strong>Wetsverband:</strong> ${item.connection}` : '')
+                explanation: (item.eis ? `<strong>Toetsmatrijs Eis:</strong> ${item.eis}<br><br>` : '') + '<strong>Studiehandboek Toelichting:</strong><br>' + item.explanation + (item.connection ? `<br><br><strong>Wetsverband & Relatie:</strong> ${item.connection}` : '')
             };
 
             questionCount++;
@@ -1774,7 +1774,7 @@
                 btnElement.classList.add('correct');
                 feedback.style.background = '#c6f6d5';
                 feedback.style.color = '#22543d';
-                feedback.innerHTML = `<strong>Juist! 🎉 Uitstekend geoefend.</strong><br><br>${currentQuizQuestion.explanation}`;
+                feedback.innerHTML = `<strong>Juist! 🎓 Academisch correct geoefend.</strong><br><br>${currentQuizQuestion.explanation}`;
                 score++;
             } else {
                 btnElement.classList.add('wrong');
