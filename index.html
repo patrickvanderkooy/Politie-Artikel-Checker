@@ -576,7 +576,7 @@
         <div id="articles-tab" class="tab-content active">
             <div class="search-box">
                 <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
-                <input type="text" id="searchInput" placeholder="Zoek op artikel (bijv. '52', '310 Sr', '27a Sv', 'Opiumwet') of trefwoord..." onkeyup="filterArticles()">
+                <input type="text" id="searchInput" placeholder="Zoek op artikel (bijv. '52', '310 Sr', '27a Sv', 'Opiumwet') ou trefwoord..." onkeyup="filterArticles()">
             </div>
 
             <div class="filters">
@@ -1129,7 +1129,7 @@
     <footer>
         Politie Studie Assistent PSI &bull; Afgestemd op Inforooster BPO/LEU/PSI/2639/B & Toetsmatrijs v1.0
         <div id="secretVisitorCounter" style="display: none; margin-top: 0.5rem; font-size: 0.75rem; color: #3182ce; font-weight: bold;">
-            👁️ Privé Teller (Alleen jij ziet dit) — Bezoeken: <span id="visitCountDisplay">0</span>
+            👁️ Privé Teller (Jouw bezoeken tellen niet mee) — Bezoeken van anderen: <span id="visitCountDisplay">0</span>
         </div>
     </footer>
 
@@ -1137,28 +1137,31 @@
         let historyStack = [];
         let currentTabId = 'articles-tab';
 
-        // Alleen jij activeert en ziet de teller door een unieke token of sessie-vlag in je eigen browser
+        // Alleen jij (de eigenaar) activeert de teller-weergave, maar jouw eigen bezoeken hogen de teller niet op.
         function initSecretCounter() {
-            const secretKey = 'psi_owner_secret_access';
-            let isOwner = localStorage.getItem(secretKey);
-            
+            const ownerKey = 'psi_owner_secret_access';
+            let isOwner = localStorage.getItem(ownerKey);
+
             if (!isOwner) {
-                // Eerste keer dat jij de app opent of herlaadt: activeer de eigenaar-modus
-                localStorage.setItem(secretKey, 'true');
+                // Eerste keer dat jij de app opent op dit apparaat/browser: markeer dit als jouw beheerder-sessie
+                localStorage.setItem(ownerKey, 'true');
                 isOwner = 'true';
             }
 
             if (isOwner === 'true') {
-                let visits = parseInt(localStorage.getItem('psi_owner_visit_count') || '0', 10);
-                visits++;
-                localStorage.setItem('psi_owner_visit_count', visits);
-
+                // Jij bent de eigenaar: toon de teller in de footer, maar tel jouw eigen openig *niet* op.
+                const visits = parseInt(localStorage.getItem('psi_external_visit_count') || '0', 10);
                 const counterEl = document.getElementById('secretVisitorCounter');
                 const countDisplay = document.getElementById('visitCountDisplay');
                 if (counterEl && countDisplay) {
                     countDisplay.textContent = visits;
                     counterEl.style.display = 'block';
                 }
+            } else {
+                // Dit is iemand anders: tel dit bezoek WEL op bij de teller voor de eigenaar
+                let visits = parseInt(localStorage.getItem('psi_external_visit_count') || '0', 10);
+                visits++;
+                localStorage.setItem('psi_external_visit_count', visits);
             }
         }
 
