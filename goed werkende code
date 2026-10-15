@@ -1512,7 +1512,7 @@
             {
                 id: "awbi1", law: "Algemene wet op het binnentreden", article: "Art. 1", title: "Legitimatie en doel binnentreden", inMatrix: true, vh: false, exam: false,
                 eis: "De student kan de vormvoorschriften bij binnentreden benoemen.",
-                text: "Degene die binnentreedt legitimeren zich ongevraagd en deelt het doel van het binnentreden mee.",
+                text: "Degene die binnentreedt legitimeert zich ongevraagd en deelt het doel van het binnentreden mee.",
                 explanation: "Verplichte cautie en bekendmaking vooraf bij woningbetreding.",
                 connection: "Grondwet art. 12."
             },
@@ -1684,56 +1684,57 @@
             let matrixItems = database.filter(d => d.inMatrix);
             const item = matrixItems[Math.floor(Math.random() * matrixItems.length)];
 
-            const subVariant = Math.floor(Math.random() * 6);
-            let questionText = "";
-            let correctAnswer = "";
-            let wrongPool = [];
+            // Genereer realistische Politieacademie examen-vragen zonder weg te geven in de vraagstelling
+            const quizVariants = [
+                {
+                    q: `Tijdens een surveillance word je geconfronteerd met een verdachte situatie waarbij handelen vereist is in het kader van de algemene politietaak. Welk wettelijk kader uit de Grondwet of Politiewet vormt de primaire grondslag voor de taakstelling van de politie?`,
+                    correct: `Politiewet 2012 - Art. 3 (Taak van de politie)`,
+                    wrongs: [
+                        `Wetboek van Strafvordering - Art. 141 (Opsporingsambtenaren)`,
+                        `Gemeentewet - Art. 172 (Handhaving openbare orde)`,
+                        `Grondwet - Art. 15 (Persoonlijke vrijheid)`
+                    ]
+                },
+                {
+                    q: `Een collega past een dwangmiddel toe en vraagt zich af of dit specifiek gekwalificeerd is als een voorlopige hechtenis feit (een 'paars VH-feit'). Wat is de juridische status van <strong>${item.article} (${item.title})</strong> in de toetsmatrijs?`,
+                    correct: item.vh ? `Dit misdrijf is aangewezen als een voorlopige hechtenis feit ex art. 67 Sv` : `Dit is geen voorlopige hechtenis feit ex art. 67 Sv`,
+                    wrongs: item.vh ? [
+                        `Dit is uitsluitend een overtreding zonder vrijheidsstraf`,
+                        `Dit kan enkel worden toegepast op bevel van de burgemeester`,
+                        `Dit is een misdrijf waarop maximaal 1 maand hechtenis staat`
+                    ] : [
+                        `Dit betreft een zwaar misdrijf dat altijd voorlopige hechtenis rechtvaardigt`,
+                        `Dit is een heterdaadfeit waarvoor direct inverzekeringstelling volgt`,
+                        `Dit valt onder de categorie van paarse VH-feiten`
+                    ]
+                },
+                {
+                    q: `In een praktijkcasus moet je bepalen welk wetsartikel en wetboek ten grondslag ligt aan de norm: <em>"${item.title}"</em>. Welke optie is juridisch volkomen juist?`,
+                    correct: `${item.law} - ${item.article}: ${item.title}`,
+                    wrongs: matrixItems.filter(d => d.id !== item.id).sort(() => 0.5 - Math.random()).slice(0, 3).map(o => `${o.law} - ${o.article}: ${o.title}`)
+                },
+                {
+                    q: `Bij de beoordeling van een proces-verbaal en de rechtmatigheid van het optreden rondom <strong>${item.title}</strong> ontstaat discussie over de correcte toepassing van de wet. Welk rechtsgebied is hier primair van toepassing?`,
+                    correct: `${item.law}`,
+                    wrongs: [
+                        `Burgerlijk Wetboek (BW)`,
+                        `Algemene wet bestuursrecht (Awb)`,
+                        `Wegenverkeerswet (WVW 1994)`
+                    ]
+                }
+            ];
 
-            if (subVariant === 0) {
-                questionText = `<strong>Academische Toets (Voorlopige Hechtenis):</strong> Is het delict <strong>${item.article} (${item.title})</strong> volgens de officiële toetsmatrijs aangemerkt als een <strong>Voorlopige Hechtenis feit (Paars VH-feit ex art. 67 Sv)</strong>?`;
-                correctAnswer = item.vh ? "Ja, dit is een aangewezen VH-feit" : "Nee, dit is GEEN VH-feit";
-                wrongPool = [
-                    item.vh ? "Nee, dit is GEEN VH-feit" : "Ja, dit is een aangewezen VH-feit",
-                    "Uitsluitend indien er sprake is van heterdaad",
-                    "Alleen op schriftelijk bevel van de burgemeester"
-                ];
-            } else if (subVariant === 1) {
-                questionText = `<strong>Wettekst Analyse:</strong> Welk wetsartikel hoort exact bij de volgende omschrijving uit het studiehandboek?<br><em>"${item.explanation.substring(0, 110)}..."</em>`;
-                correctAnswer = `${item.law} - ${item.article}: ${item.title}`;
-                const others = matrixItems.filter(d => d.id !== item.id).sort(() => 0.5 - Math.random());
-                wrongPool = others.slice(0, 3).map(o => `${o.law} - ${o.article}: ${o.title}`);
-            } else if (subVariant === 2) {
-                questionText = `<strong>Casustoets Politieacademie:</strong> ${item.eis || `Welke juridische norm is hier van toepassing bij ${item.title}?`}`;
-                correctAnswer = `${item.law} - ${item.article} (${item.title})`;
-                const others = matrixItems.filter(d => d.id !== item.id).sort(() => 0.5 - Math.random());
-                wrongPool = others.slice(0, 3).map(o => `${o.law} - ${o.article} (${o.title})`);
-            } else if (subVariant === 3) {
-                questionText = `<strong>Juridische Systematiek:</strong> Wat is het belangrijkste juridische criterium bij de toepassing van <strong>${item.article} (${item.title})</strong> uit de wet ${item.law}?`;
-                correctAnswer = item.title;
-                const others = matrixItems.filter(d => d.id !== item.id).sort(() => 0.5 - Math.random());
-                wrongPool = others.slice(0, 3).map(o => o.title);
-            } else if (subVariant === 4) {
-                questionText = `<strong>Bevoegdheden & Schakels:</strong> Welk wettelijk kader vormt de directe juridische grondslag en relatie voor de handhaving van <strong>${item.title}</strong> (${item.law} ${item.article})?`;
-                correctAnswer = `Gekoppeld aan ${item.law} en de algemene opsporingsbevoegdheden`;
-                wrongPool = [
-                    "Valt uitsluitend onder de autonome verordening van de gemeente",
-                    "Hiervoor is altijd een voorafgaand rechterlijk bevel vereist",
-                    "Dit betreft uitsluitend een interne richtlijn zonder wettelijke basis"
-                ];
-            } else {
-                questionText = `<strong>Verdiepingsvraag Examen:</strong> Welke stelling over <strong>${item.article} (${item.title})</strong> is juridisch volkomen juist volgens de landelijke toetsmatrijs?`;
-                correctAnswer = item.explanation.substring(0, 95) + "...";
-                const others = matrixItems.filter(d => d.id !== item.id).sort(() => 0.5 - Math.random());
-                wrongPool = others.slice(0, 3).map(o => o.explanation.substring(0, 95) + "...");
-            }
+            const selectedVariant = quizVariants[Math.floor(Math.random() * quizVariants.length)];
+            const correctAnswer = selectedVariant.correct;
+            const wrongPool = selectedVariant.wrongs;
 
             const allOptions = [correctAnswer, ...wrongPool.slice(0, 3)].sort(() => Math.random() - 0.5);
 
             currentQuizQuestion = {
-                question: questionText,
+                question: selectedVariant.q,
                 correct: correctAnswer,
                 options: allOptions,
-                explanation: (item.eis ? `<strong>Toetsmatrijs Eis:</strong> ${item.eis}<br><br>` : '') + '<strong>Studiehandboek Toelichting:</strong><br>' + item.explanation + (item.connection ? `<br><br><strong>Wetsverband & Relatie:</strong> ${item.connection}` : '')
+                explanation: `<strong>Juridische Verantwoording:</strong><br>Betreffende artikel: <strong>${item.law} ${item.article} (${item.title})</strong>.<br><br><strong>Toelichting uit handboek:</strong><br>${item.explanation}` + (item.connection ? `<br><br><strong>Wetsverband:</strong> ${item.connection}` : '')
             };
 
             questionCount++;
@@ -1763,7 +1764,7 @@
                 btnElement.classList.add('correct');
                 feedback.style.background = '#c6f6d5';
                 feedback.style.color = '#22543d';
-                feedback.innerHTML = `<strong>Juist! 🎓 Academisch correct geoefend.</strong><br><br>${currentQuizQuestion.explanation}`;
+                feedback.innerHTML = `<strong>Juist! 🎓 Academisch correct geoefend conform de Politieacademie toetsmatrijs.</strong><br><br>${currentQuizQuestion.explanation}`;
                 score++;
             } else {
                 btnElement.classList.add('wrong');
