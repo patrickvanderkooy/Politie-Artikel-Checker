@@ -563,7 +563,6 @@
         <button class="nav-btn" id="btn-quiz-tab" onclick="switchTab('quiz-tab', this)">Examen Quiz</button>
         <button class="nav-btn" id="btn-flow-tab" onclick="switchTab('flow-tab', this)">Stroomdiagrammen</button>
         <button class="nav-btn" id="btn-pv-tab" onclick="switchTab('pv-tab', this)">📋 PV Toets</button>
-        <button class="nav-btn" id="btn-scenario-tab" onclick="switchTab('scenario-tab', this)">💡 Casus</button>
         <button class="nav-btn" id="btn-ex1-tab" onclick="switchTab('ex1-tab', this)">Examen 1</button>
         <button class="nav-btn" id="btn-ex2-tab" onclick="switchTab('ex2-tab', this)">Examen 2</button>
         <button class="nav-btn" id="btn-ex3-tab" onclick="switchTab('ex3-tab', this)">Examen 3</button>
@@ -856,25 +855,6 @@
             </div>
         </div>
 
-        <!-- TAB 5: CASUS GENERATOR -->
-        <div id="scenario-tab" class="tab-content">
-            <div class="exam-card">
-                <h3>💡 Praktijk Casus & Scenario Generator</h3>
-                <div class="norm-badge">Oefen snel juridische kwalificaties en bevoegdheden voor rollenspellen</div>
-                <p style="font-size: 0.9rem; color: var(--text);">
-                    Klik op de knop hieronder om een willekeurige praktijkcasus op te vragen en te testen welke wetgeving en bevoegdheden van toepassing zijn.
-                </p>
-                <button class="quiz-btn" onclick="loadRandomScenario()">Genereer Nieuwe Casus 🔄</button>
-                
-                <div id="scenarioBox" style="margin-top: 1.2rem; background: var(--bg); padding: 1.2rem; border-radius: 8px; border: 1px solid var(--border); display: none;">
-                    <h4 id="scenTitle" style="color: var(--secondary); margin-top: 0;"></h4>
-                    <p id="scenDesc" style="line-height: 1.5;"></p>
-                    <div id="scenAnswer" style="margin-top: 1rem; padding: 0.8rem; background: rgba(49, 130, 206, 0.1); border-left: 3px solid var(--secondary); border-radius: 4px; display: none;"></div>
-                    <button id="scenRevealBtn" class="filter-btn" style="margin-top: 1rem;" onclick="revealScenarioAnswer()">Toon Juridische Analyse 🔍</button>
-                </div>
-            </div>
-        </div>
-
         <!-- EXAMEN 1 -->
         <div id="ex1-tab" class="tab-content">
             <div class="exam-card">
@@ -1148,11 +1128,39 @@
 
     <footer>
         Politie Studie Assistent PSI &bull; Afgestemd op Inforooster BPO/LEU/PSI/2639/B & Toetsmatrijs v1.0
+        <div id="secretVisitorCounter" style="display: none; margin-top: 0.5rem; font-size: 0.75rem; color: #3182ce; font-weight: bold;">
+            👁️ Privé Teller (Alleen jij ziet dit) — Bezoeken: <span id="visitCountDisplay">0</span>
+        </div>
     </footer>
 
     <script>
         let historyStack = [];
         let currentTabId = 'articles-tab';
+
+        // Alleen jij activeert en ziet de teller door een unieke token of sessie-vlag in je eigen browser
+        function initSecretCounter() {
+            const secretKey = 'psi_owner_secret_access';
+            let isOwner = localStorage.getItem(secretKey);
+            
+            if (!isOwner) {
+                // Eerste keer dat jij de app opent of herlaadt: activeer de eigenaar-modus
+                localStorage.setItem(secretKey, 'true');
+                isOwner = 'true';
+            }
+
+            if (isOwner === 'true') {
+                let visits = parseInt(localStorage.getItem('psi_owner_visit_count') || '0', 10);
+                visits++;
+                localStorage.setItem('psi_owner_visit_count', visits);
+
+                const counterEl = document.getElementById('secretVisitorCounter');
+                const countDisplay = document.getElementById('visitCountDisplay');
+                if (counterEl && countDisplay) {
+                    countDisplay.textContent = visits;
+                    counterEl.style.display = 'block';
+                }
+            }
+        }
 
         function recordHistoryState() {
             const currentSearch = document.getElementById('searchInput') ? document.getElementById('searchInput').value : '';
@@ -1211,6 +1219,7 @@
         }
 
         window.addEventListener('DOMContentLoaded', () => {
+            initSecretCounter();
             const dismissed = localStorage.getItem('pol_install_dismissed');
             if (!dismissed) {
                 document.getElementById('installBanner').style.display = 'flex';
@@ -1256,39 +1265,6 @@
                 .replace(/art\. (\d+[a-z]*)\b/gi, '<a class="law-link" onclick="searchArticle(\'$1\')">art. $1</a>')
                 .replace(/Grondwet art\. (\d+)/gi, '<a class="law-link" onclick="searchArticle(\'Grondwet $1\')">Grondwet art. $1</a>')
                 .replace(/Politiewet art\. (\d+)/gi, '<a class="law-link" onclick="searchArticle(\'Artikel $1\')">Politiewet art. $1</a>');
-        }
-
-        const scenarios = [
-            {
-                title: "Casus 1: Weigeren ID op Straat",
-                desc: "Je spreekt een man van 19 jaar aan verdacht van openlijke baldadigheid. Je vordert zijn identiteitsbewijs op grond van de Politiewet. De man weigert pertinent zijn ID te tonen en loopt weg.",
-                answer: "<strong>Juridische Analyse:</strong><br>1. Vordering ID is rechtmatig op grond van <strong>Politiewet Art. 8</strong> in combinatie met <strong>Wet op de identificatieplicht Art. 2</strong>.<br>2. Het weigeren levert een overtreding op ex <strong>Sr Art. 447e</strong> (niet voldoen aan identificatieplicht).<br>3. Je bent bevoegd de verdachte staande te houden ex <strong>Sv Art. 52</strong>. Indien hij blijft weigeren en je de identiteit niet kunt vaststellen, kun je hem aanhouden ter ophouden voor identificatie."
-            },
-            {
-                title: "Casus 2: Aanhouding door Omstanders (Heterdaad)",
-                desc: "Je krijgt een melding van een winkeldiefstal. Ter plaatse zie je dat de winkelier de verdachte reeds heeft vastgegrepen en tegen de grond houdt ('burgeraanhouding'). De winkelier draagt de verdachte aan jou over.",
-                answer: "<strong>Juridische Analyse:</strong><br>1. De winkelier was bevoegd tot aanhouding op grond van <strong>Sv Art. 53 lid 1</strong> (ontdekking op heterdaad).<br>2. Jij neemt als opsporingsambtenaar de verdachte over ex <strong>Sv Art. 53 lid 2</strong>.<br>3. Je mag direct een veiligheidsfouillering toepassen (<strong>Politiewet Art. 7 lid 3</strong>) en brengt de verdachte over naar het bureau (<strong>Sv Art. 55</strong>) voor identiteitsvaststelling en verhoor."
-            },
-            {
-                title: "Casus 3: Doorzoeking auto bij drugsvermoeden",
-                desc: "Je houdt een voertuig staande tijdens een verkeerscontrole. Je ruikt een sterke hennepgeur uit de auto komen en ziet in de deurportier een gripzakje met wit poeder liggen.",
-                answer: "<strong>Juridische Analyse:</strong><br>1. Dit levert een redelijk vermoeden op van overtreding van de <strong>Opiumwet Art. 2 / 3</strong> (hard/softdrugs).<br>2. Op grond van <strong>Sv Art. 96b</strong> ben je als opsporingsambtenaar bevoegd het vervoermiddel te doorzoeken ter inbeslagneming (<strong>Sv Art. 94</strong>).<br>3. Eventuele verdovende middelen en toebehoren worden in beslag genomen."
-            }
-        ];
-
-        function loadRandomScenario() {
-            const scen = scenarios[Math.floor(Math.random() * scenarios.length)];
-            document.getElementById('scenTitle').textContent = scen.title;
-            document.getElementById('scenDesc').textContent = scen.desc;
-            document.getElementById('scenAnswer').innerHTML = scen.answer;
-            document.getElementById('scenAnswer').style.display = 'none';
-            document.getElementById('scenRevealBtn').style.display = 'inline-block';
-            document.getElementById('scenarioBox').style.display = 'block';
-        }
-
-        function revealScenarioAnswer() {
-            document.getElementById('scenAnswer').style.display = 'block';
-            document.getElementById('scenRevealBtn').style.display = 'none';
         }
 
         function checkPVStatus() {
@@ -1765,7 +1741,7 @@
                     ]
                 },
                 {
-                    q: `Wat is het cruciale juridische onderscheid tussen een **veiligheidsfouillering** (Politiewet art. 7 lid 3) en een **opsporingsfouillering** (WvSv art. 56)?`,
+                    q: `Wat is het cruciale juridische onderscheid tussen een <strong>veiligheidsfouillering</strong> (Politiewet art. 7 lid 3) en een <strong>opsporingsfouillering</strong> (WvSv art. 56)?`,
                     correct: `De veiligheidsfouillering is uitsluitend gericht op het afwenden van acuut gevaar (wapens) op straat, terwijl de opsporingsfouillering op bevel van de (h)OvJ op het bureau plaatsvindt ten behoeve van de waarheidsvinding.`,
                     wrongs: [
                         `Er is geen enkel juridisch onderscheid; beide termen mogen door elkaar worden gebruikt in het proces-verbaal.`,
