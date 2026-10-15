@@ -122,7 +122,6 @@
             cursor: not-allowed;
         }
 
-        /* PROFESSIONELE NAVIGATIE: ZICHTBAAR OP PC EN MOBIEL */
         nav {
             display: flex;
             flex-wrap: wrap;
@@ -309,6 +308,7 @@
             white-space: pre-wrap;
             margin-bottom: 0.75rem;
             border-left: 3px solid var(--secondary);
+            line-height: 1.5;
         }
 
         .explanation {
@@ -551,7 +551,7 @@
 
     <header>
         <h1>Politie Wetboeken & PSI Examen Assistent - Academie Editie</h1>
-        <p>Volledige handboek (114 toetsmatrijs artikelen), stroomdiagrammen, PV-toets & Academische Examen Quiz (Niveau Politieacademie)</p>
+        <p>Volledige handboek (114 toetsmatrijs artikelen met officiële wetteksten), stroomdiagrammen, PV-toets & Academische Examen Quiz</p>
         <div class="header-btns">
             <button class="back-btn-header" id="backBtn" onclick="goBackHistory()" disabled title="Ga naar vorige pagina/zoekopdracht">↩️ Vorige</button>
             <button class="dark-toggle" onclick="toggleDarkMode()" id="darkModeBtn">🌙 Dark</button>
@@ -591,7 +591,7 @@
             <div id="articlesContainer"></div>
         </div>
 
-        <!-- TAB 2: EXAMEN QUIZ (NIVEAU POLITIEACADEMIE) -->
+        <!-- TAB 2: EXAMEN QUIZ -->
         <div id="quiz-tab" class="tab-content">
             <div class="quiz-container">
                 <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; color: #718096; font-size: 0.9rem;">
@@ -624,7 +624,7 @@
                 <details class="flow-accordion">
                     <summary>📖 Politiewet Art. 3 – Taak van de politie</summary>
                     <div class="flow-accordion-content">
-                        <strong>Wettekst:</strong> De politie heeft tot taak in ondergeschiktheid aan het bevoegd gezag en in overeenstemming met de geldende rechtsregels te zorgen voor de daadwerkelijke handhaving van de rechtsorde en het verlenen van hulp aan hen die deze behoeven.<br><br>
+                        <strong>Volledige Wettekst:</strong> De politie heeft tot taak in ondergeschiktheid aan het bevoegd gezag en in overeenstemming met de geldende rechtsregels te zorgen voor de daadwerkelijke handhaving van de rechtsorde en het verlenen van hulp aan hen die deze behoeven.<br><br>
                         <em>Toelichting:</em> Grondslag voor het optreden op straat (ordehandhaving & hulp).
                     </div>
                 </details>
@@ -632,7 +632,7 @@
                 <details class="flow-accordion">
                     <summary>📖 Politiewet Art. 8 – Vorderen inzage identiteitsbewijs</summary>
                     <div class="flow-accordion-content">
-                        <strong>Wettekst:</strong> Bevoegd tot het vorderen van inzage van een identiteitsbewijs voor zover dat redelijkerwijs noodzakelijk is voor de uitvoering van de politietaak.<br><br>
+                        <strong>Volledige Wettekst:</strong> Een ambtenaar van politie is bevoegd tot het vorderen van inzage van een identiteitsbewijs van personen als bedoeld in artikel 1 van de Wet op de identificatieplicht, voor zover dat redelijkerwijs noodzakelijk is voor de uitoefening van de politietaak.<br><br>
                         <em>Toelichting:</em> Gekoppeld aan de ID-plicht (Wid art. 2, vanaf 14 jaar).
                     </div>
                 </details>
@@ -640,7 +640,7 @@
                 <details class="flow-accordion">
                     <summary>📖 Sv Art. 52 – Staandehouding</summary>
                     <div class="flow-accordion-content">
-                        <strong>Wettekst:</strong> Iedere opsporingsambtenaar is bevoegd de verdachte staande te houden ter vaststelling van diens identiteit.<br><br>
+                        <strong>Volledige Wettekst:</strong> Iedere opsporingsambtenaar is bevoegd de verdachte staande te houden ter vaststelling van diens identiteit.<br><br>
                         <em>Toelichting:</em> Mag uitsluitend bij een redelijk vermoeden van schuld (art. 27 Sv).
                     </div>
                 </details>
@@ -648,7 +648,7 @@
                 <details class="flow-accordion">
                     <summary>📖 Sv Art. 27a – Vaststellen personalia</summary>
                     <div class="flow-accordion-content">
-                        <strong>Wettekst:</strong> Het naar naam, voornamen, geboortedatum, geboorteplaats, adres en woonplaats vragen van de verdachte.<br><br>
+                        <strong>Volledige Wettekst:</strong> Het vaststellen van de identiteit van de verdachte omvat het vragen naar zijn naam, voornamen, geboortedatum, geboorteplaats, adres waarop hij in de basisregistratie personen staat ingeschreven en woon- of verblijfplaats.<br><br>
                         <em>Toelichting:</em> Vragen staat vrij, maar bij staandehouding is medewerking verplicht (art. 447e Sr bij weigering).
                     </div>
                 </details>
@@ -656,7 +656,7 @@
                 <details class="flow-accordion">
                     <summary>📖 Ambtsinstructie Art. 2 – Legitimatieplicht</summary>
                     <div class="flow-accordion-content">
-                        <strong>Wettekst:</strong> De ambtenaar in burger legitimeert zich ongevraagd; in uniform op verzoek.<br><br>
+                        <strong>Volledige Wettekst:</strong> De ambtenaar legitimeert zich met het aan hem verstrekte legitimatiebewijs: a. bij optreden in burgerkleding ongevraagd, tenzij bijzondere omstandigheden dit onmogelijk maken; b. bij optreden in uniform, op verzoek van eenieder.<br><br>
                         <em>Toelichting:</em> Vormvoorschrift bij aanvang van het optreden.
                     </div>
                 </details>
@@ -670,24 +670,22 @@
                 <div class="flow-desc">
                     • <strong>Heterdaad (Art. 53 Sv):</strong> Iedereen bevoegd aan te houden bij ontdekking op heterdaad.<br>
                     • <strong>Buiten heterdaad (Art. 54 Sv):</strong> Uitsluitend opsporingsambtenaren op schriftelijk bevel van de (H)OvJ bij VH-feiten.<br>
-                    • <strong>🛡️ Fouilleringsoort 1 - Veiligheidsfouillering (Art. 7 lid 3 Pw):</strong> Direct op straat bij acuut dreigend gevaar voor leven of veiligheid (wapens).
+                    • <strong>🛡️ Fouilleringsoort 1 - Veiligheidsfouillering (Art. 7 lid 3 Pw):</strong> Direct op straat bij acuut dreigend gevaar voor leven en veiligheid.
                 </div>
 
                 <details class="flow-accordion">
                     <summary>📖 Sv Art. 53 & 54 – Aanhouding op en buiten heterdaad</summary>
                     <div class="flow-accordion-content">
-                        <strong>Wettekst:</strong><br>
-                        - <em>Art. 53:</em> Bij ontdekking op heterdaad is eenieder bevoegd den verdachte aan te houden.<br>
-                        - <em>Art. 54:</em> Buiten heterdaad is uitsluitend de opsporingsambtenaar bevoegd op bevel van de OvJ bij VH-feiten.<br><br>
-                        <em>Toelichting:</em> Burgers mogen alleen op heterdaad aanhouden en moeten verdachte direct overdragen aan politie.
+                        <strong>Volledige Wettekst Art. 53 Sv:</strong> 1. Bij ontdekking op heterdaad is eenieder bevoegd den verdachte aan te houden. 2. In dat geval is de opsporingsambtenaar bevoegd de verdachte, ter gelijke tijd met zijn aanhouding of onmiddellijk daarna, over te brengen naar een plaats voor verhoor.<br><br>
+                        <strong>Volledige Wettekst Art. 54 Sv:</strong> 1. Buiten het geval van ontdekking op heterdaad is de opsporingsambtenaar bevoegd de verdachte aan te houden op bevel van de officier van justitie of, indien diens bevel niet kan worden afgewacht, op bevel van de hulpofficier van justitie, voor zover het betreft een feit waarvoor voorlopige hechtenis is toegelaten.
                     </div>
                 </details>
 
                 <details class="flow-accordion">
                     <summary>📖 Politiewet Art. 7 lid 3 – Veiligheidsfouillering (Straat)</summary>
                     <div class="flow-accordion-content">
-                        <strong>Wettekst:</strong> De ambtenaar is bevoegd een persoon aan zijn kleding te onderzoeken indien er een onmiddellijk dreigend gevaar is voor leven of veiligheid.<br><br>
-                        <em>Toelichting:</em> Uitsluitend ter afwending van acuut gevaar (zoals het aantreffen van een vuurwapen of mes).
+                        <strong>Volledige Wettekst:</strong> De ambtenaar is bevoegd een persoon die rechtmatig van zijn vrijheid is beroofd, dan wel ten aanzien van wie uit feiten of omstandigheden blijkt dat een onmiddellijk gevaar dreigt voor diens leven of veiligheid, die van de ambtenaar zelf of van derden, aan zijn kleding te onderzoeken op de aanwezigheid van voorwerpen die een gevaar voor de veiligheid kunnen opleveren.<br><br>
+                        <em>Toelichting:</em> Uitsluitend ter afwending van acuut gevaar.
                     </div>
                 </details>
             </div>
@@ -707,32 +705,29 @@
                 <details class="flow-accordion">
                     <summary>📖 Sv Art. 55 – Overbrenging naar het bureau</summary>
                     <div class="flow-accordion-content">
-                        <strong>Wettekst:</strong> De aangehouden verdachte wordt onverwijld overgebracht naar een plaats voor verhoor bestemd.<br><br>
-                        <em>Toelichting:</em> Directe doorgeleiding naar het bureau na aanhouding.
+                        <strong>Volledige Wettekst:</strong> 1. De aangehouden verdachte wordt onverwijld overgebracht naar een plaats voor verhoor bestemd. 2. Hij wordt terstond voorgeleid aan de hulpofficier van justitie.
                     </div>
                 </details>
 
                 <details class="flow-accordion">
                     <summary>📖 Sv Art. 94 & 96b – Inbeslagneming & Doorzoeken voertuig</summary>
                     <div class="flow-accordion-content">
-                        <strong>Wettekst:</strong> Alle voorwerpen die kunnen dienen om de waarheid aan het dag te brengen zijn vatbaar voor inbeslagneming. Vervoermiddelen mogen doorzocht worden.<br><br>
-                        <em>Toelichting:</em> Waarheidsvinding en veiligstellen van sporen/goederen.
+                        <strong>Volledige Wettekst Art. 94 Sv:</strong> Vatbaar voor inbeslagneming zijn alle voorwerpen die kunnen dienen om de waarheid aan het dag te brengen of om wederrechtelijk verkregen voordeel aan te tonen.<br><br>
+                        <strong>Volledige Wettekst Art. 96b Sv:</strong> De opsporingsambtenaar is bevoegd ter inbeslagneming een vervoermiddel te doorzoeken.
                     </div>
                 </details>
 
                 <details class="flow-accordion">
                     <summary>📖 Sv Art. 55b – Identificatiefouillering</summary>
                     <div class="flow-accordion-content">
-                        <strong>Wettekst:</strong> Onderzoek aan de kleding van de verdachte ter vaststelling van diens identiteit indien medewerking uitblijft.<br><br>
-                        <em>Toelichting:</em> Streng beperkt doel: enkel zoeken naar een identiteitsdocument.
+                        <strong>Volledige Wettekst:</strong> De opsporingsambtenaar kan de aangehouden verdachte aan diens kleding onderzoeken, alsmede door hem meegevoerde bescheiden of voorwerpen onderzoeken, voor zover dit noodzakelijk is voor de vaststelling van diens identiteit.
                     </div>
                 </details>
 
                 <details class="flow-accordion">
                     <summary>📖 Sv Art. 56b – Ophouden ter identificatie</summary>
                     <div class="flow-accordion-content">
-                        <strong>Wettekst:</strong> Verlenging van de ophoudingstermijn met ten hoogste zes uren indien de identiteit bij een niet-VH feit niet direct kan worden vastgesteld.<br><br>
-                        <em>Toelichting:</em> Specifieke bevoegdheid voor hardnekkige weigering bij lichte feiten.
+                        <strong>Volledige Wettekst:</strong> Indien de identiteit van de verdachte niet direct kan worden vastgesteld, kan de hulpofficier van justitie bevelen dat de verdachte ten behoeve van de vaststelling van diens identiteit voor ten hoogste zes uren wordt opgehouden.
                     </div>
                 </details>
             </div>
@@ -750,8 +745,7 @@
                 <details class="flow-accordion">
                     <summary>📖 Politiewet Art. 7 lid 4 – Vervoers- en Insluitingsfouillering</summary>
                     <div class="flow-accordion-content">
-                        <strong>Wettekst:</strong> Bevoegdheid tot onderzoek aan de kleding van te vervoeren of in te sluiten personen ter ontdekking van gevaarlijke voorwerpen.<br><br>
-                        <em>Toelichting:</em> Verplichte veiligheidsprocedure voor zowel transport (auto) als insluiting (cel).
+                        <strong>Volledige Wettekst:</strong> De ambtenaar is bevoegd een persoon die te vervoeren is dan wel ingesloten is in een politiecel, aan zijn kleding te onderzoeken op de aanwezigheid van voorwerpen die bij het vervoer of de insluiting een gevaar voor diens veiligheid of de veiligheid van anderen kunnen opleveren.
                     </div>
                 </details>
             </div>
@@ -771,27 +765,22 @@
                 <details class="flow-accordion">
                     <summary>📖 Sv Art. 56 – Opsporingsfouillering</summary>
                     <div class="flow-accordion-content">
-                        <strong>Wettekst:</strong> Onderzoek aan het lichaam of kleding van de verdachte op bevel van de hulpofficier van justitie in het belang van het onderzoek.<br><br>
-                        <em>Toelichting:</em> Volledige fouillering ten behoeve van het opsporingsonderzoek en sporen.
+                        <strong>Volledige Wettekst:</strong> De officier van justitie of de hulpofficier van justitie voor wie de aangehouden verdachte wordt voorgeleid, kan, bij ernstige bezwaren, in het belang van het onderzoek bepalen dat deze aan zijn kleding of aan zijn lichaam wordt onderzocht.
                     </div>
                 </details>
 
                 <details class="flow-accordion">
                     <summary>📖 Sv Art. 56a – Ophouden voor onderzoek</summary>
                     <div class="flow-accordion-content">
-                        <strong>Wettekst:</strong> Het ophouden voor onderzoek duurt ten hoogste negen uren (bij VH-feit) of zes uren (geen VH-feit).<br><br>
-                        <em>Toelichting:</em> Strenge wettelijke tijdslimiet. Nachtelijke uren (middernacht tot negen uur ochtend) worden niet meegeteld.
+                        <strong>Volledige Wettekst:</strong> De hulpofficier van justitie kan bepalen dat de verdachte voor ten hoogste negen uren wordt opgehouden ter plaats van verhoor, indien het een feit betreft waarvoor voorlopige hechtenis is toegelaten, dan wel voor ten hoogste zes uren indien het een ander feit betreft. De tijd tussen middernacht en negen uur ’s morgens wordt niet meegerekend.
                     </div>
                 </details>
 
                 <details class="flow-accordion">
                     <summary>📖 Sv Art. 27c, 28 & 29 – Rechten, Raadsman & Cautie</summary>
                     <div class="flow-accordion-content">
-                        <strong>Wettekst:</strong><br>
-                        - <em>Art. 27c:</em> Mededeling van het feit waarvan men wordt verdacht.<br>
-                        - <em>Art. 28:</em> Recht op raadsman (consultatie- en verhoorbijstand).<br>
-                        - <em>Art. 29 lid 2:</em> Vóór de aanvang van het verhoor wordt medegedeeld dat men niet tot antwoorden verplicht is.<br><br>
-                        <em>Toelichting:</em> Fundamentele waarborgen; schending van art. 29 leidt vaak tot bewijsuitsluiting.
+                        <strong>Volledige Wettekst Art. 29 lid 2 Sv:</strong> Voor het verhoor wordt de verdachte medegedeeld dat hij niet verplicht is tot antwoorden.<br><br>
+                        <strong>Volledige Wettekst Art. 28 Sv:</strong> De verdachte heeft het recht zich te doen bijstaan door een raadsman.
                     </div>
                 </details>
             </div>
@@ -809,8 +798,7 @@
                 <details class="flow-accordion">
                     <summary>📖 Sv Art. 57 & 58 – Inverzekeringstelling</summary>
                     <div class="flow-accordion-content">
-                        <strong>Wettekst:</strong> De officier van justitie is bevoegd de inverzekeringstelling te bevelen van de verdachte van een feit waarvoor voorlopige hechtenis is toegelaten.<br><br>
-                        <em>Toelichting:</em> Maximale duur is 3 dagen, eenmalig te verlengen met 3 dagen.
+                        <strong>Volledige Wettekst Art. 57 Sv:</strong> De officier van justitie of de hulpofficier van justitie kan de aangehouden verdachte in het belang van het onderzoek in verzekering stellen, mits het een feit betreft waarvoor voorlopige hechtenis is toegelaten.
                     </div>
                 </details>
             </div>
@@ -828,8 +816,7 @@
                 <details class="flow-accordion">
                     <summary>📖 Sv Art. 339, 342 & 344 – Bewijsmiddelen & Bewijsminimum</summary>
                     <div class="flow-accordion-content">
-                        <strong>Wettekst:</strong> Als wettige bewijsmiddelen zijn er eigen waarneming van de ambtenaar (pv), verklaringen van verdachte en getuigen. Bewezen is indien de rechter door de inhoud overtuigd is, gestoeld op ten minste twee bewijsmiddelen.<br><br>
-                        <em>Toelichting:</em> De formele afronding van het strafrechtelijk onderzoek in een waterdicht proces-verbaal.
+                        <strong>Volledige Wettekst Art. 342 lid 2 Sv:</strong> Het bewijs dat de verdachte het ten laste gelegde feit heeft begaan, kan door den rechter niet uitsluitend worden aangenomen op de verklaring van één getuige.
                     </div>
                 </details>
             </div>
@@ -1319,7 +1306,7 @@
             }
         }
 
-        // DATABASE VAN 114 ARTIKELEN
+        // DATABASE VAN 114 ARTIKELEN MET VOLLEDIGE WETTEKSTEN
         const database = [
             {
                 id: "gw1", law: "Grondwet", article: "Art. 1", title: "Gelijkheid & Discriminatieverbod", inMatrix: true, vh: false, exam: true,
@@ -1331,42 +1318,42 @@
             {
                 id: "gw10", law: "Grondwet", article: "Art. 10", title: "Eerbiediging persoonlijke levenssfeer", inMatrix: true, vh: false, exam: false,
                 eis: "De student kan in een praktijksituatie bepalen wanneer de politie inbreuk mag maken op grondrechten.",
-                text: "Ieder heeft, behoudens bij of krachtens de wet te stellen beperkingen, recht op eerbiediging van zijn persoonlijke levenssfeer.",
+                text: "1. Ieder heeft, behoudens bij of krachtens de wet te stellen beperkingen, recht op eerbiediging van zijn persoonlijke levenssfeer.\n2. De wet stelt regels ter bescherming van de persoonlijke levenssfeer in verband met het vastleggen en verstrekken van persoonsgegevens.\n3. De wet stelt regels inzake de aanspraken van personen op kennisneming van over hen vastgelegde gegevens en van het gebruik dat daarvan wordt gemaakt, alsmede op verbetering van zulke gegevens.",
                 explanation: "Privacybescherming. Beperkingen zijn enkel geoorloofd wanneer bij wet geregeld (zoals AVG of WPG).",
                 connection: "WPG, AVG."
             },
             {
                 id: "gw11", law: "Grondwet", article: "Art. 11", title: "Onaantastbaarheid lichaam", inMatrix: true, vh: false, exam: false,
                 eis: "De student kan in een praktijksituatie bepalen wanneer inbreuk op lichamelijke integriteit is toegestaan.",
-                text: "Ieder heeft, behoudens bij of krachtens de wet te stellen beperkingen, recht op onaantastbaarheid van zijn lichaam.",
+                text: "Ieder heeft, behoudens bij en krachtens de wet te stellen beperkingen, recht op onaantastbaarheid van zijn lichaam.",
                 explanation: "Beschermt de lichamelijke integriteit tegen onvrijwillige medische of fysieke ingrepen, tenzij wettelijk voorzien.",
                 connection: "WvSv dwangmiddelen."
             },
             {
                 id: "gw12", law: "Grondwet", article: "Art. 12", title: "Huisrecht", inMatrix: true, vh: false, exam: false,
                 eis: "De student kan uitleggen onder welke voorwaarden binnentreden in een woning zonder toestemming is toegestaan.",
-                text: "Het binnentreden in een woning zonder toestemming van de bewoner is alleen geoorloofd in de gevallen bij of krachtens de wet bepaald...",
+                text: "1. Het binnentreden in een woning zonder de wil van de bewoner is alleen geoorloofd in de gevallen bij of krachtens de wet bepaald, door hen die daartoe bij of krachtens de wet zijn aangewezen.\n2. Voor het binnentreden overeenkomstig het eerste lid is voorafgaande legitimatie en mededeling van het doel van het binnentreden vereist, behoudens bij de wet gestelde uitzonderingen.\n3. Aan de bewoner wordt een schriftelijk verslag van het binnentreden verstrekt.",
                 explanation: "Grondwettelijk huisrecht. Binnentreden zonder toestemming vereist een wettelijke basis (zoals Awbi of hulpverlening).",
                 connection: "Awbi, Politiewet art. 7 lid 2."
             },
             {
                 id: "gw15", law: "Grondwet", article: "Art. 15", title: "Persoonlijke vrijheid", inMatrix: true, vh: false, exam: false,
                 eis: "De student kan uitleggen wat wordt bedoeld met het recht op vrijheid en onder welke voorwaarden vrijheidsontneming mag.",
-                text: "Buiten de gevallen bij of krachtens de wet bepaald mag niemand zijn vrijheid worden ontnomen.",
+                text: "1. Buiten de gevallen bij of krachtens de wet bepaald mag niemand zijn vrijheid worden ontnomen.\n2. Hij aan wie anders dan op rechterlijk bevel zijn vrijheid is ontnomen, kan de rechter verzoeken zijn invrijheidstelling te bevelen.",
                 explanation: "Vrijheidsontneming uitsluitend op wettelijke basis in het Wetboek van Strafvordering.",
                 connection: "WvSv vrijheidsontneming."
             },
             {
                 id: "pw2", law: "Politiewet 2012", article: "Art. 2", title: "Ambtenaren van politie", inMatrix: true, vh: false, exam: false,
                 eis: "De student kan beschrijven wie als ambtenaren van politie worden beschouwd.",
-                text: "Ambtenaren van politie in de zin van deze wet zijn aangesteld voor de uitvoering van de politietaak...",
+                text: "Ambtenaren van politie in de zin van deze wet zijn: a. de ambtenaren die zijn aangesteld voor de uitvoering van de politietaak; b. de ambtenaren die zijn aangesteld voor het uitvoeren van technische, administratieve en andere ondersteunende diensten.",
                 explanation: "Definitie van de politieambtenaren belast met de politietaak.",
                 connection: "Politiewet art. 3."
             },
             {
                 id: "pw3", law: "Politiewet 2012", article: "Art. 3", title: "Taak politie", inMatrix: true, vh: false, exam: false,
                 eis: "De student kan beschrijven wat de taak van de politie is.",
-                text: "De politie heeft tot taak in ondergeschiktheid aan het bevoegd gezag... te zorgen voor daadwerkelijke handhaving rechtsorde en hulpverlening.",
+                text: "De politie heeft tot taak in ondergeschiktheid aan het bevoegd gezag en in overeenstemming met de geldende rechtsregels te zorgen voor de daadwerkelijke handhaving van de rechtsorde en het verlenen van hulp aan hen die deze behoeven.",
                 explanation: "De twee kerntaken: handhaving rechtsorde en hulpverlening onder gezag van burgemeester of OvJ.",
                 connection: "Gemeentewet art. 172, WvSv art. 141."
             },
@@ -1380,116 +1367,116 @@
             {
                 id: "pw7_1", law: "Politiewet 2012", article: "Art. 7 lid 1", title: "Geweldsbevoegdheid", inMatrix: true, vh: false, exam: false,
                 eis: "De student kan beoordelen of geweldgebruik rechtmatig is.",
-                text: "Bevoegd in de rechtmatige uitoefening van de bediening geweld of vrijheidsbeperkende middelen te gebruiken wanneer het doel dit rechtvaardigt...",
+                text: "De ambtenaar van politie die is aangesteld voor de uitvoering van de politietaak, is bevoegd in de rechtmatige uitoefening van zijn bediening geweld of vrijheidsbeperkende middelen te gebruiken, wanneer het daarmee beoogde doel dit, mede gelet op de aan het gebruik van geweld of vrijheidsbeperkende middelen verbonden gevaren, rechtvaardigt en dat doel niet op een andere wijze kan worden bereikt. Aan het gebruik van geweld gaat zo mogelijk een waarschuwing vooraf.",
                 explanation: "Toetsing aan proportionaliteit en subsidiariteit.",
                 connection: "Ambtsinstructie."
             },
             {
                 id: "pw7_2", law: "Politiewet 2012", article: "Art. 7 lid 2", title: "Toegang ter hulpverlening", inMatrix: true, vh: false, exam: false,
                 eis: "De student kan bepalen of de politie bevoegd is tot betreden ter hulpverlening.",
-                text: "Heeft toegang tot elke plaats voor zover dat voor het verlenen van hulp redelijkerwijs nodig is.",
+                text: "De ambtenaar van politie heeft toegang tot elke plaats, voor zover dat voor het verlenen van hulp aan hen die deze behoeven, redelijkerwijs nodig is.",
                 explanation: "Juridische grondslag om woningen/panden te betreden bij acute nood of hulpvraag.",
                 connection: "Awbi."
             },
             {
                 id: "pw7_3", law: "Politiewet 2012", article: "Art. 7 lid 3", title: "Veiligheidsfouillering", inMatrix: true, vh: false, exam: false,
                 eis: "De student kan beschrijven onder welke voorwaarden veiligheidsfouillering wordt uitgevoerd.",
-                text: "Bevoegd tot onderzoek aan de kleding en voorwerpen indien uit feiten of omstandigheden een onmiddellijk gevaar dreigt.",
+                text: "De ambtenaar van politie is bevoegd een persoon die rechtmatig van zijn vrijheid is beroofd, dan wel ten aanzien van wie uit feiten of omstandigheden blijkt dat een onmiddellijk gevaar dreigt voor diens leven of veiligheid, die van de ambtenaar zelf of van derden, aan zijn kleding te onderzoeken op de aanwezigheid van voorwerpen die een gevaar voor de veiligheid kunnen opleveren.",
                 explanation: "Direct toepasbaar bij acuut gevaar voor leven of veiligheid.",
                 connection: "Politiewet art. 7."
             },
             {
                 id: "pw7_4", law: "Politiewet 2012", article: "Art. 7 lid 4", title: "Vervoers- en insluitingsfouillering", inMatrix: true, vh: false, exam: false,
                 eis: "De student kan beoordelen of vervoersfouillering mag.",
-                text: "Bevoegd een te vervoeren of in te sluiten persoon aan zijn kleding te onderzoeken op gevaarlijke voorwerpen.",
+                text: "De ambtenaar van politie is bevoegd een persoon die te vervoeren is dan wel ingesloten is in een politiecel, aan zijn kleding te onderzoeken op de aanwezigheid van voorwerpen die bij het vervoer of de insluiting een gevaar voor diens veiligheid of de veiligheid van anderen kunnen opleveren.",
                 explanation: "Veiligheidscheck voorafgaand aan transport in dienstvoertuig of cel.",
                 connection: "Politiewet art. 7."
             },
             {
                 id: "pw7_7", law: "Politiewet 2012", article: "Art. 7 lid 7", title: "Redelijk en gematigd", inMatrix: true, vh: false, exam: false,
                 eis: "De uitoefening van bevoegdheden dient in verhouding tot het doel redelijk en gematigd te zijn.",
-                text: "De uitoefening van de bevoegdheden dient in verhouding tot het beoogde doel redelijk en gematigd te zijn.",
+                text: "De uitoefening van de bevoegdheden, bedoeld in het eerste tot en met zesde lid, dient in verhouding tot het beoogde doel redelijk en gematigd te zijn.",
                 explanation: "Algemeen aansturingscriterium voor optreden.",
                 connection: "Politiewet art. 7."
             },
             {
                 id: "pw8", law: "Politiewet 2012", article: "Art. 8", title: "Vorderen inzage identiteitsbewijs", inMatrix: true, vh: false, exam: false,
                 eis: "De student kan bepalen of hij inzage van een identiteitsbewijs mag vorderen.",
-                text: "Bevoegd tot het vorderen van inzage van een identiteitsbewijs voor zover dat redelijkerwijs noodzakelijk is.",
+                text: "Een ambtenaar van politie is bevoegd tot het vorderen van inzage van een identiteitsbewijs van personen als bedoeld in artikel 1 van de Wet op de identificatieplicht, voor zover dat redelijkerwijs noodzakelijk is voor de uitoefening van de politietaak.",
                 explanation: "Gekoppeld aan de ID-plicht vanaf 14 jaar (Wid art. 2).",
                 connection: "Wid art. 2."
             },
             {
                 id: "ai2", law: "Ambtsinstructie", article: "Art. 2", title: "Legitimatie", inMatrix: true, vh: false, exam: false,
                 eis: "De student kan benoemen in welke situaties hij zich moet legitimeren.",
-                text: "a. Bij optreden in burgerkleding ongevraagd, tenzij bijzondere omstandigheden; b. Bij optreden in uniform, op verzoek.",
+                text: "De ambtenaar legitimeert zich met het aan hem verstrekte legitimatiebewijs: a. bij optreden in burgerkleding ongevraagd, tenzij bijzondere omstandigheden dit onmogelijk maken; b. bij optreden in uniform, op verzoek van eenieder.",
                 explanation: "Legitimatieplicht voor ambtenaren in burger en uniform.",
                 connection: "Politiewet art. 3."
             },
             {
                 id: "gw172", law: "Gemeentewet", article: "Art. 172", title: "Handhaving openbare orde", inMatrix: true, vh: false, exam: false,
                 eis: "De student kan beschrijven welke rol en bevoegdheden de burgemeester heeft.",
-                text: "De burgemeester is belast met de handhaving van de openbare orde en bevoegd overtredingen te beletten of te beëindigen.",
+                text: "1. De burgemeester is belast met de handhaving van de openbare orde.\n2. De burgemeester is bevoegd overtredingen van wettelijke voorschriften die betrekking hebben op de openbare orde, te beletten of te beëindigen. Hij bedient zich daarbij van de onder zijn gezag staande politie.",
                 explanation: "Burgemeester is opperhoofd openbare orde en bedient zich van de politie.",
                 connection: "Politiewet art. 3."
             },
             {
                 id: "wpg1", law: "Wet politiegegevens", article: "Art. 1", title: "Definitie politiegegeven", inMatrix: true, vh: false, exam: false,
                 eis: "De student kan beschrijven wat wordt verstaan onder politiegegevens.",
-                text: "Elk persoonsgegeven dat wordt verwerkt in het kader van de uitvoering van de politietaak.",
+                text: "In deze wet en de daarop berustende bepalingen wordt verstaan onder: a. politiegegeven: elk persoonsgegeven dat wordt verwerkt in het kader van de uitoefening van de politietaak, bedoeld in artikel 3 van de Politiewet 2012.",
                 explanation: "Omvat alle data verzameld tijdens het politiewerk.",
                 connection: "WPG art. 8."
             },
             {
                 id: "wpg8", law: "Wet politiegegevens", article: "Art. 8", title: "Verwerking politiegegevens", inMatrix: true, vh: false, exam: false,
                 eis: "De student kan beschrijven onder welke voorwaarden gegevens worden verwerkt.",
-                text: "Gegevens kunnen worden verwerkt voor de dagelijkse politietaak gedurende max 1 jaar (of uiterlijk 5 jaar voor vernietiging).",
+                text: "1. Politiegegevens worden verwerkt voor zover dit noodzakelijk is voor de uitvoering van de dagelijkse politietaak.\n2. De verwerking van politiegegevens vindt uitsluitend plaats voor het doel waarvoor zij zijn verzameld of voor zover verenigbaar met dat doel.",
                 explanation: "Strikte wettelijke bewaartermijnen in de WPG.",
                 connection: "WPG art. 1."
             },
             ...[
                 {art: "1", title: "Legaliteitsbeginsel", vh: false, desc: "Geen feit is strafbaar dan uit kracht van een daaraan voorafgegane wettelijke strafbepaling."},
-                {art: "39", title: "Ontoerekenbaarheid", vh: true, desc: "Niet strafbaar is hij die een feit begaat wegens psychische stoornis of handicap."},
+                {art: "39", title: "Ontoerekenbaarheid", vh: true, desc: "Niet strafbaar is hij die een feit begaat dat hem wegens een ziekelijke stoornis of gebrekkige ontwikkeling van zijn geestesvermogens niet kan worden toegerekend."},
                 {art: "40", title: "Overmacht", vh: true, desc: "Niet strafbaar is hij die een feit begaat waartoe hij door overmacht is gedrongen."},
-                {art: "41", title: "Noodweer / Noodweerexces", vh: true, desc: "Noodzakelijke verdediging tegen ogenblikkelijke, wederrechtelijke aanranding."},
+                {art: "41", title: "Noodweer / Noodweerexces", vh: true, desc: "1. Niet strafbaar is hij die een feit begaat, geboden door de noodzakelijke verdediging van eigen of eens anders lijf, eerbaarheid of goed tegen ogenblikkelijke, wederrechtelijke aanranding.\n2. Niet strafbaar is de overschrijding van de grenzen van noodzakelijke verdediging, indien zij het onmiddellijk gevolg is geweest van een hevig gemoedebewegen, door de aanranding veroorzaakt."},
                 {art: "42", title: "Uitvoering wettelijk voorschrift", vh: false, desc: "Niet strafbaar is hij die een feit begaat ter uitvoering van een wettelijk voorschrift."},
-                {art: "43", title: "Bevoegd ambtelijk bevel", vh: false, desc: "Niet strafbaar is hij die een feit begaat ter uitvoering van een bevoegd ambtelijk bevel."},
-                {art: "45", title: "Poging", vh: true, desc: "Poging tot misdrijf is strafbaar wanneer het voornemen zich door een uiterlijke begin van uitvoering heeft geopenbaard."},
-                {art: "46", title: "Voorbereiding", vh: true, desc: "Voorbereiding van een misdrijf waarop 8 jaar of meer gevangenisstraf staat."},
-                {art: "46b", title: "Vrijwillige terugtred", vh: false, desc: "Strafbaarheid vervalt indien het misdrijf niet is voltooid ten gevolge van omstandigheden van de wil van de dader afhankelijk."},
-                {art: "47", title: "Daderschap (Medeplegen/Uitlokking)", vh: true, desc: "Strafbaar als daders: pleders, medeplegers, uitlokkers en doen-plegers."},
-                {art: "48", title: "Medeplichtigheid", vh: true, desc: "Strafbaar als medeplichtige: opzettelijk behulpzaam bij plegen van misdrijf."},
-                {art: "138", title: "Huisvredebreuk", vh: true, desc: "Wederrechtelijk binnendringen in woning, lokaal of erf bij een ander in gebruik."},
-                {art: "139", title: "Lokaalvredebreuk", vh: false, desc: "Wederrechtelijk binnendringen in openbare dienst bestemd lokaal."},
-                {art: "141", title: "Openlijke geweldpleging", vh: true, desc: "Zij die openlijk in vereniging geweld plegen tegen personen of goederen."},
-                {art: "177", title: "Ambtelijke omkoping (Actief)", vh: true, desc: "Aanbieden van gift of belofte aan een ambtenaar in verband met zijn bediening."},
-                {art: "180", title: "Wederspannigheid", vh: true, desc: "Zich met geweld of bedreiging verzetten tegen ambtenaar in rechtmatige uitoefening."},
-                {art: "184", title: "Niet voldoen aan bevel / vordering", vh: false, desc: "Opzettelijk niet voldoen aan bevel of vordering krachtens wettelijk voorschrift."},
-                {art: "207", title: "Meineed", vh: true, desc: "Opzettelijk valse verklaring afleggen onder ede."},
-                {art: "225", title: "Valsheid in geschrifte", vh: true, desc: "Maken van vals geschrift met oogmerk als echt te gebruiken."},
-                {art: "251", title: "Grooming / Sexchatting", vh: true, desc: "Benaderen minderjarige <16 jaar voor seksuele doeleinden."},
-                {art: "261", title: "Smaad & Smaadschrift", vh: false, desc: "Opzettelijk iemands eer of goede naam anranden door verspreiding."},
-                {art: "285", title: "Bedreiging", vh: true, desc: "Bedreiging met zware mishandeling, misdrijf tegen het leven of gijzeling."},
-                {art: "285b", title: "Belaging / Stalking", vh: true, desc: "Wederrechtelijk stelselmatig opzettelijk inbreuk maken op persoonlijke levenssfeer."},
-                {art: "285d", title: "Doxing", vh: true, desc: "Verspreiden persoonsgegevens met oogmerk om te intimideren."},
-                {art: "287", title: "Doodslag", vh: true, desc: "Het opzettelijk een ander van het leven beroven."},
-                {art: "289", title: "Moord", vh: true, desc: "Opzettelijk en met voorbedachten rade een ander van het leven beroven."},
-                {art: "300", title: "Eenvoudige mishandeling", vh: true, desc: "Opzettelijk toebrengen van lichaamspijn of letsel."},
-                {art: "302", title: "Zware mishandeling", vh: true, desc: "Opzettelijk zwaar lichamelijk letsel toebrengen."},
-                {art: "310", title: "Diefstal", vh: true, desc: "Wegnemen goed toebehorend aan ander met toe-eigeningsogenmerk."},
-                {art: "311", title: "Gekwalificeerde diefstal (Inbraak)", vh: true, desc: "Diefstal bij nacht, in vereniging of met braak/inklimming."},
-                {art: "312", title: "Diefstal met geweld (Overval)", vh: true, desc: "Diefstal vergezeld van geweld of bedreiging met geweld tegen personen."},
-                {art: "317", title: "Afpersing", vh: true, desc: "Dwingen tot afgifte goed door geweld of bedreiging met geweld."},
-                {art: "321", title: "Verduistering", vh: true, desc: "Zich rechtmatig verkregen goed wederrechtelijk toe-eigenen."},
-                {art: "326", title: "Oplichting", vh: true, desc: "Bewegen tot afgifte goed door valse hoedanigheid of listige kunstgrepen."},
-                {art: "350", title: "Vernieling", vh: true, desc: "Opzettelijk en wederrechtelijk goed vernielen of beschadigen."},
-                {art: "350a", title: "Vernieling computergegevens", vh: true, desc: "Opzettelijk computergegevens wissen, veranderen of onbruikbaar maken."},
-                {art: "370", title: "Ambtelijke huisvredebreuk", vh: false, desc: "Ambtenaar die zonder wettelijke grondslag binnendringt."},
-                {art: "416", title: "Opzetheling", vh: true, desc: "Verkrijgen van goed wetende dat het van misdrijf afkomstig is."},
-                {art: "417bis", title: "Schuldheling", vh: true, desc: "Redelijkerwijs moeten vermoeden dat goed van misdrijf afkomstig is."},
-                {art: "424", title: "Baldadigheid", vh: false, desc: "Openlijk baldadigheid plegen op of aan de openbare weg."},
-                {art: "435", title: "Overtreding algemene regels (o.a. valse naam)", vh: false, desc: "Onder meer opgeven valse naam aan bevoegd gezag."},
-                {art: "447e", title: "Niet voldoen aan identificatieplicht", vh: false, desc: "Niet tonen ID-bewijs op vordering van bevoegde ambtenaar."}
+                {art: "43", title: "Bevoegd ambtelijk bevel", vh: false, desc: "Niet strafbaar is hij die een feit begaat ter uitvoering van een door het bevoegde gezag gegeven ambtelijk bevel."},
+                {art: "45", title: "Poging", vh: true, desc: "1. Poging tot misdrijf is strafbaar, wanneer het voornemen van de dader zich door een begin van uitvoering heeft geopenbaard."},
+                {art: "46", title: "Voorbereiding", vh: true, desc: "1. Voorbereiding van een misdrijf waarop naar de wettelijke omschrijving een gevangenisstraf van acht jaren of meer is gesteld, is strafbaar wanneer de dader opzettelijk voorwerpen, stoffen, informatiedragers, ruimten of vervoermiddelen bestemd tot het begaan van dat misdrijf bestemt, beschikt, vervaardigt, invoert, doorvoert, uitvoert of voorhanden heeft."},
+                {art: "46b", title: "Vrijwillige terugtred", vh: false, desc: "Poging of voorbereiding bestaat niet indien het misdrijf niet is voltooid ten gevolge van omstandigheden van de wil van de dader afhankelijk."},
+                {art: "47", title: "Daderschap (Medeplegen/Uitlokking)", vh: true, desc: "1. Als daders van een strafbaar feit worden gestraft: 1°. zij die het feit plegen, doen plegen of medeplegen; 2°. zij die door giften, beloften, misbruik van gezag, geweld, bedreiging of misleiding dan wel door het verschaffen van gelegenheid, middelen of inlichtingen het feit opzettelijk uitlokken."},
+                {art: "48", title: "Medeplichtigheid", vh: true, desc: "Als medeplichtigen van een misdrijf worden gestraft: 1°. zij die opzettelijk behulpzaam zijn bij het plegen van het misdrijf; 2°. zij die opzettelijk gelegenheid, middelen of inlichtingen verschaffen tot het plegen van het misdrijf."},
+                {art: "138", title: "Huisvredebreuk", vh: true, desc: "1. Hij die in de woning of het besloten lokaal of erf, bij een ander in gebruik, wederrechtelijk binnendringt of, aldaar wederrechtelijk vertoovende, zich niet op de vordering van of vanwege den rechthebbende aanstonds verwijderdt, wordt gestraft met gevangenisstraf van ten hoogste een jaar of geldboete van de derde categorie."},
+                {art: "139", title: "Lokaalvredebreuk", vh: false, desc: "Hij die in een voor de openbare dienst bestemd lokaal wederrechtelijk binnendringt, of, aldaar wederrechtelijk vertoovende, zich niet op de vordering van den bevoegden ambtenaar aanstonds verwijderdt, wordt gestraft met gevangenisstraf van ten hoogste zes maanden of geldboete van de derde categorie."},
+                {art: "141", title: "Openlijke geweldpleging", vh: true, desc: "1. Zij die openlijk in vereniging geweld plegen tegen personen of goederen, worden gestraft met gevangenisstraf van ten hoogste negen jaren of geldboete van de vierde categorie."},
+                {art: "177", title: "Ambtelijke omkoping (Actief)", vh: true, desc: "1. Met gevangenisstraf van ten hoogste zes jaren of geldboete van de vijfde categorie wordt gestraft hij die een ambtenaar een gift of belofte doet dan wel een dienst verleent met het oogmerk om hem te bewegen in zijn bediening iets te doen of te laten."},
+                {art: "180", title: "Wederspannigheid", vh: true, desc: "Hij die zich met geweld of bedreiging met geweld verzet tegen een ambtenaar werkzaam in de rechtmatige uitoefening van zijn bediening, wordt als schuldig aan wederspannigheid gestraft met gevangenisstraf van ten hoogste een jaar of geldboete van de derde categorie."},
+                {art: "184", title: "Niet voldoen aan bevel / vordering", vh: false, desc: "1. Hij die opzettelijk niet voldoet aan een bevel of een vordering, krachtens wettelijk voorschrift gedaan door een ambtenaar belast met het opsporen of onderzoeken van strafbare feiten, wordt gestraft met gevangenisstraf van ten hoogste drie maanden of geldboete van de tweede categorie."},
+                {art: "207", title: "Meineed", vh: true, desc: "1. Hij die in de gevallen waarin een wettelijk voorschrift een verklaring onder ede vordert, mondeling of bij geschrifte, persoonlijk of door een gemachtigde, valse eed aflegt, wordt gestraft met gevangenisstraf van ten hoogste zes jaren of geldboete van de vierde categorie."},
+                {art: "225", title: "Valsheid in geschrifte", vh: true, desc: "1. Hij die een geschrift dat bestemd is om tot bewijs van enig feit te dienen, valselijk opmaakt of vervalst, met het oogmerk om het als echt en onvervalst te gebruiken of door anderen te doen gebruiken, wordt als schuldig aan valsheid in geschrifte gestraft met gevangenisstraf van ten hoogste zes jaren of geldboete van de vijfde categorie."},
+                {art: "251", title: "Grooming / Sexchatting", vh: true, desc: "Hij die met het oogmerk om ontuchtige handelingen te plegen een minderjarige benadert door middel van een geautomatiseerd werk, wordt gestraft met gevangenisstraf van ten hoogste twee jaren of geldboete van de vierde categorie."},
+                {art: "261", title: "Smaad & Smaadschrift", vh: false, desc: "1. Hij die opzettelijk iemands eer of goede naam aanrandt, door telastelegging van een bepaald feit, met het kennelijke doel om daaraan ruchtbaarheid te geven, wordt, als schuldig aan smaad, gestraft met gevangenisstraf van ten hoogste zes maanden of geldboete van de derde categorie."},
+                {art: "285", title: "Bedreiging", vh: true, desc: "1. Bedreiging met openlijk geweld, met geweld tegen personen of goederen, met enig misdrijf waardoor gevaar voor de algemene veiligheid van personen of goederen ontstaat, wordt gestraft met gevangenisstraf van ten hoogste twee jaren of geldboete van de vierde categorie."},
+                {art: "285b", title: "Belaging / Stalking", vh: true, desc: "1. Hij die wederrechtelijk stelselmatig opzettelijk inbreuk maakt op eens anders persoonlijke levenssfeer met het oogmerk die ander te dwingen iets te doen, niet te doen of te dulden dan wel vrees aan te jagen, wordt als schuldig aan belaging gestraft met gevangenisstraf van ten hoogste drie jaren of geldboete van de vierde categorie."},
+                {art: "285d", title: "Doxing", vh: true, desc: "1. Hij die persoonsgegevens van een ander of een derde zoverre verspreidt met het oogmerk die ander vrees aan te jagen, wordt gestraft met gevangenisstraf van ten hoogste twee jaren of geldboete van de vierde categorie."},
+                {art: "287", title: "Doodslag", vh: true, desc: "Hij die een ander opzettelijk van het leven berooft, wordt als schuldig aan doodslag gestraft met gevangenisstraf van ten hoogste vijftien jaren of geldboete van de vijfde categorie."},
+                {art: "289", title: "Moord", vh: true, desc: "Hij die een ander opzettelijk en met voorbedachten rade van het leven berooft, wordt als schuldig aan moord gestraft met levenslange gevangenisstraf of tijdelijke van ten hoogste dertig jaren of geldboete van de vijfde categorie."},
+                {art: "300", title: "Eenvoudige mishandeling", vh: true, desc: "1. Mishandeling wordt gestraft met gevangenisstraf van ten hoogste drie jaren of geldboete van de vierde categorie.\n2. Indien het feit zwaar lichamelijk letsel ten gevolge heeft, wordt de schuldige gestraft met gevangenisstraf van ten hoogste vier jaren of geldboete van de vierde categorie."},
+                {art: "302", title: "Zware mishandeling", vh: true, desc: "1. Hij die aan een ander opzettelijk zwaar lichamelijk letsel toebrengt, wordt als schuldig aan zware mishandeling gestraft met gevangenisstraf van ten hoogste acht jaren of geldboete van de vijfde categorie."},
+                {art: "310", title: "Diefstal", vh: true, desc: "Hij die enig goed dat geheel of ten dele aan een ander toebehoort, wegneemt, met het oogmerk om het zich wederrechtelijk toe te eigenen, wordt, als schuldig aan diefstal, gestraft met gevangenisstraf van ten hoogste vier jaren of geldboete van de vierde categorie."},
+                {art: "311", title: "Gekwalificeerde diefstal (Inbraak)", vh: true, desc: "1. Met gevangenisstraf van ten hoogste zes jaren of geldboete van de vierde categorie wordt gestraft: 1°. diefstal van vee uit de weide; 2°. diefstal bij gelegenheid van een ontploffing, straatoproer of schipbreuk; 3°. diefstal bij nacht in een woning of op een besloten erf waarop een woning staat; 4°. diefstal door twee of meer verenigde personen; 5°. diefstal waarbij de schuldige zich de toegang tot de plaats van het misdrijf heeft verschaft door middel van braak, verbreking of klimming."},
+                {art: "312", title: "Diefstal met geweld (Overval)", vh: true, desc: "1. Met gevangenisstraf van ten hoogste negen jaren of geldboete van de vijfde categorie wordt gestraft diefstal voorafgegaan, vergezeld of gevolgd van geweld of bedreiging met geweld tegen personen, gepleegd met het oogmerk om die diefstal voor te bereiden of gemakkelijk te maken."},
+                {art: "317", title: "Afpersing", vh: true, desc: "1. Hij die met het oogmerk om zich of een ander wederrechtelijk te bevoordelen, door geweld of bedreiging met geweld iemand dwingt hetzij tot de afgifte van enig goed dat geheel of ten dele aan hem of aan een derde toebehoort, wordt als schuldig aan afpersing gestraft met gevangenisstraf van ten hoogste negen jaren of geldboete van de vijfde categorie."},
+                {art: "321", title: "Verduistering", vh: true, desc: "Hij die opzettelijk enig goed dat geheel of ten dele aan een ander toebehoort en dat hij anders dan door misdrijf onder zich heeft, wederrechtelijk zich toe-eigent, wordt, als schuldig aan verduistering, gestraft met gevangenisstraf van ten hoogste drie jaren of geldboete van de vierde categorie."},
+                {art: "326", title: "Oplichting", vh: true, desc: "Hij die, met het oogmerk om zich of een ander wederrechtelijk te bevoordelen, hetzij door het aannemen van een valse naam of van een valse hoedanigheid, hetzij door listige kunstgrepen, hetzij door een samenweefsel van verdichtsels, iemand beweegt tot de afgifte van enig goed, wordt als schuldig aan oplichting gestraft met gevangenisstraf van ten hoogste vier jaren of geldboete van de vierde categorie."},
+                {art: "350", title: "Vernieling", vh: true, desc: "1. Hij die opzettelijk en wederrechtelijk enig goed dat geheel of ten dele aan een ander toebehoort, vernielt, beschadigt, onbruikbaar maakt of wegmaakt, wordt gestraft met gevangenisstraf van ten hoogste twee jaren of geldboete van de vierde categorie."},
+                {art: "350a", title: "Vernieling computergegevens", vh: true, desc: "1. Hij die opzettelijk en wederrechtelijk gegevens die zijn opgeslagen, worden verwerkt of overgedragen door middel van een geautomatiseerd werk, verandert, wist, onbruikbaar maakt of toevoegt, wordt gestraft met gevangenisstraf van ten hoogste twee jaren of geldboete van de vierde categorie."},
+                {art: "370", title: "Ambtelijke huisvredebreuk", vh: false, desc: "De ambtenaar die, door overschrijding van zijn bevoegdheid of zonder inachtneming van de bij de wet bepaalde vormen, in de woning of het besloten lokaal of erf, bij een ander in gebruik, binnendringt, wordt gestraft met gevangenisstraf van ten hoogste een jaar of geldboete van de derde categorie."},
+                {art: "416", title: "Opzetheling", vh: true, desc: "1. Als schuldig aan opzetheling wordt gestraft met gevangenisstraf van ten hoogste vier jaren of geldboete van de vierde categorie: a. hij die een goed verwerft, voorhanden heeft of overdraagt, terwijl hij ten tijde van de verwerving wist dat het een door misdrijf verkregen goed betrof."},
+                {art: "417bis", title: "Schuldheling", vh: true, desc: "1. Als schuldig aan schuldheling wordt gestraft met gevangenisstraf van ten hoogste een jaar of geldboete van de vierde categorie: a. hij die een goed verwerft, voorhanden heeft of overdraagt, terwijl hij ten tijde van de verwerving redelijkerwijs had moeten vermoeden dat het een door misdrijf verkregen goed betrof."},
+                {art: "424", title: "Baldadigheid", vh: false, desc: "1. Hij die op of aan de openbare weg of op enige voor het publiek toegankelijke plaats openlijk baldadigheid pleegt waardoor gevaar of hinder voor personen of goederen kan ontstaan, wordt gestraft met geldboete van de eerste categorie."},
+                {art: "435", title: "Overtreding algemene regels (o.a. valse naam)", vh: false, desc: "Met geldboete van de eerste categorie wordt gestraft: 4°. hij die aan een bevoegde ambtenaar een valse naam, voornaam, geboortedatum of adres opgeeft."},
+                {art: "447e", title: "Niet voldoen aan identificatieplicht", vh: false, desc: "Hij die niet voldoet aan de verplichting om een identiteitsbewijs ter inzage aan te bieden, bedoeld in artikel 2 van de Wet op de identificatieplicht, wordt gestraft met geldboete van de tweede categorie."}
             ].map((item, idx) => ({
                 id: `sr_${item.art}_${idx}`, law: "Wetboek van Strafrecht", article: `Art. ${item.art}`, title: item.title, inMatrix: true, vh: item.vh, exam: item.vh,
                 eis: `De student kan in een praktijksituatie beoordelen of voldaan is aan de bestanddelen van Sr art. ${item.art}.`,
@@ -1499,54 +1486,54 @@
             })),
             ...[
                 {art: "1", title: "Legaliteitsbeginsel strafvordering", vh: false, desc: "Strafvordering heeft alleen plaats op de wijze bij de wet voorzien."},
-                {art: "27", title: "Definitie verdachte", vh: false, desc: "Degene te wiens aanzien redelijk vermoeden van schuld bestaat."},
-                {art: "27a", title: "Vaststellen personalia", vh: false, desc: "Het naar naam, voornamen, geboortedatum, geboorteplaats, adres en woonplaats vragen van de verdachte."},
-                {art: "27c", title: "Informatierechten verdachte", vh: false, desc: "Recht op informatie over verdenking en rechten."},
-                {art: "27d", title: "Tolk en vertaling", vh: false, desc: "Recht op bijstand van een tolk indien verdachte taal niet verstaat."},
-                {art: "27cb", title: "Plaats van verhoor", vh: false, desc: "Regels omtrent de plaats waar verhoor plaatsvindt."},
-                {art: "28", title: "Recht op rechtsbijstand (Raadsman)", vh: false, desc: "Recht op consultatie- en verhoorbijstand (Salduz)."},
-                {art: "28a", title: "Aanwijzing raadsman", vh: false, desc: "Regeling omtrent piketdienst en toevoeging advocaat."},
-                {art: "28b", title: "Kennisgeving aanhouding aan raadsman", vh: false, desc: "Onverwijld informeren van raadsman bij aanhouding."},
-                {art: "29", title: "Zwijgrecht & Cautie", vh: false, desc: "Verbod op pressie en verplichte cautie vóór verhoor."},
-                {art: "52", title: "Staandehouding", vh: false, desc: "Bevoegdheid tot staandehouding ter vaststelling identiteit."},
-                {art: "53", title: "Aanhouding op heterdaad", vh: false, desc: "Iedereen bevoegd bij ontdekking op heterdaad."},
-                {art: "54", title: "Aanhouding buiten heterdaad", vh: true, desc: "Uitsluitend opsporingsambtenaar op bevel OvJ bij VH-feit."},
-                {art: "55", title: "Overbrenging naar bureau", vh: false, desc: "Onverwijld overbrengen van aangehouden verdachte."},
-                {art: "55a", title: "Betreden woning ter aanhouding", vh: false, desc: "Bevoegdheid betreden plaats of woning ter aanhouding."},
-                {art: "55b", title: "Identificatiefouillering", vh: false, desc: "Onderzoek aan kleding ter vaststelling identiteit."},
-                {art: "55c", title: "Vaststellen identiteit (Vingerafdrukken/Foto)", vh: true, desc: "Nemen van foto's en vingerafdrukken."},
-                {art: "56", title: "Opsporingsfouillering (Kleding/Lichaam)", vh: true, desc: "Onderzoek aan lichaam of kleding op bevel (h)OvJ."},
-                {art: "56a", title: "Ophouden voor onderzoek", vh: true, desc: "Max 9 uur (VH) of 6 uur (geen VH) ophouden op bureau."},
-                {art: "56b", title: "Ophouden ter identificatie", vh: false, desc: "Verlenging termijn met 6 uur bij niet-VH feit."},
-                {art: "57", title: "Inverzekeringstelling (Bevel hOvJ)", vh: true, desc: "Bevel tot ivs door hulpofficier van justitie."},
-                {art: "58", title: "Duur inverzekeringstelling", vh: true, desc: "Max 3 dagen, eenmalig te verlengen met 3 dagen door OvJ."},
-                {art: "59a", title: "Voorgeleiding rechter-commissaris", vh: true, desc: "Uiterlijk 3 dagen en 18 uur na aanhouding voorgeleid."},
-                {art: "61a", title: "Onderzoeksmaatregelen tijdens ophouden", vh: true, desc: "Bijzondere maatregelen voor identiteit en onderzoek."},
-                {art: "67", title: "Gronden voor voorlopige hechtenis", vh: true, desc: "Misdrijven met 4+ jaar straf of aangewezen feiten."},
-                {art: "94", title: "Vatbaarheid inbeslagneming", vh: false, desc: "Alle voorwerpen dienend tot waarheidsvinding."},
-                {art: "95", title: "Inbeslagneming bij staandehouding/aanhouding", vh: false, desc: "In beslag nemen van meegevoerde goederen."},
-                {art: "96", title: "Inbeslagneming op heterdaad & bevriezen", vh: false, desc: "Bevoegdheid tot inbeslagname en bevriezen plaats delict."},
-                {art: "96a", title: "Bevel tot uitlevering", vh: true, desc: "Vorderen van uitlevering voorwerp bij VH-feit."},
-                {art: "96b", title: "Doorzoeken vervoermiddel", vh: true, desc: "Doorzoeken van vervoermiddel ter inbeslagneming."},
-                {art: "96c", title: "Doorzoeken plaatsen door OvJ", vh: true, desc: "Doorzoeken van plaatsen ter inbeslagneming."},
-                {art: "97", title: "Doorzoeken woning zonder toestemming", vh: true, desc: "Doorzoeken woning met machtiging RC bij spoed."},
-                {art: "104", title: "Beslagbevoegdheid rechter-commissaris", vh: true, desc: "Bevoegdheid RC tot inbeslagneming."},
-                {art: "110", title: "Doorzoeking woning door rechter-commissaris", vh: true, desc: "Doorzoeking door RC in woning verdachte."},
-                {art: "124", title: "Ordehandhaving ambtsverrichtingen", vh: false, desc: "Maatregelen tegen ordeverstoring tijdens optreden."},
-                {art: "126nd", title: "Vorderen historische telecommunicatiegegevens", vh: true, desc: "Vorderen opgeslagen gegevens bij VH-feit."},
-                {art: "126nda", title: "Vorderen camerabeelden", vh: false, desc: "Vorderen beelden van beveiligingscamera's."},
-                {art: "127", title: "Opsporingsambtenaren algemeen", vh: false, desc: "Aanwijzing algemene opsporingsambtenaren."},
-                {art: "128", title: "Ontdekking op heterdaad", vh: false, desc: "Wanneer is sprake van ontdekking op heterdaad."},
-                {art: "134", title: "Definitie inbeslagneming", vh: false, desc: "Onder zich nemen van voorwerp ten behoeve van strafvordering."},
-                {art: "141", title: "Algemene opsporingsambtenaren", vh: false, desc: "Wie zijn belast met de opsporing (Politie, KMar)."},
-                {art: "142", title: "Buitengewone opsporingsambtenaren (BOA)", vh: false, desc: "Aanwijzing BOA's voor specifieke terreinen."},
-                {art: "161", title: "Aangifte en klacht", vh: false, desc: "Bevoegdheid tot doen van aangifte."},
-                {art: "167", title: "Opportuniteitsbeginsel", vh: false, desc: "Bevoegdheid OM om af te zien van vervolging."},
-                {art: "338", title: "Bewijsregel (Bewijsmiddelen terechtzitting)", vh: false, desc: "Rechter baseert zich op wettige bewijsmiddelen."},
-                {art: "339", title: "Wettige bewijsmiddelen", vh: false, desc: "Opsomming van wettige bewijsmiddelen."},
-                {art: "341", title: "Verklaring verdachte als bewijs", vh: false, desc: "Gebruik verklaring verdachte."},
-                {art: "342", title: "Verklaring getuige & Bewijsminimum", vh: false, desc: "Unus testis nullus testis regel (minimaal 2 bewijsmiddelen)."},
-                {art: "344", title: "Schriftelijke bescheiden (Processen-verbaal)", vh: false, desc: "Bewijskracht van ambtelijke processen-verbaal."}
+                {art: "27", title: "Definitie verdachte", vh: false, desc: "1. Als verdachte wordt vóór de vervolging aangemerkt degene te wiens aanzien uit feiten of omstandigheden een redelijk vermoeden van schuld aan een strafbaar feit voortvloeit."},
+                {art: "27a", title: "Vaststellen personalia", vh: false, desc: "1. Het vaststellen van de identiteit van de verdachte omvat het vragen naar zijn naam, voornamen, geboortedatum, geboorteplaats, adres waarop hij in de basisregistratie personen staat ingeschreven en woon- of verblijfplaats."},
+                {art: "27c", title: "Informatierechten verdachte", vh: false, desc: "1. Aan de verdachte wordt bij zijn staandehouding of aanhouding mededeeld van welk strafbaar feit hij wordt verdacht."},
+                {art: "27d", title: "Tolk en vertaling", vh: false, desc: "1. De verdachte die de Nederlandse taal niet of onvoldoende beheerst, heeft recht op bijstand van een tolk."},
+                {art: "27cb", title: "Plaats van verhoor", vh: false, desc: "Het verhoor vindt plaats op een voor verhoor bestemde plaats, behoudens bij wet gestelde uitzonderingen."},
+                {art: "28", title: "Recht op rechtsbijstand (Raadsman)", vh: false, desc: "1. De verdachte heeft het recht zich te doen bijstaan door een raadsman overeenkomstig de bepalingen van dit wetboek."},
+                {art: "28a", title: "Aanwijzing raadsman", vh: false, desc: "Regels omtrent de aanwijzing en piketdienst van de raadsman bij aanhouding."},
+                {art: "28b", title: "Kennisgeving aanhouding aan raadsman", vh: false, desc: "1. De opsporingsambtenaar stelt de raadsman onverwijld in kennis van de aanhouding van de verdachte."},
+                {art: "29", title: "Zwijgrecht & Cautie", vh: false, desc: "1. In alle gevallen waarin iemand als verdachte wordt gehoord, onthoudt de verhorende ambtenaar zich van alles wat de strekking heeft een verklaring te verkrijgen, waarvan niet kan worden gezegd dat zij in vrijheid is afgelegd.\n2. Voor het verhoor wordt de verdachte medegedeeld dat hij niet verplicht is tot antwoorden."},
+                {art: "52", title: "Staandehouding", vh: false, desc: "Iedere opsporingsambtenaar is bevoegd de verdachte staande te houden ter vaststelling van diens identiteit."},
+                {art: "53", title: "Aanhouding op heterdaad", vh: false, desc: "1. Bij ontdekking op heterdaad is eenieder bevoegd den verdachte aan te houden.\n2. In dat geval is de opsporingsambtenaar bevoegd de verdachte, ter gelijke tijd met zijn aanhouding of onmiddellijk daarna, over te brengen naar een plaats voor verhoor."},
+                {art: "54", title: "Aanhouding buiten heterdaad", vh: true, desc: "1. Buiten het geval van ontdekking op heterdaad is de opsporingsambtenaar bevoegd de verdachte aan te houden op bevel van de officier van justitie of, indien diens bevel niet kan worden afgewacht, op bevel van de hulpofficier van justitie, voor zover het betreft een feit waarvoor voorlopige hechtenis is toegelaten."},
+                {art: "55", title: "Overbrenging naar bureau", vh: false, desc: "1. De aangehouden verdachte wordt onverwijld overgebracht naar een plaats voor verhoor bestemd. Hij wordt terstond voorgeleid aan de hulpofficier van justitie."},
+                {art: "55a", title: "Betreden woning ter aanhouding", vh: false, desc: "Elke opsporingsambtenaar is bevoegd ter aanhouding van de verdachte elke plaats te betreden."},
+                {art: "55b", title: "Identificatiefouillering", vh: false, desc: "De opsporingsambtenaar kan de aangehouden verdachte aan diens kleding onderzoeken, alsmede door hem meegevoerde bescheiden of voorwerpen onderzoeken, voor zover dit noodzakelijk is voor de vaststelling van diens identiteit."},
+                {art: "55c", title: "Vaststellen identiteit (Vingerafdrukken/Foto)", vh: true, desc: "1. Van de aangehouden verdachte kunnen ten behoeve van het vaststellen van zijn identiteit een of meer foto's en vingerafdrukken worden genomen."},
+                {art: "56", title: "Opsporingsfouillering (Kleding/Lichaam)", vh: true, desc: "De officier van justitie of de hulpofficier van justitie voor wie de aangehouden verdachte wordt voorgeleid, kan, bij ernstige bezwaren, in het belang van het onderzoek bepalen dat deze aan zijn kleding of aan zijn lichaam wordt onderzocht."},
+                {art: "56a", title: "Ophouden voor onderzoek", vh: true, desc: "De hulpofficier van justitie kan bepalen dat de verdachte voor ten hoogste negen uren wordt opgehouden ter plaats van verhoor, indien het een feit betreft waarvoor voorlopige hechtenis is toegelaten, dan wel voor ten hoogste zes uren indien het een ander feit betreft. De tijd tussen middernacht en negen uur ’s morgens wordt niet meegerekend."},
+                {art: "56b", title: "Ophouden ter identificatie", vh: false, desc: "Indien de identiteit van de verdachte niet direct kan worden vastgesteld, kan de hulpofficier van justitie bevelen dat de verdachte ten behoeve van de vaststelling van diens identiteit voor ten hoogste zes uren wordt opgehouden."},
+                {art: "57", title: "Inverzekeringstelling (Bevel hOvJ)", vh: true, desc: "1. De officier van justitie of de hulpofficier van justitie kan de aangehouden verdachte in het belang van het onderzoek in verzekering stellen, mits het een feit betreft waarvoor voorlopige hechtenis is toegelaten."},
+                {art: "58", title: "Duur inverzekeringstelling", vh: true, desc: "1. De inverzekeringstelling duurt ten hoogste drie dagen. Zij kan eenmaal door de officier van justitie met ten hoogste drie dagen worden verlengd."},
+                {art: "59a", title: "Voorgeleiding rechter-commissaris", vh: true, desc: "1. De verdachte wordt uiterlijk binnen drie dagen en achttien uren na zijn aanhouding voorgeleid aan de rechter-commissaris."},
+                {art: "61a", title: "Onderzoeksmaatregelen tijdens ophouden", vh: true, desc: "Bijzondere onderzoeksmaatregelen ter vaststelling van de identiteit en sporen tijdens de periode van ophouden."},
+                {art: "67", title: "Gronden voor voorlopige hechtenis", vh: true, desc: "1. Een bevel tot voorlopige hechtenis kan worden verleend in geval van verdenking van een misdrijf waarop naar de wettelijke omschrijving een gevangenisstraf van vier jaren of meer is gesteld, dan wel specifiek bij wet aangewezen misdrijven."},
+                {art: "94", title: "Vatbaarheid inbeslagneming", vh: false, desc: "1. Vatbaar voor inbeslagneming zijn alle voorwerpen die kunnen dienen om de waarheid aan het dag te brengen of om wederrechtelijk verkregen voordeel aan te tonen."},
+                {art: "95", title: "Inbeslagneming bij staandehouding/aanhouding", vh: false, desc: "1. De opsporingsambtenaar die de verdachte staande houdt of aanhoudt, kan de door de verdachte meegevoerde voorwerpen in beslag nemen."},
+                {art: "96", title: "Inbeslagneming op heterdaad & bevriezen", vh: false, desc: "1. In geval van ontdekking op heterdaad is de opsporingsambtenaar bevoegd de daarvoor vatbare voorwerpen in beslag te nemen en de plaats van het delict te bevriezen."},
+                {art: "96a", title: "Bevel tot uitlevering", vh: true, desc: "1. De opsporingsambtenaar kan bevelen dat degene van wie redelijkerwijs kan worden vermoed dat hij het voorwerp onder zich heeft, dit ter inbeslagneming uitlevert."},
+                {art: "96b", title: "Doorzoeken vervoermiddel", vh: true, desc: "1. De opsporingsambtenaar is bevoegd ter inbeslagneming een vervoermiddel te doorzoeken."},
+                {art: "96c", title: "Doorzoeken plaatsen door OvJ", vh: true, desc: "1. De officier van justitie is bevoegd ter inbeslagneming elke plaats, met uitzondering van een woning zonder toestemming, te doorzoeken."},
+                {art: "97", title: "Doorzoeken woning zonder toestemming", vh: true, desc: "1. De rechter-commissaris is bevoegd ter inbeslagneming een woning zonder toestemming van de bewoner te doorzoeken op machtiging van de officier van justitie bij dringende noodzaak."},
+                {art: "104", title: "Beslagbevoegdheid rechter-commissaris", vh: true, desc: "1. De rechter-commissaris is bevoegd in elke stand van het onderzoek voorwerpen in beslag te nemen."},
+                {art: "110", title: "Doorzoeking woning door rechter-commissaris", vh: true, desc: "1. De rechter-commissaris is bevoegd ter inbeslagneming elke plaats, met inbegrip van woningen, te doorzoeken."},
+                {art: "124", title: "Ordehandhaving ambtsverrichtingen", vh: false, desc: "Maatregelen ter handhaving van de orde tijdens de ambtsverrichtingen van de opsporingsambtenaar."},
+                {art: "126nd", title: "Vorderen historische telecommunicatiegegevens", vh: true, desc: "1. De officier van justitie kan bij verdenking van een misdrijf waarvoor voorlopige hechtenis is toegelaten, historische telecommunicatiegegevens vorderen."},
+                {art: "126nda", title: "Vorderen camerabeelden", vh: false, desc: "De opsporingsambtenaar kan vorderen dat beelden van geplaatste camera's ter beschikking worden gesteld."},
+                {art: "127", title: "Opsporingsambtenaren algemeen", vh: false, desc: "Aanwijzing van de categorieën van ambtenaren belast met de opsporing van strafbare feiten."},
+                {art: "128", title: "Ontdekking op heterdaad", vh: false, desc: "1. Ontdekking op heterdaad heeft plaats wanneer het strafbare feit wordt begaan of terstond nadat het begaan is."},
+                {art: "134", title: "Definitie inbeslagneming", vh: false, desc: "Onder inbeslagneming van een voorwerp wordt verstaan het onder zich nemen of houden van een voorwerp ten behoeve van de strafvordering."},
+                {art: "141", title: "Algemene opsporingsambtenaren", vh: false, desc: "Met de opsporing van strafbare feiten zijn belast: a. de officieren van justitie; b. de ambtenaren van politie, bedoeld in artikel 2, onder a, van de Politiewet 2012."},
+                {art: "142", title: "Buitengewone opsporingsambtenaren (BOA)", vh: false, desc: "Aanwijzing van buitengewone opsporingsambtenaren voor specifieke taken en terreinen."},
+                {art: "161", title: "Aangifte en klacht", vh: false, desc: "Ieder die kennis draagt van een begaan strafbaar feit is bevoegd daarvan aangifte of klacht te doen."},
+                {art: "167", title: "Opportuniteitsbeginsel", vh: false, desc: "1. De officier van justitie beslist of vervolging moet plaatshebben. 2. Van vervolging kan worden afgezien om redenen van algemeen belang."},
+                {art: "338", title: "Bewijsregel (Bewijsmiddelen terechtzitting)", vh: false, desc: "Het bewijs dat de verdachte het ten laste gelegde feit heeft begaan, kan door den rechter alleen worden aangenomen, indien hij daarvan uit het onderzoek op de terechtzitting door de inhoud van wettige bewijsmiddelen de overtuiging heeft bekomen."},
+                {art: "339", title: "Wettige bewijsmiddelen", vh: false, desc: "1. Als wettige bewijsmiddelen worden alleen erkend: 1°. eigen waarneming van den rechter; 2°. verklaringen van den verdachte; 3°. verklaringen van een getuige; 4°. verklaringen van een deskundige; 5°. schriftelijke bescheiden."},
+                {art: "341", title: "Verklaring verdachte als bewijs", vh: false, desc: "1. Onder verklaring van den verdachte wordt verstaan zijn bij het verhoor gedane opgave van feiten of omstandigheden, hem uit eigen wetenschap bekend."},
+                {art: "342", title: "Verklaring getuige & Bewijsminimum", vh: false, desc: "1. Onder verklaring van een getuige wordt verstaan zijn bij het verhoor gedane opgave van feiten of omstandigheden, die hij zelf waargenomen of ondervonden heeft.\n2. Het bewijs dat de verdachte het ten laste gelegde feit heeft begaan, kan door den rechter niet uitsluitend worden aangenomen op de verklaring van één getuige."},
+                {art: "344", title: "Schriftelijke bescheiden (Processen-verbaal)", vh: false, desc: "1. Onder schriftelijke bescheiden worden verstaan: 2°. de processen-verbaal en andere geschriften, in den wettelijken vorm opgemaakt door personen, daartoe bij de wet bevoegd.\n2. Het bewijs dat de verdachte het ten laste gelegde feit heeft begaan, kan door den rechter worden aangenomen op het proces-verbaal van eenen opsporingsambtenaar."}
             ].map((item, idx) => ({
                 id: `sv_${item.art}_${idx}`, law: "Wetboek van Strafvordering", article: `Art. ${item.art}`, title: item.title, inMatrix: true, vh: item.vh, exam: item.vh,
                 eis: `De student kan in een praktijksituatie toepassen en verantwoorden: Sv art. ${item.art}.`,
@@ -1557,49 +1544,49 @@
             {
                 id: "wid1", law: "Wet op de identificatieplicht", article: "Art. 1", title: "Aangewezen documenten", inMatrix: true, vh: false, exam: false,
                 eis: "De student kan benoemen welke documenten geldig zijn.",
-                text: "Paspoort, identiteitskaart of rijbewijs.",
+                text: "Als documenten waarmee de identiteit van personen kan worden vastgesteld, worden aangewezen:\n1°. een geldig paspoort of een geldige Nederlandse identiteitskaart;\n2°. een geldig rijbewijs dat is afgegeven door een bevoegde instantie.",
                 explanation: "Opsomming van rechtsgeldige identiteitsdocumenten in Nederland.",
                 connection: "Wid art. 2."
             },
             {
                 id: "wid2", law: "Wet op de identificatieplicht", article: "Art. 2", title: "Toonplicht vanaf 14 jaar", inMatrix: true, vh: false, exam: true,
                 eis: "De student kan beschrijven vanaf welke leeftijd de toonplicht geldt.",
-                text: "Eenieder vanaf de leeftijd van 14 jaar is verplicht op eerste vordering een ID-bewijs ter inzage aan te bieden.",
+                text: "Eenieder die de leeftijd van veertien jaar heeft bereikt, is verplicht op eerste vordering van een ambtenaar van politie, bedoeld in artikel 8 van de Politiewet 2012, een identiteitsbewijs als bedoeld in artikel 1 ter inzage aan te bieden.",
                 explanation: "Geldt vanaf 14 jaar in combinatie met de politietaak.",
                 connection: "Politiewet art. 8."
             },
             {
                 id: "awbi1", law: "Algemene wet op het binnentreden", article: "Art. 1", title: "Legitimatie en doel binnentreden", inMatrix: true, vh: false, exam: false,
                 eis: "De student kan de vormvoorschriften bij binnentreden benoemen.",
-                text: "Degene die binnentreedt legitimeert zich ongevraagd en deelt het doel van het binnentreden mee.",
+                text: "1. Degene die binnentreedt in een woning zonder de wil van de bewoner, legitimeert zich vooraf en deelt het doel van het binnentreden mede.\n2. Hij kan zich de toegang verschaffen, voor zover het doel van het binnentreden dit redelijkerwijs vereist.",
                 explanation: "Verplichte cautie en bekendmaking vooraf bij woningbetreding.",
                 connection: "Grondwet art. 12."
             },
             {
                 id: "awbi2", law: "Algemene wet op het binnentreden", article: "Art. 2", title: "Schriftelijke machtiging", inMatrix: true, vh: false, exam: false,
                 eis: "De student kan aangeven wanneer een machtiging nodig is.",
-                text: "Voor het binnentreden in een woning zonder toestemming is een schriftelijke machtiging vereist.",
+                text: "1. Voor het binnentreden in een woning zonder de wil van de bewoner is een schriftelijke machtiging vereist, behoudens bij wet gestelde uitzonderingen.",
                 explanation: "Machtiging door bevoegde autoriteit (bijv. burgemeester of OvJ/RC).",
                 connection: "Awbi art. 1."
             },
             {
                 id: "awbi3", law: "Algemene wet op het binnentreden", article: "Art. 3", title: "Nachtelijk binnentreden", inMatrix: true, vh: false, exam: false,
                 eis: "De student kan de regels voor nachtelijk binnentreden uitleggen.",
-                text: "Tussen 00:00 en 06:00 uur is binnentreden in een woning zonder toestemming verboden, tenzij uitdrukkelijk bij wet voorzien.",
+                text: "1. Het binnentreden in een woning zonder de wil van de bewoner tussen middernacht en zes uur 's morgens is slechts geoorloofd voor zover dit uitdrukkelijk in de machtiging is bepaald.",
                 explanation: "Strikte nachtrustbescherming; vereist speciale nachtmachtiging.",
                 connection: "Awbi art. 2."
             },
             {
                 id: "awbi7", law: "Algemene wet op het binnentreden", article: "Art. 7", title: "Verslag binnentreden", inMatrix: true, vh: false, exam: false,
                 eis: "De student kan beschrijven dat achteraf verslag wordt opgemaakt.",
-                text: "Aan de bewoner wordt zo spoedig mogelijk een schriftelijk verslag van het binnentreden verstrekt.",
+                text: "1. Degene die zonder de wil van de bewoner in een woning is binnengetreden, maakt op zijn ambtseed of belofte een schriftelijk verslag op van het binnentreden en verstrekt aan de bewoner een afschrift.",
                 explanation: "Transparantieverplichting na betreding van een woning.",
                 connection: "Grondwet art. 12."
             },
             {
                 id: "awbi9", law: "Algemene wet op het binnentreden", article: "Art. 9", title: "Doorgang verschaffen / Politiegeweld", inMatrix: true, vh: false, exam: false,
                 eis: "De student kan benoemen dat men zich zo nodig toegang kan verschaffen.",
-                text: "De binnentredende ambtenaar is bevoegd zich zo nodig met behulp van geweld toegang tot de woning te verschaffen.",
+                text: "1. Degene die bevoegd is binnentreden, kan zich de doorgang verschaffen door zo nodig binnendeuren en afsluitingen te forceren of te openen.",
                 explanation: "Bevoegdheid tot openbreken of forceren bij weigering of afwezigheid.",
                 connection: "Politiewet art. 7."
             }
@@ -1732,7 +1719,6 @@
             filterArticles();
         }
 
-        // --- EXTREEM NIVEAU EXAMEN QUIZ (ECHTE POLITIEACADEMIE CASUSVRAGEN) ---
         let currentQuizQuestion = null;
         let score = 0;
         let questionCount = 0;
@@ -1741,12 +1727,6 @@
             document.getElementById('quiz-feedback').style.display = 'none';
             document.getElementById('quiz-next-btn').style.display = 'none';
 
-            let matrixItems = database.filter(d => d.inMatrix);
-            const item = matrixItems[Math.floor(Math.random() * matrixItems.length)];
-            const otherItems = matrixItems.filter(d => d.id !== item.id);
-            const randOther = otherItems[Math.floor(Math.random() * otherItems.length)];
-
-            // Complexe casusbank op niveau van de echte theorietoets (geen weggevers)
             const academicPool = [
                 {
                     q: `Tijdens een heterdaadsituatie fouilleert een collega een verdachte direct op straat zonder dat er sprake is van een omschreven acuut gevaar. Welke juridische consequentie heeft dit volgens de toetsmatrijs voor het aangetroffen bewijsmiddel?`,
@@ -1797,7 +1777,6 @@
 
             const selected = academicPool[Math.floor(Math.random() * academicPool.length)];
             const correctAnswer = selected.correct;
-            // Mix de foute antwoorden zorgvuldig
             const options = [correctAnswer, ...selected.wrongs].sort(() => Math.random() - 0.5);
 
             currentQuizQuestion = {
