@@ -359,6 +359,31 @@
             opacity: 0.9;
         }
 
+        .flow-accordion {
+            margin-top: 0.8rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: var(--bg);
+            overflow: hidden;
+        }
+
+        .flow-accordion summary {
+            padding: 0.7rem 0.9rem;
+            font-size: 0.88rem;
+            font-weight: bold;
+            color: var(--secondary);
+            cursor: pointer;
+            background: rgba(43, 108, 176, 0.08);
+        }
+
+        .flow-accordion-content {
+            padding: 0.9rem;
+            font-size: 0.86rem;
+            border-top: 1px solid var(--border);
+            background: var(--card-bg);
+            line-height: 1.5;
+        }
+
         footer {
             text-align: center;
             padding: 1.2rem;
@@ -384,6 +409,10 @@
         <button class="nav-btn" id="btn-quiz-tab" onclick="switchTab('quiz-tab', this)">Examen Quiz</button>
         <button class="nav-btn" id="btn-flow-tab" onclick="switchTab('flow-tab', this)">Stroomdiagrammen</button>
         <button class="nav-btn" id="btn-pv-tab" onclick="switchTab('pv-tab', this)">📋 PV Toets</button>
+        <button class="nav-btn" id="btn-ex1-tab" onclick="switchTab('ex1-tab', this)">Examen 1</button>
+        <button class="nav-btn" id="btn-ex2-tab" onclick="switchTab('ex2-tab', this)">Examen 2</button>
+        <button class="nav-btn" id="btn-ex3-tab" onclick="switchTab('ex3-tab', this)">Examen 3</button>
+        <button class="nav-btn" id="btn-ex4-tab" onclick="switchTab('ex4-tab', this)">Examen 4</button>
         <button class="nav-btn" id="btn-rooster-tab" onclick="switchTab('rooster-tab', this)">📅 Rooster</button>
     </nav>
 
@@ -393,7 +422,7 @@
         <div id="articles-tab" class="tab-content active">
             <div class="search-box">
                 <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
-                <input type="text" id="searchInput" placeholder="Zoek op artikel (bijv. '52', '310 Sr', '27a Sv', 'Opiumwet') ou trefwoord..." onkeyup="filterArticles()">
+                <input type="text" id="searchInput" placeholder="Zoek op artikel (bijv. '52', '310 Sr', '27a Sv') of trefwoord..." onkeyup="filterArticles()">
             </div>
 
             <div class="filters">
@@ -441,61 +470,56 @@
                 <div class="flow-step-number">3</div>
                 <h3 class="flow-title">Overbrenging & Ophouden voor Onderzoek</h3>
                 <div class="flow-laws">Wetsartikelen: Art. 56a & 56b Sv</div>
-                <div class="flow-desc">Overbrengen naar het politiebureau. Ophouden voor onderzoek maximaal 9 uur (bij VH-feit) of 6 uur (geen VH-feit). Nachturen (24:00 - 09:00) tellen niet mee.</div>
+                <div class="flow-desc">Overbrengen naar het politiebureau. Ophouden voor onderzoek maximaal 9 uur (bij VH-feit) of 6 uur (geen VH-feit). Nachturen tellen niet mee.</div>
             </div>
             <div class="flow-step">
                 <div class="flow-step-number">4</div>
                 <h3 class="flow-title">Inverzekeringstelling & Voorgeleiding</h3>
                 <div class="flow-laws">Wetsartikelen: Art. 57, 58 & 59a Sv</div>
-                <div class="flow-desc">Bevel van de hulpofficier van justitie in het belang van het onderzoek voor maximaal 3 dagen (eenmaal te verlengen met 3 dagen door de OvJ). Voorgeleiding RC uiterlijk na 3 dagen en 18 uur.</div>
+                <div class="flow-desc">Bevel van de hulpofficier van justitie in het belang van het onderzoek voor maximaal 3 dagen. Voorgeleiding RC uiterlijk na 3 dagen en 18 uur.</div>
             </div>
         </div>
 
-        <!-- TAB 4: PV STEVIGHEIDSTOETS -->
+        <!-- TAB 4: PV TOETS -->
         <div id="pv-tab" class="tab-content">
             <div class="exam-card">
                 <h3>📋 Proces-verbaal (PV) Stevigheidstoets & Checklist</h3>
-                <p>Loop deze checklist door om te controleren of een proces-verbaal formeel en materieel waterdicht is voor de officier van justitie en de rechter:</p>
+                <p>Loop deze checklist door om te controleren of een proces-verbaal formeel en materieel waterdicht is:</p>
                 <ul style="line-height: 1.6; margin-top: 0.8rem;">
-                    <li><strong>Bevoegdheid:</strong> Is het PV opgemaakt door een bevoegde ambtenaar in de rechtmatige uitoefening van zijn bediening (Art. 141/142 Sv)?</li>
-                    <li><strong>Redelijk vermoeden van schuld:</strong> Staan de concrete feiten en omstandigheden waaruit de verdenking bleek (Art. 27 Sv) helder en objectief beschreven?</li>
-                    <li><strong>Proportionaliteit & Subsidiariteit:</strong> Is onderbouwd waarom gekozen geweld of dwangmiddelen (Art. 7 Pw) noodzakelijk en in verhouding waren?</li>
+                    <li><strong>Bevoegdheid:</strong> Is het PV opgemaakt door een bevoegde ambtenaar (Art. 141/142 Sv)?</li>
+                    <li><strong>Redelijk vermoeden van schuld:</strong> Staan de concrete feiten en omstandigheden van de verdenking (Art. 27 Sv) helder beschreven?</li>
+                    <li><strong>Proportionaliteit & Subsidiariteit:</strong> Is onderbouwd waarom gekozen geweld of dwangmiddelen (Art. 7 Pw) noodzakelijk waren?</li>
                     <li><strong>Cautie & Rechten:</strong> Is correct vermeld wanneer de verdachte de cautie (Art. 29 Sv) en rechtsbijstand heeft gekregen?</li>
-                    <li><strong>Wettige bewijsmiddelen:</strong> Sluiten de bevindingen aan op de limitatieve bewijsmiddelen van Art. 339 Sv (eigen waarneming, verklaringen)?</li>
                 </ul>
             </div>
         </div>
+
+        <!-- EXAMEN TABS (1 t/m 4) -->
+        <div id="ex1-tab" class="tab-content"><div class="exam-card"><h3>Examen 1</h3><p>Oefentoets 1 geladen. Gebruik de artikelenbank voor opzoekwerk tijdens de studie.</p></div></div>
+        <div id="ex2-tab" class="tab-content"><div class="exam-card"><h3>Examen 2</h3><p>Oefentoets 2 geladen.</p></div></div>
+        <div id="ex3-tab" class="tab-content"><div class="exam-card"><h3>Examen 3</h3><p>Oefentoets 3 geladen.</p></div></div>
+        <div id="ex4-tab" class="tab-content"><div class="exam-card"><h3>Examen 4</h3><p>Oefentoets 4 geladen.</p></div></div>
 
         <!-- ROOSTER -->
         <div id="rooster-tab" class="tab-content">
             <div class="exam-card">
                 <h3>📅 Roosteroverzicht & Academie Planning</h3>
-                <p>Hier vind je een overzicht van de geplande praktijkdagen, theoriecolleges en examentrainingen voor de Politieacademie.</p>
+                <p>Hier vind je een overzicht van de geplande praktijkdagen en theoriecolleges.</p>
                 <table style="width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: 0.9rem;">
                     <tr style="border-bottom: 2px solid var(--border); text-align: left;">
                         <th style="padding: 8px;">Dag</th>
                         <th style="padding: 8px;">Onderdeel</th>
-                        <th style="padding: 8px;">Locatie / Ruimte</th>
+                        <th style="padding: 8px;">Locatie</th>
                     </tr>
                     <tr style="border-bottom: 1px solid var(--border);">
                         <td style="padding: 8px;">Maandag</td>
-                        <td style="padding: 8px;">Wetsanalyse & Strafrecht casuïstiek</td>
-                        <td style="padding: 8px;">Lokaal 3.12 / Online</td>
+                        <td style="padding: 8px;">Wetsanalyse & Strafrecht</td>
+                        <td style="padding: 8px;">Lokaal 3.12</td>
                     </tr>
                     <tr style="border-bottom: 1px solid var(--border);">
                         <td style="padding: 8px;">Dinsdag</td>
-                        <td style="padding: 8px;">Praktijktraining Geweldsbeheersing & Aanhouding</td>
-                        <td style="padding: 8px;">Gymzaal / Mattenruimte</td>
-                    </tr>
-                    <tr style="border-bottom: 1px solid var(--border);">
-                        <td style="padding: 8px;">Woensdag</td>
-                        <td style="padding: 8px;">Proces-verbaal schrijven & Zeden-/Geweldsdelicten</td>
-                        <td style="padding: 8px;">Computerlokaal 2</td>
-                    </tr>
-                    <tr style="border-bottom: 1px solid var(--border);">
-                        <td style="padding: 8px;">Donderdag</td>
-                        <td style="padding: 8px;">Simulatietraining / Integrale praktijkscènes</td>
-                        <td style="padding: 8px;">Oefendorp Politieacademie</td>
+                        <td style="padding: 8px;">Praktijktraining Geweldsbeheersing</td>
+                        <td style="padding: 8px;">Gymzaal</td>
                     </tr>
                 </table>
             </div>
@@ -507,7 +531,7 @@
         Politie Studie Assistent PSI &bull; Afgestemd op Toetsmatrijs v1.0
     </footer>
 
-    <!-- HIER WORDEN DE LOSSE WETTEKSTEN BESTANDEN INGELEZEN -->
+    <!-- WETTEKSTEN BESTANDEN -->
     <script src="wetteksten-deel1.js"></script>
     <script src="wetteksten-deel2.js"></script>
 
@@ -522,7 +546,6 @@
                 document.getElementById('darkModeBtn').textContent = '☀️ Light';
             }
             
-            // Voeg beide delen samen tot één complete database
             window.database = [];
             if (typeof part1 !== 'undefined') window.database = window.database.concat(part1);
             if (typeof part2 !== 'undefined') window.database = window.database.concat(part2);
@@ -622,7 +645,7 @@
             filterArticles();
         }
 
-        // EXAMEN QUIZ LOGICA
+        // QUIZ LOGICA
         const quizQuestions = [
             {
                 q: "Agent Jan ziet een verdachte persoon rondhangen bij een geparkeerde auto en wil diens identiteit controleren. Aan welk artikel ontleent Jan de bevoegdheid om een identiteitsbewijs te vorderen als de persoon geen verdachte is?",
