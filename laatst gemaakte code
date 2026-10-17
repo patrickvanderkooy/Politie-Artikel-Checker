@@ -563,7 +563,6 @@
         <button class="nav-btn" id="btn-quiz-tab" onclick="switchTab('quiz-tab', this)">Examen Quiz</button>
         <button class="nav-btn" id="btn-flow-tab" onclick="switchTab('flow-tab', this)">Stroomdiagrammen</button>
         <button class="nav-btn" id="btn-pv-tab" onclick="switchTab('pv-tab', this)">📋 PV Toets</button>
-        <button class="nav-btn" id="btn-scenario-tab" onclick="switchTab('scenario-tab', this)">💡 Casus</button>
         <button class="nav-btn" id="btn-ex1-tab" onclick="switchTab('ex1-tab', this)">Examen 1</button>
         <button class="nav-btn" id="btn-ex2-tab" onclick="switchTab('ex2-tab', this)">Examen 2</button>
         <button class="nav-btn" id="btn-ex3-tab" onclick="switchTab('ex3-tab', this)">Examen 3</button>
@@ -607,18 +606,20 @@
 
         <!-- TAB 3: STROOMDIAGRAMMEN -->
         <div id="flow-tab" class="tab-content">
-            <h2 style="color: var(--secondary); font-size: 1.25rem; margin-bottom: 0.5rem;">Chronologisch Stroomdiagram: Van Straat tot Insluiting</h2>
-            <p style="color: #718096; font-size: 0.92rem; margin-bottom: 1.5rem;">Volledige stap-voor-stap doorloping volgens Stapel & De Koning en de toetsmatrijs. Klik op een wet om het volledige artikel en de toelichting direct uit te klappen.</p>
+            <h2 style="color: var(--secondary); font-size: 1.25rem; margin-bottom: 0.5rem;">Chronologisch Stroomdiagram: Van Straat tot Cel</h2>
+            <p style="color: #718096; font-size: 0.92rem; margin-bottom: 1.5rem;">Volledige stap-voor-stap doorloping volgens Stapel & De Koning en de Toetsmatrijs PSI. Inclusief alle 5 de typen fouilleringen, rechten van de verdachte, termijnen en wetteksten.</p>
 
             <!-- FASE 1 -->
             <div class="flow-step">
                 <div class="flow-step-number">1</div>
-                <h3 class="flow-title">Optreden & Staandehouding op straat</h3>
-                <div class="flow-laws">Wetsartikelen: Art. 3 & 8 Politiewet | Art. 52 & 27a Sv | Art. 2 Wid | Art. 2 Ambtsinstructie</div>
+                <h3 class="flow-title">1. Optreden & Staandehouding op straat</h3>
+                <div class="flow-laws">Wetsartikelen: Art. 3 & 8 Politiewet 2012 | Art. 27 & 52 Sv | Art. 27a Sv | Art. 2 Wid | Art. 2 Ambtsinstructie</div>
                 <div class="flow-desc">
-                    • <strong>Taakstelling (Art. 3 Pw):</strong> Handhaving rechtsorde en hulpverlening.<br>
-                    • <strong>Identificatie (Art. 8 Pw & Art. 2 Wid):</strong> Vorderen ID-bewijs vanaf 14 jaar.<br>
-                    • <strong>Staandehouding (Art. 52 Sv):</strong> Kort ophouden van een verdachte ter vaststelling van personalia (Art. 27a Sv).
+                    • <strong>Politietaak (Art. 3 Pw):</strong> Handhaving rechtsorde en hulpverlening.<br>
+                    • <strong>Status Verdachte (Art. 27 Sv):</strong> Redelijk vermoeden van schuld aan een strafbaar feit.<br>
+                    • <strong>Staandehouden (Art. 52 Sv):</strong> Kort stilhouden ter vaststelling van personalia (Art. 27a Sv).<br>
+                    • <strong>ID-Vordering (Art. 8 Pw / Art. 2 Wid):</strong> Vorderen inzage identiteitsbewijs vanaf 14 jaar.<br>
+                    • <strong>Legitimatieplicht (Art. 2 Ambtsinstructie):</strong> Agent legitimeert zich op verzoek (uniform) of ongevraagd (burger).
                 </div>
                 
                 <details class="flow-accordion">
@@ -630,34 +631,25 @@
                 </details>
 
                 <details class="flow-accordion">
-                    <summary>📖 Politiewet Art. 8 – Vorderen inzage identiteitsbewijs</summary>
+                    <summary>📖 Politiewet Art. 8 & Wid Art. 2 – Vorderen inzage identiteitsbewijs</summary>
                     <div class="flow-accordion-content">
                         <strong>Volledige Wettekst:</strong> Een ambtenaar van politie is bevoegd tot het vorderen van inzage van een identiteitsbewijs van personen als bedoeld in artikel 1 van de Wet op de identificatieplicht, voor zover dat redelijkerwijs noodzakelijk is voor de uitoefening van de politietaak.<br><br>
-                        <em>Toelichting:</em> Gekoppeld aan de ID-plicht (Wid art. 2, vanaf 14 jaar).
+                        <em>Toelichting:</em> Gekoppeld aan de ID-plicht vanaf 14 jaar.
                     </div>
                 </details>
 
                 <details class="flow-accordion">
-                    <summary>📖 Sv Art. 52 – Staandehouding</summary>
+                    <summary>📖 Sv Art. 52 & 27a – Staandehouding en personalia</summary>
                     <div class="flow-accordion-content">
-                        <strong>Volledige Wettekst:</strong> Iedere opsporingsambtenaar is bevoegd de verdachte staande te houden ter vaststelling van diens identiteit.<br><br>
-                        <em>Toelichting:</em> Mag uitsluitend bij een redelijk vermoeden van schuld (art. 27 Sv).
-                    </div>
-                </details>
-
-                <details class="flow-accordion">
-                    <summary>📖 Sv Art. 27a – Vaststellen personalia</summary>
-                    <div class="flow-accordion-content">
-                        <strong>Volledige Wettekst:</strong> Het vaststellen van de identiteit van de verdachte omvat het vragen naar zijn naam, voornamen, geboortedatum, geboorteplaats, adres waarop hij in de basisregistratie personen staat ingeschreven en woon- of verblijfplaats.<br><br>
-                        <em>Toelichting:</em> Vragen staat vrij, maar bij staandehouding is medewerking verplicht (art. 447e Sr bij weigering).
+                        <strong>Volledige Wettekst Art. 52 Sv:</strong> Iedere opsporingsambtenaar is bevoegd de verdachte staande te houden ter vaststelling van diens identiteit.<br><br>
+                        <strong>Volledige Wettekst Art. 27a Sv:</strong> Het vaststellen van de identiteit van de verdachte omvat het vragen naar zijn naam, voornamen, geboortedatum, geboorteplaats, adres waarop hij in de basisregistratie personen staat ingeschreven en woon- of verblijfplaats.
                     </div>
                 </details>
 
                 <details class="flow-accordion">
                     <summary>📖 Ambtsinstructie Art. 2 – Legitimatieplicht</summary>
                     <div class="flow-accordion-content">
-                        <strong>Volledige Wettekst:</strong> De ambtenaar legitimeert zich met het aan hem verstrekte legitimatiebewijs: a. bij optreden in burgerkleding ongevraagd, tenzij bijzondere omstandigheden dit onmogelijk maken; b. bij optreden in uniform, op verzoek van eenieder.<br><br>
-                        <em>Toelichting:</em> Vormvoorschrift bij aanvang van het optreden.
+                        <strong>Volledige Wettekst:</strong> De ambtenaar legitimeert zich met het aan hem verstrekte legitimatiebewijs: a. bij optreden in burgerkleding ongevraagd, tenzij bijzondere omstandigheden dit onmogelijk maken; b. bij optreden in uniform, op verzoek van eenieder.
                     </div>
                 </details>
             </div>
@@ -665,12 +657,14 @@
             <!-- FASE 2 -->
             <div class="flow-step">
                 <div class="flow-step-number">2</div>
-                <h3 class="flow-title">Aanhouding & Veiligheidsfouillering op straat</h3>
-                <div class="flow-laws">Wetsartikelen: Art. 53 & 54 Sv (Aanhouding) | Politiewet Art. 7 lid 3 (Veiligheidsfouillering)</div>
+                <h3 class="flow-title">2. Aanhouding, Straatfouilleringen & Beslag</h3>
+                <div class="flow-laws">Wetsartikelen: Art. 53 & 54 Sv | Art. 7 lid 3 Pw | Art. 55b Sv | Art. 94, 95 & 96b Sv</div>
                 <div class="flow-desc">
-                    • <strong>Heterdaad (Art. 53 Sv):</strong> Iedereen bevoegd aan te houden bij ontdekking op heterdaad.<br>
-                    • <strong>Buiten heterdaad (Art. 54 Sv):</strong> Uitsluitend opsporingsambtenaren op schriftelijk bevel van de (H)OvJ bij VH-feiten.<br>
-                    • <strong>🛡️ Fouilleringsoort 1 - Veiligheidsfouillering (Art. 7 lid 3 Pw):</strong> Direct op straat bij acuut dreigend gevaar voor leven en veiligheid.
+                    • <strong>Heterdaad (Art. 53 Sv):</strong> Iedereen (burger + politie) bevoegd tot aanhouding.<br>
+                    • <strong>Buiten heterdaad (Art. 54 Sv):</strong> Uitsluitend opsporingsambtenaar op bevel (H)OvJ bij VH-feiten.<br>
+                    • <strong>🛡️ Fouillering 1 - Veiligheidsfouillering (Art. 7 lid 3 Pw):</strong> Onderzoek kleding/bagage bij acuut gevaar voor leven of veiligheid.<br>
+                    • <strong>🛡️ Fouillering 2 - Identificatiefouillering (Art. 55b Sv):</strong> Kleding- en bagage-onderzoek uitsluitend gericht op het vinden van een ID-bewijs.<br>
+                    • <strong>Inbeslagneming (Art. 94/95/96b Sv):</strong> Veiligstellen voorwerpen voor waarheidsvinding of wederrechtelijk voordeel en doorzoeken voertuig.
                 </div>
 
                 <details class="flow-accordion">
@@ -684,8 +678,22 @@
                 <details class="flow-accordion">
                     <summary>📖 Politiewet Art. 7 lid 3 – Veiligheidsfouillering (Straat)</summary>
                     <div class="flow-accordion-content">
-                        <strong>Volledige Wettekst:</strong> De ambtenaar is bevoegd een persoon die rechtmatig van zijn vrijheid is beroofd, dan wel ten aanzien van wie uit feiten of omstandigheden blijkt dat een onmiddellijk gevaar dreigt voor diens leven of veiligheid, die van de ambtenaar zelf of van derden, aan zijn kleding te onderzoeken op de aanwezigheid van voorwerpen die een gevaar voor de veiligheid kunnen opleveren.<br><br>
-                        <em>Toelichting:</em> Uitsluitend ter afwending van acuut gevaar.
+                        <strong>Volledige Wettekst:</strong> De ambtenaar is bevoegd een persoon die rechtmatig van zijn vrijheid is beroofd, dan wel ten aanzien van wie uit feiten en omstandigheden blijkt dat een onmiddellijk gevaar dreigt voor diens leven of veiligheid, die van de ambtenaar zelf of van derden, aan zijn kleding te onderzoeken op de aanwezigheid van voorwerpen die een gevaar voor de veiligheid kunnen opleveren.
+                    </div>
+                </details>
+
+                <details class="flow-accordion">
+                    <summary>📖 Sv Art. 55b – Identificatiefouillering (Straat)</summary>
+                    <div class="flow-accordion-content">
+                        <strong>Volledige Wettekst:</strong> De opsporingsambtenaar kan de aangehouden verdachte aan diens kleding onderzoeken, alsmede door hem meegevoerde bescheiden of voorwerpen onderzoeken, voor zover dit noodzakelijk is voor de vaststelling van diens identiteit.
+                    </div>
+                </details>
+
+                <details class="flow-accordion">
+                    <summary>📖 Sv Art. 94, 95 & 96b – Inbeslagneming & Doorzoeken vervoermiddel</summary>
+                    <div class="flow-accordion-content">
+                        <strong>Volledige Wettekst Art. 94 Sv:</strong> Vatbaar voor inbeslagneming zijn alle voorwerpen die kunnen dienen om de waarheid aan het dag te brengen of om wederrechtelijk verkregen voordeel aan te tonen.<br><br>
+                        <strong>Volledige Wettekst Art. 96b Sv:</strong> De opsporingsambtenaar is bevoegd ter inbeslagneming een vervoermiddel te doorzoeken.
                     </div>
                 </details>
             </div>
@@ -693,41 +701,27 @@
             <!-- FASE 3 -->
             <div class="flow-step">
                 <div class="flow-step-number">3</div>
-                <h3 class="flow-title">Overbrenging, Beslagneming & Identificatiefouillering</h3>
-                <div class="flow-laws">Wetsartikelen: Art. 55 & 55b Sv | Art. 94, 95, 96 & 96b Sv | Art. 56b Sv</div>
+                <h3 class="flow-title">3. Transport, Vervoersfouillering & Rechten</h3>
+                <div class="flow-laws">Wetsartikelen: Art. 55 Sv | Art. 7 lid 4 Pw | Art. 27c, 27d, 28 & 28a Sv</div>
                 <div class="flow-desc">
-                    • <strong>Overbrenging (Art. 55 Sv):</strong> Onverwijld transport naar het politiebureau.<br>
-                    • <strong>Inbeslagneming (Art. 94 e.v. Sv):</strong> Veiligstellen bewijs, goederen en doorzoeken vervoermiddel (Art. 96b Sv).<br>
-                    • <strong>🛡️ Fouilleringsoort 2 - Identificatiefouillering (Art. 55b Sv):</strong> Onderzoek aan kleding uitsluitend gericht op het vinden van een ID-bewijs.<br>
-                    • <strong>Uitwijk (Art. 56b Sv):</strong> Ophouden ter identificatie bij niet-VH feiten.
+                    • <strong>Overbrenging (Art. 55 Sv):</strong> Onverwijld overbrengen naar een plaats voor verhoor (politiebureau).<br>
+                    • <strong>🛡️ Fouillering 3 - Vervoersfouillering (Art. 7 lid 4 Pw):</strong> Veiligheidscheck direct vóór/tijdens plaatsing in het dienstvoertuig.<br>
+                    • <strong>Rechten verdachte (Art. 27c/27d Sv):</strong> Directe mondelinge mededeling van verdenking en schriftelijk rechtenblad overhandigen.<br>
+                    • <strong>Consultatiebijstand (Art. 28/28a Sv):</strong> Recht om vertrouwelijk een advocaat te spreken voorafgaand aan het verhoor.
                 </div>
 
                 <details class="flow-accordion">
-                    <summary>📖 Sv Art. 55 – Overbrenging naar het bureau</summary>
+                    <summary>📖 Politiewet Art. 7 lid 4 – Vervoersfouillering</summary>
                     <div class="flow-accordion-content">
-                        <strong>Volledige Wettekst:</strong> 1. De aangehouden verdachte wordt onverwijld overgebracht naar een plaats voor verhoor bestemd. 2. Hij wordt terstond voorgeleid aan de hulpofficier van justitie.
+                        <strong>Volledige Wettekst:</strong> De ambtenaar van politie is bevoegd een te vervoeren of in te sluiten persoon aan zijn kleding te onderzoeken op de aanwezigheid van voorwerpen die een gevaar voor de veiligheid van betrokkene of voor anderen kunnen vormen, alsmede daartoe de voorwerpen te onderzoeken die betrokkene bij zich draagt of met zich meevoert.
                     </div>
                 </details>
 
                 <details class="flow-accordion">
-                    <summary>📖 Sv Art. 94 & 96b – Inbeslagneming & Doorzoeken voertuig</summary>
+                    <summary>📖 Sv Art. 27c, 27d & 28 – Rechten & Consultatiebijstand</summary>
                     <div class="flow-accordion-content">
-                        <strong>Volledige Wettekst Art. 94 Sv:</strong> Vatbaar voor inbeslagneming zijn alle voorwerpen die kunnen dienen om de waarheid aan het dag te brengen of om wederrechtelijk verkregen voordeel aan te tonen.<br><br>
-                        <strong>Volledige Wettekst Art. 96b Sv:</strong> De opsporingsambtenaar is bevoegd ter inbeslagneming een vervoermiddel te doorzoeken.
-                    </div>
-                </details>
-
-                <details class="flow-accordion">
-                    <summary>📖 Sv Art. 55b – Identificatiefouillering</summary>
-                    <div class="flow-accordion-content">
-                        <strong>Volledige Wettekst:</strong> De opsporingsambtenaar kan de aangehouden verdachte aan diens kleding onderzoeken, alsmede door hem meegevoerde bescheiden of voorwerpen onderzoeken, voor zover dit noodzakelijk is voor de vaststelling van diens identiteit.
-                    </div>
-                </details>
-
-                <details class="flow-accordion">
-                    <summary>📖 Sv Art. 56b – Ophouden ter identificatie</summary>
-                    <div class="flow-accordion-content">
-                        <strong>Volledige Wettekst:</strong> Indien de identiteit van de verdachte niet direct kan worden vastgesteld, kan de hulpofficier van justitie bevelen dat de verdachte ten behoeve van de vaststelling van diens identiteit voor ten hoogste zes uren wordt opgehouden.
+                        <strong>Volledige Wettekst Art. 27c Sv:</strong> Aan de verdachte wordt bij zijn staandehouding of aanhouding medegedeeld van welk strafbaar feit hij wordt verdacht.<br><br>
+                        <strong>Volledige Wettekst Art. 28 Sv:</strong> De verdachte heeft het recht zich te doen bijstaan door een raadsman.
                     </div>
                 </details>
             </div>
@@ -735,31 +729,15 @@
             <!-- FASE 4 -->
             <div class="flow-step">
                 <div class="flow-step-number">4</div>
-                <h3 class="flow-title">Binnenkomst Bureau: Vervoers- & Insluitingsfouillering</h3>
-                <div class="flow-laws">Wetsartikelen: Politiewet 2012 - Art. 7 lid 4</div>
+                <h3 class="flow-title">4. Voorgeleiding, Insluiting & Ophouden voor onderzoek</h3>
+                <div class="flow-laws">Wetsartikelen: Art. 56a Sv | Art. 7 lid 4 Pw | Art. 56 Sv | Art. 55c Sv | Art. 29 Sv</div>
                 <div class="flow-desc">
-                    • <strong>🛡️ Fouilleringsoort 3 - Vervoersfouillering:</strong> Veiligheidscheck direct vóór plaatsing in de surveillanceauto.<br>
-                    • <strong>🛡️ Fouilleringsoort 4 - Insluitingsfouillering:</strong> Grondige veiligheidscheck direct vóór celopname (verwijderen riemen, schoenveters, gevaarlijke voorwerpen).
-                </div>
-
-                <details class="flow-accordion">
-                    <summary>📖 Politiewet Art. 7 lid 4 – Vervoers- en Insluitingsfouillering</summary>
-                    <div class="flow-accordion-content">
-                        <strong>Volledige Wettekst:</strong> De ambtenaar is bevoegd een persoon die te vervoeren is dan wel ingesloten is in een politiecel, aan zijn kleding te onderzoeken op de aanwezigheid van voorwerpen die bij het vervoer of de insluiting een gevaar voor diens veiligheid of de veiligheid van anderen kunnen opleveren.
-                    </div>
-                </details>
-            </div>
-
-            <!-- FASE 5 -->
-            <div class="flow-step">
-                <div class="flow-step-number">5</div>
-                <h3 class="flow-title">Bureaufase: Opsporingsfouillering, Rechten & Verhoor</h3>
-                <div class="flow-laws">Wetsartikelen: Art. 56 Sv (Opsporing) | Art. 56a Sv (Ophouden) | Art. 27c, 28, 29 Sv (Rechten & Cautie)</div>
-                <div class="flow-desc">
-                    • <strong>🛡️ Fouilleringsoort 5 - Opsporingsfouillering (Art. 56 Sv):</strong> Grondig onderzoek op bevel (H)OvJ voor waarheidsvinding.<br>
-                    • <strong>Ophouden voor onderzoek (Art. 56a Sv):</strong> Max 9 uur (VH) of 6 uur (geen VH). Nachtelijke uren (00:00 - 09:00) tellen niet mee.<br>
-                    • <strong>Rechten & Salduz (Art. 27c, 28, 28b Sv):</strong> Mededeling verdenking, tolk, raadsman.<br>
-                    • <strong>De Cautie (Art. 29 Sv):</strong> Verplichte mededeling zwijgrecht vóór verhoor.
+                    • <strong>Voorgeleiding:</strong> Terstond bij de Hulpofficier van Justitie (HOvJ).<br>
+                    • <strong>🛡️ Fouillering 4 - Insluitingsfouillering (Art. 7 lid 4 Pw):</strong> Veiligheidscheck direct vóór celopname (veiligstellen gevaarlijke spullen).<br>
+                    • <strong>🛡️ Fouillering 5 - Opsporingsfouillering (Art. 56 Sv):</strong> Onderzoek aan kleding/lichaam op bevel van (H)OvJ bij ernstige bezwaren voor waarheidsvinding.<br>
+                    • <strong>Identiteitsmaatregelen (Art. 55c Sv):</strong> Maken van foto's en nemen van vingerafdrukken.<br>
+                    • <strong>Ophouden voor Onderzoek (Art. 56a lid 2 Sv):</strong> Maximaal <strong>9 uur</strong> (VH-feit) of <strong>6 uur</strong> (Niet-VH-feit). <em>Nachtrust:</em> 00:00 - 09:00 uur telt NIET mee.<br>
+                    • <strong>De Cautie (Art. 29 lid 2 Sv):</strong> Verplichte mededeling van het zwijgrecht vóór de start van het inhoudelijke verhoor.
                 </div>
 
                 <details class="flow-accordion">
@@ -777,10 +755,29 @@
                 </details>
 
                 <details class="flow-accordion">
-                    <summary>📖 Sv Art. 27c, 28 & 29 – Rechten, Raadsman & Cautie</summary>
+                    <summary>📖 Sv Art. 29 lid 2 – De Cautie</summary>
                     <div class="flow-accordion-content">
-                        <strong>Volledige Wettekst Art. 29 lid 2 Sv:</strong> Voor het verhoor wordt de verdachte medegedeeld dat hij niet verplicht is tot antwoorden.<br><br>
-                        <strong>Volledige Wettekst Art. 28 Sv:</strong> De verdachte heeft het recht zich te doen bijstaan door een raadsman.
+                        <strong>Volledige Wettekst:</strong> Voor het verhoor wordt de verdachte medegedeeld dat hij niet verplicht is tot antwoorden.
+                    </div>
+                </details>
+            </div>
+
+            <!-- FASE 5 -->
+            <div class="flow-step">
+                <div class="flow-step-number">5</div>
+                <h3 class="flow-title">5. Inverzekeringstelling (IVS)</h3>
+                <div class="flow-laws">Wetsartikelen: Art. 57 Sv | Art. 58 Sv | Art. 59a Sv | Art. 67 Sv</div>
+                <div class="flow-desc">
+                    • <strong>Bevoegdheid:</strong> Bevolen door (H)OvJ in het belang van het onderzoek (uitsluitend bij VH-feiten conform Art. 67 Sv).<br>
+                    • <strong>Duur (Art. 58 Sv):</strong> Maximaal <strong>3 dagen</strong>. Eenmaal te verlengen met <strong>3 dagen</strong> door OvJ (totaal max. 6 dagen).<br>
+                    • <strong>Rechterlijke Controle (Art. 59a Sv):</strong> Verplichte voorgeleiding aan de Rechter-Commissaris (RC) binnen <strong>3 dagen en 18 uur</strong> (80 uur) ter toetsing van de rechtmatigheid van de IVS.
+                </div>
+
+                <details class="flow-accordion">
+                    <summary>📖 Sv Art. 57, 58 & 59a – Inverzekeringstelling & RC-Toetsing</summary>
+                    <div class="flow-accordion-content">
+                        <strong>Volledige Wettekst Art. 57 Sv:</strong> De officier van justitie of de hulpofficier van justitie kan de aangehouden verdachte in het belang van het onderzoek in verzekering stellen, mits het een feit betreft waarvoor voorlopige hechtenis is toegelaten.<br><br>
+                        <strong>Volledige Wettekst Art. 59a Sv:</strong> De verdachte wordt uiterlijk binnen drie dagen en achttien uren na zijn aanhouding voorgeleid aan de rechter-commissaris.
                     </div>
                 </details>
             </div>
@@ -788,17 +785,19 @@
             <!-- FASE 6 -->
             <div class="flow-step">
                 <div class="flow-step-number">6</div>
-                <h3 class="flow-title">Vervolg: Inverzekeringstelling (IVS) & Voorgeleiding</h3>
-                <div class="flow-laws">Wetsartikelen: Art. 57, 58 & 59a Sv | Art. 67 & 67a Sv</div>
+                <h3 class="flow-title">6. Voorlopige Hechtenis: Inbewaringstelling (IBS)</h3>
+                <div class="flow-laws">Wetsartikelen: Art. 63 Sv | Art. 64 Sv | Art. 67 & 67a Sv</div>
                 <div class="flow-desc">
-                    • <strong>Inverzekeringstelling (Art. 57 & 58 Sv):</strong> Bevel van de (H)OvJ bij VH-feiten (Art. 67 Sv) + gronden (Art. 67a Sv). Duur: max 3 dagen + 1x verlenging.<br>
-                    • <strong>Voorgeleiding (Art. 59a Sv):</strong> Uiterlijk binnen 3 dagen en 18 uur voor de Rechter-Commissaris.
+                    • <strong>Bevoegdheid:</strong> Bevolen door de <strong>Rechter-Commissaris (RC)</strong> op vordering van de OvJ.<br>
+                    • <strong>Voorwaarden:</strong> Ernstig misdrijf (VH-feit), ernstige bezwaren + gronden (vluchtgevaar, 12-jaarsfeit, geschokte rechtsorde, recidivegevaar).<br>
+                    • <strong>Duur:</strong> Maximaal <strong>14 dagen</strong> (kan niet verlengd worden).
                 </div>
 
                 <details class="flow-accordion">
-                    <summary>📖 Sv Art. 57 & 58 – Inverzekeringstelling</summary>
+                    <summary>📖 Sv Art. 63, 67 & 67a – Inbewaringstelling & Voorwaarden VH</summary>
                     <div class="flow-accordion-content">
-                        <strong>Volledige Wettekst Art. 57 Sv:</strong> De officier van justitie of de hulpofficier van justitie kan de aangehouden verdachte in het belang van het onderzoek in verzekering stellen, mits het een feit betreft waarvoor voorlopige hechtenis is toegelaten.
+                        <strong>Volledige Wettekst Art. 63 Sv:</strong> De rechter-commissaris kan op vordering van de officier van justitie een bevel tot inbewaringstelling verlenen.<br><br>
+                        <strong>Volledige Wettekst Art. 67 Sv:</strong> Een bevel tot voorlopige hechtenis kan worden verleend in geval van verdenking van een misdrijf waarop naar de wettelijke omschrijving een gevangenisstraf van vier jaren of meer is gesteld.
                     </div>
                 </details>
             </div>
@@ -806,20 +805,22 @@
             <!-- FASE 7 -->
             <div class="flow-step">
                 <div class="flow-step-number">7</div>
-                <h3 class="flow-title">Dossierenvorming & Proces-Verbaal (PV)</h3>
-                <div class="flow-laws">Wetsartikelen: Art. 339, 342 lid 2 & 344 lid 2 Sv</div>
+                <h3 class="flow-title">7. Voorlopige Hechtenis: Gevangenhouding</h3>
+                <div class="flow-laws">Wetsartikelen: Art. 65 Sv | Art. 66 lid 1 Sv</div>
                 <div class="flow-desc">
-                    • <strong>Bewijsminimum (Art. 342 lid 2 Sv):</strong> Ten minste twee wettige bewijsmiddelen (Unus testis, nullus testis).<br>
-                    • <strong>Ambtseed (Art. 344 lid 2 Sv):</strong> Bewijskracht van het proces-verbaal opgemaakt in de ambtseed.
+                    • <strong>Bevoegdheid:</strong> Bevolen door de <strong>Raadkamer van de Rechtbank</strong> (3 rechters).<br>
+                    • <strong>Duur:</strong> Maximaal <strong>90 dagen</strong>.
                 </div>
 
                 <details class="flow-accordion">
-                    <summary>📖 Sv Art. 339, 342 & 344 – Bewijsmiddelen & Bewijsminimum</summary>
+                    <summary>📖 Sv Art. 65 & 66 – Gevangenhouding door Raadkamer</summary>
                     <div class="flow-accordion-content">
-                        <strong>Volledige Wettekst Art. 342 lid 2 Sv:</strong> Het bewijs dat de verdachte het ten laste gelegde feit heeft begaan, kan door den rechter niet uitsluitend worden aangenomen op de verklaring van één getuige.
+                        <strong>Volledige Wettekst Art. 65 Sv:</strong> De rechtbank kan op vordering van de officier van justitie de gevangenhouding bebevelen van de verdachte die zich in bewaring bevindt.<br><br>
+                        <strong>Volledige Wettekst Art. 66 lid 1 Sv:</strong> Het bevel tot gevangenhouding is van kracht gedurende een door de rechtbank te bepalen termijn van hoogstens negentig dagen.
                     </div>
                 </details>
             </div>
+
         </div>
 
         <!-- TAB 4: PV STEVIGHEIDSTOETS -->
@@ -853,25 +854,6 @@
 
                 <button class="quiz-btn" onclick="checkPVStatus()" style="margin-top: 1rem;">Controleer PV Status →</button>
                 <div id="pvFeedback" style="margin-top: 1rem; font-weight: bold; display: none; padding: 0.8rem; border-radius: 6px;"></div>
-            </div>
-        </div>
-
-        <!-- TAB 5: CASUS GENERATOR -->
-        <div id="scenario-tab" class="tab-content">
-            <div class="exam-card">
-                <h3>💡 Praktijk Casus & Scenario Generator</h3>
-                <div class="norm-badge">Oefen snel juridische kwalificaties en bevoegdheden voor rollenspellen</div>
-                <p style="font-size: 0.9rem; color: var(--text);">
-                    Klik op de knop hieronder om een willekeurige praktijkcasus op te vragen en te testen welke wetgeving en bevoegdheden van toepassing zijn.
-                </p>
-                <button class="quiz-btn" onclick="loadRandomScenario()">Genereer Nieuwe Casus 🔄</button>
-                
-                <div id="scenarioBox" style="margin-top: 1.2rem; background: var(--bg); padding: 1.2rem; border-radius: 8px; border: 1px solid var(--border); display: none;">
-                    <h4 id="scenTitle" style="color: var(--secondary); margin-top: 0;"></h4>
-                    <p id="scenDesc" style="line-height: 1.5;"></p>
-                    <div id="scenAnswer" style="margin-top: 1rem; padding: 0.8rem; background: rgba(49, 130, 206, 0.1); border-left: 3px solid var(--secondary); border-radius: 4px; display: none;"></div>
-                    <button id="scenRevealBtn" class="filter-btn" style="margin-top: 1rem;" onclick="revealScenarioAnswer()">Toon Juridische Analyse 🔍</button>
-                </div>
             </div>
         </div>
 
@@ -1148,11 +1130,38 @@
 
     <footer>
         Politie Studie Assistent PSI &bull; Afgestemd op Inforooster BPO/LEU/PSI/2639/B & Toetsmatrijs v1.0
+        <div id="secretVisitorCounter" style="display: none; margin-top: 0.5rem; font-size: 0.75rem; color: #3182ce; font-weight: bold;">
+            👁️ Privé Teller (Jouw bezoeken tellen niet mee) — Bezoeken van anderen: <span id="visitCountDisplay">0</span>
+        </div>
     </footer>
 
     <script>
         let historyStack = [];
         let currentTabId = 'articles-tab';
+
+        function initSecretCounter() {
+            const ownerKey = 'psi_owner_secret_access';
+            let isOwner = localStorage.getItem(ownerKey);
+
+            if (!isOwner) {
+                localStorage.setItem(ownerKey, 'true');
+                isOwner = 'true';
+            }
+
+            if (isOwner === 'true') {
+                const visits = parseInt(localStorage.getItem('psi_external_visit_count') || '0', 10);
+                const counterEl = document.getElementById('secretVisitorCounter');
+                const countDisplay = document.getElementById('visitCountDisplay');
+                if (counterEl && countDisplay) {
+                    countDisplay.textContent = visits;
+                    counterEl.style.display = 'block';
+                }
+            } else {
+                let visits = parseInt(localStorage.getItem('psi_external_visit_count') || '0', 10);
+                visits++;
+                localStorage.setItem('psi_external_visit_count', visits);
+            }
+        }
 
         function recordHistoryState() {
             const currentSearch = document.getElementById('searchInput') ? document.getElementById('searchInput').value : '';
@@ -1211,6 +1220,7 @@
         }
 
         window.addEventListener('DOMContentLoaded', () => {
+            initSecretCounter();
             const dismissed = localStorage.getItem('pol_install_dismissed');
             if (!dismissed) {
                 document.getElementById('installBanner').style.display = 'flex';
@@ -1258,39 +1268,6 @@
                 .replace(/Politiewet art\. (\d+)/gi, '<a class="law-link" onclick="searchArticle(\'Artikel $1\')">Politiewet art. $1</a>');
         }
 
-        const scenarios = [
-            {
-                title: "Casus 1: Weigeren ID op Straat",
-                desc: "Je spreekt een man van 19 jaar aan verdacht van openlijke baldadigheid. Je vordert zijn identiteitsbewijs op grond van de Politiewet. De man weigert pertinent zijn ID te tonen en loopt weg.",
-                answer: "<strong>Juridische Analyse:</strong><br>1. Vordering ID is rechtmatig op grond van <strong>Politiewet Art. 8</strong> in combinatie met <strong>Wet op de identificatieplicht Art. 2</strong>.<br>2. Het weigeren levert een overtreding op ex <strong>Sr Art. 447e</strong> (niet voldoen aan identificatieplicht).<br>3. Je bent bevoegd de verdachte staande te houden ex <strong>Sv Art. 52</strong>. Indien hij blijft weigeren en je de identiteit niet kunt vaststellen, kun je hem aanhouden ter ophouden voor identificatie."
-            },
-            {
-                title: "Casus 2: Aanhouding door Omstanders (Heterdaad)",
-                desc: "Je krijgt een melding van een winkeldiefstal. Ter plaatse zie je dat de winkelier de verdachte reeds heeft vastgegrepen en tegen de grond houdt ('burgeraanhouding'). De winkelier draagt de verdachte aan jou over.",
-                answer: "<strong>Juridische Analyse:</strong><br>1. De winkelier was bevoegd tot aanhouding op grond van <strong>Sv Art. 53 lid 1</strong> (ontdekking op heterdaad).<br>2. Jij neemt als opsporingsambtenaar de verdachte over ex <strong>Sv Art. 53 lid 2</strong>.<br>3. Je mag direct een veiligheidsfouillering toepassen (<strong>Politiewet Art. 7 lid 3</strong>) en brengt de verdachte over naar het bureau (<strong>Sv Art. 55</strong>) voor identiteitsvaststelling en verhoor."
-            },
-            {
-                title: "Casus 3: Doorzoeking auto bij drugsvermoeden",
-                desc: "Je houdt een voertuig staande tijdens een verkeerscontrole. Je ruikt een sterke hennepgeur uit de auto komen en ziet in de deurportier een gripzakje met wit poeder liggen.",
-                answer: "<strong>Juridische Analyse:</strong><br>1. Dit levert een redelijk vermoeden op van overtreding van de <strong>Opiumwet Art. 2 / 3</strong> (hard/softdrugs).<br>2. Op grond van <strong>Sv Art. 96b</strong> ben je als opsporingsambtenaar bevoegd het vervoermiddel te doorzoeken ter inbeslagneming (<strong>Sv Art. 94</strong>).<br>3. Eventuele verdovende middelen en toebehoren worden in beslag genomen."
-            }
-        ];
-
-        function loadRandomScenario() {
-            const scen = scenarios[Math.floor(Math.random() * scenarios.length)];
-            document.getElementById('scenTitle').textContent = scen.title;
-            document.getElementById('scenDesc').textContent = scen.desc;
-            document.getElementById('scenAnswer').innerHTML = scen.answer;
-            document.getElementById('scenAnswer').style.display = 'none';
-            document.getElementById('scenRevealBtn').style.display = 'inline-block';
-            document.getElementById('scenarioBox').style.display = 'block';
-        }
-
-        function revealScenarioAnswer() {
-            document.getElementById('scenAnswer').style.display = 'block';
-            document.getElementById('scenRevealBtn').style.display = 'none';
-        }
-
         function checkPVStatus() {
             const allChecked = ['pv1','pv2','pv3','pv4','pv5','pv6','pv7','pv8'].every(id => document.getElementById(id).checked);
             const feedback = document.getElementById('pvFeedback');
@@ -1332,7 +1309,7 @@
             {
                 id: "gw12", law: "Grondwet", article: "Art. 12", title: "Huisrecht", inMatrix: true, vh: false, exam: false,
                 eis: "De student kan uitleggen onder welke voorwaarden binnentreden in een woning zonder toestemming is toegestaan.",
-                text: "1. Het binnentreden in een woning zonder de wil van de bewoner is alleen geoorloofd in de gevallen bij of krachtens de wet bepaald, door hen die daartoe bij of krachtens de wet zijn aangewezen.\n2. Voor het binnentreden overeenkomstig het eerste lid is voorafgaande legitimatie en mededeling van het doel van het binnentreden vereist, behoudens bij de wet gestelde uitzonderingen.\n3. Aan de bewoner wordt een schriftelijk verslag van het binnentreden verstrekt.",
+                text: "1. Het binnentreden in een woning zonder de wil van de bewoner is alleen geoorloofd in de gevallen bij or krachtens de wet bepaald, door hen die daartoe bij of krachtens de wet zijn aangewezen.\n2. Voor het binnentreden overeenkomstig het eerste lid is voorafgaande legitimatie en mededeling van het doel van het binnentreden vereist, behoudens bij de wet gestelde uitzonderingen.\n3. Aan de bewoner wordt een schriftelijk verslag van het binnentreden verstrekt.",
                 explanation: "Grondwettelijk huisrecht. Binnentreden zonder toestemming vereist een wettelijke basis (zoals Awbi of hulpverlening).",
                 connection: "Awbi, Politiewet art. 7 lid 2."
             },
@@ -1455,7 +1432,7 @@
                 {art: "207", title: "Meineed", vh: true, desc: "1. Hij die in de gevallen waarin een wettelijk voorschrift een verklaring onder ede vordert, mondeling of bij geschrifte, persoonlijk of door een gemachtigde, valse eed aflegt, wordt gestraft met gevangenisstraf van ten hoogste zes jaren of geldboete van de vierde categorie."},
                 {art: "225", title: "Valsheid in geschrifte", vh: true, desc: "1. Hij die een geschrift dat bestemd is om tot bewijs van enig feit te dienen, valselijk opmaakt of vervalst, met het oogmerk om het als echt en onvervalst te gebruiken of door anderen te doen gebruiken, wordt als schuldig aan valsheid in geschrifte gestraft met gevangenisstraf van ten hoogste zes jaren of geldboete van de vijfde categorie."},
                 {art: "251", title: "Grooming / Sexchatting", vh: true, desc: "Hij die met het oogmerk om ontuchtige handelingen te plegen een minderjarige benadert door middel van een geautomatiseerd werk, wordt gestraft met gevangenisstraf van ten hoogste twee jaren of geldboete van de vierde categorie."},
-                {art: "261", title: "Smaad & Smaadschrift", vh: false, desc: "1. Hij die opzettelijk iemands eer of goede naam aanrandt, door telastelegging van een bepaald feit, met het kennelijke doel om daaraan ruchtbaarheid te geven, wordt, als schuldig aan smaad, gestraft met gevangenisstraf van ten hoogste zes maanden of geldboete van de derde categorie."},
+                {art: "261", title: "Smaad & Smaadschrift", vh: false, desc: "1. Hij die opzettelijk iemands eer of goede naam aanrandt, door telastelegging van een bepaald feit, met het kennelijke doel om daaraan ruchtbaarheid te geven, wordt, als schuldig aan smaad, gestraft met gevangenisstraf van ten hoogste zes maanden en geldboete van de derde categorie."},
                 {art: "285", title: "Bedreiging", vh: true, desc: "1. Bedreiging met openlijk geweld, met geweld tegen personen of goederen, met enig misdrijf waardoor gevaar voor de algemene veiligheid van personen of goederen ontstaat, wordt gestraft met gevangenisstraf van ten hoogste twee jaren of geldboete van de vierde categorie."},
                 {art: "285b", title: "Belaging / Stalking", vh: true, desc: "1. Hij die wederrechtelijk stelselmatig opzettelijk inbreuk maakt op eens anders persoonlijke levenssfeer met het oogmerk die ander te dwingen iets te doen, niet te doen of te dulden dan wel vrees aan te jagen, wordt als schuldig aan belaging gestraft met gevangenisstraf van ten hoogste drie jaren of geldboete van de vierde categorie."},
                 {art: "285d", title: "Doxing", vh: true, desc: "1. Hij die persoonsgegevens van een ander of een derde zoverre verspreidt met het oogmerk die ander vrees aan te jagen, wordt gestraft met gevangenisstraf van ten hoogste twee jaren of geldboete van de vierde categorie."},
@@ -1765,7 +1742,7 @@
                     ]
                 },
                 {
-                    q: `Wat is het cruciale juridische onderscheid tussen een **veiligheidsfouillering** (Politiewet art. 7 lid 3) en een **opsporingsfouillering** (WvSv art. 56)?`,
+                    q: `Wat is het cruciale juridische onderscheid tussen een <strong>veiligheidsfouillering</strong> (Politiewet art. 7 lid 3) en een <strong>opsporingsfouillering</strong> (WvSv art. 56)?`,
                     correct: `De veiligheidsfouillering is uitsluitend gericht op het afwenden van acuut gevaar (wapens) op straat, terwijl de opsporingsfouillering op bevel van de (h)OvJ op het bureau plaatsvindt ten behoeve van de waarheidsvinding.`,
                     wrongs: [
                         `Er is geen enkel juridisch onderscheid; beide termen mogen door elkaar worden gebruikt in het proces-verbaal.`,
